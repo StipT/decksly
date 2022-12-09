@@ -1,2 +1,4 @@
 # decksly
-Hearthstone deck builder
+
+Hearthstone card collector.
+

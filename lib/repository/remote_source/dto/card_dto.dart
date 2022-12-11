@@ -1,11 +1,11 @@
-import 'package:decksly/model/dto/duels_dto.dart';
+import 'package:decksly/repository/remote_source/dto/duels_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'card_dto.g.dart';
 
 @JsonSerializable()
 class CardDTO {
-  CardDTO({
+  CardDTO( {
     required this.id,
     required this.collectible,
     required this.slug,
@@ -15,6 +15,7 @@ class CardDTO {
     required this.cardTypeId,
     required this.cardSetId,
     required this.rarityId,
+    required this.parentId,
     required this.artistName,
     required this.manaCost,
     required this.name,
@@ -39,6 +40,7 @@ class CardDTO {
   final int cardTypeId;
   final int cardSetId;
   final int rarityId;
+  final int parentId;
 
   final String artistName;
   final int manaCost;

@@ -6,20 +6,13 @@ part 'card_response.g.dart';
 @JsonSerializable()
 class CardResponse {
   CardResponse({
-    required this.cards,
-    required this.cardCount,
-    required this.pageCount,
-    required this.page,
+    required this.card,
   });
 
   factory CardResponse.fromJson(Map<String, dynamic> json) =>
       _$CardResponseFromJson(json);
 
-  final List<CardDTO> cards;
-  final int cardCount;
-  final int pageCount;
-  final int page;
-
+  final CardDTO card;
 
   Map<String, dynamic> toJson() => _$CardResponseToJson(this);
 }

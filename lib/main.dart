@@ -1,9 +1,7 @@
-import 'package:decksly/app/di_config.dart';
 import 'package:decksly/common/application.constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  configureDependencies();
   runApp(const MyApp());
 }
 

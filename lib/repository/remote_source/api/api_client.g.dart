@@ -44,7 +44,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CardsResponse> getMovies(id) async {
+  Future<CardsResponse> getCard(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -1,5 +1,5 @@
 import 'package:decksly/common/application.constants.dart';
-import 'package:decksly/repository/remote_source/auth/token_response.dart';
+import 'package:decksly/repository/remote_source/auth/token_response/token_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 

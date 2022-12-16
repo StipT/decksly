@@ -1,4 +1,4 @@
-import 'package:decksly/repository/remote_source/api/dto/duels_dto.dart';
+import 'package:decksly/repository/remote_source/api/dto/duels_dto/duels_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'card_dto.freezed.dart';

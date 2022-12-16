@@ -6,8 +6,8 @@ part of 'cards_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CardsResponse _$CardsResponseFromJson(Map<String, dynamic> json) =>
-    CardsResponse(
+_$_CardsResponse _$$_CardsResponseFromJson(Map<String, dynamic> json) =>
+    _$_CardsResponse(
       cards: (json['cards'] as List<dynamic>)
           .map((e) => CardDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -16,7 +16,7 @@ CardsResponse _$CardsResponseFromJson(Map<String, dynamic> json) =>
       page: json['page'] as int,
     );
 
-Map<String, dynamic> _$CardsResponseToJson(CardsResponse instance) =>
+Map<String, dynamic> _$$_CardsResponseToJson(_$_CardsResponse instance) =>
     <String, dynamic>{
       'cards': instance.cards,
       'cardCount': instance.cardCount,

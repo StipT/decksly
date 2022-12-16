@@ -1,5 +1,5 @@
 import 'package:decksly/common/application.constants.dart';
-import 'package:decksly/repository/remote_source/models/response/cards_response.dart';
+import 'package:decksly/repository/remote_source/api/models/response/cards_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 

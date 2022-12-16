@@ -1,0 +1,1 @@
+const rCardGallery = '/card_gallery';

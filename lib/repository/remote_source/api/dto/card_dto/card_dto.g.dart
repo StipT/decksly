@@ -6,7 +6,7 @@ part of 'card_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CardDTO _$CardDTOFromJson(Map<String, dynamic> json) => CardDTO(
+_$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       id: json['id'] as int,
       collectible: json['collectible'] as int,
       slug: json['slug'] as String,
@@ -14,7 +14,7 @@ CardDTO _$CardDTOFromJson(Map<String, dynamic> json) => CardDTO(
       multiClassIds: (json['multiClassIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      spellSchoolId: json['spellSchoolId'] as bool,
+      spellSchoolId: json['spellSchoolId'] as int,
       cardTypeId: json['cardTypeId'] as int,
       cardSetId: json['cardSetId'] as int,
       rarityId: json['rarityId'] as int,
@@ -33,7 +33,8 @@ CardDTO _$CardDTOFromJson(Map<String, dynamic> json) => CardDTO(
       duels: DuelsDTO.fromJson(json['duels'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$CardDTOToJson(CardDTO instance) => <String, dynamic>{
+Map<String, dynamic> _$$_CardDTOToJson(_$_CardDTO instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'collectible': instance.collectible,
       'slug': instance.slug,

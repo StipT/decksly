@@ -1,5 +1,5 @@
 import 'package:decksly/common/application.constants.dart';
-import 'package:decksly/repository/remote_source/api_client.dart';
+import 'package:decksly/repository/remote_source/api/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

@@ -14,7 +14,7 @@ part 'card_gallery_state.dart';
 
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
-  CardGalleryBloc(this._networkInfo, this.internetConnectionState, {required this.fetchCardsUsecase})
+  CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase})
       : super(const CardsInitial()) {
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.page));
     _streamInternetConnectionState();

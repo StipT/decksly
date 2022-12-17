@@ -10,5 +10,9 @@ abstract class AuthClient {
   factory AuthClient(Dio dio, {String baseUrl}) = _AuthClient;
 
   @POST('/token')
-  Future<TokenResponse> getAccessToken();
+  Future<TokenResponse> getAccessToken(
+    @Header("Content-Type") String contentType,
+    @Header("Authorization") String authorization,
+    @Body() String grantType,
+  );
 }

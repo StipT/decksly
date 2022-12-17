@@ -10,6 +10,13 @@ class CardGalleryScreen extends StatefulWidget {
 }
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
+
+  @override
+  void initState() {
+    BlocProvider.of<CardGalleryBloc>(context)
+        .add(FetchCardsEvent(0));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<CardGalleryBloc, CardGalleryState>(

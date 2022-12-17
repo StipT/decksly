@@ -21,16 +21,25 @@ class _AuthClient implements AuthClient {
   String? baseUrl;
 
   @override
-  Future<TokenResponse> getAccessToken() async {
+  Future<TokenResponse> getAccessToken(
+    contentType,
+    authorization,
+    grantType,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Content-Type': contentType,
+      r'Authorization': authorization,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = grantType;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<TokenResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: contentType,
     )
             .compose(
               _dio.options,

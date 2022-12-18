@@ -23,7 +23,7 @@ class CardsRepositoryImpl extends CardsRepository {
     if (!await _networkInfo.isConnected) {
       throw NoInternetException();
     }
-    final cardResponse = await _apiService.apiClient.getCards();
+    final cardResponse = await _apiService.apiClient.getCards("en_US");
     return cardResponse.cards;
   }
 }

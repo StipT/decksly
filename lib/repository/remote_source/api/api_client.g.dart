@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'eu.api.blizzard.com';
+    baseUrl ??= 'https://eu.api.blizzard.com';
   }
 
   final Dio _dio;
@@ -21,9 +21,9 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<CardsResponse> getCards() async {
+  Future<CardsResponse> getCards(locale) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'locale': locale};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio

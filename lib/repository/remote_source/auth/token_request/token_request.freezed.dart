@@ -22,10 +22,6 @@ TokenRequest _$TokenRequestFromJson(Map<String, dynamic> json) {
 mixin _$TokenRequest {
   @JsonKey(name: "grant_type")
   String get grantType => throw _privateConstructorUsedError;
-  @JsonKey(name: "client_id")
-  String get clientId => throw _privateConstructorUsedError;
-  @JsonKey(name: "client_secret")
-  String get clientSecret => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,10 +35,7 @@ abstract class $TokenRequestCopyWith<$Res> {
           TokenRequest value, $Res Function(TokenRequest) then) =
       _$TokenRequestCopyWithImpl<$Res, TokenRequest>;
   @useResult
-  $Res call(
-      {@JsonKey(name: "grant_type") String grantType,
-      @JsonKey(name: "client_id") String clientId,
-      @JsonKey(name: "client_secret") String clientSecret});
+  $Res call({@JsonKey(name: "grant_type") String grantType});
 }
 
 /// @nodoc
@@ -59,21 +52,11 @@ class _$TokenRequestCopyWithImpl<$Res, $Val extends TokenRequest>
   @override
   $Res call({
     Object? grantType = null,
-    Object? clientId = null,
-    Object? clientSecret = null,
   }) {
     return _then(_value.copyWith(
       grantType: null == grantType
           ? _value.grantType
           : grantType // ignore: cast_nullable_to_non_nullable
-              as String,
-      clientId: null == clientId
-          ? _value.clientId
-          : clientId // ignore: cast_nullable_to_non_nullable
-              as String,
-      clientSecret: null == clientSecret
-          ? _value.clientSecret
-          : clientSecret // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -87,10 +70,7 @@ abstract class _$$_TokenRequestCopyWith<$Res>
       __$$_TokenRequestCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: "grant_type") String grantType,
-      @JsonKey(name: "client_id") String clientId,
-      @JsonKey(name: "client_secret") String clientSecret});
+  $Res call({@JsonKey(name: "grant_type") String grantType});
 }
 
 /// @nodoc
@@ -105,21 +85,11 @@ class __$$_TokenRequestCopyWithImpl<$Res>
   @override
   $Res call({
     Object? grantType = null,
-    Object? clientId = null,
-    Object? clientSecret = null,
   }) {
     return _then(_$_TokenRequest(
       grantType: null == grantType
           ? _value.grantType
           : grantType // ignore: cast_nullable_to_non_nullable
-              as String,
-      clientId: null == clientId
-          ? _value.clientId
-          : clientId // ignore: cast_nullable_to_non_nullable
-              as String,
-      clientSecret: null == clientSecret
-          ? _value.clientSecret
-          : clientSecret // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -128,10 +98,7 @@ class __$$_TokenRequestCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TokenRequest implements _TokenRequest {
-  const _$_TokenRequest(
-      {@JsonKey(name: "grant_type") required this.grantType,
-      @JsonKey(name: "client_id") required this.clientId,
-      @JsonKey(name: "client_secret") required this.clientSecret});
+  const _$_TokenRequest({@JsonKey(name: "grant_type") required this.grantType});
 
   factory _$_TokenRequest.fromJson(Map<String, dynamic> json) =>
       _$$_TokenRequestFromJson(json);
@@ -139,16 +106,10 @@ class _$_TokenRequest implements _TokenRequest {
   @override
   @JsonKey(name: "grant_type")
   final String grantType;
-  @override
-  @JsonKey(name: "client_id")
-  final String clientId;
-  @override
-  @JsonKey(name: "client_secret")
-  final String clientSecret;
 
   @override
   String toString() {
-    return 'TokenRequest(grantType: $grantType, clientId: $clientId, clientSecret: $clientSecret)';
+    return 'TokenRequest(grantType: $grantType)';
   }
 
   @override
@@ -157,17 +118,12 @@ class _$_TokenRequest implements _TokenRequest {
         (other.runtimeType == runtimeType &&
             other is _$_TokenRequest &&
             (identical(other.grantType, grantType) ||
-                other.grantType == grantType) &&
-            (identical(other.clientId, clientId) ||
-                other.clientId == clientId) &&
-            (identical(other.clientSecret, clientSecret) ||
-                other.clientSecret == clientSecret));
+                other.grantType == grantType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, grantType, clientId, clientSecret);
+  int get hashCode => Object.hash(runtimeType, grantType);
 
   @JsonKey(ignore: true)
   @override
@@ -185,9 +141,7 @@ class _$_TokenRequest implements _TokenRequest {
 
 abstract class _TokenRequest implements TokenRequest {
   const factory _TokenRequest(
-          {@JsonKey(name: "grant_type") required final String grantType,
-          @JsonKey(name: "client_id") required final String clientId,
-          @JsonKey(name: "client_secret") required final String clientSecret}) =
+          {@JsonKey(name: "grant_type") required final String grantType}) =
       _$_TokenRequest;
 
   factory _TokenRequest.fromJson(Map<String, dynamic> json) =
@@ -196,12 +150,6 @@ abstract class _TokenRequest implements TokenRequest {
   @override
   @JsonKey(name: "grant_type")
   String get grantType;
-  @override
-  @JsonKey(name: "client_id")
-  String get clientId;
-  @override
-  @JsonKey(name: "client_secret")
-  String get clientSecret;
   @override
   @JsonKey(ignore: true)
   _$$_TokenRequestCopyWith<_$_TokenRequest> get copyWith =>

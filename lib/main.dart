@@ -6,6 +6,14 @@ import 'package:flutter/services.dart';
 void main() {
   configureInjection();
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
   runApp(const DeckslyApp());
+}
+
+void _landscapeModeOnly() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
 }

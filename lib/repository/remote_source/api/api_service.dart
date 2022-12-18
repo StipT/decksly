@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:decksly/common/application.constants.dart';
 import 'package:decksly/env.dart';
 import 'package:decksly/repository/remote_source/api/api_client.dart';
@@ -60,12 +62,14 @@ class ApiServiceImpl implements ApiService {
     secureStorage = const FlutterSecureStorage();
 
     final _authDio = Dio(
-      BaseOptions(baseUrl: AUTH_BASE_URL),
+      BaseOptions(baseUrl: AUTH_BASE_URL, headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }),
     );
     _authDio.interceptors.add(logInterceptor);
     _authClient = AuthClient(_authDio);
 
-    final _restDio = Dio(
+    _restDio = Dio(
       BaseOptions(baseUrl: API_BASE_URL, headers: {
         'Content-Type': 'application/json',
       }),
@@ -77,7 +81,6 @@ class ApiServiceImpl implements ApiService {
 
   bool isTokenInvalid(String? accessToken) {
     if (accessToken == null) {
-      print("");
       return true;
     }
 
@@ -87,10 +90,12 @@ class ApiServiceImpl implements ApiService {
   }
 
   Future<String> refreshAccessToken() async {
+    String basicAuth =
+        'Basic ' + base64.encode(utf8.encode('$BATTLENET_CLIENT_ID:$BATTLENET_CLIENT_SECRET'));
+
     final tokenResponse = await _authClient.getAccessToken(
-      'application/x-www-form-urlencoded',
-      "$BATTLENET_CLIENT_ID:$BATTLENET_CLIENT_SECRET",
-      CLIENT_CREDENTIALS_GRANT_TYPE,
+      basicAuth,
+      const TokenRequest(grantType: CLIENT_CREDENTIALS_GRANT_TYPE),
     );
 
     final accessToken = tokenResponse.accessToken;

@@ -10,7 +10,7 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   @GET('/hearthstone/cards')
-  Future<CardsResponse> getCards();
+  Future<CardsResponse> getCards(@Query("locale") String locale);
 
   @GET('/hearthstone/cards/{id}')
   Future<CardsResponse> getCard(@Path() String id);

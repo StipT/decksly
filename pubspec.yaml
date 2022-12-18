@@ -64,11 +64,15 @@ dependencies:
   firebase_auth: ^3.3.0
 
   # UI
+  flutter_screenutil: ^5.6.0
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^1.2.1
+  infinite_scroll_pagination: ^3.2.0
+  foil: ^0.9.0+1
 
   # Dev
   logger: ^1.1.0
+  xl: ^0.9.1
 
 dev_dependencies:
   lint: ^1.5.3
@@ -98,8 +102,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+   - assets/background.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

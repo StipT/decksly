@@ -11,10 +11,10 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       collectible: json['collectible'] as int,
       slug: json['slug'] as String,
       classId: json['classId'] as int,
-      multiClassIds: (json['multiClassIds'] as List<dynamic>)
-          .map((e) => e as String)
+      multiClassIds: (json['multiClassIds'] as List<dynamic>?)
+          ?.map((e) => e as int?)
           .toList(),
-      spellSchoolId: json['spellSchoolId'] as int,
+      spellSchoolId: json['spellSchoolId'] as int?,
       cardTypeId: json['cardTypeId'] as int,
       cardSetId: json['cardSetId'] as int,
       rarityId: json['rarityId'] as int,
@@ -27,10 +27,14 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       imageGold: json['imageGold'] as String,
       flavorText: json['flavorText'] as String,
       cropImage: json['cropImage'] as String,
-      keywordIds: (json['keywordIds'] as List<dynamic>)
-          .map((e) => e as String)
+      keywordIds: (json['keywordIds'] as List<dynamic>?)
+          ?.map((e) => e as int?)
           .toList(),
-      duels: DuelsDTO.fromJson(json['duels'] as Map<String, dynamic>),
+      childIds:
+          (json['childIds'] as List<dynamic>?)?.map((e) => e as int?).toList(),
+      duels: json['duels'] == null
+          ? null
+          : DuelsDTO.fromJson(json['duels'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_CardDTOToJson(_$_CardDTO instance) =>
@@ -54,5 +58,6 @@ Map<String, dynamic> _$$_CardDTOToJson(_$_CardDTO instance) =>
       'flavorText': instance.flavorText,
       'cropImage': instance.cropImage,
       'keywordIds': instance.keywordIds,
+      'childIds': instance.childIds,
       'duels': instance.duels,
     };

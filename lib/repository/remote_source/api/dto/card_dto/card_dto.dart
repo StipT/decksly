@@ -11,8 +11,8 @@ class CardDTO with _$CardDTO {
     required int collectible,
     required String slug,
     required int classId,
-    required List<String> multiClassIds,
-    required int spellSchoolId,
+    required List<int?>? multiClassIds,
+    required int? spellSchoolId,
     required int cardTypeId,
     required int cardSetId,
     required int rarityId,
@@ -22,11 +22,12 @@ class CardDTO with _$CardDTO {
     required String name,
     required String text,
     required String image,
-    required String  imageGold,
+    required String imageGold,
     required String flavorText,
     required String cropImage,
-    required List<String> keywordIds,
-    required DuelsDTO duels,
+    required List<int?>? keywordIds,
+    required List<int?>? childIds,
+    required DuelsDTO? duels,
   }) = _CardDTO;
 
   factory CardDTO.fromJson(Map<String, dynamic> json) => _$CardDTOFromJson(json);

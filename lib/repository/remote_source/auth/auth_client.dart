@@ -1,4 +1,5 @@
 import 'package:decksly/common/application.constants.dart';
+import 'package:decksly/repository/remote_source/auth/token_request/token_request.dart';
 import 'package:decksly/repository/remote_source/auth/token_response/token_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -11,8 +12,7 @@ abstract class AuthClient {
 
   @POST('/token')
   Future<TokenResponse> getAccessToken(
-    @Header("Content-Type") String contentType,
     @Header("Authorization") String authorization,
-    @Body() String grantType,
+    @Body() TokenRequest tokenRequest,
   );
 }

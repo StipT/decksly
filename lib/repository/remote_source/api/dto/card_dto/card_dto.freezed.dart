@@ -24,8 +24,8 @@ mixin _$CardDTO {
   int get collectible => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
   int get classId => throw _privateConstructorUsedError;
-  List<String> get multiClassIds => throw _privateConstructorUsedError;
-  int get spellSchoolId => throw _privateConstructorUsedError;
+  List<int?>? get multiClassIds => throw _privateConstructorUsedError;
+  int? get spellSchoolId => throw _privateConstructorUsedError;
   int get cardTypeId => throw _privateConstructorUsedError;
   int get cardSetId => throw _privateConstructorUsedError;
   int get rarityId => throw _privateConstructorUsedError;
@@ -38,8 +38,9 @@ mixin _$CardDTO {
   String get imageGold => throw _privateConstructorUsedError;
   String get flavorText => throw _privateConstructorUsedError;
   String get cropImage => throw _privateConstructorUsedError;
-  List<String> get keywordIds => throw _privateConstructorUsedError;
-  DuelsDTO get duels => throw _privateConstructorUsedError;
+  List<int?>? get keywordIds => throw _privateConstructorUsedError;
+  List<int?>? get childIds => throw _privateConstructorUsedError;
+  DuelsDTO? get duels => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,8 +57,8 @@ abstract class $CardDTOCopyWith<$Res> {
       int collectible,
       String slug,
       int classId,
-      List<String> multiClassIds,
-      int spellSchoolId,
+      List<int?>? multiClassIds,
+      int? spellSchoolId,
       int cardTypeId,
       int cardSetId,
       int rarityId,
@@ -70,10 +71,11 @@ abstract class $CardDTOCopyWith<$Res> {
       String imageGold,
       String flavorText,
       String cropImage,
-      List<String> keywordIds,
-      DuelsDTO duels});
+      List<int?>? keywordIds,
+      List<int?>? childIds,
+      DuelsDTO? duels});
 
-  $DuelsDTOCopyWith<$Res> get duels;
+  $DuelsDTOCopyWith<$Res>? get duels;
 }
 
 /// @nodoc
@@ -93,8 +95,8 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
     Object? collectible = null,
     Object? slug = null,
     Object? classId = null,
-    Object? multiClassIds = null,
-    Object? spellSchoolId = null,
+    Object? multiClassIds = freezed,
+    Object? spellSchoolId = freezed,
     Object? cardTypeId = null,
     Object? cardSetId = null,
     Object? rarityId = null,
@@ -107,8 +109,9 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
     Object? imageGold = null,
     Object? flavorText = null,
     Object? cropImage = null,
-    Object? keywordIds = null,
-    Object? duels = null,
+    Object? keywordIds = freezed,
+    Object? childIds = freezed,
+    Object? duels = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -127,14 +130,14 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.classId
           : classId // ignore: cast_nullable_to_non_nullable
               as int,
-      multiClassIds: null == multiClassIds
+      multiClassIds: freezed == multiClassIds
           ? _value.multiClassIds
           : multiClassIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      spellSchoolId: null == spellSchoolId
+              as List<int?>?,
+      spellSchoolId: freezed == spellSchoolId
           ? _value.spellSchoolId
           : spellSchoolId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       cardTypeId: null == cardTypeId
           ? _value.cardTypeId
           : cardTypeId // ignore: cast_nullable_to_non_nullable
@@ -183,21 +186,29 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.cropImage
           : cropImage // ignore: cast_nullable_to_non_nullable
               as String,
-      keywordIds: null == keywordIds
+      keywordIds: freezed == keywordIds
           ? _value.keywordIds
           : keywordIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      duels: null == duels
+              as List<int?>?,
+      childIds: freezed == childIds
+          ? _value.childIds
+          : childIds // ignore: cast_nullable_to_non_nullable
+              as List<int?>?,
+      duels: freezed == duels
           ? _value.duels
           : duels // ignore: cast_nullable_to_non_nullable
-              as DuelsDTO,
+              as DuelsDTO?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $DuelsDTOCopyWith<$Res> get duels {
-    return $DuelsDTOCopyWith<$Res>(_value.duels, (value) {
+  $DuelsDTOCopyWith<$Res>? get duels {
+    if (_value.duels == null) {
+      return null;
+    }
+
+    return $DuelsDTOCopyWith<$Res>(_value.duels!, (value) {
       return _then(_value.copyWith(duels: value) as $Val);
     });
   }
@@ -215,8 +226,8 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
       int collectible,
       String slug,
       int classId,
-      List<String> multiClassIds,
-      int spellSchoolId,
+      List<int?>? multiClassIds,
+      int? spellSchoolId,
       int cardTypeId,
       int cardSetId,
       int rarityId,
@@ -229,11 +240,12 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
       String imageGold,
       String flavorText,
       String cropImage,
-      List<String> keywordIds,
-      DuelsDTO duels});
+      List<int?>? keywordIds,
+      List<int?>? childIds,
+      DuelsDTO? duels});
 
   @override
-  $DuelsDTOCopyWith<$Res> get duels;
+  $DuelsDTOCopyWith<$Res>? get duels;
 }
 
 /// @nodoc
@@ -250,8 +262,8 @@ class __$$_CardDTOCopyWithImpl<$Res>
     Object? collectible = null,
     Object? slug = null,
     Object? classId = null,
-    Object? multiClassIds = null,
-    Object? spellSchoolId = null,
+    Object? multiClassIds = freezed,
+    Object? spellSchoolId = freezed,
     Object? cardTypeId = null,
     Object? cardSetId = null,
     Object? rarityId = null,
@@ -264,8 +276,9 @@ class __$$_CardDTOCopyWithImpl<$Res>
     Object? imageGold = null,
     Object? flavorText = null,
     Object? cropImage = null,
-    Object? keywordIds = null,
-    Object? duels = null,
+    Object? keywordIds = freezed,
+    Object? childIds = freezed,
+    Object? duels = freezed,
   }) {
     return _then(_$_CardDTO(
       id: null == id
@@ -284,14 +297,14 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.classId
           : classId // ignore: cast_nullable_to_non_nullable
               as int,
-      multiClassIds: null == multiClassIds
+      multiClassIds: freezed == multiClassIds
           ? _value._multiClassIds
           : multiClassIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      spellSchoolId: null == spellSchoolId
+              as List<int?>?,
+      spellSchoolId: freezed == spellSchoolId
           ? _value.spellSchoolId
           : spellSchoolId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       cardTypeId: null == cardTypeId
           ? _value.cardTypeId
           : cardTypeId // ignore: cast_nullable_to_non_nullable
@@ -340,14 +353,18 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.cropImage
           : cropImage // ignore: cast_nullable_to_non_nullable
               as String,
-      keywordIds: null == keywordIds
+      keywordIds: freezed == keywordIds
           ? _value._keywordIds
           : keywordIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      duels: null == duels
+              as List<int?>?,
+      childIds: freezed == childIds
+          ? _value._childIds
+          : childIds // ignore: cast_nullable_to_non_nullable
+              as List<int?>?,
+      duels: freezed == duels
           ? _value.duels
           : duels // ignore: cast_nullable_to_non_nullable
-              as DuelsDTO,
+              as DuelsDTO?,
     ));
   }
 }
@@ -360,7 +377,7 @@ class _$_CardDTO implements _CardDTO {
       required this.collectible,
       required this.slug,
       required this.classId,
-      required final List<String> multiClassIds,
+      required final List<int?>? multiClassIds,
       required this.spellSchoolId,
       required this.cardTypeId,
       required this.cardSetId,
@@ -374,10 +391,12 @@ class _$_CardDTO implements _CardDTO {
       required this.imageGold,
       required this.flavorText,
       required this.cropImage,
-      required final List<String> keywordIds,
+      required final List<int?>? keywordIds,
+      required final List<int?>? childIds,
       required this.duels})
       : _multiClassIds = multiClassIds,
-        _keywordIds = keywordIds;
+        _keywordIds = keywordIds,
+        _childIds = childIds;
 
   factory _$_CardDTO.fromJson(Map<String, dynamic> json) =>
       _$$_CardDTOFromJson(json);
@@ -390,16 +409,18 @@ class _$_CardDTO implements _CardDTO {
   final String slug;
   @override
   final int classId;
-  final List<String> _multiClassIds;
+  final List<int?>? _multiClassIds;
   @override
-  List<String> get multiClassIds {
+  List<int?>? get multiClassIds {
+    final value = _multiClassIds;
+    if (value == null) return null;
     if (_multiClassIds is EqualUnmodifiableListView) return _multiClassIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_multiClassIds);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int spellSchoolId;
+  final int? spellSchoolId;
   @override
   final int cardTypeId;
   @override
@@ -424,20 +445,32 @@ class _$_CardDTO implements _CardDTO {
   final String flavorText;
   @override
   final String cropImage;
-  final List<String> _keywordIds;
+  final List<int?>? _keywordIds;
   @override
-  List<String> get keywordIds {
+  List<int?>? get keywordIds {
+    final value = _keywordIds;
+    if (value == null) return null;
     if (_keywordIds is EqualUnmodifiableListView) return _keywordIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_keywordIds);
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<int?>? _childIds;
+  @override
+  List<int?>? get childIds {
+    final value = _childIds;
+    if (value == null) return null;
+    if (_childIds is EqualUnmodifiableListView) return _childIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final DuelsDTO duels;
+  final DuelsDTO? duels;
 
   @override
   String toString() {
-    return 'CardDTO(id: $id, collectible: $collectible, slug: $slug, classId: $classId, multiClassIds: $multiClassIds, spellSchoolId: $spellSchoolId, cardTypeId: $cardTypeId, cardSetId: $cardSetId, rarityId: $rarityId, parentId: $parentId, artistName: $artistName, manaCost: $manaCost, name: $name, text: $text, image: $image, imageGold: $imageGold, flavorText: $flavorText, cropImage: $cropImage, keywordIds: $keywordIds, duels: $duels)';
+    return 'CardDTO(id: $id, collectible: $collectible, slug: $slug, classId: $classId, multiClassIds: $multiClassIds, spellSchoolId: $spellSchoolId, cardTypeId: $cardTypeId, cardSetId: $cardSetId, rarityId: $rarityId, parentId: $parentId, artistName: $artistName, manaCost: $manaCost, name: $name, text: $text, image: $image, imageGold: $imageGold, flavorText: $flavorText, cropImage: $cropImage, keywordIds: $keywordIds, childIds: $childIds, duels: $duels)';
   }
 
   @override
@@ -477,6 +510,7 @@ class _$_CardDTO implements _CardDTO {
                 other.cropImage == cropImage) &&
             const DeepCollectionEquality()
                 .equals(other._keywordIds, _keywordIds) &&
+            const DeepCollectionEquality().equals(other._childIds, _childIds) &&
             (identical(other.duels, duels) || other.duels == duels));
   }
 
@@ -503,6 +537,7 @@ class _$_CardDTO implements _CardDTO {
         flavorText,
         cropImage,
         const DeepCollectionEquality().hash(_keywordIds),
+        const DeepCollectionEquality().hash(_childIds),
         duels
       ]);
 
@@ -526,8 +561,8 @@ abstract class _CardDTO implements CardDTO {
       required final int collectible,
       required final String slug,
       required final int classId,
-      required final List<String> multiClassIds,
-      required final int spellSchoolId,
+      required final List<int?>? multiClassIds,
+      required final int? spellSchoolId,
       required final int cardTypeId,
       required final int cardSetId,
       required final int rarityId,
@@ -540,8 +575,9 @@ abstract class _CardDTO implements CardDTO {
       required final String imageGold,
       required final String flavorText,
       required final String cropImage,
-      required final List<String> keywordIds,
-      required final DuelsDTO duels}) = _$_CardDTO;
+      required final List<int?>? keywordIds,
+      required final List<int?>? childIds,
+      required final DuelsDTO? duels}) = _$_CardDTO;
 
   factory _CardDTO.fromJson(Map<String, dynamic> json) = _$_CardDTO.fromJson;
 
@@ -554,9 +590,9 @@ abstract class _CardDTO implements CardDTO {
   @override
   int get classId;
   @override
-  List<String> get multiClassIds;
+  List<int?>? get multiClassIds;
   @override
-  int get spellSchoolId;
+  int? get spellSchoolId;
   @override
   int get cardTypeId;
   @override
@@ -582,9 +618,11 @@ abstract class _CardDTO implements CardDTO {
   @override
   String get cropImage;
   @override
-  List<String> get keywordIds;
+  List<int?>? get keywordIds;
   @override
-  DuelsDTO get duels;
+  List<int?>? get childIds;
+  @override
+  DuelsDTO? get duels;
   @override
   @JsonKey(ignore: true)
   _$$_CardDTOCopyWith<_$_CardDTO> get copyWith =>

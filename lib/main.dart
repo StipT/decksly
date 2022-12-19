@@ -7,7 +7,7 @@ void main() {
   configureInjection();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-
+  _landscapeModeOnly();
   runApp(const DeckslyApp());
 }
 

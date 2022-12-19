@@ -35,60 +35,56 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CardGalleryBloc, CardGalleryState>(
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
-      child: Column(
+      child: Stack(
         children: [
-          //   AppBar(backgroundColor: Colors.grey),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/background.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: PagedGridView<int, CardDTO>(
-                pagingController: _pagingController,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                padding: EdgeInsets.zero,
-                builderDelegate: PagedChildBuilderDelegate<CardDTO>(
-                  itemBuilder: (ctx, card, _) {
-                    return XL(
-                      sharesPointer: false,
-                      layers: [
-                        XLayer(
-                          xRotation: 1.0,
-                          yRotation: 1.0,
-                          xOffset: 200,
-                          yOffset: 200,
-                          child: Center(
-                            child: Foil(
-                              useSensor: true,
-                              isUnwrapped: false,
-                              opacity: 0.2,
-                              child: Image.network(
-                                card.image,
-                                fit: BoxFit.contain,
-                              ),
+          Column(
+            children: [
+              //   AppBar(backgroundColor: Colors.grey),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/background.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: PagedGridView<int, CardDTO>(
+                    pagingController: _pagingController,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                    padding: EdgeInsets.zero,
+                    builderDelegate: PagedChildBuilderDelegate<CardDTO>(
+                      itemBuilder: (ctx, card, _) {
+                        return GestureDetector(
+                          onTap: () => Navigator.push(context, HeroDialogRoute(
+                              //  fullscreenDialog: true,
+                              builder: (context) {
+                            return DetailScreen(card);
+                          })),
+                          child: Hero(
+                            tag: card.id,
+                            child: Image.network(
+                              card.image,
+                              fit: BoxFit.contain,
                             ),
                           ),
+                        );
+                      },
+                      firstPageProgressIndicatorBuilder: (_) => const Center(
+                        child: CircularProgressIndicator.adaptive(
+                          strokeWidth: 1.4,
                         ),
-                      ],
-                    );
-                  },
-                  firstPageProgressIndicatorBuilder: (_) => const Center(
-                    child: CircularProgressIndicator.adaptive(
-                      strokeWidth: 1.4,
-                    ),
-                  ),
-                  newPageProgressIndicatorBuilder: (_) => const Center(
-                    child: CircularProgressIndicator.adaptive(
-                      strokeWidth: 1.4,
+                      ),
+                      newPageProgressIndicatorBuilder: (_) => const Center(
+                        child: CircularProgressIndicator.adaptive(
+                          strokeWidth: 1.4,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
@@ -108,4 +104,103 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       );
     }
   }
+}
+
+class DetailScreen extends StatelessWidget {
+  const DetailScreen(this.card, {super.key});
+
+  final CardDTO card;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        color: Colors.transparent,
+        child: XL(
+          sharesPointer: false,
+          layers: [
+            XLayer(
+                xRotation: 0.5,
+                yRotation: 0.5,
+                xOffset: 0,
+                yOffset: 0,
+                child: Row(
+              children: [
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          card.artistName,
+                          style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
+                        ))),
+                Expanded(child: const SizedBox()),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          card.flavorText,
+                          style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
+                        ))),
+              ],
+            )),
+            XLayer(
+              xRotation: 1.0,
+              yRotation: 1.0,
+              xOffset: 0,
+              yOffset: 200,
+              child: Foil(
+                useSensor: true,
+                isUnwrapped: false,
+                opacity: 0.3,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Center(
+                    child: Hero(
+                      tag: card.id.toString(),
+                      child: Image.network(
+                        card.image,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HeroDialogRoute<T> extends PageRoute<T> {
+  HeroDialogRoute({required this.builder}) : super();
+
+  final WidgetBuilder builder;
+
+  @override
+  bool get opaque => false;
+
+  @override
+  bool get barrierDismissible => true;
+
+  @override
+  Duration get transitionDuration => const Duration(milliseconds: 100);
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Color get barrierColor => Colors.black54;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return builder(context);
+  }
+
+  @override
+  // TODO: implement barrierLabel
+  String? get barrierLabel => "throw UnimplementedError()";
 }

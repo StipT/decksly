@@ -47,7 +47,7 @@ class ApiServiceImpl implements ApiService {
     }, onResponse: (response, handler) {
       return handler.next(response);
     }, onError: (error, handler) async {
-      return handler.next(error);
+      return await _retryRequest(error, handler);
     });
   }
 
@@ -89,9 +89,24 @@ class ApiServiceImpl implements ApiService {
     return false;
   }
 
+  Future<void> _retryRequest(DioError error, ErrorInterceptorHandler handler) async {
+    if (error.response?.statusCode == 401) {
+      final RequestOptions? options = error.response?.requestOptions;
+      if (options == null || options.headers['Retry-Count'] == 1) {
+        return;
+      }
+
+      await refreshAccessToken();
+      options.headers['Retry-Count'] = 1; //setting retry count to 1 to prevent further concurrent calls
+      final retryResponse = await _restDio.fetch(options);
+      return handler.resolve(retryResponse);
+    } else {
+      return handler.next(error);
+    }
+  }
+
   Future<String> refreshAccessToken() async {
-    String basicAuth =
-        'Basic ' + base64.encode(utf8.encode('$BATTLENET_CLIENT_ID:$BATTLENET_CLIENT_SECRET'));
+    String basicAuth = 'Basic ' + base64.encode(utf8.encode('$BATTLENET_CLIENT_ID:$BATTLENET_CLIENT_SECRET'));
 
     final tokenResponse = await _authClient.getAccessToken(
       basicAuth,

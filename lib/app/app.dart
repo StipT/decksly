@@ -4,13 +4,13 @@ import 'package:decksly/common/colors.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckslyApp extends StatelessWidget {
   const DeckslyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

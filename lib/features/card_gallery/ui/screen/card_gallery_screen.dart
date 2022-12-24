@@ -56,9 +56,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                       itemBuilder: (ctx, card, _) {
                         return GestureDetector(
-                          onTap: () => Navigator.push(context, HeroDialogRoute(
-                              //  fullscreenDialog: true,
-                              builder: (context) {
+                          onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                             return DetailScreen(card);
                           })),
                           child: Hero(
@@ -126,24 +124,24 @@ class DetailScreen extends StatelessWidget {
                 xOffset: 0,
                 yOffset: 0,
                 child: Row(
-              children: [
-                Expanded(
-                    child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          card.artistName,
-                          style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
-                        ))),
-                Expanded(child: const SizedBox()),
-                Expanded(
-                    child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          card.flavorText,
-                          style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
-                        ))),
-              ],
-            )),
+                  children: [
+                    Expanded(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              card.artistName,
+                              style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
+                            ))),
+                    Expanded(child: const SizedBox()),
+                    Expanded(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              card.flavorText,
+                              style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
+                            ))),
+                  ],
+                )),
             XLayer(
               xRotation: 1.0,
               yRotation: 1.0,

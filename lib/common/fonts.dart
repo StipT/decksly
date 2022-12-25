@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class FontStyles {
+
+  static const String FONT_FAMILY = "Belwe";
+
   static TextStyle get semiBold12 => const TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 12,

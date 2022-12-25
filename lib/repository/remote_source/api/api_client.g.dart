@@ -21,9 +21,44 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<CardsResponse> getCards(locale) async {
+  Future<CardsResponse> getCards({
+    page = 0,
+    locale = "en_US",
+    set,
+    heroClass,
+    manaCost,
+    attack,
+    health,
+    collectible,
+    rarity,
+    type,
+    minionType,
+    keyword,
+    textFilter,
+    gameMode,
+    spellSchool,
+    sort,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'locale': locale};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'locale': locale,
+      r'set': set,
+      r'class': heroClass,
+      r'manaCost': manaCost,
+      r'attack': attack,
+      r'health': health,
+      r'collectible': collectible,
+      r'rarity': rarity,
+      r'type': type,
+      r'minionType': minionType,
+      r'keyword': keyword,
+      r'textFilter': textFilter,
+      r'gameMode': gameMode,
+      r'spellSchool': spellSchool,
+      r'sort': sort,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio

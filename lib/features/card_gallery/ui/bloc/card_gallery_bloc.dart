@@ -23,7 +23,8 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   final NetworkInfo _networkInfo;
   late final Stream<bool> internetConnectionState;
   final FetchCardsUsecase fetchCardsUsecase;
-  int _pageNumber = 1;
+  num _pageNumber = 1;
+  final int _cardsPerPage = 20;
 
   void _streamInternetConnectionState() {
     internetConnectionState = _networkInfo.resultStream
@@ -33,14 +34,14 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
 
   Future<void> handleFetchCards(Emitter<CardGalleryState> emit, int pageKey) async {
     emit(const CardsLoading());
-    if (pageKey == 0) {
-      _pageNumber = 1;
-    }
-    final resultOrFailure = await fetchCardsUsecase(FetchCardsParams(_pageNumber, 'en'));
+
+    _pageNumber = pageKey == 0 ? 1 : pageKey ~/ _cardsPerPage;
+    print("Page key $pageKey");
+    final resultOrFailure = await fetchCardsUsecase(FetchCardsParams(page: _pageNumber));
     resultOrFailure.fold(
       (failure) => emit(CardsError(failure)),
       (cards) {
-        _pageNumber++;
+        pageKey++;
         emit(CardsLoaded(cards));
       },
     );

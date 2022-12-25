@@ -5,7 +5,24 @@ import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart'
 import 'package:injectable/injectable.dart';
 
 abstract class CardsRepository {
-  Future<List<CardDTO>> getCards(String language, int page);
+  Future<List<CardDTO>> getCards({
+    num page,
+    String locale = "en_US",
+    String? set,
+    String? heroClass,
+    List<num>? manaCost,
+    List<num>? attack,
+    List<num>? health,
+    List<num>? collectible,
+    String? rarity,
+    String? type,
+    String? minionType,
+    String? keyword,
+    String? textFilter,
+    String? gameMode,
+    String? spellSchool,
+    String? sort,
+  });
 }
 
 @LazySingleton(as: CardsRepository)
@@ -19,11 +36,30 @@ class CardsRepositoryImpl extends CardsRepository {
   final NetworkInfo _networkInfo;
 
   @override
-  Future<List<CardDTO>> getCards(String language, int page) async {
+  Future<List<CardDTO>> getCards({
+    num page = 0,
+    String locale = "en_US",
+    String? set,
+    String? heroClass,
+    List<num>? manaCost,
+    List<num>? attack,
+    List<num>? health,
+    List<num>? collectible,
+    String? rarity,
+    String? type,
+    String? minionType,
+    String? keyword,
+    String? textFilter,
+    String? gameMode,
+    String? spellSchool,
+    String? sort,
+  }) async {
     if (!await _networkInfo.isConnected) {
       throw NoInternetException();
     }
-    final cardResponse = await _apiService.apiClient.getCards("en_US");
+    // TODO PAGE
+
+    final cardResponse = await _apiService.apiClient.getCards(page: page, locale: locale);
     return cardResponse.cards;
   }
 }

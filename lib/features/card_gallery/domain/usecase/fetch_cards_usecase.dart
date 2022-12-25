@@ -15,7 +15,7 @@ class FetchCardsUsecase extends UseCase<List<CardDTO>, FetchCardsParams> {
   @override
   Future<Either<Failure, List<CardDTO>>> call(FetchCardsParams params) async {
     try {
-      final cards = await _cardsRepository.getCards(params.language, params.pageNumber);
+      final cards = await _cardsRepository.getCards(page: params.page);
       return Right(cards);
     } catch (exception) {
       return Left(ExceptionToFailureMapper.mapExceptionToFailure(exception));
@@ -24,8 +24,39 @@ class FetchCardsUsecase extends UseCase<List<CardDTO>, FetchCardsParams> {
 }
 
 class FetchCardsParams {
-  FetchCardsParams(this.pageNumber, this.language);
+  FetchCardsParams({
+    this.page = 0,
+    this.locale,
+    this.set,
+    this.heroClass,
+    this.manaCost,
+    this.attack,
+    this.health,
+    this.collectible,
+    this.rarity,
+    this.type,
+    this.minionType,
+    this.keyword,
+    this.textFilter,
+    this.gameMode,
+    this.spellSchool,
+    this.sort,
+  });
 
-  final int pageNumber;
-  final String language;
+  final num page;
+  final String? locale;
+  final String? set;
+  final String? heroClass;
+  final List<num>? manaCost;
+  final List<num>? attack;
+  final List<num>? health;
+  final List<num>? collectible;
+  final String? rarity;
+  final String? type;
+  final String? minionType;
+  final String? keyword;
+  final String? textFilter;
+  final String? gameMode;
+  final String? spellSchool;
+  final String? sort;
 }

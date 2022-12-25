@@ -1,3 +1,4 @@
+import 'package:decksly/common/colors.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,6 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
         children: [
           Column(
             children: [
-              //   AppBar(backgroundColor: Colors.grey),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
@@ -80,6 +80,39 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              Container(
+                height: 0.13.sh,
+                color: AppColors.splashColor,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

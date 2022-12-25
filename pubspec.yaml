@@ -103,6 +103,8 @@ flutter:
     # Classes
     - assets/classes/death_knight_icon.png
     - assets/classes/demon_hunter_icon.png
+    - assets/classes/druid_icon.png
+    - assets/classes/hunter_icon.png
     - assets/classes/mage_icon.png
     - assets/classes/paladin_icon.png
     - assets/classes/priest_icon.png

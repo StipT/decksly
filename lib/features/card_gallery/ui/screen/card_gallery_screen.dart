@@ -1,4 +1,4 @@
-import 'package:decksly/common/colors.dart';
+import 'package:decksly/common/fonts.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/background.png"),
+                      image: AssetImage("assets/scroll_background.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -83,33 +83,58 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 ),
               ),
               Container(
-                height: 0.13.sh,
-                color: AppColors.splashColor,
+                height: 0.125.sh,
+                padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/velvet_background.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 child: Row(
                   children: [
+                    // TODO deck-8 Add Class filter
                     Expanded(
                       child: Container(
                         color: Colors.transparent,
+                        child: Image.asset("assets/classes/warlock_icon.png"),
                       ),
                     ),
+                    // TODO deck-9 Add Card Set filter
                     Expanded(
                       child: Container(
                         color: Colors.transparent,
+                        child: Text(
+                          "Standard Cards",
+                          style: FontStyles.regular12,
+                        ),
                       ),
                     ),
+                    // TODO deck-10 Add Mana filter
                     Expanded(
                       child: Container(
                         color: Colors.transparent,
+                        child: Image.asset("assets/misc/mana_inactive.png"),
                       ),
                     ),
+                    // TODO deck-11 Add Search filter
                     Expanded(
                       child: Container(
                         color: Colors.transparent,
+                        child: Text(
+                          "Search...",
+                          style: FontStyles.regular12,
+                        ),
                       ),
                     ),
+                    // TODO deck-12 Add filter Dialog
                     Expanded(
                       child: Container(
                         color: Colors.transparent,
+                        child: Text(
+                          "Filters",
+                          style: FontStyles.regular12,
+                        ),
                       ),
                     ),
                   ],
@@ -137,6 +162,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   }
 }
 
+// TODO deck-13 Add DetailsScreen
 class DetailScreen extends StatelessWidget {
   const DetailScreen(this.card, {super.key});
 

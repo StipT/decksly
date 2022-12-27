@@ -70,9 +70,14 @@ dependencies:
   infinite_scroll_pagination: ^3.2.0
   foil: ^0.9.0+1
 
+  # Util
+  flutter_markdown: ^0.6.13
+  flutter_html: ^2.2.1
+
   # Dev
   logger: ^1.1.0
   xl: ^0.9.1
+  flip_card: ^0.6.0
 
 dev_dependencies:
   lint: ^1.5.3

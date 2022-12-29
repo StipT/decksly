@@ -69,6 +69,7 @@ dependencies:
   flutter_native_splash: ^1.2.1
   infinite_scroll_pagination: ^3.2.0
   foil: ^0.9.0+1
+  flutter_svg: ^0.23.0+1
 
   # Util
   flutter_markdown: ^0.6.13
@@ -103,24 +104,57 @@ flutter:
   uses-material-design: true
   assets:
     # Backgrounds
-    - assets/scroll_background.png
-    - assets/velvet_background.jpg
-    # Classes
-    - assets/classes/death_knight_icon.png
-    - assets/classes/demon_hunter_icon.png
-    - assets/classes/druid_icon.png
-    - assets/classes/hunter_icon.png
-    - assets/classes/mage_icon.png
-    - assets/classes/paladin_icon.png
-    - assets/classes/priest_icon.png
-    - assets/classes/rogue_icon.png
-    - assets/classes/shaman_icon.png
-    - assets/classes/warlock_icon.png
-    - assets/classes/warrior_icon.png
+    - assets/background/scroll_background.png
+    - assets/background/velvet_background_top.png
+    - assets/background/velvet_background_center.jpg
+    - assets/background/velvet_background_bottom.png
+
+    # Shared
+    - assets/shared/border_left_outline.png
+    - assets/shared/border_center_outline.png
+    - assets/shared/border_right_outline.png
+
+    # Button
+    - assets/button/button_border_left.png
+    - assets/button/button_border_center.png
+    - assets/button/button_border_right.png
+
+    # Search
+    - assets/search/search_border_left.png
+    - assets/search/search_border_center.png
+    - assets/search/search_border_right.png
+
+    # Dropdown
+    - assets/dropdown/dropdown_button_border_left.png
+    - assets/dropdown/dropdown_border_bottom.png
+    - assets/dropdown/dropdown_border_bottom_left.png
+    - assets/dropdown/dropdown_border_bottom_right.png
+    - assets/dropdown/dropdown_border_left.png
+    - assets/dropdown/dropdown_border_right.png
+    - assets/dropdown/dropdown_border_top.png
+    - assets/dropdown/dropdown_border_top_left.png
+    - assets/dropdown/dropdown_border_top_right.png
+
+    # Class
+    - assets/class/all_class_icon.png
+    - assets/class/neutral_icon.png
+    - assets/class/death_knight_icon.png
+    - assets/class/demon_hunter_icon.png
+    - assets/class/druid_icon.png
+    - assets/class/hunter_icon.png
+    - assets/class/mage_icon.png
+    - assets/class/paladin_icon.png
+    - assets/class/priest_icon.png
+    - assets/class/rogue_icon.png
+    - assets/class/shaman_icon.png
+    - assets/class/warlock_icon.png
+    - assets/class/warrior_icon.png
+
     # Misc
     - assets/misc/mana.png
     - assets/misc/mana_active.png
     - assets/misc/mana_inactive.png
+    - assets/misc/filter.svg
 
   fonts:
     - family: Belwe

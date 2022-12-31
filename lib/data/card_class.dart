@@ -1,20 +1,19 @@
-const String CARD_CLASS_ALL = "all classes";
-const String CARD_CLASS_NEUTRAL = "neutral";
-const String CARD_CLASS_DEATH_KNIGHT = "death knight";
-const String CARD_CLASS_DEMON_HUNTER = "demon hunter";
-const String CARD_CLASS_DRUID = "druid";
-const String CARD_CLASS_HUNTER = "hunter";
-const String CARD_CLASS_MAGE = "mage";
-const String CARD_CLASS_PALADIN = "paladin";
-const String CARD_CLASS_PRIEST = "priest";
-const String CARD_CLASS_ROGUE = "rogue";
-const String CARD_CLASS_SHAMAN = "shaman";
-const String CARD_CLASS_WARLOCK = "warlock";
-const String CARD_CLASS_WARRIOR = "warrior";
+const String CARD_CLASS_ALL = "All Classes";
+const String CARD_CLASS_NEUTRAL = "Neutral";
+const String CARD_CLASS_DEATH_KNIGHT = "Death Knight";
+const String CARD_CLASS_DEMON_HUNTER = "Demon Hunter";
+const String CARD_CLASS_DRUID = "Druid";
+const String CARD_CLASS_HUNTER = "Hunter";
+const String CARD_CLASS_MAGE = "Mage";
+const String CARD_CLASS_PALADIN = "Paladin";
+const String CARD_CLASS_PRIEST = "Priest";
+const String CARD_CLASS_ROGUE = "Rogue";
+const String CARD_CLASS_SHAMAN = "Shaman";
+const String CARD_CLASS_WARLOCK = "Warlock";
+const String CARD_CLASS_WARRIOR = "Warrior";
 
 enum CardClass {
   all,
-  neutral,
   deathKnight,
   demonHunter,
   druid,
@@ -26,6 +25,7 @@ enum CardClass {
   shaman,
   warlock,
   warrior,
+  neutral,
 }
 
 extension CardClassValues on CardClass {
@@ -33,8 +33,6 @@ extension CardClassValues on CardClass {
     switch (this) {
       case CardClass.all:
         return CARD_CLASS_ALL;
-      case CardClass.neutral:
-        return CARD_CLASS_NEUTRAL;
       case CardClass.deathKnight:
         return CARD_CLASS_DEATH_KNIGHT;
       case CardClass.demonHunter:
@@ -57,22 +55,59 @@ extension CardClassValues on CardClass {
         return CARD_CLASS_WARLOCK;
       case CardClass.warrior:
         return CARD_CLASS_WARRIOR;
+      case CardClass.neutral:
+        return CARD_CLASS_NEUTRAL;
     }
   }
 
   static List<CardClass> get values => [
-    CardClass.all,
-    CardClass.neutral,
-    CardClass.deathKnight,
-    CardClass.demonHunter,
-    CardClass.druid,
-    CardClass.hunter,
-    CardClass.mage,
-    CardClass.paladin,
-    CardClass.priest,
-    CardClass.rogue,
-    CardClass.shaman,
-    CardClass.warlock,
-    CardClass.warrior,
-  ];
+        CardClass.all,
+        CardClass.neutral,
+        CardClass.deathKnight,
+        CardClass.demonHunter,
+        CardClass.druid,
+        CardClass.hunter,
+        CardClass.mage,
+        CardClass.paladin,
+        CardClass.priest,
+        CardClass.rogue,
+        CardClass.shaman,
+        CardClass.warlock,
+        CardClass.warrior,
+      ];
+}
+
+extension CardClassFromIndex on CardClass {
+  CardClass cardClassFromIndex(int index) {
+    switch (index) {
+      case 0:
+        return CardClass.all;
+      case 1:
+        return CardClass.deathKnight;
+      case 2:
+        return CardClass.demonHunter;
+      case 3:
+        return CardClass.druid;
+      case 4:
+        return CardClass.hunter;
+      case 5:
+        return CardClass.mage;
+      case 6:
+        return CardClass.paladin;
+      case 7:
+        return CardClass.priest;
+      case 8:
+        return CardClass.rogue;
+      case 9:
+        return CardClass.shaman;
+      case 10:
+        return CardClass.warlock;
+      case 11:
+        return CardClass.warrior;
+      case 13:
+        return CardClass.neutral;
+      default:
+        return CardClass.all;
+    }
+  }
 }

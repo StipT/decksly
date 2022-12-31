@@ -1,9 +1,10 @@
-import 'package:decksly/common/fonts.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_dropdown_button.dart';
+import 'package:decksly/common/colors.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_button.dart';
+import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_dropdown_button.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterAppBar extends StatelessWidget {
   const FilterAppBar({Key? key}) : super(key: key);
@@ -60,23 +61,41 @@ class FilterAppBar extends StatelessWidget {
                 // TODO deck-8 Add Class filter
                 Expanded(
                   flex: 1,
-                  child: HSDropdownButton(title: "All Classes", icon: Image.asset("assets/class/all_class_icon.png"),),
+                  child: HSDropdownButton(
+                    title: "All Classes",
+                      dropdownType: DropdownType.cardClass,
+                  ),
                 ),
                 // TODO deck-9 Add Card Set filter
                 Expanded(
                   flex: 1,
-                  child: HSDropdownButton(title: "", icon: Image.asset("assets/misc/mana_inactive.png"), ),
+                  child: HSDropdownButton(
+                    title: "",
+                    dropdownType: DropdownType.cardSet,
+                  ),
                 ),
                 // TODO deck-10 Add Mana filter
 
                 Expanded(
                   flex: 1,
-                  child: HSDropdownButton(title: "Mana", icon: Image.asset("assets/misc/mana_inactive.png"),),
+                  child: HSDropdownButton(
+                    dropdownType: DropdownType.mana,
+                    title: "Mana",
+                  ),
                 ),
                 // TODO deck-11 Add Search filter
-                Expanded(flex: 1, child: HSTextField(),),
+                Expanded(
+                  flex: 1,
+                  child: HSTextField(),
+                ),
                 // TODO deck-12 Add filter Dialog
-                Expanded(child: HSButton()),
+                HSButton(
+                  icon: SvgPicture.asset(
+                    "assets/misc/filter.svg",
+                    fit: BoxFit.fill,
+                    color: AppColors.buttonIconColor,
+                  ),
+                ),
               ],
             ),
           ),

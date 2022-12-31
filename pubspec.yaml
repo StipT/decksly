@@ -70,6 +70,7 @@ dependencies:
   infinite_scroll_pagination: ^3.2.0
   foil: ^0.9.0+1
   flutter_svg: ^0.23.0+1
+  auto_size_text: ^3.0.0-nullsafety.0
 
   # Util
   flutter_markdown: ^0.6.13
@@ -125,6 +126,7 @@ flutter:
     - assets/search/search_border_right.png
 
     # Dropdown
+    - assets/dropdown/dropdown_background.png
     - assets/dropdown/dropdown_button_border_left.png
     - assets/dropdown/dropdown_border_bottom.png
     - assets/dropdown/dropdown_border_bottom_left.png
@@ -136,10 +138,10 @@ flutter:
     - assets/dropdown/dropdown_border_top_right.png
 
     # Class
-    - assets/class/all_class_icon.png
+    - assets/class/all_icon.png
     - assets/class/neutral_icon.png
-    - assets/class/death_knight_icon.png
-    - assets/class/demon_hunter_icon.png
+    - assets/class/deathKnight_icon.png
+    - assets/class/demonHunter_icon.png
     - assets/class/druid_icon.png
     - assets/class/hunter_icon.png
     - assets/class/mage_icon.png

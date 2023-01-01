@@ -14,5 +14,6 @@ class AppColors {
 
   static const Color buttonTextColor = Color(0xff614326);
   static const Color buttonIconColor = Color(0xff472C11);
+  static const Color dropdownBackgroundColor = Color(0xff3D362F);
   static const Color hintTextColor = Color(0xff967463);
 }

@@ -19,6 +19,12 @@ class FontStyles {
     color: AppColors.text,
   );
 
+  static TextStyle bold17 = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 17.sp,
+    color: AppColors.text,
+  );
+
   static TextStyle bold20 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 20.sp,

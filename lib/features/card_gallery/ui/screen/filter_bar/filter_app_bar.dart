@@ -1,7 +1,10 @@
 import 'package:decksly/common/colors.dart';
+import 'package:decksly/data/card_class.dart';
+import 'package:decksly/data/card_set.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_button.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_dropdown_button.dart';
+import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_dropdown.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_text_field.dart';
+import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -52,42 +55,36 @@ class FilterAppBar extends StatelessWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(left: 0.01.sw, right: 0.01.sw, top: 0.04.sh, bottom: 0.02.sh),
+            padding: EdgeInsets.only(left: 0.01.sw, top: 0.04.sh, bottom: 0.02.sh),
             width: double.infinity,
             height: double.infinity,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 // TODO deck-8 Add Class filter
-                Expanded(
-                  flex: 1,
-                  child: HSDropdownButton(
-                    title: "All Classes",
-                      dropdownType: DropdownType.cardClass,
+                Container(
+                  child: HSDropdown(
+                    dropdownType: DropdownType.cardSet,
+                    dropdownValues: CardSet.values,
+                    width: 35.w,
+                    dropdownWidth: 125.w,
+
                   ),
                 ),
                 // TODO deck-9 Add Card Set filter
-                Expanded(
-                  flex: 1,
-                  child: HSDropdownButton(
-                    title: "",
-                    dropdownType: DropdownType.cardSet,
-                  ),
+                HSDropdown(
+                  width: 0.2.sw,
+                  dropdownWidth: 0.225.sw,
+                  dropdownType: DropdownType.cardClass,
+                  dropdownValues: CardClass.values,
                 ),
                 // TODO deck-10 Add Mana filter
 
-                Expanded(
-                  flex: 1,
-                  child: HSDropdownButton(
-                    dropdownType: DropdownType.mana,
-                    title: "Mana",
-                  ),
-                ),
+                Container(width: 165.w, child: ManaPicker(onChange: (change){},)),
                 // TODO deck-11 Add Search filter
                 Expanded(
-                  flex: 1,
-                  child: HSTextField(),
-                ),
+
+                    child: HSTextField()),
                 // TODO deck-12 Add filter Dialog
                 HSButton(
                   icon: SvgPicture.asset(

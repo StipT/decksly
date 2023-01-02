@@ -77,37 +77,35 @@ extension CardClassValues on CardClass {
       ];
 }
 
-extension CardClassFromIndex on CardClass {
-  CardClass cardClassFromIndex(int index) {
-    switch (index) {
-      case 0:
-        return CardClass.all;
-      case 1:
-        return CardClass.deathKnight;
-      case 2:
-        return CardClass.demonHunter;
-      case 3:
-        return CardClass.druid;
-      case 4:
-        return CardClass.hunter;
-      case 5:
-        return CardClass.mage;
-      case 6:
-        return CardClass.paladin;
-      case 7:
-        return CardClass.priest;
-      case 8:
-        return CardClass.rogue;
-      case 9:
-        return CardClass.shaman;
-      case 10:
-        return CardClass.warlock;
-      case 11:
-        return CardClass.warrior;
-      case 13:
-        return CardClass.neutral;
-      default:
-        return CardClass.all;
-    }
+CardClass cardClassFromIndex(int index) {
+  switch (index) {
+    case 0:
+      return CardClass.all;
+    case 1:
+      return CardClass.deathKnight;
+    case 2:
+      return CardClass.demonHunter;
+    case 3:
+      return CardClass.druid;
+    case 4:
+      return CardClass.hunter;
+    case 5:
+      return CardClass.mage;
+    case 6:
+      return CardClass.paladin;
+    case 7:
+      return CardClass.priest;
+    case 8:
+      return CardClass.rogue;
+    case 9:
+      return CardClass.shaman;
+    case 10:
+      return CardClass.warlock;
+    case 11:
+      return CardClass.warrior;
+    case 12:
+      return CardClass.neutral;
+    default:
+      return CardClass.all;
   }
 }

@@ -13,7 +13,7 @@ class HSButton extends StatelessWidget {
       constraints: BoxConstraints(
         minHeight: 20.h,
         maxHeight: 50.h,
-        minWidth: 20.w,
+        minWidth: 15.w,
         maxWidth: 30.w,
       ),
       child: Container(
@@ -113,7 +113,7 @@ class HSButton extends StatelessWidget {
                     ),
                     Text(
                       label ?? "",
-                      style: FontStyles.bold17Button,
+                      style: FontStyles.bold15Button,
                     )
                   ],
                 ),

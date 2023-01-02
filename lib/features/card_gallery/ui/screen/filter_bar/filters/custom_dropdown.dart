@@ -1,13 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropdown<T> extends StatefulWidget {
   /// the child widget for the button, this will be ignored if text is supplied
-  final Widget child;
 
   /// onChange is called when the selected option is changed.;
   /// It will pass back the value and the index of the option.
   final void Function(T, int) onChange;
+
+  final Widget Function(String) dropdownButton;
 
   /// list of DropdownItems
   final List<DropdownItem<T>> items;
@@ -26,7 +28,7 @@ class CustomDropdown<T> extends StatefulWidget {
   const CustomDropdown({
     Key? key,
     this.hideIcon = false,
-    required this.child,
+    required this.dropdownButton,
     required this.items,
     required this.dropdownStyle,
     required this.dropdownButtonStyle,
@@ -91,9 +93,13 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
               mainAxisSize: MainAxisSize.max,
               children: [
                 if (_currentIndex == -1) ...[
-                  widget.child,
+                  Expanded(
+                    child: widget.dropdownButton(0.toString(),),
+                  )
                 ] else ...[
-                  widget.items[_currentIndex],
+                  Expanded(
+                    child: widget.dropdownButton(_currentIndex.toString()),
+                  ),
                 ],
                 if (!widget.hideIcon)
                   RotationTransition(
@@ -116,7 +122,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
     var offset = renderBox.localToGlobal(Offset.zero);
     var topOffset = offset.dy + size.height + 5;
     return OverlayEntry(
-      // full screen GestureDetector to register when a
+      // full screen GestureDetector to register when ał
       // user has clicked away from the dropdown
       builder: (context) => GestureDetector(
         onTap: () => _toggleDropdown(close: true),
@@ -149,6 +155,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                               maxHeight: MediaQuery.of(context).size.height - topOffset - 15,
                             ),
                         child: Container(
+                          padding: EdgeInsets.only(top: 0.015.sh, bottom: 0.015.sh, right: 0.01.sw,),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
@@ -157,20 +164,25 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                               fit: BoxFit.fill,
                             ),
                           ),
-                          child: ListView(
-                            physics: const BouncingScrollPhysics(),
-                            padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
-                            shrinkWrap: true,
-                            children: widget.items.asMap().entries.map((item) {
-                              return InkWell(
-                                onTap: () {
-                                  setState(() => _currentIndex = item.key);
-                                  widget.onChange(item.value.value, item.key);
-                                  _toggleDropdown();
-                                },
-                                child: item.value,
-                              );
-                            }).toList(),
+                          child: RawScrollbar(
+                            thumbVisibility: false,
+                       //     thumbColor: primaryColorLight,
+                            radius: Radius.circular(20.r),
+                            child: ListView(
+                              physics: const BouncingScrollPhysics(),
+                              padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
+                              shrinkWrap: true,
+                              children: widget.items.asMap().entries.map((item) {
+                                return InkWell(
+                                  onTap: () {
+                                    setState(() => _currentIndex = item.key);
+                                    widget.onChange(item.value.value, item.key);
+                                    _toggleDropdown();
+                                  },
+                                  child: item.value,
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ),

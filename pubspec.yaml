@@ -137,6 +137,44 @@ flutter:
     - assets/dropdown/dropdown_border_top_left.png
     - assets/dropdown/dropdown_border_top_right.png
 
+    # Sets
+    - assets/set/standard.svg
+    - assets/set/wild.svg
+    - assets/set/classic.svg
+    - assets/set/currentArenaCards.svg
+    - assets/set/currentDuelsCards.svg
+    - assets/set/pathOfArthas.svg
+    - assets/set/marchOfTheLichKing.svg
+    - assets/set/murderAtCastleNathria.svg
+    - assets/set/voyageToTheSunkenCity.svg
+    - assets/set/fracturedInAlteracValley.svg
+    - assets/set/unitedInStormwind.svg
+    - assets/set/forgedInTheBarrens.svg
+    - assets/set/core.svg
+    - assets/set/madnessAtTheDarkmoonFaire.svg
+    - assets/set/scholomanceAcademy.svg
+    - assets/set/demonHunterInitiate.svg
+    - assets/set/ashesOfOutland.svg
+    - assets/set/galakrondsAwakening.svg
+    - assets/set/descentOfDragons.svg
+    - assets/set/saviorsOfUldum.svg
+    - assets/set/riseOfShadows.svg
+    - assets/set/rastakhansRumble.svg
+    - assets/set/theBoomsdayProject.svg
+    - assets/set/theWitchwood.svg
+    - assets/set/koboltsAndCatacombs.svg
+    - assets/set/knightsOfTheFrozenThrone.svg
+    - assets/set/journeyToUnGoro.svg
+    - assets/set/meanStreetsOfGadgetzan.svg
+    - assets/set/oneNightInKarazhan.svg
+    - assets/set/whispersOfTheOldGods.svg
+    - assets/set/leagueOfExplorers.svg
+    - assets/set/theGrandTournament.svg
+    - assets/set/blackrockMountain.svg
+    - assets/set/goblinsVsGnomes.svg
+    - assets/set/curseOfNaxxramas.svg
+    - assets/set/legacy.svg
+
     # Class
     - assets/class/all_icon.png
     - assets/class/neutral_icon.png
@@ -156,6 +194,7 @@ flutter:
     - assets/misc/mana.png
     - assets/misc/mana_active.png
     - assets/misc/mana_inactive.png
+    - assets/misc/golden_circle_border.png
     - assets/misc/filter.svg
 
   fonts:

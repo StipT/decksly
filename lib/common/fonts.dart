@@ -37,6 +37,24 @@ class FontStyles {
     color: AppColors.text,
   );
 
+  static TextStyle bold22Shadow = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 22.sp,
+    color: AppColors.text,
+    shadows: const <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 5.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 8.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ],
+  );
+
   static TextStyle bold28 = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 28.sp,
@@ -115,9 +133,22 @@ class FontStyles {
     color: AppColors.hintTextColor,
   );
 
-  static TextStyle bold17Button = TextStyle(
+
+  static TextStyle bold17Grey = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 17.sp,
+    color: AppColors.grey,
+  );
+
+  static TextStyle bold15Button = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 15.sp,
+    color: AppColors.buttonTextColor,
+  );
+
+  static TextStyle bold12Button = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 12.sp,
     color: AppColors.buttonTextColor,
   );
 }

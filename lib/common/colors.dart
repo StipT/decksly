@@ -12,8 +12,10 @@ class AppColors {
   static const Color categoryTextYellow = Color(0xffffe5ac);
   static const Color black90Transparent = Color(0xE6000000);
 
+  static const Color gold = Color(0xffffd700);
   static const Color buttonTextColor = Color(0xff614326);
   static const Color buttonIconColor = Color(0xff472C11);
   static const Color dropdownBackgroundColor = Color(0xff3D362F);
+  static const Color grey = Color(0xffA09E9C);
   static const Color hintTextColor = Color(0xff967463);
 }

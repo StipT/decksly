@@ -4,13 +4,13 @@ const String CARD_SET_CLASSIC = "classic cards";
 const String CARD_SET_CURRENT_ARENA = "current arena cards";
 const String CARD_SET_CURRENT_DUELS = "current duels cards";
 
-enum CardSet {
+enum CardSet{
   // Game modes
   standard,
   wild,
   classic,
-  currentArena,
-  currentDuels,
+  currentArenaCards,
+  currentDuelsCards,
 
   // Standard sets
   pathOfArthas,
@@ -58,9 +58,9 @@ extension CardSetValues on CardSet {
         return "Wild";
       case CardSet.classic:
         return "Classic";
-      case CardSet.currentArena:
+      case CardSet.currentArenaCards:
         return "Current Arena Cards";
-      case CardSet.currentDuels:
+      case CardSet.currentDuelsCards:
         return "Current Duels Cards";
 
       // Standard sets
@@ -136,8 +136,8 @@ extension CardSetValues on CardSet {
         CardSet.standard,
         CardSet.wild,
         CardSet.classic,
-        CardSet.currentArena,
-        CardSet.currentDuels,
+        CardSet.currentArenaCards,
+        CardSet.currentDuelsCards,
 
         // Standard sets
         CardSet.pathOfArthas,
@@ -200,8 +200,8 @@ List<CardSet> _getGameModes() => [
       CardSet.standard,
       CardSet.wild,
       CardSet.classic,
-      CardSet.currentArena,
-      CardSet.currentDuels,
+      CardSet.currentArenaCards,
+      CardSet.currentDuelsCards,
     ];
 
 List<CardSet> _getStandardSets() => [
@@ -240,3 +240,82 @@ List<CardSet> _getWildSets() => [
       CardSet.curseOfNaxxramas,
       CardSet.legacy,
     ];
+
+CardSet cardSetFromIndex(int index) {
+  switch (index) {
+    case 0:
+      return CardSet.standard;
+    case 1:
+      return CardSet.wild;
+    case 2:
+      return CardSet.classic;
+    case 3:
+      return CardSet.currentArenaCards;
+    case 4:
+      return CardSet.currentDuelsCards;
+    case 5:
+      return CardSet.pathOfArthas;
+    case 6:
+      return CardSet.marchOfTheLichKing;
+    case 7:
+      return CardSet.murderAtCastleNathria;
+    case 8:
+      return CardSet.voyageToTheSunkenCity;
+    case 9:
+      return CardSet.fracturedInAlteracValley;
+    case 10:
+      return CardSet.unitedInStormwind;
+    case 11:
+      return CardSet.forgedInTheBarrens;
+    case 12:
+      return CardSet.core;
+    case 13:
+      return CardSet.madnessAtTheDarkmoonFaire;
+    case 14:
+      return CardSet.scholomanceAcademy;
+    case 15:
+      return CardSet.demonHunterInitiate;
+    case 16:
+      return CardSet.ashesOfOutland;
+    case 17:
+      return CardSet.galakrondsAwakening;
+    case 18:
+      return CardSet.descentOfDragons;
+    case 19:
+      return CardSet.saviorsOfUldum;
+    case 20:
+      return CardSet.riseOfShadows;
+    case 21:
+      return CardSet.rastakhansRumble;
+    case 22:
+      return CardSet.theBoomsdayProject;
+    case 23:
+      return CardSet.theWitchwood;
+    case 24:
+      return CardSet.koboltsAndCatacombs;
+    case 25:
+      return CardSet.knightsOfTheFrozenThrone;
+    case 26:
+      return CardSet.journeyToUnGoro;
+    case 27:
+      return CardSet.meanStreetsOfGadgetzan;
+    case 28:
+      return CardSet.oneNightInKarazhan;
+    case 29:
+      return CardSet.whispersOfTheOldGods;
+    case 30:
+      return CardSet.leagueOfExplorers;
+    case 31:
+      return CardSet.theGrandTournament;
+    case 32:
+      return CardSet.blackrockMountain;
+    case 33:
+      return CardSet.goblinsVsGnomes;
+    case 34:
+      return CardSet.curseOfNaxxramas;
+    case 35:
+      return CardSet.legacy;
+    default:
+      return CardSet.standard;
+  }
+}

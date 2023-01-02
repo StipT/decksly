@@ -102,7 +102,7 @@ class _HSTextFieldState extends State<HSTextField> {
                     isEmpty = _textEditingController.text.isEmpty;
                   });
                 },
-                style: FontStyles.bold15,
+                style: FontStyles.bold17,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   suffixIcon: IconButton(
@@ -114,7 +114,7 @@ class _HSTextFieldState extends State<HSTextField> {
                         });
                       }
                     },
-                    icon: Icon(isEmpty ? Icons.search : Icons.close),
+                    icon: Icon(isEmpty ? Icons.search : Icons.close,),
                     color: AppColors.accentYellow,
                   ),
                   hintText: "Search",

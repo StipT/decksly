@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HSButton extends StatelessWidget {
-  const HSButton({Key? key, this.label, this.icon}) : super(key: key);
+  const HSButton({Key? key, this.label, this.icon, required this.onTap}) : super(key: key);
   final String? label;
   final Widget? icon;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class HSButton extends StatelessWidget {
       constraints: BoxConstraints(
         minHeight: 20.h,
         maxHeight: 50.h,
-        minWidth: 20.w,
+        minWidth: 15.w,
         maxWidth: 30.w,
       ),
       child: Container(
@@ -21,7 +22,7 @@ class HSButton extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 0.001.sh),
         child: InkWell(
           onTap: () {
-            print("CLICK");
+            onTap();
           },
           child: Stack(
             alignment: Alignment.center,
@@ -113,7 +114,7 @@ class HSButton extends StatelessWidget {
                     ),
                     Text(
                       label ?? "",
-                      style: FontStyles.bold17Button,
+                      style: FontStyles.bold15Button,
                     )
                   ],
                 ),

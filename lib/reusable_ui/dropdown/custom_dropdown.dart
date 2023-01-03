@@ -1,13 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropdown<T> extends StatefulWidget {
   /// the child widget for the button, this will be ignored if text is supplied
-  final Widget child;
 
   /// onChange is called when the selected option is changed.;
   /// It will pass back the value and the index of the option.
-  final void Function(T, int) onChange;
+  final void Function(int) onChange;
+
+  final Widget Function(String) dropdownButton;
 
   /// list of DropdownItems
   final List<DropdownItem<T>> items;
@@ -26,7 +28,7 @@ class CustomDropdown<T> extends StatefulWidget {
   const CustomDropdown({
     Key? key,
     this.hideIcon = false,
-    required this.child,
+    required this.dropdownButton,
     required this.items,
     required this.dropdownStyle,
     required this.dropdownButtonStyle,
@@ -77,8 +79,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
           style: OutlinedButton.styleFrom(
             textStyle: style.textStyle,
             padding: style.padding,
-            backgroundColor: style.backgroundColor,
-            elevation: style.elevation,
             primary: style.primaryColor,
             shape: style.shape as OutlinedBorder?,
           ),
@@ -91,9 +91,13 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
               mainAxisSize: MainAxisSize.max,
               children: [
                 if (_currentIndex == -1) ...[
-                  widget.child,
+                  Expanded(
+                    child: widget.dropdownButton(0.toString(),),
+                  )
                 ] else ...[
-                  widget.items[_currentIndex],
+                  Expanded(
+                    child: widget.dropdownButton(_currentIndex.toString()),
+                  ),
                 ],
                 if (!widget.hideIcon)
                   RotationTransition(
@@ -116,7 +120,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
     var offset = renderBox.localToGlobal(Offset.zero);
     var topOffset = offset.dy + size.height + 5;
     return OverlayEntry(
-      // full screen GestureDetector to register when a
+      // full screen GestureDetector to register when ał
       // user has clicked away from the dropdown
       builder: (context) => GestureDetector(
         onTap: () => _toggleDropdown(close: true),
@@ -135,40 +139,45 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                   offset: widget.dropdownStyle.offset ?? Offset(0, size.height + 5),
                   link: this._layerLink,
                   showWhenUnlinked: false,
-                  child: Material(
-                    textStyle: widget.dropdownStyle.textStyle,
-                    elevation: widget.dropdownStyle.elevation ?? 0,
-                    borderRadius: widget.dropdownStyle.borderRadius ?? BorderRadius.zero,
-                    color: Colors.transparent,
-                    child: SizeTransition(
-                      axisAlignment: 1,
-                      sizeFactor: _expandAnimation,
-                      child: ConstrainedBox(
-                        constraints: widget.dropdownStyle.constraints ??
-                            BoxConstraints(
-                              maxHeight: MediaQuery.of(context).size.height - topOffset - 15,
-                            ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                widget.dropdownStyle.dropdownBackgroundAssetPath ?? "",
-                              ),
-                              fit: BoxFit.fill,
-                            ),
+                  child: SizeTransition(
+                    axisAlignment: 1,
+                    sizeFactor: _expandAnimation,
+                    child: ConstrainedBox(
+                      constraints: widget.dropdownStyle.constraints ??
+                          BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height - topOffset - 15,
                           ),
+                      child: Container(
+                        padding: EdgeInsets.only(top: 0.015.sh, bottom: 0.015.sh, right: 0.01.sw,),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              widget.dropdownStyle.dropdownBackgroundAssetPath ?? "",
+                            ),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        child: RawScrollbar(
+                          thumbVisibility: false,
+                          radius: Radius.circular(20.r),
                           child: ListView(
                             physics: const BouncingScrollPhysics(),
                             padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
                             shrinkWrap: true,
                             children: widget.items.asMap().entries.map((item) {
-                              return InkWell(
-                                onTap: () {
-                                  setState(() => _currentIndex = item.key);
-                                  widget.onChange(item.value.value, item.key);
-                                  _toggleDropdown();
-                                },
-                                child: item.value,
+                              return Material(
+                                textStyle: _currentIndex == item.key ? widget.dropdownStyle.selectedTextStyle : widget.dropdownStyle.textStyle,
+                                elevation: widget.dropdownStyle.elevation ?? 0,
+                                borderRadius: widget.dropdownStyle.borderRadius ?? BorderRadius.zero,
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() => _currentIndex = item.key);
+                                    widget.onChange(item.key);
+                                    _toggleDropdown();
+                                  },
+                                  child: item.value,
+                                ),
                               );
                             }).toList(),
                           ),
@@ -247,7 +256,8 @@ class DropdownStyle {
   final Color? color;
   final EdgeInsets? padding;
   final BoxConstraints? constraints;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
+  final TextStyle? selectedTextStyle;
 
   /// position of the top left of the dropdown relative to the top left of the button
   final Offset? offset;
@@ -266,6 +276,7 @@ class DropdownStyle {
     this.color,
     this.padding,
     this.borderRadius,
-    required this.textStyle,
+    this.selectedTextStyle,
+    this.textStyle,
   });
 }

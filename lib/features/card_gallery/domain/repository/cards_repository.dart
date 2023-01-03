@@ -59,7 +59,8 @@ class CardsRepositoryImpl extends CardsRepository {
     }
     // TODO PAGE
 
-    final cardResponse = await _apiService.apiClient.getCards(page: page, locale: locale);
+    final cardResponse = await _apiService.apiClient.getCards(
+        page: page, locale: locale, set: set, heroClass: heroClass, manaCost: manaCost, textFilter: textFilter);
     return cardResponse.cards;
   }
 }

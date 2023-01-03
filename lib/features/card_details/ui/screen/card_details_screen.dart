@@ -31,12 +31,9 @@ class _DetailScreenState extends State<CardDetailsScreen> {
       isUnwrapped: false,
       opacity: hasGoldenEdition ? 0.4 : 0.15,
       child: Center(
-        child: Hero(
-          tag: widget.card.id.toString(),
-          child: Image.network(
-            card,
-            fit: BoxFit.fill,
-          ),
+        child: Image.network(
+          card,
+          fit: BoxFit.fill,
         ),
       ),
     );

@@ -2,9 +2,14 @@ import 'package:decksly/common/asset_loader.dart';
 import 'package:decksly/common/colors.dart';
 import 'package:decksly/common/fonts.dart';
 import 'package:decksly/data/card_class.dart';
+import 'package:decksly/data/card_set.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/class_dropdown_item.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/custom_dropdown.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_rectangular_outline.dart';
+import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/set_dropdown_item.dart';
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_outline.dart';
+import 'package:decksly/reusable_ui/button/hs_dropdown_button.dart';
+import 'package:decksly/reusable_ui/dropdown/custom_dropdown.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,23 +19,29 @@ enum DropdownType {
   mana,
 }
 
-class HSDropdownButton extends StatelessWidget {
-  HSDropdownButton({
+class HSDropdown extends StatelessWidget {
+  HSDropdown({
     Key? key,
     required this.dropdownType,
-    required this.title,
+    required this.dropdownValues,
+    this.height,
+    this.width,
+    this.dropdownWidth,
+    required this.onChange,
   }) : super(key: key);
 
+  double? height;
+  double? width;
+  double? dropdownWidth;
   final DropdownType dropdownType;
-  final String title;
-  Widget? icon;
-  List<String> dropdownValues = [];
+  final List<dynamic> dropdownValues;
+  final void Function(int) onChange;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      width: 70,
+      height: height ?? 100,
+      width: width ?? 70,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(vertical: 0.001.sh),
       child: Stack(
@@ -67,8 +78,13 @@ class HSDropdownButton extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
+
+              //
             ],
           ),
+
+          //  const HSActiveDropdownButtonOverlay(),
+          //const HSSelectedDropdownButtonOverlay(),
           Container(
             width: double.infinity,
             alignment: Alignment.centerLeft,
@@ -83,31 +99,48 @@ class HSDropdownButton extends StatelessWidget {
                 Expanded(
                   child: Container(
                     child: CustomDropdown<int>(
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      child: Container(
-                        color: Colors.orange,
-                        child: Text(
-                          'All Classes',
-                        ),
-                      ),
-                      onChange: (int value, int index) => print("Value: $value, Index: $index"),
+                      icon: Icon(Icons.keyboard_arrow_down, size: 20.sp),
+                      dropdownButton: (value) {
+                        switch (dropdownType) {
+                          case DropdownType.cardClass:
+                            return HSDropdownButton(
+                              assetImagePath: assetPath("class", "${cardClassFromIndex(int.parse(value)).name}_icon"),
+                              text: cardClassFromIndex(int.parse(value)).localized(),
+                            );
+                          case DropdownType.cardSet:
+                            return HSDropdownButton(
+                              assetImagePath:
+                                  assetPath("set", cardSetFromIndex(int.parse(value)).name, fileExtension: "svg"),
+                              text: cardSetFromIndex(int.parse(value)).localized(),
+                              hideText: true,
+                            );
+                          case DropdownType.mana:
+                            return HSDropdownButton(
+                              assetImagePath: assetPath("class", value),
+                              text: value,
+                            );
+                        }
+                      },
+                      onChange: (int index) => onChange(index),
                       dropdownButtonStyle: DropdownButtonStyle(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        width: double.infinity,
+                        width: width,
                         padding: EdgeInsets.only(left: 0.0075.sw),
-                        textStyle: FontStyles.bold17Button,
+                        textStyle: FontStyles.bold15Button,
                         elevation: 1,
                         backgroundColor: Colors.transparent,
                         primaryColor: AppColors.buttonTextColor,
                       ),
                       dropdownStyle: DropdownStyle(
+                        selectedTextStyle: FontStyles.bold15Gold,
+                        width: dropdownWidth,
                         textStyle: FontStyles.bold15,
                         dropdownBackgroundAssetPath: "assets/dropdown/dropdown_background.png",
                         borderRadius: BorderRadius.circular(8),
                         elevation: 6,
                         padding: const EdgeInsets.all(5),
                       ),
-                      items: CardClass.values
+                      items: dropdownValues
                           .asMap()
                           .entries
                           .map(
@@ -134,35 +167,25 @@ class HSDropdownButton extends StatelessWidget {
   ) {
     switch (dropdownType) {
       case DropdownType.cardSet:
-        return ClassDropdownItem(
-          className: CardClass.values[index].value,
-          assetImagePath: assetPath("class", "${CardClass.values[index].name}_icon"),
+        if (index == 3) {
+          return SetDropdownHeader(text: LocaleKeys.standardSets.tr());
+        } else if (index == 11) {
+          return SetDropdownHeader(text: LocaleKeys.wildSets.tr());
+        }
+        return SetDropdownItem(
+          text: CardSet.values[index].localized(),
+          assetImagePath: assetPath("set", CardSet.values[index].name, fileExtension: "svg"),
         );
       case DropdownType.cardClass:
         return ClassDropdownItem(
-          className: CardClass.values[index].value,
+          text: CardClass.values[index].localized(),
           assetImagePath: assetPath("class", "${CardClass.values[index].name}_icon"),
         );
       case DropdownType.mana:
         return ClassDropdownItem(
-          className: CardClass.values[index].name,
+          text: CardClass.values[index].name,
           assetImagePath: '',
         );
-    }
-  }
-
-  Widget? _getIcon(DropdownType dropdownType) {
-    if (icon != null) {
-      return icon;
-    } else {
-      switch (dropdownType) {
-        case DropdownType.cardSet:
-          return Image.asset(assetPath("class", "all_icon"));
-        case DropdownType.cardClass:
-          return Image.asset(assetPath("class", "all_icon"));
-        case DropdownType.mana:
-          return Image.asset(assetPath("misc", "mana_inactive"));
-      }
     }
   }
 }

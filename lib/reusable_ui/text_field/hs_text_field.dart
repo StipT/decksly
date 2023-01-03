@@ -1,5 +1,6 @@
 import 'package:decksly/common/colors.dart';
 import 'package:decksly/common/fonts.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +13,29 @@ class HSTextField extends StatefulWidget {
 
 class _HSTextFieldState extends State<HSTextField> {
   final _textEditingController = TextEditingController();
+  final FocusNode _focus = FocusNode();
   bool isEmpty = true;
+
+  @override
+  void initState() {
+    super.initState();
+  //  _focus.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  //  _focus.removeListener(_onFocusChange);
+    _focus.dispose();
+  }
+
+  void _onFocusChange() {
+    if (_focus.previousFocus() != _focus.hasFocus) {
+      setState(() {
+        _focus.hasFocus ? _focus.unfocus() : _focus.requestFocus();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,38 +112,44 @@ class _HSTextFieldState extends State<HSTextField> {
             ],
           ),
 
+          if (_focus.hasFocus) const HSActiveTextFieldOverlay(),
+
           // Functional foreground
           Container(
-              margin: EdgeInsets.only(
-                left: 8.w,
-                right: 2.w,
-              ),
-              child: TextField(
-                controller: _textEditingController,
-                onChanged: (text) {
-                  setState(() {
-                    isEmpty = _textEditingController.text.isEmpty;
-                  });
-                },
-                style: FontStyles.bold17,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      if (!isEmpty) {
-                        _textEditingController.clear();
-                        setState(() {
-                          isEmpty = _textEditingController.text.isEmpty;
-                        });
-                      }
-                    },
-                    icon: Icon(isEmpty ? Icons.search : Icons.close,),
-                    color: AppColors.accentYellow,
+            margin: EdgeInsets.only(
+              left: 8.w,
+              right: 2.w,
+            ),
+            child: TextField(
+              focusNode: _focus,
+              controller: _textEditingController,
+              onChanged: (text) {
+                setState(() {
+                  isEmpty = _textEditingController.text.isEmpty;
+                });
+              },
+              style: FontStyles.bold17,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    if (!isEmpty) {
+                      _textEditingController.clear();
+                      setState(() {
+                        isEmpty = _textEditingController.text.isEmpty;
+                      });
+                    }
+                  },
+                  icon: Icon(
+                    isEmpty ? Icons.search : Icons.close,
                   ),
-                  hintText: "Search",
-                  hintStyle: FontStyles.bold17Hint,
+                  color: AppColors.accentYellow,
                 ),
-              )),
+                hintText: "Search",
+                hintStyle: FontStyles.bold17Hint,
+              ),
+            ),
+          ),
         ],
       ),
     );

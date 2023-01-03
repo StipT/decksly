@@ -63,6 +63,9 @@ dependencies:
   firebase_core: ^1.14.0
   firebase_auth: ^3.3.0
 
+  #Localization
+  easy_localization: ^3.0.1
+
   # UI
   flutter_screenutil: ^5.6.0
   cupertino_icons: ^1.0.2
@@ -71,6 +74,8 @@ dependencies:
   foil: ^0.9.0+1
   flutter_svg: ^0.23.0+1
   auto_size_text: ^3.0.0-nullsafety.0
+  xl: ^0.9.1
+  flip_card: ^0.6.0
 
   # Util
   flutter_markdown: ^0.6.13
@@ -78,8 +83,6 @@ dependencies:
 
   # Dev
   logger: ^1.1.0
-  xl: ^0.9.1
-  flip_card: ^0.6.0
 
 dev_dependencies:
   lint: ^1.5.3
@@ -119,23 +122,26 @@ flutter:
     - assets/button/button_border_left.png
     - assets/button/button_border_center.png
     - assets/button/button_border_right.png
+    - assets/button/focused_button_left.png
+    - assets/button/focused_button_center.png
+    - assets/button/focused_button_right.png
 
     # Search
     - assets/search/search_border_left.png
     - assets/search/search_border_center.png
     - assets/search/search_border_right.png
+    - assets/search/focused_search_left.png
+    - assets/search/focused_search_center.png
+    - assets/search/focused_search_right.png
 
     # Dropdown
     - assets/dropdown/dropdown_background.png
     - assets/dropdown/dropdown_button_border_left.png
-    - assets/dropdown/dropdown_border_bottom.png
-    - assets/dropdown/dropdown_border_bottom_left.png
-    - assets/dropdown/dropdown_border_bottom_right.png
-    - assets/dropdown/dropdown_border_left.png
-    - assets/dropdown/dropdown_border_right.png
-    - assets/dropdown/dropdown_border_top.png
-    - assets/dropdown/dropdown_border_top_left.png
-    - assets/dropdown/dropdown_border_top_right.png
+    - assets/dropdown/selected_dropdown_button_left.png
+    - assets/dropdown/selected_dropdown_button_center.png
+    - assets/dropdown/selected_dropdown_button_right.png
+    - assets/dropdown/focused_dropdown_button_left.png
+
 
     # Sets
     - assets/set/standard.svg
@@ -176,7 +182,7 @@ flutter:
     - assets/set/legacy.svg
 
     # Class
-    - assets/class/all_icon.png
+    - assets/class/allClasses_icon.png
     - assets/class/neutral_icon.png
     - assets/class/deathKnight_icon.png
     - assets/class/demonHunter_icon.png
@@ -196,6 +202,10 @@ flutter:
     - assets/misc/mana_inactive.png
     - assets/misc/golden_circle_border.png
     - assets/misc/filter.svg
+
+    # Localization
+    - assets/localization/en-US.json
+    - assets/localization/hr-HR.json
 
   fonts:
     - family: Belwe

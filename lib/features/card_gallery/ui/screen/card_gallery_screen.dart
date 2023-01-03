@@ -62,12 +62,8 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                             onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                               return CardDetailsScreen(card);
                             })),
-                            child: Hero(
-                              tag: card.id,
-                              child: Image.network(
-                                card.image,
-                                fit: BoxFit.contain,
-                              ),
+                            child: Image.network(
+                              card.image,
                             ),
                           );
                         },
@@ -95,8 +91,12 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     if (state is CardsLoaded) {
-      final nextPageKey = _pagingController.nextPageKey ?? 0;
-      _pagingController.appendPage(state.cards, nextPageKey + state.cards.length);
+      if (state.refresh) {
+        _pagingController.refresh();
+      } else {
+        final nextPageKey = _pagingController.nextPageKey ?? 0;
+        _pagingController.appendPage(state.cards, nextPageKey + state.cards.length);
+      }
     } else if (state is CardsError) {
       _pagingController.error = state.failure;
       ScaffoldMessenger.of(ctx).showSnackBar(

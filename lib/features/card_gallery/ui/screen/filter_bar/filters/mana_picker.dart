@@ -1,7 +1,7 @@
 import 'package:decksly/common/asset_loader.dart';
 import 'package:decksly/common/fonts.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_rectangular_golden_border.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/hs_rectangular_outline.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_outline.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +44,6 @@ class _ManaPickerState extends State<ManaPicker> {
               scrollDirection: Axis.horizontal,
               itemCount: 11,
               itemBuilder: (BuildContext context, int index) {
-                print(activeItems.length);
                 return ManaItem(
                   index: index,
                   isActive: activeItems[index],

@@ -1,19 +1,8 @@
-const String CARD_CLASS_ALL = "All Classes";
-const String CARD_CLASS_NEUTRAL = "Neutral";
-const String CARD_CLASS_DEATH_KNIGHT = "Death Knight";
-const String CARD_CLASS_DEMON_HUNTER = "Demon Hunter";
-const String CARD_CLASS_DRUID = "Druid";
-const String CARD_CLASS_HUNTER = "Hunter";
-const String CARD_CLASS_MAGE = "Mage";
-const String CARD_CLASS_PALADIN = "Paladin";
-const String CARD_CLASS_PRIEST = "Priest";
-const String CARD_CLASS_ROGUE = "Rogue";
-const String CARD_CLASS_SHAMAN = "Shaman";
-const String CARD_CLASS_WARLOCK = "Warlock";
-const String CARD_CLASS_WARRIOR = "Warrior";
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum CardClass {
-  all,
+  allClasses,
   deathKnight,
   demonHunter,
   druid,
@@ -31,38 +20,37 @@ enum CardClass {
 extension CardClassValues on CardClass {
   String get value {
     switch (this) {
-      case CardClass.all:
-        return CARD_CLASS_ALL;
+      case CardClass.allClasses:
+        return "";
       case CardClass.deathKnight:
-        return CARD_CLASS_DEATH_KNIGHT;
+        return "deathknight";
       case CardClass.demonHunter:
-        return CARD_CLASS_DEMON_HUNTER;
+        return "demonhunter";
       case CardClass.druid:
-        return CARD_CLASS_DRUID;
+        return "druid";
       case CardClass.hunter:
-        return CARD_CLASS_HUNTER;
+        return "hunter";
       case CardClass.mage:
-        return CARD_CLASS_MAGE;
+        return "mage";
       case CardClass.paladin:
-        return CARD_CLASS_PALADIN;
+        return "paladin";
       case CardClass.priest:
-        return CARD_CLASS_PRIEST;
+        return "priest";
       case CardClass.rogue:
-        return CARD_CLASS_ROGUE;
+        return "rogue";
       case CardClass.shaman:
-        return CARD_CLASS_SHAMAN;
+        return "shaman";
       case CardClass.warlock:
-        return CARD_CLASS_WARLOCK;
+        return "warlock";
       case CardClass.warrior:
-        return CARD_CLASS_WARRIOR;
+        return "warrior";
       case CardClass.neutral:
-        return CARD_CLASS_NEUTRAL;
+        return "neutral";
     }
   }
 
   static List<CardClass> get values => [
-        CardClass.all,
-        CardClass.neutral,
+        CardClass.allClasses,
         CardClass.deathKnight,
         CardClass.demonHunter,
         CardClass.druid,
@@ -74,13 +62,47 @@ extension CardClassValues on CardClass {
         CardClass.shaman,
         CardClass.warlock,
         CardClass.warrior,
+    CardClass.neutral,
       ];
+}
+
+extension CardClassVLocalized on CardClass {
+  String localized() {
+    switch (this) {
+      case CardClass.allClasses:
+        return LocaleKeys.allClasses.tr();
+      case CardClass.deathKnight:
+        return LocaleKeys.deathKnight.tr();
+      case CardClass.demonHunter:
+        return LocaleKeys.demonHunter.tr();
+      case CardClass.druid:
+        return LocaleKeys.druid.tr();
+      case CardClass.hunter:
+        return LocaleKeys.hunter.tr();
+      case CardClass.mage:
+        return LocaleKeys.mage.tr();
+      case CardClass.paladin:
+        return LocaleKeys.paladin.tr();
+      case CardClass.priest:
+        return LocaleKeys.priest.tr();
+      case CardClass.rogue:
+        return LocaleKeys.rogue.tr();
+      case CardClass.shaman:
+        return LocaleKeys.shaman.tr();
+      case CardClass.warlock:
+        return LocaleKeys.warlock.tr();
+      case CardClass.warrior:
+        return LocaleKeys.warrior.tr();
+      case CardClass.neutral:
+        return LocaleKeys.neutral.tr();
+    }
+  }
 }
 
 CardClass cardClassFromIndex(int index) {
   switch (index) {
     case 0:
-      return CardClass.all;
+      return CardClass.allClasses;
     case 1:
       return CardClass.deathKnight;
     case 2:
@@ -106,6 +128,6 @@ CardClass cardClassFromIndex(int index) {
     case 12:
       return CardClass.neutral;
     default:
-      return CardClass.all;
+      return CardClass.allClasses;
   }
 }

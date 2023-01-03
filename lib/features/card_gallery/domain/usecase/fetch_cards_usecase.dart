@@ -15,7 +15,7 @@ class FetchCardsUsecase extends UseCase<List<CardDTO>, FetchCardsParams> {
   @override
   Future<Either<Failure, List<CardDTO>>> call(FetchCardsParams params) async {
     try {
-      final cards = await _cardsRepository.getCards(page: params.page);
+      final cards = await _cardsRepository.getCards(page: params.page, textFilter: params.textFilter, set: params.set, heroClass: params.heroClass, manaCost: params.manaCost);
       return Right(cards);
     } catch (exception) {
       return Left(ExceptionToFailureMapper.mapExceptionToFailure(exception));

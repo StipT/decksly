@@ -1,16 +1,17 @@
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 const String CARD_SET_STANDARD = "standard cards";
 const String CARD_SET_WILD = "wild cards";
 const String CARD_SET_CLASSIC = "classic cards";
 const String CARD_SET_CURRENT_ARENA = "current arena cards";
 const String CARD_SET_CURRENT_DUELS = "current duels cards";
 
-enum CardSet{
+enum CardSet {
   // Game modes
   standard,
   wild,
   classic,
-  currentArenaCards,
-  currentDuelsCards,
 
   // Standard sets
   pathOfArthas,
@@ -53,81 +54,77 @@ extension CardSetValues on CardSet {
     switch (this) {
       // Game modes
       case CardSet.standard:
-        return "Standard";
+        return "standard";
       case CardSet.wild:
-        return "Wild";
+        return "wild";
       case CardSet.classic:
-        return "Classic";
-      case CardSet.currentArenaCards:
-        return "Current Arena Cards";
-      case CardSet.currentDuelsCards:
-        return "Current Duels Cards";
+        return "classic-cards";
 
       // Standard sets
       case CardSet.pathOfArthas:
-        return "Path of Arthas";
+        return "path-of-arthas";
       case CardSet.marchOfTheLichKing:
-        return "March of the Lich King";
+        return "march-of-the-lich-king";
       case CardSet.murderAtCastleNathria:
-        return "Murder At Castle Nathria";
+        return "murder-at-castle-nathria";
       case CardSet.voyageToTheSunkenCity:
-        return "Voyage To The Sunken City";
+        return "voyage-to-the-sunken-city";
       case CardSet.fracturedInAlteracValley:
-        return "Fractured In Alterac Valley";
+        return "fractured-in-alterac-valley";
       case CardSet.unitedInStormwind:
-        return "United In Stormwind";
+        return "united-in-stormwind";
       case CardSet.forgedInTheBarrens:
-        return "Forged In The Barrens";
+        return "forged-in-the-barrens";
       case CardSet.core:
-        return "Core";
+        return "core";
 
       // Wild sets
       case CardSet.madnessAtTheDarkmoonFaire:
-        return "Madness At The Darkmoon Faire";
+        return "madness-at-the-darkmoon-faire";
       case CardSet.scholomanceAcademy:
-        return "Scholomance Academy";
+        return "scholomance-academy";
       case CardSet.demonHunterInitiate:
-        return "Demon Hunter Initiate";
+        return "demonhunter-initiate";
       case CardSet.ashesOfOutland:
-        return "Ashes Of Outland";
+        return "ashes-of-outland";
       case CardSet.galakrondsAwakening:
-        return "Galakrond's Awakening";
+        return "galakronds-awakening";
       case CardSet.descentOfDragons:
-        return "Descent Of Dragons";
+        return "descent-of-dragons";
       case CardSet.saviorsOfUldum:
-        return "Saviors Of Uldum";
+        return "saviors-of-uldum";
       case CardSet.riseOfShadows:
-        return "Rise Of Shadows";
+        return "rise-of-shadows";
       case CardSet.rastakhansRumble:
-        return "Rastakhans Rumble";
+        return "rastakhans-rumble";
       case CardSet.theBoomsdayProject:
-        return "The Boomsday Project";
+        return "the-boomsday-project";
       case CardSet.theWitchwood:
-        return "The Witchwood";
+        return "the-witchwood";
       case CardSet.koboltsAndCatacombs:
-        return "Kobolts And Catacombs";
+        return "kobolds-and-catacombs";
       case CardSet.knightsOfTheFrozenThrone:
-        return "Knights Of The Frozen Throne";
+        return "knights-of-the-frozen-throne";
       case CardSet.journeyToUnGoro:
-        return "Journey To Un'Goro";
+        return "journey-to-ungoro";
       case CardSet.meanStreetsOfGadgetzan:
-        return "Mean Streets Of Gadgetzan";
+        return "mean-streets-of-gadgetzan";
       case CardSet.oneNightInKarazhan:
-        return "One Night In Karazhan";
+        return "one-night-in-karazhan";
       case CardSet.whispersOfTheOldGods:
-        return "Whispers Of The Old Gods";
+        return "whispers-of-the-old-gods";
       case CardSet.leagueOfExplorers:
-        return "League Of Explorers";
+        return "league-of-explorers";
       case CardSet.theGrandTournament:
-        return "The Grand Tournament";
+        return "the-grand-tournament";
       case CardSet.blackrockMountain:
-        return "Blackrock Mountain";
+        return "blackrock-mountain";
       case CardSet.goblinsVsGnomes:
-        return "Goblins vs Gnomes";
+        return "goblins-vs-gnomes";
       case CardSet.curseOfNaxxramas:
-        return "Curse Of Naxxramas";
+        return "naxxramas";
       case CardSet.legacy:
-        return "Legacy";
+        return "legacy";
     }
   }
 
@@ -136,8 +133,6 @@ extension CardSetValues on CardSet {
         CardSet.standard,
         CardSet.wild,
         CardSet.classic,
-        CardSet.currentArenaCards,
-        CardSet.currentDuelsCards,
 
         // Standard sets
         CardSet.pathOfArthas,
@@ -176,6 +171,86 @@ extension CardSetValues on CardSet {
       ];
 }
 
+extension CardSetLocalized on CardSet {
+  String localized() {
+    switch (this) {
+      // Game modes
+      case CardSet.standard:
+        return LocaleKeys.standard.tr();
+      case CardSet.wild:
+        return LocaleKeys.wild.tr();
+      case CardSet.classic:
+        return LocaleKeys.classic.tr();
+
+      // Standard sets
+      case CardSet.pathOfArthas:
+        return LocaleKeys.pathOfArthas.tr();
+      case CardSet.marchOfTheLichKing:
+        return LocaleKeys.marchOfTheLichKing.tr();
+      case CardSet.murderAtCastleNathria:
+        return LocaleKeys.murderAtCastleNathria.tr();
+      case CardSet.voyageToTheSunkenCity:
+        return LocaleKeys.voyageToTheSunkenCity.tr();
+      case CardSet.fracturedInAlteracValley:
+        return LocaleKeys.fracturedInAlteracValley.tr();
+      case CardSet.unitedInStormwind:
+        return LocaleKeys.unitedInStormwind.tr();
+      case CardSet.forgedInTheBarrens:
+        return LocaleKeys.forgedInTheBarrens.tr();
+      case CardSet.core:
+        return LocaleKeys.core.tr();
+
+      // Wild sets
+      case CardSet.madnessAtTheDarkmoonFaire:
+        return LocaleKeys.madnessAtTheDarkmoonFaire.tr();
+      case CardSet.scholomanceAcademy:
+        return LocaleKeys.scholomanceAcademy.tr();
+      case CardSet.demonHunterInitiate:
+        return LocaleKeys.demonHunterInitiate.tr();
+      case CardSet.ashesOfOutland:
+        return LocaleKeys.ashesOfOutland.tr();
+      case CardSet.galakrondsAwakening:
+        return LocaleKeys.galakrondsAwakening.tr();
+      case CardSet.descentOfDragons:
+        return LocaleKeys.descentOfDragons.tr();
+      case CardSet.saviorsOfUldum:
+        return LocaleKeys.saviorsOfUldum.tr();
+      case CardSet.riseOfShadows:
+        return LocaleKeys.riseOfShadows.tr();
+      case CardSet.rastakhansRumble:
+        return LocaleKeys.rastakhansRumble.tr();
+      case CardSet.theBoomsdayProject:
+        return LocaleKeys.theBoomsdayProject.tr();
+      case CardSet.theWitchwood:
+        return LocaleKeys.theWitchwood.tr();
+      case CardSet.koboltsAndCatacombs:
+        return LocaleKeys.koboltsAndCatacombs.tr();
+      case CardSet.knightsOfTheFrozenThrone:
+        return LocaleKeys.knightsOfTheFrozenThrone.tr();
+      case CardSet.journeyToUnGoro:
+        return LocaleKeys.journeyToUnGoro.tr();
+      case CardSet.meanStreetsOfGadgetzan:
+        return LocaleKeys.meanStreetsOfGadgetzan.tr();
+      case CardSet.oneNightInKarazhan:
+        return LocaleKeys.oneNightInKarazhan.tr();
+      case CardSet.whispersOfTheOldGods:
+        return LocaleKeys.whispersOfTheOldGods.tr();
+      case CardSet.leagueOfExplorers:
+        return LocaleKeys.leagueOfExplorers.tr();
+      case CardSet.theGrandTournament:
+        return LocaleKeys.theGrandTournament.tr();
+      case CardSet.blackrockMountain:
+        return LocaleKeys.blackrockMountain.tr();
+      case CardSet.goblinsVsGnomes:
+        return LocaleKeys.goblinsVsGnomes.tr();
+      case CardSet.curseOfNaxxramas:
+        return LocaleKeys.curseOfNaxxramas.tr();
+      case CardSet.legacy:
+        return LocaleKeys.legacy.tr();
+    }
+  }
+}
+
 enum SubCollection {
   all,
   gameModes,
@@ -200,8 +275,6 @@ List<CardSet> _getGameModes() => [
       CardSet.standard,
       CardSet.wild,
       CardSet.classic,
-      CardSet.currentArenaCards,
-      CardSet.currentDuelsCards,
     ];
 
 List<CardSet> _getStandardSets() => [
@@ -250,70 +323,66 @@ CardSet cardSetFromIndex(int index) {
     case 2:
       return CardSet.classic;
     case 3:
-      return CardSet.currentArenaCards;
-    case 4:
-      return CardSet.currentDuelsCards;
-    case 5:
       return CardSet.pathOfArthas;
-    case 6:
+    case 4:
       return CardSet.marchOfTheLichKing;
-    case 7:
+    case 5:
       return CardSet.murderAtCastleNathria;
-    case 8:
+    case 6:
       return CardSet.voyageToTheSunkenCity;
-    case 9:
+    case 7:
       return CardSet.fracturedInAlteracValley;
-    case 10:
+    case 8:
       return CardSet.unitedInStormwind;
-    case 11:
+    case 9:
       return CardSet.forgedInTheBarrens;
-    case 12:
+    case 10:
       return CardSet.core;
-    case 13:
+    case 11:
       return CardSet.madnessAtTheDarkmoonFaire;
-    case 14:
+    case 12:
       return CardSet.scholomanceAcademy;
-    case 15:
+    case 13:
       return CardSet.demonHunterInitiate;
-    case 16:
+    case 14:
       return CardSet.ashesOfOutland;
-    case 17:
+    case 15:
       return CardSet.galakrondsAwakening;
-    case 18:
+    case 16:
       return CardSet.descentOfDragons;
-    case 19:
+    case 17:
       return CardSet.saviorsOfUldum;
-    case 20:
+    case 18:
       return CardSet.riseOfShadows;
-    case 21:
+    case 19:
       return CardSet.rastakhansRumble;
-    case 22:
+    case 20:
       return CardSet.theBoomsdayProject;
-    case 23:
+    case 21:
       return CardSet.theWitchwood;
-    case 24:
+    case 22:
       return CardSet.koboltsAndCatacombs;
-    case 25:
+    case 23:
       return CardSet.knightsOfTheFrozenThrone;
-    case 26:
+    case 24:
       return CardSet.journeyToUnGoro;
-    case 27:
+    case 25:
       return CardSet.meanStreetsOfGadgetzan;
-    case 28:
+    case 26:
       return CardSet.oneNightInKarazhan;
-    case 29:
+    case 27:
       return CardSet.whispersOfTheOldGods;
-    case 30:
+    case 28:
       return CardSet.leagueOfExplorers;
-    case 31:
+    case 29:
       return CardSet.theGrandTournament;
-    case 32:
+    case 30:
       return CardSet.blackrockMountain;
-    case 33:
+    case 31:
       return CardSet.goblinsVsGnomes;
-    case 34:
+    case 32:
       return CardSet.curseOfNaxxramas;
-    case 35:
+    case 33:
       return CardSet.legacy;
     default:
       return CardSet.standard;

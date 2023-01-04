@@ -1,5 +1,6 @@
 import 'package:decksly/common/asset_loader.dart';
 import 'package:decksly/common/fonts.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_outline.dart';
 import 'package:flutter/foundation.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ManaPicker extends StatefulWidget {
-  final void Function(int) onChange;
+  final void Function(String) onChange;
 
   const ManaPicker({
     Key? key,
@@ -33,6 +34,7 @@ class _ManaPickerState extends State<ManaPicker> {
         children: [
           const HSRectangularOutline(),
           const HSRectangularGoldenBorder(),
+          if (activeItems.contains(true)) const HSActiveTextFieldOverlay(),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 0.0085.sw,
@@ -51,6 +53,14 @@ class _ManaPickerState extends State<ManaPicker> {
                     setState(() {
                       activeItems[index] = !activeItems[index];
                     });
+
+                    String manaFilter = "";
+                    for (int i = 0; i < activeItems.length; i++) {
+                      if (activeItems[i] == true) {
+                        manaFilter.isEmpty ? manaFilter += i.toString() : manaFilter += ",${i.toString()}";
+                      }
+                    }
+                    widget.onChange(manaFilter);
                   },
                 );
               },
@@ -103,7 +113,6 @@ class ManaItem extends StatelessWidget {
             Center(
               child: Text(
                 index.toString(),
-
                 style: FontStyles.bold22Shadow,
               ),
             ),

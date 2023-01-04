@@ -47,7 +47,7 @@ class FetchCardsParams {
   final String? locale;
   final String? set;
   final String? heroClass;
-  final List<num>? manaCost;
+  final String? manaCost;
   final List<num>? attack;
   final List<num>? health;
   final List<num>? collectible;

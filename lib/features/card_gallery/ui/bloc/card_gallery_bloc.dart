@@ -19,6 +19,9 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.page, false));
     on<CardSetChangedEvent>((event, emit) async => await handleCardSetChanged(emit, event.set));
     on<CardClassChangedEvent>((event, emit) async => await handleCardClassChanged(emit, event.heroClass));
+
+    on<ManaFilterChangedEvent>((event, emit) async => await handleManaFilterChangedEvent(emit, event.manaCost));
+    on<SearchFilterChangedEvent>((event, emit) async => await handleSearchFilterChangedEvent(emit, event.textFilter));
     _streamInternetConnectionState();
   }
 
@@ -27,9 +30,9 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   final FetchCardsUsecase fetchCardsUsecase;
 
   String? locale = "en_US";
-  String? set = "";
+  String? set = "standard";
   String? heroClass = "";
-  List<num>? manaCost = [];
+  String? manaCost = "";
   List<num>? attack = [];
   List<num>? health = [];
   List<num>? collectible = [];
@@ -53,11 +56,13 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   Future<void> handleFetchCards(
     Emitter<CardGalleryState> emit,
     int pageKey,
-  bool refresh,
+    bool refresh,
   ) async {
     emit(const CardsLoading());
-    _pageNumber = pageKey == 0 ? 1 : pageKey ~/ _cardsPerPage;
+    _pageNumber = (pageKey < _cardsPerPage ) ? 1 : pageKey ~/ _cardsPerPage;
 
+    print("_pageNumber $_pageNumber, pageKey $pageKey,  _cardsPerPage $_cardsPerPage");
+    print(22 ~/ 20);
     final fetchCardsParams = FetchCardsParams(
       page: _pageNumber,
       textFilter: textFilter,
@@ -89,11 +94,23 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
 
   Future<void> handleCardSetChanged(Emitter<CardGalleryState> emit, String set) async {
     this.set = set;
-    await handleFetchCards(emit, 0, true);
+    await handleFetchCards(emit, 1, true);
   }
 
   Future<void> handleCardClassChanged(Emitter<CardGalleryState> emit, String heroClass) async {
     this.heroClass = heroClass;
-    await handleFetchCards(emit, 0, true);
+    await handleFetchCards(emit, 1, true);
+  }
+
+  Future<void> handleManaFilterChangedEvent(Emitter<CardGalleryState> emit, String manaCost) async {
+    this.manaCost = manaCost;
+    print("MANA COST IS ${manaCost}");
+    await handleFetchCards(emit, 1, true);
+  }
+
+  Future<void> handleSearchFilterChangedEvent(Emitter<CardGalleryState> emit, String textFilter) async {
+      this.textFilter =  textFilter.isEmpty ? null : textFilter;
+    print("textFilter IS ${textFilter}");
+    await handleFetchCards(emit, 1, true);
   }
 }

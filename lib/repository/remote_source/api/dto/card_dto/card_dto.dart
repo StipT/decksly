@@ -1,4 +1,5 @@
 import 'package:decksly/repository/remote_source/api/dto/duels_dto/duels_dto.dart';
+import 'package:decksly/repository/remote_source/api/dto/rune_cost_dto/rune_cost_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'card_dto.freezed.dart';
@@ -10,7 +11,7 @@ class CardDTO with _$CardDTO {
     required int id,
     required int cardSetId,
     required int classId,
-    required int parentId,
+    required int? parentId,
     required int cardTypeId,
     required int rarityId,
     required int collectible,
@@ -24,6 +25,7 @@ class CardDTO with _$CardDTO {
     required String? cropImage,
     required int manaCost,
     required DuelsDTO? duels,
+    required RuneCostDTO? runeCost,
     required List<int>? keywordIds,
     required List<int>? childIds,
     required int? spellSchoolId,

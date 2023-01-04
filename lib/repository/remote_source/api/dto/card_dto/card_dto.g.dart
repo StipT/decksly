@@ -10,7 +10,7 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       id: json['id'] as int,
       cardSetId: json['cardSetId'] as int,
       classId: json['classId'] as int,
-      parentId: json['parentId'] as int,
+      parentId: json['parentId'] as int?,
       cardTypeId: json['cardTypeId'] as int,
       rarityId: json['rarityId'] as int,
       collectible: json['collectible'] as int,
@@ -26,6 +26,9 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       duels: json['duels'] == null
           ? null
           : DuelsDTO.fromJson(json['duels'] as Map<String, dynamic>),
+      runeCost: json['runeCost'] == null
+          ? null
+          : RuneCostDTO.fromJson(json['runeCost'] as Map<String, dynamic>),
       keywordIds:
           (json['keywordIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
       childIds:
@@ -64,6 +67,7 @@ Map<String, dynamic> _$$_CardDTOToJson(_$_CardDTO instance) =>
       'cropImage': instance.cropImage,
       'manaCost': instance.manaCost,
       'duels': instance.duels,
+      'runeCost': instance.runeCost,
       'keywordIds': instance.keywordIds,
       'childIds': instance.childIds,
       'spellSchoolId': instance.spellSchoolId,

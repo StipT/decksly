@@ -7,6 +7,7 @@ abstract class CardGalleryState extends Equatable {
   final List<CardDTO> cards;
   final bool refresh;
 
+
   @override
   List<Object?> get props => cards;
 }

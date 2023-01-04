@@ -23,7 +23,7 @@ mixin _$CardDTO {
   int get id => throw _privateConstructorUsedError;
   int get cardSetId => throw _privateConstructorUsedError;
   int get classId => throw _privateConstructorUsedError;
-  int get parentId => throw _privateConstructorUsedError;
+  int? get parentId => throw _privateConstructorUsedError;
   int get cardTypeId => throw _privateConstructorUsedError;
   int get rarityId => throw _privateConstructorUsedError;
   int get collectible => throw _privateConstructorUsedError;
@@ -37,6 +37,7 @@ mixin _$CardDTO {
   String? get cropImage => throw _privateConstructorUsedError;
   int get manaCost => throw _privateConstructorUsedError;
   DuelsDTO? get duels => throw _privateConstructorUsedError;
+  RuneCostDTO? get runeCost => throw _privateConstructorUsedError;
   List<int>? get keywordIds => throw _privateConstructorUsedError;
   List<int>? get childIds => throw _privateConstructorUsedError;
   int? get spellSchoolId => throw _privateConstructorUsedError;
@@ -63,7 +64,7 @@ abstract class $CardDTOCopyWith<$Res> {
       {int id,
       int cardSetId,
       int classId,
-      int parentId,
+      int? parentId,
       int cardTypeId,
       int rarityId,
       int collectible,
@@ -77,6 +78,7 @@ abstract class $CardDTOCopyWith<$Res> {
       String? cropImage,
       int manaCost,
       DuelsDTO? duels,
+      RuneCostDTO? runeCost,
       List<int>? keywordIds,
       List<int>? childIds,
       int? spellSchoolId,
@@ -90,6 +92,7 @@ abstract class $CardDTOCopyWith<$Res> {
       int? durability});
 
   $DuelsDTOCopyWith<$Res>? get duels;
+  $RuneCostDTOCopyWith<$Res>? get runeCost;
 }
 
 /// @nodoc
@@ -108,7 +111,7 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
     Object? id = null,
     Object? cardSetId = null,
     Object? classId = null,
-    Object? parentId = null,
+    Object? parentId = freezed,
     Object? cardTypeId = null,
     Object? rarityId = null,
     Object? collectible = null,
@@ -122,6 +125,7 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
     Object? cropImage = freezed,
     Object? manaCost = null,
     Object? duels = freezed,
+    Object? runeCost = freezed,
     Object? keywordIds = freezed,
     Object? childIds = freezed,
     Object? spellSchoolId = freezed,
@@ -147,10 +151,10 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.classId
           : classId // ignore: cast_nullable_to_non_nullable
               as int,
-      parentId: null == parentId
+      parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       cardTypeId: null == cardTypeId
           ? _value.cardTypeId
           : cardTypeId // ignore: cast_nullable_to_non_nullable
@@ -203,6 +207,10 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.duels
           : duels // ignore: cast_nullable_to_non_nullable
               as DuelsDTO?,
+      runeCost: freezed == runeCost
+          ? _value.runeCost
+          : runeCost // ignore: cast_nullable_to_non_nullable
+              as RuneCostDTO?,
       keywordIds: freezed == keywordIds
           ? _value.keywordIds
           : keywordIds // ignore: cast_nullable_to_non_nullable
@@ -261,6 +269,18 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
       return _then(_value.copyWith(duels: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RuneCostDTOCopyWith<$Res>? get runeCost {
+    if (_value.runeCost == null) {
+      return null;
+    }
+
+    return $RuneCostDTOCopyWith<$Res>(_value.runeCost!, (value) {
+      return _then(_value.copyWith(runeCost: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -274,7 +294,7 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
       {int id,
       int cardSetId,
       int classId,
-      int parentId,
+      int? parentId,
       int cardTypeId,
       int rarityId,
       int collectible,
@@ -288,6 +308,7 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
       String? cropImage,
       int manaCost,
       DuelsDTO? duels,
+      RuneCostDTO? runeCost,
       List<int>? keywordIds,
       List<int>? childIds,
       int? spellSchoolId,
@@ -302,6 +323,8 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
 
   @override
   $DuelsDTOCopyWith<$Res>? get duels;
+  @override
+  $RuneCostDTOCopyWith<$Res>? get runeCost;
 }
 
 /// @nodoc
@@ -317,7 +340,7 @@ class __$$_CardDTOCopyWithImpl<$Res>
     Object? id = null,
     Object? cardSetId = null,
     Object? classId = null,
-    Object? parentId = null,
+    Object? parentId = freezed,
     Object? cardTypeId = null,
     Object? rarityId = null,
     Object? collectible = null,
@@ -331,6 +354,7 @@ class __$$_CardDTOCopyWithImpl<$Res>
     Object? cropImage = freezed,
     Object? manaCost = null,
     Object? duels = freezed,
+    Object? runeCost = freezed,
     Object? keywordIds = freezed,
     Object? childIds = freezed,
     Object? spellSchoolId = freezed,
@@ -356,10 +380,10 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.classId
           : classId // ignore: cast_nullable_to_non_nullable
               as int,
-      parentId: null == parentId
+      parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       cardTypeId: null == cardTypeId
           ? _value.cardTypeId
           : cardTypeId // ignore: cast_nullable_to_non_nullable
@@ -412,6 +436,10 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.duels
           : duels // ignore: cast_nullable_to_non_nullable
               as DuelsDTO?,
+      runeCost: freezed == runeCost
+          ? _value.runeCost
+          : runeCost // ignore: cast_nullable_to_non_nullable
+              as RuneCostDTO?,
       keywordIds: freezed == keywordIds
           ? _value._keywordIds
           : keywordIds // ignore: cast_nullable_to_non_nullable
@@ -481,6 +509,7 @@ class _$_CardDTO implements _CardDTO {
       required this.cropImage,
       required this.manaCost,
       required this.duels,
+      required this.runeCost,
       required final List<int>? keywordIds,
       required final List<int>? childIds,
       required this.spellSchoolId,
@@ -507,7 +536,7 @@ class _$_CardDTO implements _CardDTO {
   @override
   final int classId;
   @override
-  final int parentId;
+  final int? parentId;
   @override
   final int cardTypeId;
   @override
@@ -534,6 +563,8 @@ class _$_CardDTO implements _CardDTO {
   final int manaCost;
   @override
   final DuelsDTO? duels;
+  @override
+  final RuneCostDTO? runeCost;
   final List<int>? _keywordIds;
   @override
   List<int>? get keywordIds {
@@ -591,7 +622,7 @@ class _$_CardDTO implements _CardDTO {
 
   @override
   String toString() {
-    return 'CardDTO(id: $id, cardSetId: $cardSetId, classId: $classId, parentId: $parentId, cardTypeId: $cardTypeId, rarityId: $rarityId, collectible: $collectible, slug: $slug, name: $name, artistName: $artistName, text: $text, image: $image, imageGold: $imageGold, flavorText: $flavorText, cropImage: $cropImage, manaCost: $manaCost, duels: $duels, keywordIds: $keywordIds, childIds: $childIds, spellSchoolId: $spellSchoolId, multiClassIds: $multiClassIds, multiTypeIds: $multiTypeIds, copyOfCardId: $copyOfCardId, minionTypeId: $minionTypeId, health: $health, attack: $attack, armor: $armor, durability: $durability)';
+    return 'CardDTO(id: $id, cardSetId: $cardSetId, classId: $classId, parentId: $parentId, cardTypeId: $cardTypeId, rarityId: $rarityId, collectible: $collectible, slug: $slug, name: $name, artistName: $artistName, text: $text, image: $image, imageGold: $imageGold, flavorText: $flavorText, cropImage: $cropImage, manaCost: $manaCost, duels: $duels, runeCost: $runeCost, keywordIds: $keywordIds, childIds: $childIds, spellSchoolId: $spellSchoolId, multiClassIds: $multiClassIds, multiTypeIds: $multiTypeIds, copyOfCardId: $copyOfCardId, minionTypeId: $minionTypeId, health: $health, attack: $attack, armor: $armor, durability: $durability)';
   }
 
   @override
@@ -626,6 +657,8 @@ class _$_CardDTO implements _CardDTO {
             (identical(other.manaCost, manaCost) ||
                 other.manaCost == manaCost) &&
             (identical(other.duels, duels) || other.duels == duels) &&
+            (identical(other.runeCost, runeCost) ||
+                other.runeCost == runeCost) &&
             const DeepCollectionEquality()
                 .equals(other._keywordIds, _keywordIds) &&
             const DeepCollectionEquality().equals(other._childIds, _childIds) &&
@@ -667,6 +700,7 @@ class _$_CardDTO implements _CardDTO {
         cropImage,
         manaCost,
         duels,
+        runeCost,
         const DeepCollectionEquality().hash(_keywordIds),
         const DeepCollectionEquality().hash(_childIds),
         spellSchoolId,
@@ -699,7 +733,7 @@ abstract class _CardDTO implements CardDTO {
       {required final int id,
       required final int cardSetId,
       required final int classId,
-      required final int parentId,
+      required final int? parentId,
       required final int cardTypeId,
       required final int rarityId,
       required final int collectible,
@@ -713,6 +747,7 @@ abstract class _CardDTO implements CardDTO {
       required final String? cropImage,
       required final int manaCost,
       required final DuelsDTO? duels,
+      required final RuneCostDTO? runeCost,
       required final List<int>? keywordIds,
       required final List<int>? childIds,
       required final int? spellSchoolId,
@@ -734,7 +769,7 @@ abstract class _CardDTO implements CardDTO {
   @override
   int get classId;
   @override
-  int get parentId;
+  int? get parentId;
   @override
   int get cardTypeId;
   @override
@@ -761,6 +796,8 @@ abstract class _CardDTO implements CardDTO {
   int get manaCost;
   @override
   DuelsDTO? get duels;
+  @override
+  RuneCostDTO? get runeCost;
   @override
   List<int>? get keywordIds;
   @override

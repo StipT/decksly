@@ -132,7 +132,6 @@ class HSDropdown extends StatelessWidget {
                         primaryColor: AppColors.buttonTextColor,
                       ),
                       dropdownStyle: DropdownStyle(
-                        selectedTextStyle: FontStyles.bold15Gold,
                         width: dropdownWidth,
                         textStyle: FontStyles.bold15,
                         dropdownBackgroundAssetPath: "assets/dropdown/dropdown_background.png",

@@ -92,7 +92,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
               children: [
                 if (_currentIndex == -1) ...[
                   Expanded(
-                    child: widget.dropdownButton(0.toString(),),
+                    child: widget.dropdownButton(
+                      0.toString(),
+                    ),
                   )
                 ] else ...[
                   Expanded(
@@ -139,48 +141,57 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                   offset: widget.dropdownStyle.offset ?? Offset(0, size.height + 5),
                   link: this._layerLink,
                   showWhenUnlinked: false,
-                  child: SizeTransition(
-                    axisAlignment: 1,
-                    sizeFactor: _expandAnimation,
-                    child: ConstrainedBox(
-                      constraints: widget.dropdownStyle.constraints ??
-                          BoxConstraints(
-                            maxHeight: MediaQuery.of(context).size.height - topOffset - 15,
-                          ),
-                      child: Container(
-                        padding: EdgeInsets.only(top: 0.015.sh, bottom: 0.015.sh, right: 0.01.sw,),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              widget.dropdownStyle.dropdownBackgroundAssetPath ?? "",
+                  child: Material(
+                    textStyle: widget.dropdownStyle.textStyle,
+                    elevation: widget.dropdownStyle.elevation ?? 0,
+                    borderRadius: widget.dropdownStyle.borderRadius ?? BorderRadius.zero,
+                    color: Colors.transparent,
+                    child: SizeTransition(
+                      axisAlignment: 1,
+                      sizeFactor: _expandAnimation,
+                      child: ConstrainedBox(
+                        constraints: widget.dropdownStyle.constraints ??
+                            BoxConstraints(
+                              maxHeight: MediaQuery.of(context).size.height - topOffset - 15,
                             ),
-                            fit: BoxFit.fill,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                            top: 0.015.sh,
+                            bottom: 0.015.sh,
+                            right: 0.01.sw,
                           ),
-                        ),
-                        child: RawScrollbar(
-                          thumbVisibility: false,
-                          radius: Radius.circular(20.r),
-                          child: ListView(
-                            physics: const BouncingScrollPhysics(),
-                            padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
-                            shrinkWrap: true,
-                            children: widget.items.asMap().entries.map((item) {
-                              return Material(
-                                textStyle: _currentIndex == item.key ? widget.dropdownStyle.selectedTextStyle : widget.dropdownStyle.textStyle,
-                                elevation: widget.dropdownStyle.elevation ?? 0,
-                                borderRadius: widget.dropdownStyle.borderRadius ?? BorderRadius.zero,
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() => _currentIndex = item.key);
-                                    widget.onChange(item.key);
-                                    _toggleDropdown();
-                                  },
-                                  child: item.value,
-                                ),
-                              );
-                            }).toList(),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                widget.dropdownStyle.dropdownBackgroundAssetPath ?? "",
+                              ),
+                              fit: BoxFit.fill,
+                            ),
                           ),
+                          child: RawScrollbar(
+                              thumbVisibility: false,
+                              radius: Radius.circular(20.r),
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
+                                shrinkWrap: true,
+                                itemCount: widget.items.length,
+                                itemBuilder: (context, index) {
+                                  final item = widget.items.asMap().entries.toList()[index];
+                                  // widget.items.asMap().entries.map((item) {
+                                  return InkWell(
+                                    onTap: () {
+                                      print("current item is ${item.value}");
+
+                                      print("currentIndex is $_currentIndex, and item.key is ${index}");
+                                      setState(() => _currentIndex = index);
+                                      widget.onChange(index);
+                                      _toggleDropdown();
+                                    },
+                                    child: item.value as Widget,
+                                  );
+                                },
+                              )),
                         ),
                       ),
                     ),
@@ -257,7 +268,6 @@ class DropdownStyle {
   final EdgeInsets? padding;
   final BoxConstraints? constraints;
   final TextStyle? textStyle;
-  final TextStyle? selectedTextStyle;
 
   /// position of the top left of the dropdown relative to the top left of the button
   final Offset? offset;
@@ -276,7 +286,6 @@ class DropdownStyle {
     this.color,
     this.padding,
     this.borderRadius,
-    this.selectedTextStyle,
     this.textStyle,
   });
 }

@@ -24,22 +24,12 @@ class _HSTextFieldState extends State<HSTextField> {
   @override
   void initState() {
     super.initState();
-    //  _focus.addListener(_onFocusChange);
   }
 
   @override
   void dispose() {
     super.dispose();
-    //  _focus.removeListener(_onFocusChange);
     _focus.dispose();
-  }
-
-  void _onFocusChange() {
-    if (_focus.previousFocus() != _focus.hasFocus) {
-      setState(() {
-        _focus.hasFocus ? _focus.unfocus() : _focus.requestFocus();
-      });
-    }
   }
 
   @override

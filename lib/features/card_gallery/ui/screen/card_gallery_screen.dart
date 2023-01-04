@@ -16,7 +16,7 @@ class CardGalleryScreen extends StatefulWidget {
 }
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
-  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
+  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 1);
 
   @override
   void initState() {
@@ -52,12 +52,18 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                       ),
                     ),
                     child: PagedGridView<int, CardDTO>(
+
                       pagingController: _pagingController,
                       physics: const BouncingScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                       padding: EdgeInsets.zero,
                       builderDelegate: PagedChildBuilderDelegate<CardDTO>(
+                        noItemsFoundIndicatorBuilder: (context) {
+                          // TODO NO items component
+                          return Container();
+                        },
                         itemBuilder: (ctx, card, _) {
+
                           return GestureDetector(
                             onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                               return CardDetailsScreen(card);
@@ -94,10 +100,14 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       if (state.refresh) {
         _pagingController.refresh();
       } else {
-        final nextPageKey = _pagingController.nextPageKey ?? 0;
-        _pagingController.appendPage(state.cards, nextPageKey + state.cards.length);
+        final nextPageKey = _pagingController.nextPageKey;
+
+        if (nextPageKey != null && nextPageKey != 0) {
+          _pagingController.appendPage(state.cards, nextPageKey + state.cards.length);
+        }
       }
     } else if (state is CardsError) {
+      print(state.failure.message);
       _pagingController.error = state.failure;
       ScaffoldMessenger.of(ctx).showSnackBar(
         SnackBar(

@@ -40,34 +40,35 @@ class _FilterAppBarState extends State<FilterAppBar> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // TODO deck-8 Add Class filter
                         Container(
                           child: HSDropdown(
                             dropdownType: DropdownType.cardSet,
                             dropdownValues: CardSet.values,
                             width: 35.w,
                             dropdownWidth: 125.w,
-                            onChange: (value) =>
-                                BlocProvider.of<CardGalleryBloc>(context).add(CardSetChangedEvent(cardSetFromIndex(value).value)),
+                            onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
+                                .add(CardSetChangedEvent(cardSetFromIndex(value).value)),
                           ),
                         ),
-                        // TODO deck-9 Add Card Set filter
                         HSDropdown(
                           width: 0.2.sw,
                           dropdownWidth: 0.225.sw,
                           dropdownType: DropdownType.cardClass,
                           dropdownValues: CardClass.values,
-                          onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(CardClassChangedEvent(cardClassFromIndex(value).value)),
+                          onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
+                              .add(CardClassChangedEvent(cardClassFromIndex(value).value)),
                         ),
-                        // TODO deck-10 Add Mana filter
-
                         SizedBox(
                             width: 165.w,
                             child: ManaPicker(
-                              onChange: (change) {},
+                              onChange: (mana) =>
+                                  BlocProvider.of<CardGalleryBloc>(context).add(ManaFilterChangedEvent(mana)),
                             )),
-                        // TODO deck-11 Add Search filter
-                        const Expanded(child: HSTextField()),
+                        Expanded(
+                            child: HSTextField(
+                          onChange: (text) =>
+                              BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
+                        )),
                         // TODO deck-12 Add filter Dialog
                         HSButton(
                           icon: SvgPicture.asset(

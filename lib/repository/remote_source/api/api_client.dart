@@ -15,7 +15,7 @@ abstract class ApiClient {
     @Query("locale") String locale = "en_US",
     @Query("set") String? set,
     @Query("class") String? heroClass,
-    @Query("manaCost") List<num>? manaCost,
+    @Query("manaCost") String? manaCost,
     @Query("attack") List<num>? attack,
     @Query("health") List<num>? health,
     @Query("collectible") List<num>? collectible,

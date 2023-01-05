@@ -120,7 +120,6 @@ class _HSTextFieldState extends State<HSTextField> {
               controller: _textEditingController,
               onChanged: (searchString) {
                 setState(() {
-                  print("Controller is EMPTy $isEmpty");
                   isEmpty = _textEditingController.text.trim().isEmpty;
                 });
 

@@ -50,5 +50,7 @@
   "legacy": "Legacy",
   "standardSets": "Standard Sets",
   "wildSets": "Wild Sets",
-  "search": "Search"
+  "search": "Search",
+  "noCardsFound": "No cards found",
+  "tryRemovingSearchItems": "Try removing search item(s) for better results"
 }

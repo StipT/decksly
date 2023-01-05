@@ -3,6 +3,7 @@ import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart'
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
+import 'package:decksly/reusable_ui/no_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +17,7 @@ class CardGalleryScreen extends StatefulWidget {
 }
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
-  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
 
   @override
   void initState() {
@@ -52,18 +53,18 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                       ),
                     ),
                     child: PagedGridView<int, CardDTO>(
-
                       pagingController: _pagingController,
                       physics: const BouncingScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                       padding: EdgeInsets.zero,
                       builderDelegate: PagedChildBuilderDelegate<CardDTO>(
+                        animateTransitions: true,
                         noItemsFoundIndicatorBuilder: (context) {
-                          // TODO NO items component
-                          return Container();
+                          return NoResultsWidget(
+                            onTap: () {},
+                          );
                         },
                         itemBuilder: (ctx, card, _) {
-
                           return GestureDetector(
                             onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                               return CardDetailsScreen(card);
@@ -97,17 +98,16 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     if (state is CardsLoaded) {
+      final nextPageKey = _pagingController.nextPageKey ?? 0;
+
       if (state.refresh) {
         _pagingController.refresh();
+      } else if (20 > state.page.cards.length) {
+        _pagingController.appendLastPage(state.page.cards);
       } else {
-        final nextPageKey = _pagingController.nextPageKey;
-
-        if (nextPageKey != null && nextPageKey != 0) {
-          _pagingController.appendPage(state.cards, nextPageKey + state.cards.length);
-        }
+        _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
       }
     } else if (state is CardsError) {
-      print(state.failure.message);
       _pagingController.error = state.failure;
       ScaffoldMessenger.of(ctx).showSnackBar(
         SnackBar(

@@ -17,6 +17,15 @@ enum DropdownType {
   cardClass,
   cardSet,
   mana,
+
+  sortBy,
+  attack,
+  health,
+  cardType,
+  minionType,
+  spellSchool,
+  rarity,
+  keywords,
 }
 
 class HSDropdown extends StatelessWidget {
@@ -181,6 +190,55 @@ class HSDropdown extends StatelessWidget {
           assetImagePath: assetPath("class", "${CardClass.values[index].name}_icon"),
         );
       case DropdownType.mana:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+
+      case DropdownType.sortBy:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.attack:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.health:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.cardType:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.minionType:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.spellSchool:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.rarity:
+        return ClassDropdownItem(
+          text: CardClass.values[index].name,
+          assetImagePath: '',
+        );
+
+      case DropdownType.keywords:
         return ClassDropdownItem(
           text: CardClass.values[index].name,
           assetImagePath: '',

@@ -1,8 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:decksly/common/failures.dart';
 import 'package:decksly/common/network_info.dart';
+import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
-import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,9 +43,9 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   String? textFilter = "";
   String? gameMode = "constructed";
   String? spellSchool = "";
-  String? sort = "";
+  String? sort = "manaCost:asc";
   num _pageNumber = 1;
-  final int _cardsPerPage = 20;
+  final int pageSize = 20;
 
   void _streamInternetConnectionState() {
     internetConnectionState = _networkInfo.resultStream
@@ -59,10 +59,8 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     bool refresh,
   ) async {
     emit(const CardsLoading());
-    _pageNumber = (pageKey < _cardsPerPage ) ? 1 : pageKey ~/ _cardsPerPage;
+    _pageNumber = (pageKey < pageSize) ? 1 : pageKey ~/ pageSize;
 
-    print("_pageNumber $_pageNumber, pageKey $pageKey,  _cardsPerPage $_cardsPerPage");
-    print(22 ~/ 20);
     final fetchCardsParams = FetchCardsParams(
       page: _pageNumber,
       textFilter: textFilter,
@@ -104,13 +102,11 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
 
   Future<void> handleManaFilterChangedEvent(Emitter<CardGalleryState> emit, String manaCost) async {
     this.manaCost = manaCost;
-    print("MANA COST IS ${manaCost}");
     await handleFetchCards(emit, 1, true);
   }
 
   Future<void> handleSearchFilterChangedEvent(Emitter<CardGalleryState> emit, String textFilter) async {
-      this.textFilter =  textFilter.isEmpty ? null : textFilter;
-    print("textFilter IS ${textFilter}");
+    this.textFilter = textFilter.isEmpty ? null : textFilter;
     await handleFetchCards(emit, 1, true);
   }
 }

@@ -53,5 +53,7 @@ abstract class  LocaleKeys {
   static const standardSets = 'standardSets';
   static const wildSets = 'wildSets';
   static const search = 'search';
+  static const noCardsFound = 'noCardsFound';
+  static const tryRemovingSearchItems = 'tryRemovingSearchItems';
 
 }

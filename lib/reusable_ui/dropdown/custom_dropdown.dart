@@ -181,9 +181,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                                   // widget.items.asMap().entries.map((item) {
                                   return InkWell(
                                     onTap: () {
-                                      print("current item is ${item.value}");
-
-                                      print("currentIndex is $_currentIndex, and item.key is ${index}");
                                       setState(() => _currentIndex = index);
                                       widget.onChange(index);
                                       _toggleDropdown();

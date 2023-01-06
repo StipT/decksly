@@ -14,7 +14,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterAppBar extends StatefulWidget {
-  const FilterAppBar({Key? key}) : super(key: key);
+  const FilterAppBar({Key? key, required this.activeFilters}) : super(key: key);
+
+  final int activeFilters;
 
   @override
   State<FilterAppBar> createState() => _FilterAppBarState();
@@ -22,25 +24,19 @@ class FilterAppBar extends StatefulWidget {
 
 class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMixin {
   bool isExtended = false;
-
-  late AnimationController _animationController;
-  late Animation<double> _expandAnimation;
+  double _height = 0.21.sh;
 
   @override
   void initState() {
     super.initState();
-
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _expandAnimation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: isExtended ? 0.31.sh : 0.2.sh,
+    return AnimatedContainer(
+      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 300),
+      height: _height,
       child: Stack(
         children: [
           const HSAppBarOverlay(),
@@ -84,12 +80,14 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
                       )),
                       // TODO deck-12 Add filter Dialog
-                      HSButton(
+                      HSBarToggleButton(
                         icon: SvgPicture.asset(
                           "assets/misc/filter.svg",
                           fit: BoxFit.fill,
                           color: AppColors.buttonIconColor,
                         ),
+                        isToggled: isExtended,
+                        activeFilters: widget.activeFilters,
                         onTap: () {
                           _toggleBarExtension();
                         },
@@ -98,13 +96,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                   ),
                 ),
               ),
-              //if (isExtended)
-                Expanded(
-                  child: SizeTransition(
-                    axisAlignment: 1,
-                    sizeFactor: _expandAnimation,
-                    child: const FilterAppBarExtension(),
-                  ),
+              if (isExtended)
+                Flexible(
+                  child: const FilterAppBarExtension(),
                 ),
             ],
           ),
@@ -113,18 +107,17 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     );
   }
 
-  void _toggleBarExtension({bool close = false}) async  {
-      if (isExtended || close) {
-        await _animationController.reverse();
-       // this._overlayEntry.remove();
-        setState(() {
-          isExtended = false;
-        });
-      } else {
-      //  this._overlayEntry = this._createOverlayEntry();
-     //   Overlay.of(context)?.insert(this._overlayEntry);
-        setState(() => isExtended = true);
-        _animationController.forward();
-      }
+  void _toggleBarExtension() async {
+    if (isExtended) {
+      setState(() {
+        _height = 0.21.sh;
+        isExtended = false;
+      });
+    } else {
+      setState(() {
+        isExtended = true;
+        _height = 0.31.sh;
+      });
     }
+  }
 }

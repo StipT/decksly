@@ -27,6 +27,7 @@ class HSDropdownButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if(assetImagePath.isNotEmpty)
           _getImage(),
           if(!hideText)
           Expanded(

@@ -1,4 +1,5 @@
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum MinionType {
   any,
@@ -65,27 +66,27 @@ extension MinionTypeLocalized on MinionType {
   String localized() {
     switch (this) {
       case MinionType.any:
-        return LocaleKeys.any.tr();
+        return LocaleKeys.anyMinionType.tr();
       case MinionType.beast:
-        return LocaleKeys.free.tr();
+        return LocaleKeys.beast.tr();
       case MinionType.demon:
-        return LocaleKeys.common.tr();
+        return LocaleKeys.demon.tr();
       case MinionType.dragon:
-        return LocaleKeys.rare.tr();
+        return LocaleKeys.dragon.tr();
       case MinionType.elemental:
-        return LocaleKeys.epic.tr();
+        return LocaleKeys.elemental.tr();
       case MinionType.mech:
-        return LocaleKeys.legendary.tr();
+        return LocaleKeys.mech.tr();
       case MinionType.murloc:
-        return LocaleKeys.rare.tr();
+        return LocaleKeys.murloc.tr();
       case MinionType.naga:
-        return LocaleKeys.epic.tr();
+        return LocaleKeys.naga.tr();
       case MinionType.pirate:
-        return LocaleKeys.legendary.tr();
+        return LocaleKeys.pirate.tr();
       case MinionType.quilboar:
-        return LocaleKeys.rare.tr();
+        return LocaleKeys.quilboar.tr();
       case MinionType.totem:
-        return LocaleKeys.epic.tr();
+        return LocaleKeys.totem.tr();
       case MinionType.undead:
         return LocaleKeys.undead.tr();
     }

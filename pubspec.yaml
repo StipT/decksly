@@ -76,6 +76,7 @@ dependencies:
   auto_size_text: ^3.0.0-nullsafety.0
   xl: ^0.9.1
   flip_card: ^0.6.0
+  flutter_spinkit: ^5.1.0
 
   # Util
   flutter_markdown: ^0.6.13
@@ -106,6 +107,7 @@ flutter:
   assets:
     # Backgrounds
     - assets/background/scroll_background.png
+    - assets/background/second_background.jpg
     - assets/background/velvet_background_top.png
     - assets/background/velvet_background_center.jpg
     - assets/background/velvet_background_bottom.png
@@ -204,6 +206,9 @@ flutter:
     - assets/misc/attack.png
     - assets/misc/health.png
     - assets/misc/filter_number_bubble.png
+    - assets/misc/side_bar_border.png
+    - assets/misc/left_bar_divider.png
+    - assets/misc/right_bar_divider.png
 
     # Localization
     - assets/localization/en-US.json

@@ -1,4 +1,5 @@
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum Rarity {
   any,
@@ -41,7 +42,7 @@ extension RarityLocalized on Rarity {
   String localized() {
     switch (this) {
       case Rarity.any:
-        return LocaleKeys.any.tr();
+        return LocaleKeys.anyRarity.tr();
       case Rarity.free:
         return LocaleKeys.free.tr();
       case Rarity.common:

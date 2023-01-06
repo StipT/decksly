@@ -1,4 +1,5 @@
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum Keyword {
   any,
@@ -16,6 +17,7 @@ enum Keyword {
   dredge,
   echo,
   freeze,
+  frenzy,
   honorableKill,
   immune,
   infuse,
@@ -54,7 +56,7 @@ extension KeywordValues on Keyword {
   String get value {
     switch (this) {
       case Keyword.any:
-        return  "";
+        return "";
       case Keyword.adapt:
         return "adapt";
       case Keyword.battlecry:
@@ -83,6 +85,8 @@ extension KeywordValues on Keyword {
         return "echo";
       case Keyword.freeze:
         return "freeze";
+      case Keyword.frenzy:
+        return "frenzy";
       case Keyword.honorableKill:
         return "honorablekill";
       case Keyword.immune:
@@ -166,6 +170,7 @@ extension KeywordValues on Keyword {
         Keyword.dredge,
         Keyword.echo,
         Keyword.freeze,
+        Keyword.frenzy,
         Keyword.honorableKill,
         Keyword.immune,
         Keyword.infuse,
@@ -234,6 +239,8 @@ extension KeywordLocalized on Keyword {
         return LocaleKeys.echo.tr();
       case Keyword.freeze:
         return LocaleKeys.freeze.tr();
+      case Keyword.frenzy:
+        return LocaleKeys.frenzy.tr();
       case Keyword.honorableKill:
         return LocaleKeys.honorableKill.tr();
       case Keyword.immune:
@@ -335,66 +342,67 @@ Keyword keywordFromIndex(int index) {
     case 14:
       return Keyword.freeze;
     case 15:
-      return Keyword.honorableKill;
+      return Keyword.frenzy;
     case 16:
-      return Keyword.immune;
+      return Keyword.honorableKill;
     case 17:
-      return Keyword.infuse;
+      return Keyword.immune;
     case 18:
-      return Keyword.inspire;
+      return Keyword.infuse;
     case 19:
-      return Keyword.invoke;
+      return Keyword.inspire;
     case 20:
-      return Keyword.lackey;
+      return Keyword.invoke;
     case 21:
-      return Keyword.lifesteal;
+      return Keyword.lackey;
     case 22:
-      return Keyword.magnetic;
+      return Keyword.lifesteal;
     case 23:
-      return Keyword.manathirst;
+      return Keyword.magnetic;
     case 24:
-      return Keyword.megaWindfury;
-
+      return Keyword.manathirst;
     case 25:
-      return Keyword.natureSpellDamage;
+      return Keyword.megaWindfury;
     case 26:
-      return Keyword.outcast;
+      return Keyword.natureSpellDamage;
     case 27:
-      return Keyword.overkill;
+      return Keyword.outcast;
     case 28:
-      return Keyword.overload;
+      return Keyword.overkill;
     case 29:
-      return Keyword.poisonous;
+      return Keyword.overload;
     case 30:
-      return Keyword.quest;
+      return Keyword.poisonous;
     case 31:
-      return Keyword.questline;
+      return Keyword.quest;
     case 32:
-      return Keyword.reborn;
+      return Keyword.questline;
     case 33:
+      return Keyword.reborn;
+    case 34:
       return Keyword.recruit;
 
-    case 34:
-      return Keyword.secret;
     case 35:
-      return Keyword.sidequest;
+      return Keyword.secret;
     case 36:
-      return Keyword.spareParts;
+      return Keyword.sidequest;
     case 37:
-      return Keyword.spellDamage;
+      return Keyword.spareParts;
     case 38:
-      return Keyword.spellburst;
+      return Keyword.spellDamage;
     case 39:
-      return Keyword.startOfGame;
+      return Keyword.spellburst;
     case 40:
-      return Keyword.stealh;
+      return Keyword.startOfGame;
     case 41:
-      return Keyword.taunt;
+      return Keyword.stealh;
     case 42:
-      return Keyword.tradeable;
+      return Keyword.taunt;
     case 43:
-      return Keyword.twinspell;
+      return Keyword.tradeable;
     case 44:
+      return Keyword.twinspell;
+    case 45:
       return Keyword.windfury;
     default:
       return Keyword.any;

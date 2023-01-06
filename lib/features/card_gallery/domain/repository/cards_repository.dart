@@ -11,8 +11,8 @@ abstract class CardsRepository {
     String? set,
     String? heroClass,
     String? manaCost,
-    List<num>? attack,
-    List<num>? health,
+    String? attack,
+    String? health,
     List<num>? collectible,
     String? rarity,
     String? type,
@@ -42,8 +42,8 @@ class CardsRepositoryImpl extends CardsRepository {
     String? set,
     String? heroClass,
     String? manaCost,
-    List<num>? attack,
-    List<num>? health,
+    String? attack,
+    String? health,
     List<num>? collectible,
     String? rarity,
     String? type,
@@ -59,7 +59,23 @@ class CardsRepositoryImpl extends CardsRepository {
     }
 
     final cardResponse = await _apiService.apiClient.getCards(
-        page: page, locale: locale, set: set, heroClass: heroClass, manaCost: manaCost, textFilter: textFilter);
+      gameMode: gameMode,
+      collectible: collectible,
+      page: page,
+      locale: locale,
+      set: set,
+      heroClass: heroClass,
+      manaCost: manaCost,
+      textFilter: textFilter,
+      sort: sort,
+      attack: attack,
+      health: health,
+      type: type,
+      minionType: minionType,
+      spellSchool: spellSchool,
+      rarity: rarity,
+      keyword: keyword,
+    );
     return CardsPage(
         cards: cardResponse.cards,
         cardCount: cardResponse.cardCount,

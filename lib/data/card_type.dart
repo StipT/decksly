@@ -1,4 +1,5 @@
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum CardType {
   any,
@@ -41,7 +42,7 @@ extension CardTypeLocalized on CardType {
   String localized() {
     switch (this) {
       case CardType.any:
-        return LocaleKeys.any.tr();
+        return LocaleKeys.anyCardType.tr();
       case CardType.hero:
         return LocaleKeys.hero.tr();
       case CardType.minion:

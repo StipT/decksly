@@ -1,6 +1,8 @@
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 enum SpellSchool {
+  any,
   arcane,
   fire,
   frost,
@@ -13,6 +15,8 @@ enum SpellSchool {
 extension SpellSchoolValues on SpellSchool {
   String get value {
     switch (this) {
+      case SpellSchool.any:
+        return "";
       case SpellSchool.arcane:
         return "arcane";
       case SpellSchool.fire:
@@ -31,6 +35,7 @@ extension SpellSchoolValues on SpellSchool {
   }
 
   static List<SpellSchool> get values => [
+    SpellSchool.any,
     SpellSchool.arcane,
     SpellSchool.fire,
     SpellSchool.frost,
@@ -44,6 +49,8 @@ extension SpellSchoolValues on SpellSchool {
 extension SpellSchoolLocalized on SpellSchool {
   String localized() {
     switch (this) {
+      case SpellSchool.any:
+        return LocaleKeys.anySpellSchool.tr();
       case SpellSchool.arcane:
         return LocaleKeys.arcane.tr();
       case SpellSchool.fire:
@@ -65,20 +72,22 @@ extension SpellSchoolLocalized on SpellSchool {
 SpellSchool spellSchoolFromIndex(int index) {
   switch (index) {
     case 0:
-      return SpellSchool.arcane;
+      return SpellSchool.any;
     case 1:
-      return SpellSchool.fire;
+      return SpellSchool.arcane;
     case 2:
-      return SpellSchool.frost;
+      return SpellSchool.fire;
     case 3:
-      return SpellSchool.nature;
+      return SpellSchool.frost;
     case 4:
-      return SpellSchool.holy;
+      return SpellSchool.nature;
     case 5:
-      return SpellSchool.shadow;
+      return SpellSchool.holy;
     case 6:
+      return SpellSchool.shadow;
+    case 7:
       return SpellSchool.fel;
     default:
-      return SpellSchool.arcane;
+      return SpellSchool.any;
   }
 }

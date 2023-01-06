@@ -18,6 +18,7 @@ class ClassDropdownItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50.h,
       margin: EdgeInsets.only(
         bottom: 0.01.sh,
         left: 0.001.sw,
@@ -25,26 +26,27 @@ class ClassDropdownItem extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Stack(children: [
-            Center(
-              child: Image.asset(
-                assetPath("misc", "golden_circle_border"),
-                fit: BoxFit.fill,
-                width: 40.sp,
+          if (assetImagePath.isNotEmpty)
+            Stack(children: [
+              Center(
+                child: Image.asset(
+                  assetPath("misc", "golden_circle_border"),
+                  fit: BoxFit.fill,
+                  width: 40.sp,
+                ),
               ),
-            ),
-            Center(
-              child: Container(
-                padding: EdgeInsets.all(5.sp),
-                  child: assetImagePath.isNotEmpty
-                  ? Image.asset(
-                assetImagePath,
-                fit: BoxFit.fill,
-                width: 30.sp,
-              )
-                  : const SizedBox()),
-            ),
-          ]),
+              Center(
+                child: Container(
+                    padding: EdgeInsets.all(5.sp),
+                    child: assetImagePath.isNotEmpty
+                        ? Image.asset(
+                            assetImagePath,
+                            fit: BoxFit.fill,
+                            width: 30.sp,
+                          )
+                        : const SizedBox()),
+              ),
+            ]),
           Expanded(
             child: Container(
               padding: EdgeInsets.only(left: 0.01.sw),

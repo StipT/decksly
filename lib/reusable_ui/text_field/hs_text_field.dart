@@ -1,7 +1,9 @@
 import 'package:decksly/common/colors.dart';
 import 'package:decksly/common/fonts.dart';
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
 import 'package:decksly/reusable_ui/text_field/debouncer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -107,7 +109,7 @@ class _HSTextFieldState extends State<HSTextField> {
             ],
           ),
 
-          if (_focus.hasFocus) const HSActiveTextFieldOverlay(),
+          if (!isEmpty) const HSActiveTextFieldOverlay(),
 
           // Functional foreground
           Container(
@@ -145,7 +147,7 @@ class _HSTextFieldState extends State<HSTextField> {
                   ),
                   color: AppColors.accentYellow,
                 ),
-                hintText: "Search",
+                hintText: LocaleKeys.search.tr(),
                 hintStyle: FontStyles.bold17Hint,
               ),
             ),

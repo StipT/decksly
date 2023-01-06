@@ -29,3 +29,43 @@ class SearchFilterChangedEvent extends CardGalleryEvent {
   final String textFilter;
   const SearchFilterChangedEvent(this.textFilter);
 }
+
+class SortByChangedEvent extends CardGalleryEvent {
+  final String sortBy;
+  const SortByChangedEvent(this.sortBy);
+}
+
+class AttackFilterChangedEvent extends CardGalleryEvent {
+  final String attack;
+  const AttackFilterChangedEvent(this.attack);
+}
+
+class HealthFilterChangedEvent extends CardGalleryEvent {
+  final String health;
+  const HealthFilterChangedEvent(this.health);
+}
+
+class CardTypeFilterChangedEvent extends CardGalleryEvent {
+  final String cardType;
+  const CardTypeFilterChangedEvent(this.cardType);
+}
+
+class MinionTypeFilterChangedEvent extends CardGalleryEvent {
+  final String minionType;
+  const MinionTypeFilterChangedEvent(this.minionType);
+}
+
+class SpellSchoolFilterChangedEvent extends CardGalleryEvent {
+  final String spellSchool;
+  const SpellSchoolFilterChangedEvent(this.spellSchool);
+}
+
+class RarityFilterChangedEvent extends CardGalleryEvent {
+  final String rarity;
+  const RarityFilterChangedEvent(this.rarity);
+}
+
+class KeywordFilterChangedEvent extends CardGalleryEvent {
+  final String keyword;
+  const KeywordFilterChangedEvent(this.keyword);
+}

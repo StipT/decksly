@@ -96,6 +96,13 @@ class FontStyles {
     color: AppColors.text,
   );
 
+  static TextStyle regular17Brown = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.w400,
+    fontSize: 17.sp,
+    color: AppColors.buttonTextColor,
+  );
+
   static TextStyle regular20 = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w400,
@@ -171,6 +178,13 @@ class FontStyles {
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w700,
     fontSize: 15.sp,
+    color: AppColors.buttonTextColor,
+  );
+
+  static TextStyle bold24Button = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 24.sp,
     color: AppColors.buttonTextColor,
   );
 

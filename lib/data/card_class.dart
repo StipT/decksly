@@ -66,7 +66,7 @@ extension CardClassValues on CardClass {
       ];
 }
 
-extension CardClassVLocalized on CardClass {
+extension CardClassLocalized on CardClass {
   String localized() {
     switch (this) {
       case CardClass.allClasses:

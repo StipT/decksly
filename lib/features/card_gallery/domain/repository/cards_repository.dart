@@ -1,18 +1,18 @@
 import 'package:decksly/common/exceptions.dart';
 import 'package:decksly/common/network_info.dart';
+import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/repository/remote_source/api/api_service.dart';
-import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class CardsRepository {
-  Future<List<CardDTO>> getCards({
+  Future<CardsPage> getCards({
     num page,
     String locale = "en_US",
     String? set,
     String? heroClass,
     String? manaCost,
-    List<num>? attack,
-    List<num>? health,
+    String? attack,
+    String? health,
     List<num>? collectible,
     String? rarity,
     String? type,
@@ -36,14 +36,14 @@ class CardsRepositoryImpl extends CardsRepository {
   final NetworkInfo _networkInfo;
 
   @override
-  Future<List<CardDTO>> getCards({
+  Future<CardsPage> getCards({
     num page = 0,
     String locale = "en_US",
     String? set,
     String? heroClass,
     String? manaCost,
-    List<num>? attack,
-    List<num>? health,
+    String? attack,
+    String? health,
     List<num>? collectible,
     String? rarity,
     String? type,
@@ -57,10 +57,29 @@ class CardsRepositoryImpl extends CardsRepository {
     if (!await _networkInfo.isConnected) {
       throw NoInternetException();
     }
-    // TODO PAGE
 
     final cardResponse = await _apiService.apiClient.getCards(
-        page: page, locale: locale, set: set, heroClass: heroClass, manaCost: manaCost, textFilter: textFilter);
-    return cardResponse.cards;
+      gameMode: gameMode,
+      collectible: collectible,
+      page: page,
+      locale: locale,
+      set: set,
+      heroClass: heroClass,
+      manaCost: manaCost,
+      textFilter: textFilter,
+      sort: sort,
+      attack: attack,
+      health: health,
+      type: type,
+      minionType: minionType,
+      spellSchool: spellSchool,
+      rarity: rarity,
+      keyword: keyword,
+    );
+    return CardsPage(
+        cards: cardResponse.cards,
+        cardCount: cardResponse.cardCount,
+        pageCount: cardResponse.pageCount,
+        page: cardResponse.page);
   }
 }

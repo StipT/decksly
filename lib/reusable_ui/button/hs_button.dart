@@ -1,11 +1,17 @@
+import 'package:decksly/common/asset_loader.dart';
 import 'package:decksly/common/fonts.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HSButton extends StatelessWidget {
-  const HSButton({Key? key, this.label, this.icon, required this.onTap}) : super(key: key);
+class HSBarToggleButton extends StatelessWidget {
+  const HSBarToggleButton(
+      {Key? key, this.label, this.icon, required this.onTap, required this.isToggled, required this.activeFilters})
+      : super(key: key);
   final String? label;
   final Widget? icon;
+  final bool isToggled;
+  final int activeFilters;
   final VoidCallback onTap;
 
   @override
@@ -19,7 +25,7 @@ class HSButton extends StatelessWidget {
       ),
       child: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(vertical: 0.001.sh),
+        margin: EdgeInsets.symmetric(vertical: 1.h),
         child: InkWell(
           onTap: () {
             onTap();
@@ -97,6 +103,7 @@ class HSButton extends StatelessWidget {
                   ),
                 ],
               ),
+              if (isToggled) const HSActiveButtonOverlay(),
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(
@@ -108,9 +115,13 @@ class HSButton extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      child: icon ?? const SizedBox(),
-                      width: 15.w,
+                    Stack(
+                      children: [
+                        Container(
+                          child: icon ?? const SizedBox(),
+                          width: 15.w,
+                        ),
+                      ],
                     ),
                     Text(
                       label ?? "",
@@ -119,10 +130,32 @@ class HSButton extends StatelessWidget {
                   ],
                 ),
               ),
+              _showFilterBubble(activeFilters),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _showFilterBubble(int activeFilters) {
+    if (activeFilters.isFinite) {
+      return Positioned(
+        bottom: 2.h,
+        right: 2.w,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(assetPath("misc", "filter_number_bubble"), width: 10.w),
+            Text(
+              activeFilters.toString(),
+              textAlign: TextAlign.center,
+              style: FontStyles.bold15,
+            ),
+          ],
+        ),
+      );
+    }
+    return const SizedBox();
   }
 }

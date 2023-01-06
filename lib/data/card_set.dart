@@ -1,12 +1,6 @@
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-const String CARD_SET_STANDARD = "standard cards";
-const String CARD_SET_WILD = "wild cards";
-const String CARD_SET_CLASSIC = "classic cards";
-const String CARD_SET_CURRENT_ARENA = "current arena cards";
-const String CARD_SET_CURRENT_DUELS = "current duels cards";
-
 enum CardSet {
   // Game modes
   standard,

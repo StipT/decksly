@@ -76,6 +76,7 @@ dependencies:
   auto_size_text: ^3.0.0-nullsafety.0
   xl: ^0.9.1
   flip_card: ^0.6.0
+  flutter_spinkit: ^5.1.0
 
   # Util
   flutter_markdown: ^0.6.13
@@ -100,15 +101,13 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true
   assets:
     # Backgrounds
     - assets/background/scroll_background.png
+    - assets/background/second_background.jpg
     - assets/background/velvet_background_top.png
     - assets/background/velvet_background_center.jpg
     - assets/background/velvet_background_bottom.png
@@ -141,7 +140,6 @@ flutter:
     - assets/dropdown/selected_dropdown_button_center.png
     - assets/dropdown/selected_dropdown_button_right.png
     - assets/dropdown/focused_dropdown_button_left.png
-
 
     # Sets
     - assets/set/standard.svg
@@ -202,6 +200,15 @@ flutter:
     - assets/misc/mana_inactive.png
     - assets/misc/golden_circle_border.png
     - assets/misc/filter.svg
+    - assets/misc/divider.png
+    - assets/misc/line.png
+    - assets/misc/no_cards_found.png
+    - assets/misc/attack.png
+    - assets/misc/health.png
+    - assets/misc/filter_number_bubble.png
+    - assets/misc/side_bar_border.png
+    - assets/misc/left_bar_divider.png
+    - assets/misc/right_bar_divider.png
 
     # Localization
     - assets/localization/en-US.json

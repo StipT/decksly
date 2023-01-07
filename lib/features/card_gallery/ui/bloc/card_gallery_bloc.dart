@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:decksly/common/failures.dart';
 import 'package:decksly/common/network_info.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -26,8 +27,10 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     on<AttackFilterChangedEvent>((event, emit) async => await handleAttackFilterChangedEvent(emit, event.attack));
     on<HealthFilterChangedEvent>((event, emit) async => await handleHealthFilterChangedEvent(emit, event.health));
     on<CardTypeFilterChangedEvent>((event, emit) async => await handleCardTypeFilterChangedEvent(emit, event.cardType));
-    on<MinionTypeFilterChangedEvent>((event, emit) async => await handleMinionTypeFilterChangedEvent(emit, event.minionType));
-    on<SpellSchoolFilterChangedEvent>((event, emit) async => await handleSpellSchoolFilterChangedEvent(emit, event.spellSchool));
+    on<MinionTypeFilterChangedEvent>(
+        (event, emit) async => await handleMinionTypeFilterChangedEvent(emit, event.minionType));
+    on<SpellSchoolFilterChangedEvent>(
+        (event, emit) async => await handleSpellSchoolFilterChangedEvent(emit, event.spellSchool));
 
     on<RarityFilterChangedEvent>((event, emit) async => await handleRarityFilterChangedEvent(emit, event.rarity));
     on<KeywordFilterChangedEvent>((event, emit) async => await handleKeywordFilterChangedEvent(emit, event.keyword));
@@ -37,24 +40,6 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   final NetworkInfo _networkInfo;
   late final Stream<bool> internetConnectionState;
   final FetchCardsUsecase fetchCardsUsecase;
-
-  String? locale = "en_US";
-  String? set = "standard";
-  String? heroClass = "";
-  String? manaCost = "";
-  String? attack = "";
-  String? health = "";
-  List<num>? collectible = [];
-  String? rarity = "";
-  String? type = "";
-  String? minionType = "";
-  String? keyword = "";
-  String? textFilter = "";
-  String? gameMode = "constructed";
-  String? spellSchool = "";
-  String? sort = "manaCost:asc";
-  num _pageNumber = 1;
-  final int pageSize = 20;
 
   void _streamInternetConnectionState() {
     internetConnectionState = _networkInfo.resultStream
@@ -68,32 +53,14 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     bool refresh,
   ) async {
     emit(const CardsLoading());
-    _pageNumber = (pageKey < pageSize) ? 1 : pageKey ~/ pageSize;
-
-    final fetchCardsParams = FetchCardsParams(
-      page: _pageNumber,
-      textFilter: textFilter,
-      manaCost: manaCost,
-      heroClass: heroClass,
-      set: set,
-      locale: locale,
-      attack: attack,
-      collectible: collectible,
-      gameMode: gameMode,
-      health: health,
-      keyword: keyword,
-      minionType: minionType,
-      rarity: rarity,
-      sort: sort,
-      spellSchool: spellSchool,
-      type: type,
-    );
-
-    final resultOrFailure = await fetchCardsUsecase(fetchCardsParams);
+    final pageSize = state.cardFilterParams.pageSize;
+    final _pageNumber = (pageKey < pageSize) ? 1 : pageKey ~/ pageSize;
+    final cardFilterParams = state.cardFilterParams.copyWith(page: _pageNumber);
+    final resultOrFailure = await fetchCardsUsecase(cardFilterParams);
     resultOrFailure.fold(
       (failure) => emit(CardsError(failure)),
       (cards) {
-        emit(CardsLoaded(cards, refresh));
+        emit(CardsLoaded(cards,  ,refresh));
         pageKey++;
       },
     );

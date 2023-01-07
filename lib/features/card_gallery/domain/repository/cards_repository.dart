@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 
 abstract class CardsRepository {
   Future<CardsPage> getCards({
-    num page,
-    String locale = "en_US",
+    num? page,
+    String? locale = "en_US",
     String? set,
     String? heroClass,
     String? manaCost,
@@ -37,8 +37,8 @@ class CardsRepositoryImpl extends CardsRepository {
 
   @override
   Future<CardsPage> getCards({
-    num page = 0,
-    String locale = "en_US",
+    num? page = 0,
+    String? locale = "en_US",
     String? set,
     String? heroClass,
     String? manaCost,

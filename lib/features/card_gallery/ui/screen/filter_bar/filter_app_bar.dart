@@ -33,77 +33,83 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      curve: Curves.easeInOut,
-      duration: const Duration(milliseconds: 300),
-      height: _height,
-      child: Stack(
-        children: [
-          const HSAppBarOverlay(),
-          Column(
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
+      builder: (BuildContext context, state) {
+        return AnimatedContainer(
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 300),
+          height: _height,
+          child: Stack(
             children: [
-              SizedBox(
-                height: 0.2.sh,
-                width: double.infinity,
-                child: Container(
-                  padding: EdgeInsets.only(left: 0.01.sw, top: 0.06.sh, bottom: 0.02.sh),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        child: HSDropdown(
-                          dropdownType: DropdownType.cardSet,
-                          dropdownValues: CardSet.values,
-                          width: 35.w,
-                          dropdownWidth: 125.w,
-                          onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                              .add(CardSetChangedEvent(cardSetFromIndex(value).value)),
-                        ),
-                      ),
-                      HSDropdown(
-                        width: 0.2.sw,
-                        dropdownWidth: 0.225.sw,
-                        dropdownType: DropdownType.cardClass,
-                        dropdownValues: CardClass.values,
-                        onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                            .add(CardClassChangedEvent(cardClassFromIndex(value).value)),
-                      ),
-                      SizedBox(
-                          width: 165.w,
-                          child: ManaPicker(
-                            onChange: (mana) =>
-                                BlocProvider.of<CardGalleryBloc>(context).add(ManaFilterChangedEvent(mana)),
+              const HSAppBarOverlay(),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 0.2.sh,
+                    width: double.infinity,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 0.01.sw, top: 0.06.sh, bottom: 0.02.sh),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            child: HSDropdown(
+                              selectedValue: state.cardFilterParams.set,
+                              dropdownType: DropdownType.cardSet,
+                              dropdownValues: CardSet.values,
+                              width: 35.w,
+                              dropdownWidth: 125.w,
+                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
+                                  .add(CardSetChangedEvent(cardSetFromIndex(value).value)),
+                            ),
+                          ),
+                          HSDropdown(
+                            width: 0.2.sw,
+                            dropdownWidth: 0.225.sw,
+                            selectedValue: state.cardFilterParams.heroClass,
+                            dropdownType: DropdownType.cardClass,
+                            dropdownValues: CardClass.values,
+                            onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
+                                .add(CardClassChangedEvent(cardClassFromIndex(value).value)),
+                          ),
+                          SizedBox(
+                              width: 165.w,
+                              child: ManaPicker(
+                                onChange: (mana) =>
+                                    BlocProvider.of<CardGalleryBloc>(context).add(ManaFilterChangedEvent(mana)),
+                              )),
+                          Expanded(
+                              child: HSTextField(
+                            onChange: (text) =>
+                                BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
                           )),
-                      Expanded(
-                          child: HSTextField(
-                        onChange: (text) =>
-                            BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
-                      )),
-                      // TODO deck-12 Add filter Dialog
-                      HSBarToggleButton(
-                        icon: SvgPicture.asset(
-                          "assets/misc/filter.svg",
-                          fit: BoxFit.fill,
-                          color: AppColors.buttonIconColor,
-                        ),
-                        isToggled: isExtended,
-                        activeFilters: widget.activeFilters,
-                        onTap: () {
-                          _toggleBarExtension();
-                        },
+                          // TODO deck-12 Add filter Dialog
+                          HSBarToggleButton(
+                            icon: SvgPicture.asset(
+                              "assets/misc/filter.svg",
+                              fit: BoxFit.fill,
+                              color: AppColors.buttonIconColor,
+                            ),
+                            isToggled: isExtended,
+                            activeFilters: widget.activeFilters,
+                            onTap: () {
+                              _toggleBarExtension();
+                            },
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  if (isExtended)
+                    Flexible(
+                      child: const FilterAppBarExtension(),
+                    ),
+                ],
               ),
-              if (isExtended)
-                Flexible(
-                  child: const FilterAppBarExtension(),
-                ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

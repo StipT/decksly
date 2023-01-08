@@ -2,30 +2,43 @@ part of 'card_gallery_bloc.dart';
 
 @immutable
 abstract class CardGalleryState extends Equatable {
-  const CardGalleryState(this.page, this.refresh);
+  const CardGalleryState(this.page, this.cardFilterParams);
 
   final CardsPage page;
-  final bool refresh;
+  final CardFilterParams cardFilterParams;
 
   @override
   List<Object?> get props => page.cards;
 }
 
 class CardsInitial extends CardGalleryState {
-  const CardsInitial() : super(const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0), false);
-
-
-}
-
-class CardsLoading extends CardGalleryState {
-  const CardsLoading() : super(const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0), false);
+  const CardsInitial()
+      : super(
+          const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0),
+          const CardFilterParams(
+            page: 0,
+            pageSize: 20,
+            locale: "en_US",
+            gameMode: "constructed",
+            set: "standard",
+            collectible: "1",
+            sort: "manaCost:asc",
+          ),
+        );
 }
 
 class CardsLoaded extends CardGalleryState {
-  const CardsLoaded(super.cards, super.refresh);
+  const CardsLoaded(
+    super.cards,
+    super.cardFilterParams,
+  );
 }
 
 class CardsError extends CardGalleryState {
-  const CardsError(this.failure) : super(const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0), false);
+  const CardsError(this.failure)
+      : super(
+          const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0),
+          const CardFilterParams(),
+        );
   final Failure failure;
 }

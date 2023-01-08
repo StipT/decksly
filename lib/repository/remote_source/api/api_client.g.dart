@@ -22,8 +22,9 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<CardsResponse> getCards({
-    page = 0,
-    locale = "en_US",
+    pageSize,
+    page,
+    locale,
     set,
     heroClass,
     manaCost,
@@ -41,6 +42,7 @@ class _ApiClient implements ApiClient {
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'pageSize': pageSize,
       r'page': page,
       r'locale': locale,
       r'set': set,
@@ -81,7 +83,7 @@ class _ApiClient implements ApiClient {
   @override
   Future<CardsResponse> getCard(
     id, {
-    locale = "en_US",
+    locale,
     gameMode,
   }) async {
     const _extra = <String, dynamic>{};

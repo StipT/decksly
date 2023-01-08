@@ -21,6 +21,7 @@ class CardGalleryScreen extends StatefulWidget {
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
   final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   @override
   void dispose() {
     _pagingController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -57,6 +59,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     ),
                     child: PagedGridView<int, CardDTO>(
                       pagingController: _pagingController,
+                      scrollController: _scrollController,
                       physics: const BouncingScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
                       padding: EdgeInsets.zero,
@@ -104,13 +107,16 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     if (state is CardsLoaded) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
-
-      if (state.refresh) {
+      if (state.page.page == 1) {
         _pagingController.refresh();
-      } else if (20 > state.page.cards.length) {
-        _pagingController.appendLastPage(state.page.cards);
-      } else {
+        _scrollController.jumpTo(0);
+      }
+
+
+      if (state.page.pageCount > state.page.page) {
         _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
+      } else {
+        _pagingController.appendLastPage(state.page.cards);
       }
     } else if (state is CardsError) {
       _pagingController.error = state.failure;

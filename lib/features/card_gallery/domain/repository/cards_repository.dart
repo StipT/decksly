@@ -6,14 +6,15 @@ import 'package:injectable/injectable.dart';
 
 abstract class CardsRepository {
   Future<CardsPage> getCards({
+    num? pageSize,
     num? page,
-    String? locale = "en_US",
+    String? locale,
     String? set,
     String? heroClass,
     String? manaCost,
     String? attack,
     String? health,
-    List<num>? collectible,
+    String? collectible,
     String? rarity,
     String? type,
     String? minionType,
@@ -37,14 +38,15 @@ class CardsRepositoryImpl extends CardsRepository {
 
   @override
   Future<CardsPage> getCards({
-    num? page = 0,
-    String? locale = "en_US",
+    num? pageSize,
+    num? page,
+    String? locale,
     String? set,
     String? heroClass,
     String? manaCost,
     String? attack,
     String? health,
-    List<num>? collectible,
+    String? collectible,
     String? rarity,
     String? type,
     String? minionType,
@@ -59,6 +61,7 @@ class CardsRepositoryImpl extends CardsRepository {
     }
 
     final cardResponse = await _apiService.apiClient.getCards(
+      pageSize: pageSize,
       gameMode: gameMode,
       collectible: collectible,
       page: page,

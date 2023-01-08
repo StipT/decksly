@@ -39,6 +39,7 @@ class HSDropdown extends StatelessWidget {
   HSDropdown({
     Key? key,
     required this.dropdownType,
+    required this.selectedValue,
     required this.dropdownValues,
     this.height,
     this.width,
@@ -50,6 +51,7 @@ class HSDropdown extends StatelessWidget {
   double? width;
   double? dropdownWidth;
   final DropdownType dropdownType;
+  final dynamic selectedValue;
   final List<dynamic> dropdownValues;
   final void Function(int) onChange;
 

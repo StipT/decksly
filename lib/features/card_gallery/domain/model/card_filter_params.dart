@@ -5,7 +5,7 @@ part 'card_filter_params.freezed.dart';
 @freezed
 class CardFilterParams with _$CardFilterParams {
   const factory CardFilterParams({
-     @Default(20) int pageSize,
+     int? pageSize,
      num? page,
      String? locale,
      String? set,

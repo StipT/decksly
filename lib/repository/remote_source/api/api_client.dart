@@ -11,14 +11,15 @@ abstract class ApiClient {
 
   @GET('/hearthstone/cards')
   Future<CardsResponse> getCards({
-    @Query("page") num page = 0,
-    @Query("locale") String locale = "en_US",
+    @Query("pageSize") num? pageSize,
+    @Query("page") num? page,
+    @Query("locale") String? locale,
     @Query("set") String? set,
     @Query("class") String? heroClass,
     @Query("manaCost") String? manaCost,
     @Query("attack") String? attack,
     @Query("health") String? health,
-    @Query("collectible") List<num>? collectible,
+    @Query("collectible") String? collectible,
     @Query("rarity") String? rarity,
     @Query("type") String? type,
     @Query("minionType") String? minionType,
@@ -32,7 +33,7 @@ abstract class ApiClient {
   @GET('/hearthstone/cards/{id}')
   Future<CardsResponse> getCard(
     @Path() String id, {
-    @Query("locale") String locale = "en_US",
+    @Query("locale") String? locale,
     @Query("gameMode") String? gameMode,
   });
 

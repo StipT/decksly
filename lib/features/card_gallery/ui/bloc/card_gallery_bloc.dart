@@ -1,6 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dartz/dartz.dart';
 import 'package:decksly/common/failures.dart';
 import 'package:decksly/common/network_info.dart';
+import 'package:decksly/data/card_set.dart';
+import 'package:decksly/data/card_set.dart';
+import 'package:decksly/data/card_set.dart';
+import 'package:decksly/data/sort_by.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
@@ -10,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../data/card_set.dart';
+
 part 'card_gallery_event.dart';
 
 part 'card_gallery_state.dart';
@@ -17,7 +24,7 @@ part 'card_gallery_state.dart';
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase}) : super(const CardsInitial()) {
-    on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.page, false));
+    on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, state.cardFilterParams));
     on<CardSetChangedEvent>((event, emit) async => await handleCardSetChanged(emit, event.set));
     on<CardClassChangedEvent>((event, emit) async => await handleCardClassChanged(emit, event.heroClass));
     on<ManaFilterChangedEvent>((event, emit) async => await handleManaFilterChangedEvent(emit, event.manaCost));
@@ -28,9 +35,9 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     on<HealthFilterChangedEvent>((event, emit) async => await handleHealthFilterChangedEvent(emit, event.health));
     on<CardTypeFilterChangedEvent>((event, emit) async => await handleCardTypeFilterChangedEvent(emit, event.cardType));
     on<MinionTypeFilterChangedEvent>(
-        (event, emit) async => await handleMinionTypeFilterChangedEvent(emit, event.minionType));
+            (event, emit) async => await handleMinionTypeFilterChangedEvent(emit, event.minionType));
     on<SpellSchoolFilterChangedEvent>(
-        (event, emit) async => await handleSpellSchoolFilterChangedEvent(emit, event.spellSchool));
+            (event, emit) async => await handleSpellSchoolFilterChangedEvent(emit, event.spellSchool));
 
     on<RarityFilterChangedEvent>((event, emit) async => await handleRarityFilterChangedEvent(emit, event.rarity));
     on<KeywordFilterChangedEvent>((event, emit) async => await handleKeywordFilterChangedEvent(emit, event.keyword));
@@ -47,82 +54,76 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-  Future<void> handleFetchCards(
-    Emitter<CardGalleryState> emit,
-    int pageKey,
-    bool refresh,
-  ) async {
-    emit(const CardsLoading());
-    final pageSize = state.cardFilterParams.pageSize;
-    final _pageNumber = (pageKey < pageSize) ? 1 : pageKey ~/ pageSize;
-    final cardFilterParams = state.cardFilterParams.copyWith(page: _pageNumber);
-    final resultOrFailure = await fetchCardsUsecase(cardFilterParams);
+  Future<void> handleFetchCards(Emitter<CardGalleryState> emit,
+      CardFilterParams cardFilterParams,
+      ) async {
+    final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
+    final resultOrFailure = await fetchCardsUsecase(updatedParams);
     resultOrFailure.fold(
-      (failure) => emit(CardsError(failure)),
-      (cards) {
-        emit(CardsLoaded(cards,  ,refresh));
-        pageKey++;
+          (failure) => emit(CardsError(failure)),
+          (cards) {
+        emit(CardsLoaded(cards, updatedParams));
       },
     );
   }
 
   Future<void> handleCardSetChanged(Emitter<CardGalleryState> emit, String set) async {
-    this.set = set;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(set: set, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleCardClassChanged(Emitter<CardGalleryState> emit, String heroClass) async {
-    this.heroClass = heroClass;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(heroClass: heroClass, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleManaFilterChangedEvent(Emitter<CardGalleryState> emit, String manaCost) async {
-    this.manaCost = manaCost;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(manaCost: manaCost, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleSearchFilterChangedEvent(Emitter<CardGalleryState> emit, String textFilter) async {
-    this.textFilter = textFilter.isEmpty ? null : textFilter;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(textFilter: textFilter, page: 0);
+    await handleFetchCards(emit, params);
   }
 
-  Future<void> handleSortByChangedEvent(Emitter<CardGalleryState> emit, String sortBy) async {
-    this.sort = sortBy;
-    await handleFetchCards(emit, 1, true);
+  Future<void> handleSortByChangedEvent(Emitter<CardGalleryState> emit, String sort) async {
+    final CardFilterParams params = state.cardFilterParams.copyWith(sort: sort, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleAttackFilterChangedEvent(Emitter<CardGalleryState> emit, String attack) async {
-    this.attack = attack;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(attack: attack, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleHealthFilterChangedEvent(Emitter<CardGalleryState> emit, String health) async {
-    this.health = health;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(health: health, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleCardTypeFilterChangedEvent(Emitter<CardGalleryState> emit, String type) async {
-    this.type = type;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(type: type, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleMinionTypeFilterChangedEvent(Emitter<CardGalleryState> emit, String minionType) async {
-    this.minionType = minionType;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(minionType: minionType, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleSpellSchoolFilterChangedEvent(Emitter<CardGalleryState> emit, String spellSchool) async {
-    this.spellSchool = spellSchool;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(spellSchool: spellSchool, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleRarityFilterChangedEvent(Emitter<CardGalleryState> emit, String rarity) async {
-    this.rarity = rarity;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(rarity: rarity, page: 0);
+    await handleFetchCards(emit, params);
   }
 
   Future<void> handleKeywordFilterChangedEvent(Emitter<CardGalleryState> emit, String keyword) async {
-    this.keyword = keyword;
-    await handleFetchCards(emit, 1, true);
+    final CardFilterParams params = state.cardFilterParams.copyWith(keyword: keyword, page: 0);
+    await handleFetchCards(emit, params);
   }
 }

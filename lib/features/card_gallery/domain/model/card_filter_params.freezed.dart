@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CardFilterParams {
-  int get pageSize => throw _privateConstructorUsedError;
+  int? get pageSize => throw _privateConstructorUsedError;
   num? get page => throw _privateConstructorUsedError;
   String? get locale => throw _privateConstructorUsedError;
   String? get set => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $CardFilterParamsCopyWith<$Res> {
       _$CardFilterParamsCopyWithImpl<$Res, CardFilterParams>;
   @useResult
   $Res call(
-      {int pageSize,
+      {int? pageSize,
       num? page,
       String? locale,
       String? set,
@@ -78,7 +78,7 @@ class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pageSize = null,
+    Object? pageSize = freezed,
     Object? page = freezed,
     Object? locale = freezed,
     Object? set = freezed,
@@ -97,10 +97,10 @@ class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams>
     Object? sort = freezed,
   }) {
     return _then(_value.copyWith(
-      pageSize: null == pageSize
+      pageSize: freezed == pageSize
           ? _value.pageSize
           : pageSize // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -178,7 +178,7 @@ abstract class _$$_CardFilterParamsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int pageSize,
+      {int? pageSize,
       num? page,
       String? locale,
       String? set,
@@ -208,7 +208,7 @@ class __$$_CardFilterParamsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pageSize = null,
+    Object? pageSize = freezed,
     Object? page = freezed,
     Object? locale = freezed,
     Object? set = freezed,
@@ -227,10 +227,10 @@ class __$$_CardFilterParamsCopyWithImpl<$Res>
     Object? sort = freezed,
   }) {
     return _then(_$_CardFilterParams(
-      pageSize: null == pageSize
+      pageSize: freezed == pageSize
           ? _value.pageSize
           : pageSize // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -303,7 +303,7 @@ class __$$_CardFilterParamsCopyWithImpl<$Res>
 
 class _$_CardFilterParams implements _CardFilterParams {
   const _$_CardFilterParams(
-      {this.pageSize = 20,
+      {this.pageSize,
       this.page,
       this.locale,
       this.set,
@@ -322,8 +322,7 @@ class _$_CardFilterParams implements _CardFilterParams {
       this.sort});
 
   @override
-  @JsonKey()
-  final int pageSize;
+  final int? pageSize;
   @override
   final num? page;
   @override
@@ -424,7 +423,7 @@ class _$_CardFilterParams implements _CardFilterParams {
 
 abstract class _CardFilterParams implements CardFilterParams {
   const factory _CardFilterParams(
-      {final int pageSize,
+      {final int? pageSize,
       final num? page,
       final String? locale,
       final String? set,
@@ -443,7 +442,7 @@ abstract class _CardFilterParams implements CardFilterParams {
       final String? sort}) = _$_CardFilterParams;
 
   @override
-  int get pageSize;
+  int? get pageSize;
   @override
   num? get page;
   @override

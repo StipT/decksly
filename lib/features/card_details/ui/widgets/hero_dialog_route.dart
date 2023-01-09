@@ -1,4 +1,4 @@
-import 'package:decksly/common/colors.dart';
+import 'package:decksly/common/design/colors.dart';
 import 'package:flutter/widgets.dart';
 
 class HeroDialogRoute<T> extends PageRoute<T> {
@@ -19,7 +19,7 @@ class HeroDialogRoute<T> extends PageRoute<T> {
   bool get maintainState => true;
 
   @override
-  Color get barrierColor => AppColors.black90Transparent;
+  Color get barrierColor => AppColors.black90;
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {

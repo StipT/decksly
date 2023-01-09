@@ -1,7 +1,8 @@
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/widgets.dart';
 
-class HSRectangularOutline extends StatelessWidget {
-  const HSRectangularOutline({Key? key}) : super(key: key);
+class HSVelvetBorder extends StatelessWidget {
+  const HSVelvetBorder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class HSRectangularOutline extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            "assets/shared/border_left_outline.png",
+            assetPath(SUBFOLDER_SHARED, "border_left_outline"),
             fit: BoxFit.fill,
           ),
         ),
@@ -20,7 +21,7 @@ class HSRectangularOutline extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              "assets/shared/border_center_outline.png",
+              assetPath(SUBFOLDER_SHARED, "border_center_outline"),
               fit: BoxFit.fill,
             ),
           ),
@@ -28,7 +29,7 @@ class HSRectangularOutline extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            "assets/shared/border_right_outline.png",
+            assetPath(SUBFOLDER_SHARED, "border_right_outline"),
             fit: BoxFit.fill,
           ),
         ),

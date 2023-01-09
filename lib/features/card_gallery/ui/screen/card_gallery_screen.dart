@@ -1,5 +1,5 @@
-import 'package:decksly/common/asset_loader.dart';
-import 'package:decksly/common/colors.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
@@ -82,13 +82,13 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                         },
                         firstPageProgressIndicatorBuilder: (_) =>  Center(
                           child: SpinKitRipple(
-                            color: AppColors.buttonTextColor,
+                            color: AppColors.vanDykeBrown,
                             size: 25.w,
                           ),
                         ),
                         newPageProgressIndicatorBuilder: (_) =>  Center(
                           child: SpinKitRipple(
-                            color: AppColors.buttonTextColor,
+                            color: AppColors.vanDykeBrown,
                             size: 25.w,
                           ),
                         ),

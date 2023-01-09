@@ -1,7 +1,9 @@
-import 'package:decksly/common/colors.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:decksly/reusable_ui/text_field/debouncer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -38,80 +40,12 @@ class _HSTextFieldState extends State<HSTextField> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 0.001.sh),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Stylized Background
-          Row(
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    height: double.infinity,
-                    child: Image.asset(
-                      "assets/shared/border_left_outline.png",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SizedBox(
-                    height: double.infinity,
-                    child: Image.asset(
-                      "assets/search/search_border_left.png",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Container(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Image.asset(
-                          "assets/shared/border_center_outline.png",
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      SizedBox(
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Image.asset(
-                          "assets/search/search_border_center.png",
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Stack(
-                children: [
-                  SizedBox(
-                    height: double.infinity,
-                    child: Image.asset(
-                      "assets/shared/border_right_outline.png",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SizedBox(
-                    height: double.infinity,
-                    child: Image.asset(
-                      "assets/search/search_border_right.png",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-
+          const HSVelvetBorder(),
+          const HSRectangularGoldenBorder(),
           if (!isEmpty) const HSActiveTextFieldOverlay(),
-
-          // Functional foreground
           Container(
             margin: EdgeInsets.only(
               left: 8.w,
@@ -145,10 +79,10 @@ class _HSTextFieldState extends State<HSTextField> {
                   icon: Icon(
                     isEmpty ? Icons.search : Icons.close,
                   ),
-                  color: AppColors.accentYellow,
+                  color: AppColors.gold,
                 ),
                 hintText: LocaleKeys.search.tr(),
-                hintStyle: FontStyles.bold17Hint,
+                hintStyle: FontStyles.bold17DarkChestnutBrown,
               ),
             ),
           ),

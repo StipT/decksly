@@ -1,8 +1,8 @@
-import 'package:decksly/common/asset_loader.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_outline.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +32,7 @@ class _ManaPickerState extends State<ManaPicker> {
     return Container(
       child: Stack(
         children: [
-          const HSRectangularOutline(),
+          const HSVelvetBorder(),
           const HSRectangularGoldenBorder(),
           if (activeItems.contains(true)) const HSActiveTextFieldOverlay(),
           Container(
@@ -98,7 +98,7 @@ class ManaItem extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               child: Image.asset(
-                assetPath("misc", "mana_inactive"),
+                assetPath(SUBFOLDER_MISC, "mana_inactive"),
                 fit: BoxFit.fill,
               ),
             ),
@@ -106,14 +106,14 @@ class ManaItem extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  assetPath("misc", "mana_active"),
+                  assetPath(SUBFOLDER_MISC, "mana_active"),
                   fit: BoxFit.fill,
                 ),
               ),
             Center(
               child: Text(
                 index.toString(),
-                style: FontStyles.bold22Shadow,
+                style: FontStyles.bold22WithShadow,
               ),
             ),
           ],

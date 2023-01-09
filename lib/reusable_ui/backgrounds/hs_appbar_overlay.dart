@@ -1,5 +1,5 @@
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HSAppBarOverlay extends StatelessWidget {
   const HSAppBarOverlay({Key? key}) : super(key: key);
@@ -13,17 +13,20 @@ class HSAppBarOverlay extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              "assets/background/velvet_background_center.jpg",
+              assetPath(
+                SUBFOLDER_BACKGROUND,
+                "velvet_background_center",
+                fileExtension: JPG_EXTENSION,
+              ),
               fit: BoxFit.fill,
             ),
           ),
         ),
-
         Container(
           alignment: Alignment.topCenter,
           width: double.infinity,
           child: Image.asset(
-            "assets/background/velvet_background_top.png",
+            assetPath(SUBFOLDER_BACKGROUND, "velvet_background_top"),
             fit: BoxFit.fitWidth,
           ),
         ),
@@ -31,7 +34,7 @@ class HSAppBarOverlay extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           width: double.infinity,
           child: Image.asset(
-            "assets/background/velvet_background_bottom.png",
+            assetPath(SUBFOLDER_BACKGROUND, "velvet_background_bottom"),
             fit: BoxFit.fill,
           ),
         ),

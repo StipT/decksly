@@ -1,7 +1,7 @@
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/application.constants.dart';
-import 'package:decksly/common/colors.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -35,8 +35,9 @@ class DeckslyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: FontStyles.FONT_FAMILY,
-              primaryColor: AppColors.primary,
-              splashColor: AppColors.splashColor,
+              primaryColor: AppColors.vanDykeBrown,
+              splashColor: AppColors.bistreBrown,
+              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.gold),
             ),
           );
         },

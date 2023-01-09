@@ -1,5 +1,5 @@
-import 'package:decksly/common/exceptions.dart';
-import 'package:decksly/common/failures.dart';
+import 'package:decksly/common/util/exceptions.dart';
+import 'package:decksly/common/util/failures.dart';
 
 class ExceptionToFailureMapper {
   static const String _noInternetFailureMessage = 'No internet connection.';

@@ -125,18 +125,19 @@ flutter:
     - assets/button/focused_button_center.png
     - assets/button/focused_button_right.png
 
-    # Search
-    - assets/search/search_border_left.png
-    - assets/search/search_border_center.png
-    - assets/search/search_border_right.png
-    - assets/search/focused_search_left.png
-    - assets/search/focused_search_center.png
-    - assets/search/focused_search_right.png
+    # TextField
+    - assets/text_field/text_field_border_left.png
+    - assets/text_field/text_field_border_center.png
+    - assets/text_field/text_field_border_right.png
+    - assets/text_field/focused_text_field_left.png
+    - assets/text_field/focused_text_field_center.png
+    - assets/text_field/focused_text_field_right.png
 
     # Dropdown
     - assets/dropdown/dropdown_background.png
     - assets/dropdown/dropdown_button_border_left.png
     - assets/dropdown/selected_dropdown_button_left.png
+    - assets/dropdown/selected_dropdown_button_left_iconless.png
     - assets/dropdown/selected_dropdown_button_center.png
     - assets/dropdown/selected_dropdown_button_right.png
     - assets/dropdown/focused_dropdown_button_left.png
@@ -217,8 +218,8 @@ flutter:
   fonts:
     - family: Belwe
       fonts:
-        - asset: assets/fonts/Belwe-Medium.ttf
-        - asset: assets/fonts/Belwe-Light.ttf
+        - asset: assets/font/Belwe-Medium.ttf
+        - asset: assets/font/Belwe-Light.ttf
           weight: 300
-        - asset: assets/fonts/Belwe-Bold.ttf
+        - asset: assets/font/Belwe-Bold.ttf
           weight: 700

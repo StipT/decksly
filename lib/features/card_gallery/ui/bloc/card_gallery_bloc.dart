@@ -1,11 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dartz/dartz.dart';
-import 'package:decksly/common/failures.dart';
-import 'package:decksly/common/network_info.dart';
-import 'package:decksly/data/card_set.dart';
-import 'package:decksly/data/card_set.dart';
-import 'package:decksly/data/card_set.dart';
-import 'package:decksly/data/sort_by.dart';
+import 'package:decksly/common/util/failures.dart';
+import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
@@ -15,10 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../data/card_set.dart';
-
 part 'card_gallery_event.dart';
-
 part 'card_gallery_state.dart';
 
 @injectable
@@ -35,9 +27,9 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     on<HealthFilterChangedEvent>((event, emit) async => await handleHealthFilterChangedEvent(emit, event.health));
     on<CardTypeFilterChangedEvent>((event, emit) async => await handleCardTypeFilterChangedEvent(emit, event.cardType));
     on<MinionTypeFilterChangedEvent>(
-            (event, emit) async => await handleMinionTypeFilterChangedEvent(emit, event.minionType));
+        (event, emit) async => await handleMinionTypeFilterChangedEvent(emit, event.minionType));
     on<SpellSchoolFilterChangedEvent>(
-            (event, emit) async => await handleSpellSchoolFilterChangedEvent(emit, event.spellSchool));
+        (event, emit) async => await handleSpellSchoolFilterChangedEvent(emit, event.spellSchool));
 
     on<RarityFilterChangedEvent>((event, emit) async => await handleRarityFilterChangedEvent(emit, event.rarity));
     on<KeywordFilterChangedEvent>((event, emit) async => await handleKeywordFilterChangedEvent(emit, event.keyword));
@@ -54,14 +46,15 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-  Future<void> handleFetchCards(Emitter<CardGalleryState> emit,
-      CardFilterParams cardFilterParams,
-      ) async {
+  Future<void> handleFetchCards(
+    Emitter<CardGalleryState> emit,
+    CardFilterParams cardFilterParams,
+  ) async {
     final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
     resultOrFailure.fold(
-          (failure) => emit(CardsError(failure)),
-          (cards) {
+      (failure) => emit(CardsError(failure)),
+      (cards) {
         emit(CardsLoaded(cards, updatedParams));
       },
     );

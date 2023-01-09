@@ -40,5 +40,6 @@ class CardsError extends CardGalleryState {
           const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0),
           const CardFilterParams(),
         );
+
   final Failure failure;
 }

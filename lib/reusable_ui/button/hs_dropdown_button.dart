@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/colors.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,21 +27,20 @@ class HSDropdownButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if(assetImagePath.isNotEmpty)
-          _getImage(),
-          if(!hideText)
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(left: 0.01.sw),
-              child: AutoSizeText(
-                text,
-                minFontSize: 8,
-                maxLines: 1,
-                style: FontStyles.bold15Button,
+          if (assetImagePath.isNotEmpty) _getImage(),
+          if (!hideText)
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(left: 0.01.sw),
+                child: AutoSizeText(
+                  text,
+                  minFontSize: 8,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
+                  style: FontStyles.bold15VanDykeBrown,
+                ),
               ),
-              //padding: EdgeInsets.only(top: 0.03.sh, bottom: 0.03.sh, left: 0.008.sw),
             ),
-          ),
         ],
       ),
     );
@@ -52,7 +51,7 @@ class HSDropdownButton extends StatelessWidget {
       return const SizedBox();
     }
 
-    final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains("svg");
+    final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(SVG_EXTENSION);
     return Flexible(
       child: isSvg
           ? SvgPicture.asset(

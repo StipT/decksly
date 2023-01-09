@@ -9,7 +9,7 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../common/network_info.dart' as _i5;
+import '../common/util/network_info.dart' as _i5;
 import '../features/card_gallery/domain/repository/cards_repository.dart'
     as _i6;
 import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'

@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/common/util/failures.dart';
 import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
@@ -53,8 +54,12 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
     resultOrFailure.fold(
-      (failure) => emit(CardsError(failure)),
+      (failure) {
+        log(failure.message);
+        emit(CardsError(failure));
+      },
       (cards) {
+
         emit(CardsLoaded(cards, updatedParams));
       },
     );

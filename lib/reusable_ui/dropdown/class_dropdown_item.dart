@@ -53,6 +53,7 @@ class HSDropdownItem extends StatelessWidget {
               padding: EdgeInsets.only(left: 0.01.sw),
               child: AutoSizeText(
                 text,
+                maxLines: 1,
                 style: isSelected ? FontStyles.bold17Gold : FontStyles.bold17,
                 overflow: TextOverflow.fade,
               ),

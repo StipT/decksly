@@ -8,7 +8,7 @@ abstract class CardGalleryState extends Equatable {
   final CardFilterParams cardFilterParams;
 
   @override
-  List<Object?> get props => page.cards;
+  List<Object?> get props => [page.cards, page.cardCount];
 }
 
 class CardsInitial extends CardGalleryState {

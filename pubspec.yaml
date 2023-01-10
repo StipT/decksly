@@ -210,6 +210,8 @@ flutter:
     - assets/misc/side_bar_border.png
     - assets/misc/left_bar_divider.png
     - assets/misc/right_bar_divider.png
+    - assets/misc/card_template_gold.png
+    - assets/misc/card_template_grey.png
 
     # Localization
     - assets/localization/en-US.json

@@ -6,9 +6,9 @@ part 'rune_cost_dto.g.dart';
 @freezed
 class RuneCostDTO with _$RuneCostDTO {
   const factory RuneCostDTO({
-    required int blood,
-    required int frost,
-    required int unholy,
+    required int? blood,
+    required int? frost,
+    required int? unholy,
   }) = _RuneCostDTO;
 
   factory RuneCostDTO.fromJson(Map<String, dynamic> json) =>

@@ -1,3 +1,4 @@
+import 'package:decksly/common/dev/logger.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,10 +11,14 @@ class CustomDropdown<T> extends StatefulWidget {
   final void Function(int) onChange;
 
   final Widget Function(String) dropdownButton;
+  final DropdownItem<String> Function(int) selectedItem;
 
   /// list of DropdownItems
   final List<DropdownItem<T>> items;
   final DropdownStyle dropdownStyle;
+
+  final Widget? activeDropdownButtonOverlay;
+  final Widget? selectedDropdownButtonOverlay;
 
   /// dropdownButtonStyles passes styles to OutlineButton.styleFrom()
   final DropdownButtonStyle dropdownButtonStyle;
@@ -22,19 +27,18 @@ class CustomDropdown<T> extends StatefulWidget {
   final Icon icon;
   final bool hideIcon;
 
-  /// if true the dropdown icon will as a leading icon, default to false
-  final bool leadingIcon;
-
   const CustomDropdown({
     Key? key,
     this.hideIcon = false,
     required this.dropdownButton,
     required this.items,
+    required this.selectedItem,
     required this.dropdownStyle,
     required this.dropdownButtonStyle,
     required this.icon,
-    this.leadingIcon = false,
     required this.onChange,
+    this.activeDropdownButtonOverlay,
+    this.selectedDropdownButtonOverlay,
   }) : super(key: key);
 
   @override
@@ -45,7 +49,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   final LayerLink _layerLink = LayerLink();
   late OverlayEntry _overlayEntry;
   bool _isOpen = false;
-  int _currentIndex = -1;
+  int _currentIndex = 0;
   late AnimationController _animationController;
   late Animation<double> _expandAnimation;
   late Animation<double> _rotateAnimation;
@@ -68,48 +72,49 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   @override
   Widget build(BuildContext context) {
     var style = widget.dropdownButtonStyle;
-    // link the overlay to the button
     return CompositedTransformTarget(
-      link: this._layerLink,
-      child: Container(
-        color: Colors.transparent,
-        width: style.width,
-        height: style.height,
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            textStyle: style.textStyle,
-            padding: style.padding,
-            primary: style.primaryColor,
-            shape: style.shape as OutlinedBorder?,
-          ),
-          onPressed: _toggleDropdown,
-          child: Container(
-            width: double.infinity,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              textDirection: widget.leadingIcon ? TextDirection.rtl : TextDirection.ltr,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                if (_currentIndex == -1) ...[
-                  Expanded(
-                    child: widget.dropdownButton(
-                      0.toString(),
-                    ),
-                  )
-                ] else ...[
-                  Expanded(
-                    child: widget.dropdownButton(_currentIndex.toString()),
-                  ),
-                ],
-                if (!widget.hideIcon)
-                  RotationTransition(
-                    turns: _rotateAnimation,
-                    child: widget.icon,
-                  ),
-              ],
+      link: _layerLink,
+      child: Stack(
+        children: [
+          if(_isOpen)
+            widget.activeDropdownButtonOverlay ?? const SizedBox(),
+          if(_currentIndex != 0 && !_isOpen)
+            widget.selectedDropdownButtonOverlay ?? const SizedBox(),
+          Container(
+            color: Colors.transparent,
+            width: style.width,
+            height: style.height,
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                textStyle: style.textStyle,
+                padding: style.padding,
+                primary: style.primaryColor,
+                shape: style.shape as OutlinedBorder?,
+              ),
+              onPressed: _toggleDropdown,
+              child: Container(
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    ...[
+                      Expanded(
+                        child: widget.dropdownButton(_currentIndex.toString()),
+                      ),
+                    ],
+                    if (!widget.hideIcon)
+                      Container(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: RotationTransition(
+                          turns: _rotateAnimation,
+                          child: widget.icon,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -128,7 +133,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
         onTap: () => _toggleDropdown(close: true),
         behavior: HitTestBehavior.opaque,
         // full screen container to register taps anywhere and close drop down
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
@@ -139,7 +144,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                 width: widget.dropdownStyle.width ?? size.width,
                 child: CompositedTransformFollower(
                   offset: widget.dropdownStyle.offset ?? Offset(0, size.height + 5),
-                  link: this._layerLink,
+                  link: _layerLink,
                   showWhenUnlinked: false,
                   child: Material(
                     textStyle: widget.dropdownStyle.textStyle,
@@ -177,16 +182,29 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                                 shrinkWrap: true,
                                 itemCount: widget.items.length,
                                 itemBuilder: (context, index) {
+                                  final DropdownItem<String> selectedItem = widget.selectedItem(_currentIndex) as DropdownItem<String>;
                                   final item = widget.items.asMap().entries.toList()[index];
-                                  // widget.items.asMap().entries.map((item) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() => _currentIndex = index);
-                                      widget.onChange(index);
-                                      _toggleDropdown();
-                                    },
-                                    child: item.value as Widget,
-                                  );
+                                  print("Selected item ${item.value.value}, ${selectedItem.value}");
+                                  if (item.value.value == selectedItem.value) {
+                                    return InkWell(
+                                      onTap: () {
+                                        setState(() => _currentIndex = index);
+                                        widget.onChange(index);
+                                        _toggleDropdown();
+                                      },
+                                      child: selectedItem.child
+                                    );
+                                  } else {
+                                    return InkWell(
+                                      onTap: () {
+                                        setState(() => _currentIndex = index);
+                                        widget.onChange(index);
+                                        _toggleDropdown();
+                                      },
+                                      child: item.value as Widget,
+                                    );
+                                  }
+
                                 },
                               )),
                         ),
@@ -205,13 +223,13 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   void _toggleDropdown({bool close = false}) async {
     if (_isOpen || close) {
       await _animationController.reverse();
-      this._overlayEntry.remove();
+      _overlayEntry.remove();
       setState(() {
         _isOpen = false;
       });
     } else {
-      this._overlayEntry = this._createOverlayEntry();
-      Overlay.of(context)?.insert(this._overlayEntry);
+      _overlayEntry = _createOverlayEntry();
+      Overlay.of(context)?.insert(_overlayEntry);
       setState(() => _isOpen = true);
       _animationController.forward();
     }

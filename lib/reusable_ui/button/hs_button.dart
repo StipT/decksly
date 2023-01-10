@@ -1,6 +1,8 @@
-import 'package:decksly/common/asset_loader.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,76 +35,8 @@ class HSBarToggleButton extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          height: double.infinity,
-                          child: Image.asset(
-                            "assets/shared/border_left_outline.png",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        SizedBox(
-                          height: double.infinity,
-                          child: Image.asset(
-                            "assets/button/button_border_left.png",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Image.asset(
-                              "assets/shared/border_center_outline.png",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Container(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Image.asset(
-                              "assets/button/button_border_center.png",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          height: double.infinity,
-                          child: Image.asset(
-                            "assets/shared/border_right_outline.png",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        SizedBox(
-                          height: double.infinity,
-                          child: Image.asset(
-                            "assets/button/button_border_right.png",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              const HSVelvetBorder(),
+              const HSButtonOverlay(),
               if (isToggled) const HSActiveButtonOverlay(),
               Container(
                 alignment: Alignment.center,
@@ -125,7 +59,7 @@ class HSBarToggleButton extends StatelessWidget {
                     ),
                     Text(
                       label ?? "",
-                      style: FontStyles.bold15Button,
+                      style: FontStyles.bold15VanDykeBrown,
                     )
                   ],
                 ),

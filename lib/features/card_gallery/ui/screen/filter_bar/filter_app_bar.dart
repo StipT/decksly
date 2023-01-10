@@ -1,4 +1,5 @@
-import 'package:decksly/common/colors.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/data/card_set.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
@@ -39,6 +40,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
           height: _height,
+          width: double.infinity,
           child: Stack(
             children: [
               const HSAppBarOverlay(),
@@ -54,9 +56,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                         children: [
                           Container(
                             child: HSDropdown(
-                              selectedValue: state.cardFilterParams.set,
+                              selectedValue: state.cardFilterParams.set ?? CardSet.standard.value,
                               dropdownType: DropdownType.cardSet,
-                              dropdownValues: CardSet.values,
+                              dropdownValues: CardSet.values.map((e) => e.value).toList(),
                               width: 35.w,
                               dropdownWidth: 125.w,
                               onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
@@ -66,9 +68,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                           HSDropdown(
                             width: 0.2.sw,
                             dropdownWidth: 0.225.sw,
-                            selectedValue: state.cardFilterParams.heroClass,
+                            selectedValue: state.cardFilterParams.heroClass ?? CardClass.allClasses.value,
                             dropdownType: DropdownType.cardClass,
-                            dropdownValues: CardClass.values,
+                            dropdownValues: CardClass.values.map((e) => e.value).toList(),
                             onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
                                 .add(CardClassChangedEvent(cardClassFromIndex(value).value)),
                           ),
@@ -86,9 +88,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                           // TODO deck-12 Add filter Dialog
                           HSBarToggleButton(
                             icon: SvgPicture.asset(
-                              "assets/misc/filter.svg",
+                              assetPath(SUBFOLDER_MISC, "filter", fileExtension: SVG_EXTENSION),
                               fit: BoxFit.fill,
-                              color: AppColors.buttonIconColor,
+                              color: AppColors.bistreBrown,
                             ),
                             isToggled: isExtended,
                             activeFilters: widget.activeFilters,
@@ -101,9 +103,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                     ),
                   ),
                   if (isExtended)
-                    Flexible(
-                      child: const FilterAppBarExtension(),
-                    ),
+                    Flexible(child:  FilterAppBarExtension(),),
                 ],
               ),
             ],

@@ -1,5 +1,6 @@
-import 'package:decksly/common/asset_loader.dart';
-import 'package:decksly/common/colors.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CardGalleryScreen extends StatefulWidget {
   const CardGalleryScreen({super.key});
@@ -47,7 +49,9 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
           children: [
             Column(
               children: [
-                FilterAppBar(activeFilters: 2,),
+                FilterAppBar(
+                  activeFilters: 2,
+                ),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
@@ -76,20 +80,47 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                               return CardDetailsScreen(card);
                             })),
                             child: Image.network(
+                              // TODO Add image not found asset
                               card.image,
+                              loadingBuilder: (context, widget, chunk) {
+                                return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
+                                    ? widget
+                                    : Container(
+                                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                                        child: Shimmer.fromColors(
+                                          baseColor: AppColors.spanishGrey,
+                                          highlightColor: AppColors.shimmerGrey,
+                                          child: Image.asset(
+                                            assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                                          ),
+                                        ),
+                                      );
+                              },
                             ),
                           );
                         },
-                        firstPageProgressIndicatorBuilder: (_) =>  Center(
-                          child: SpinKitRipple(
-                            color: AppColors.buttonTextColor,
-                            size: 25.w,
+                        firstPageProgressIndicatorBuilder: (_) => Center(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                            child: Shimmer.fromColors(
+                              baseColor: AppColors.spanishGrey,
+                              highlightColor: AppColors.shimmerGrey,
+                              child: Image.asset(
+                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                              ),
+                            ),
                           ),
                         ),
-                        newPageProgressIndicatorBuilder: (_) =>  Center(
-                          child: SpinKitRipple(
-                            color: AppColors.buttonTextColor,
-                            size: 25.w,
+                        newPageProgressIndicatorBuilder: (_) => Center(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                            child: Shimmer.fromColors(
+                              baseColor: AppColors.spanishGrey,
+                              highlightColor: AppColors.shimmerGrey,
+                              child: Image.asset(
+                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -107,11 +138,19 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     if (state is CardsLoaded) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
+      log("Page ${state.page}, ");
+      if (state.page.cardCount == 0) {
+        _pagingController.refresh();
+        _scrollController.jumpTo(0);
+       // _scrollController.animateTo(0, curve: Curves.easeIn, duration: Duration(milliseconds: 500));
+        _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
+        return;
+      }
+
       if (state.page.page == 1) {
         _pagingController.refresh();
         _scrollController.jumpTo(0);
       }
-
 
       if (state.page.pageCount > state.page.page) {
         _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);

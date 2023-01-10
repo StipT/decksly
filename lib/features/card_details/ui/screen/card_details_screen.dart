@@ -1,5 +1,5 @@
-import 'package:decksly/common/colors.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +90,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                       children: [
                         Container(
                           child: Text(
-                            widget.card.name,
+                            widget.card.name ?? "",
                             style: FontStyles.bold28,
                           ),
                         ),
@@ -99,8 +99,8 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                             vertical: 0.02.sh,
                           ),
                           child: Text(
-                            widget.card.flavorText,
-                            style: FontStyles.regular15Grey,
+                            widget.card.flavorText ?? "",
+                            style: FontStyles.regular17Grey,
                           ),
                         ),
                         Container(
@@ -113,9 +113,9 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                                 // TODO Add localization
                                 const TextSpan(
                                   text: 'Artist: ',
-                                  style: TextStyle(color: AppColors.categoryTextYellow),
+                                  style: TextStyle(color: AppColors.navajoWhite),
                                 ),
-                                TextSpan(text: widget.card.artistName, style: FontStyles.regular15),
+                                TextSpan(text: widget.card.artistName, style: FontStyles.regular17),
                               ],
                             ),
                           ),

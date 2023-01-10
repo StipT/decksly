@@ -1,7 +1,9 @@
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/widgets.dart';
 
 class HSActiveButtonOverlay extends StatelessWidget {
-  const HSActiveButtonOverlay({Key? key}) : super(key: key);
+  const HSActiveButtonOverlay({Key? key, this.isDropdownButton = false}) : super(key: key);
+  final bool isDropdownButton;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class HSActiveButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            "assets/button/focused_button_left.png",
+            isDropdownButton ? assetPath(SUBFOLDER_DROPDOWN,  "focused_dropdown_button_left" ) : assetPath(SUBFOLDER_BUTTON, "focused_button_left"),
             fit: BoxFit.fill,
           ),
         ),
@@ -20,7 +22,7 @@ class HSActiveButtonOverlay extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              "assets/button/focused_button_center.png",
+              assetPath(SUBFOLDER_BUTTON, "focused_button_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -28,7 +30,7 @@ class HSActiveButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            "assets/button/focused_button_right.png",
+            assetPath(SUBFOLDER_BUTTON, "focused_button_right"),
             fit: BoxFit.fill,
           ),
         ),

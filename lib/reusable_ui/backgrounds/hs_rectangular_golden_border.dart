@@ -1,3 +1,4 @@
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/widgets.dart';
 
 class HSRectangularGoldenBorder extends StatelessWidget {
@@ -11,7 +12,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            "assets/search/search_border_left.png",
+            assetPath(SUBFOLDER_TEXT_FIELD, "text_field_border_left"),
             fit: BoxFit.fill,
           ),
         ),
@@ -20,7 +21,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              "assets/search/search_border_center.png",
+              assetPath(SUBFOLDER_TEXT_FIELD, "text_field_border_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -28,7 +29,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            "assets/search/search_border_right.png",
+            assetPath(SUBFOLDER_TEXT_FIELD, "text_field_border_right"),
             fit: BoxFit.fill,
           ),
         ),

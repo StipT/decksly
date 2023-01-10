@@ -1,5 +1,5 @@
-import 'package:decksly/common/asset_loader.dart';
-import 'package:decksly/common/fonts.dart';
+import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class NoResultsWidget extends StatelessWidget {
                   top: 160.h,
                   child: Container(
                       child: Image.asset(
-                    assetPath("misc", "divider"),
+                    assetPath(SUBFOLDER_MISC, "divider"),
                     width: 0.7.sw,
                   )),
                 ),
@@ -34,7 +34,7 @@ class NoResultsWidget extends StatelessWidget {
                     child: Container(
                         height: 200.h,
                         child: Image.asset(
-                          assetPath("misc", "no_cards_found"),
+                          assetPath(SUBFOLDER_MISC, "no_cards_found"),
                           height: 200.h,
                         ))),
               ],
@@ -43,20 +43,20 @@ class NoResultsWidget extends StatelessWidget {
           Container(
             child: Text(
               LocaleKeys.noCardsFound.tr(),
-              style: FontStyles.bold24Button,
+              style: FontStyles.bold25VanDykeBrown,
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: 0.02.sh),
             child: Text(
               LocaleKeys.tryRemovingSearchItems.tr(),
-              style: FontStyles.regular17Brown,
+              style: FontStyles.regular17VanDykeBrown,
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: 0.05.sh),
             child: Image.asset(
-              assetPath("misc", "line"),
+              assetPath(SUBFOLDER_MISC, "line"),
               width: 0.7.sw,
             ),
           ),

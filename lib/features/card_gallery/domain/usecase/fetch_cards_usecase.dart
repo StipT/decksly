@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:decksly/common/exception_to_failure_mapper.dart';
-import 'package:decksly/common/failures.dart';
-import 'package:decksly/common/use_case.dart';
+import 'package:decksly/common/util/exception_to_failure_mapper.dart';
+import 'package:decksly/common/util/failures.dart';
+import 'package:decksly/common/util/use_case.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/repository/cards_repository.dart';

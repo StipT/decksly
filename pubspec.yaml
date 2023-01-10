@@ -77,6 +77,7 @@ dependencies:
   xl: ^0.9.1
   flip_card: ^0.6.0
   flutter_spinkit: ^5.1.0
+  shimmer: ^2.0.0
 
   # Util
   flutter_markdown: ^0.6.13

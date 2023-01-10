@@ -6,8 +6,8 @@ part 'duels_dto.g.dart';
 @freezed
 class DuelsDTO with _$DuelsDTO {
   const factory DuelsDTO({
-    required bool relevant,
-    required bool constructed,
+    required bool? relevant,
+    required bool? constructed,
   }) = _DuelsDTO;
 
   factory DuelsDTO.fromJson(Map<String, dynamic> json) =>

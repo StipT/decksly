@@ -18,7 +18,7 @@ class ExceptionToFailureMapper {
     } else if (exception is NoInternetException) {
       return NoConnectionFailure(_noInternetFailureMessage);
     } else {
-      return UnknownFailure(_unknownFailureMessage);
+      return UnknownFailure(exception.toString());
     }
   }
 }

@@ -40,6 +40,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
           height: _height,
+          width: double.infinity,
           child: Stack(
             children: [
               const HSAppBarOverlay(),
@@ -102,9 +103,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                     ),
                   ),
                   if (isExtended)
-                    Flexible(
-                      child: const FilterAppBarExtension(),
-                    ),
+                    Flexible(child:  FilterAppBarExtension(),),
                 ],
               ),
             ],

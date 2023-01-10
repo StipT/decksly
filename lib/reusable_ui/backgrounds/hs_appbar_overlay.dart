@@ -7,19 +7,18 @@ class HSAppBarOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
+      fit: StackFit.expand,
       children: [
-        Expanded(
-          child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: Image.asset(
-              assetPath(
-                SUBFOLDER_BACKGROUND,
-                "velvet_background_center",
-                fileExtension: JPG_EXTENSION,
-              ),
-              fit: BoxFit.fill,
+        Container(
+          width: double.infinity,
+          child: Image.asset(
+            assetPath(
+              SUBFOLDER_BACKGROUND,
+              "velvet_background_center",
+              fileExtension: JPG_EXTENSION,
             ),
+            fit: BoxFit.fill,
           ),
         ),
         Container(

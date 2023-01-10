@@ -65,6 +65,10 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     );
   }
 
+  int extraFiltersActive() {
+    return 3;
+  }
+
   Future<void> handleCardSetChanged(Emitter<CardGalleryState> emit, String set) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(set: set, page: 0);
     await handleFetchCards(emit, params);

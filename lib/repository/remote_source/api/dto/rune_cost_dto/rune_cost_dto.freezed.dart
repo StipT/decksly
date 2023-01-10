@@ -20,9 +20,9 @@ RuneCostDTO _$RuneCostDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RuneCostDTO {
-  int get blood => throw _privateConstructorUsedError;
-  int get frost => throw _privateConstructorUsedError;
-  int get unholy => throw _privateConstructorUsedError;
+  int? get blood => throw _privateConstructorUsedError;
+  int? get frost => throw _privateConstructorUsedError;
+  int? get unholy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $RuneCostDTOCopyWith<$Res> {
           RuneCostDTO value, $Res Function(RuneCostDTO) then) =
       _$RuneCostDTOCopyWithImpl<$Res, RuneCostDTO>;
   @useResult
-  $Res call({int blood, int frost, int unholy});
+  $Res call({int? blood, int? frost, int? unholy});
 }
 
 /// @nodoc
@@ -52,23 +52,23 @@ class _$RuneCostDTOCopyWithImpl<$Res, $Val extends RuneCostDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? blood = null,
-    Object? frost = null,
-    Object? unholy = null,
+    Object? blood = freezed,
+    Object? frost = freezed,
+    Object? unholy = freezed,
   }) {
     return _then(_value.copyWith(
-      blood: null == blood
+      blood: freezed == blood
           ? _value.blood
           : blood // ignore: cast_nullable_to_non_nullable
-              as int,
-      frost: null == frost
+              as int?,
+      frost: freezed == frost
           ? _value.frost
           : frost // ignore: cast_nullable_to_non_nullable
-              as int,
-      unholy: null == unholy
+              as int?,
+      unholy: freezed == unholy
           ? _value.unholy
           : unholy // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$_RuneCostDTOCopyWith<$Res>
       __$$_RuneCostDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int blood, int frost, int unholy});
+  $Res call({int? blood, int? frost, int? unholy});
 }
 
 /// @nodoc
@@ -95,23 +95,23 @@ class __$$_RuneCostDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? blood = null,
-    Object? frost = null,
-    Object? unholy = null,
+    Object? blood = freezed,
+    Object? frost = freezed,
+    Object? unholy = freezed,
   }) {
     return _then(_$_RuneCostDTO(
-      blood: null == blood
+      blood: freezed == blood
           ? _value.blood
           : blood // ignore: cast_nullable_to_non_nullable
-              as int,
-      frost: null == frost
+              as int?,
+      frost: freezed == frost
           ? _value.frost
           : frost // ignore: cast_nullable_to_non_nullable
-              as int,
-      unholy: null == unholy
+              as int?,
+      unholy: freezed == unholy
           ? _value.unholy
           : unholy // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -126,11 +126,11 @@ class _$_RuneCostDTO implements _RuneCostDTO {
       _$$_RuneCostDTOFromJson(json);
 
   @override
-  final int blood;
+  final int? blood;
   @override
-  final int frost;
+  final int? frost;
   @override
-  final int unholy;
+  final int? unholy;
 
   @override
   String toString() {
@@ -167,19 +167,19 @@ class _$_RuneCostDTO implements _RuneCostDTO {
 
 abstract class _RuneCostDTO implements RuneCostDTO {
   const factory _RuneCostDTO(
-      {required final int blood,
-      required final int frost,
-      required final int unholy}) = _$_RuneCostDTO;
+      {required final int? blood,
+      required final int? frost,
+      required final int? unholy}) = _$_RuneCostDTO;
 
   factory _RuneCostDTO.fromJson(Map<String, dynamic> json) =
       _$_RuneCostDTO.fromJson;
 
   @override
-  int get blood;
+  int? get blood;
   @override
-  int get frost;
+  int? get frost;
   @override
-  int get unholy;
+  int? get unholy;
   @override
   @JsonKey(ignore: true)
   _$$_RuneCostDTOCopyWith<_$_RuneCostDTO> get copyWith =>

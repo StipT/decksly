@@ -8,9 +8,9 @@ part of 'rune_cost_dto.dart';
 
 _$_RuneCostDTO _$$_RuneCostDTOFromJson(Map<String, dynamic> json) =>
     _$_RuneCostDTO(
-      blood: json['blood'] as int,
-      frost: json['frost'] as int,
-      unholy: json['unholy'] as int,
+      blood: json['blood'] as int?,
+      frost: json['frost'] as int?,
+      unholy: json['unholy'] as int?,
     );
 
 Map<String, dynamic> _$$_RuneCostDTOToJson(_$_RuneCostDTO instance) =>

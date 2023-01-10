@@ -20,8 +20,8 @@ DuelsDTO _$DuelsDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DuelsDTO {
-  bool get relevant => throw _privateConstructorUsedError;
-  bool get constructed => throw _privateConstructorUsedError;
+  bool? get relevant => throw _privateConstructorUsedError;
+  bool? get constructed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $DuelsDTOCopyWith<$Res> {
   factory $DuelsDTOCopyWith(DuelsDTO value, $Res Function(DuelsDTO) then) =
       _$DuelsDTOCopyWithImpl<$Res, DuelsDTO>;
   @useResult
-  $Res call({bool relevant, bool constructed});
+  $Res call({bool? relevant, bool? constructed});
 }
 
 /// @nodoc
@@ -50,18 +50,18 @@ class _$DuelsDTOCopyWithImpl<$Res, $Val extends DuelsDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? relevant = null,
-    Object? constructed = null,
+    Object? relevant = freezed,
+    Object? constructed = freezed,
   }) {
     return _then(_value.copyWith(
-      relevant: null == relevant
+      relevant: freezed == relevant
           ? _value.relevant
           : relevant // ignore: cast_nullable_to_non_nullable
-              as bool,
-      constructed: null == constructed
+              as bool?,
+      constructed: freezed == constructed
           ? _value.constructed
           : constructed // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -73,7 +73,7 @@ abstract class _$$_DuelsDTOCopyWith<$Res> implements $DuelsDTOCopyWith<$Res> {
       __$$_DuelsDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool relevant, bool constructed});
+  $Res call({bool? relevant, bool? constructed});
 }
 
 /// @nodoc
@@ -87,18 +87,18 @@ class __$$_DuelsDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? relevant = null,
-    Object? constructed = null,
+    Object? relevant = freezed,
+    Object? constructed = freezed,
   }) {
     return _then(_$_DuelsDTO(
-      relevant: null == relevant
+      relevant: freezed == relevant
           ? _value.relevant
           : relevant // ignore: cast_nullable_to_non_nullable
-              as bool,
-      constructed: null == constructed
+              as bool?,
+      constructed: freezed == constructed
           ? _value.constructed
           : constructed // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -112,9 +112,9 @@ class _$_DuelsDTO implements _DuelsDTO {
       _$$_DuelsDTOFromJson(json);
 
   @override
-  final bool relevant;
+  final bool? relevant;
   @override
-  final bool constructed;
+  final bool? constructed;
 
   @override
   String toString() {
@@ -152,15 +152,15 @@ class _$_DuelsDTO implements _DuelsDTO {
 
 abstract class _DuelsDTO implements DuelsDTO {
   const factory _DuelsDTO(
-      {required final bool relevant,
-      required final bool constructed}) = _$_DuelsDTO;
+      {required final bool? relevant,
+      required final bool? constructed}) = _$_DuelsDTO;
 
   factory _DuelsDTO.fromJson(Map<String, dynamic> json) = _$_DuelsDTO.fromJson;
 
   @override
-  bool get relevant;
+  bool? get relevant;
   @override
-  bool get constructed;
+  bool? get constructed;
   @override
   @JsonKey(ignore: true)
   _$$_DuelsDTOCopyWith<_$_DuelsDTO> get copyWith =>

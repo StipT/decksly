@@ -27,13 +27,13 @@ mixin _$CardDTO {
   int get cardTypeId => throw _privateConstructorUsedError;
   int get rarityId => throw _privateConstructorUsedError;
   int get collectible => throw _privateConstructorUsedError;
-  String get slug => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get artistName => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
+  String? get slug => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get artistName => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get imageGold => throw _privateConstructorUsedError;
-  String get flavorText => throw _privateConstructorUsedError;
+  String? get flavorText => throw _privateConstructorUsedError;
   String? get cropImage => throw _privateConstructorUsedError;
   int get manaCost => throw _privateConstructorUsedError;
   DuelsDTO? get duels => throw _privateConstructorUsedError;
@@ -68,13 +68,13 @@ abstract class $CardDTOCopyWith<$Res> {
       int cardTypeId,
       int rarityId,
       int collectible,
-      String slug,
-      String name,
-      String artistName,
-      String text,
+      String? slug,
+      String? name,
+      String? artistName,
+      String? text,
       String image,
       String imageGold,
-      String flavorText,
+      String? flavorText,
       String? cropImage,
       int manaCost,
       DuelsDTO? duels,
@@ -115,13 +115,13 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
     Object? cardTypeId = null,
     Object? rarityId = null,
     Object? collectible = null,
-    Object? slug = null,
-    Object? name = null,
-    Object? artistName = null,
-    Object? text = null,
+    Object? slug = freezed,
+    Object? name = freezed,
+    Object? artistName = freezed,
+    Object? text = freezed,
     Object? image = null,
     Object? imageGold = null,
-    Object? flavorText = null,
+    Object? flavorText = freezed,
     Object? cropImage = freezed,
     Object? manaCost = null,
     Object? duels = freezed,
@@ -167,22 +167,22 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.collectible
           : collectible // ignore: cast_nullable_to_non_nullable
               as int,
-      slug: null == slug
+      slug: freezed == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      artistName: null == artistName
+              as String?,
+      artistName: freezed == artistName
           ? _value.artistName
           : artistName // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
+              as String?,
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -191,10 +191,10 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.imageGold
           : imageGold // ignore: cast_nullable_to_non_nullable
               as String,
-      flavorText: null == flavorText
+      flavorText: freezed == flavorText
           ? _value.flavorText
           : flavorText // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       cropImage: freezed == cropImage
           ? _value.cropImage
           : cropImage // ignore: cast_nullable_to_non_nullable
@@ -298,13 +298,13 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
       int cardTypeId,
       int rarityId,
       int collectible,
-      String slug,
-      String name,
-      String artistName,
-      String text,
+      String? slug,
+      String? name,
+      String? artistName,
+      String? text,
       String image,
       String imageGold,
-      String flavorText,
+      String? flavorText,
       String? cropImage,
       int manaCost,
       DuelsDTO? duels,
@@ -344,13 +344,13 @@ class __$$_CardDTOCopyWithImpl<$Res>
     Object? cardTypeId = null,
     Object? rarityId = null,
     Object? collectible = null,
-    Object? slug = null,
-    Object? name = null,
-    Object? artistName = null,
-    Object? text = null,
+    Object? slug = freezed,
+    Object? name = freezed,
+    Object? artistName = freezed,
+    Object? text = freezed,
     Object? image = null,
     Object? imageGold = null,
-    Object? flavorText = null,
+    Object? flavorText = freezed,
     Object? cropImage = freezed,
     Object? manaCost = null,
     Object? duels = freezed,
@@ -396,22 +396,22 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.collectible
           : collectible // ignore: cast_nullable_to_non_nullable
               as int,
-      slug: null == slug
+      slug: freezed == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      artistName: null == artistName
+              as String?,
+      artistName: freezed == artistName
           ? _value.artistName
           : artistName // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
+              as String?,
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -420,10 +420,10 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.imageGold
           : imageGold // ignore: cast_nullable_to_non_nullable
               as String,
-      flavorText: null == flavorText
+      flavorText: freezed == flavorText
           ? _value.flavorText
           : flavorText // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       cropImage: freezed == cropImage
           ? _value.cropImage
           : cropImage // ignore: cast_nullable_to_non_nullable
@@ -544,19 +544,19 @@ class _$_CardDTO implements _CardDTO {
   @override
   final int collectible;
   @override
-  final String slug;
+  final String? slug;
   @override
-  final String name;
+  final String? name;
   @override
-  final String artistName;
+  final String? artistName;
   @override
-  final String text;
+  final String? text;
   @override
   final String image;
   @override
   final String imageGold;
   @override
-  final String flavorText;
+  final String? flavorText;
   @override
   final String? cropImage;
   @override
@@ -737,13 +737,13 @@ abstract class _CardDTO implements CardDTO {
       required final int cardTypeId,
       required final int rarityId,
       required final int collectible,
-      required final String slug,
-      required final String name,
-      required final String artistName,
-      required final String text,
+      required final String? slug,
+      required final String? name,
+      required final String? artistName,
+      required final String? text,
       required final String image,
       required final String imageGold,
-      required final String flavorText,
+      required final String? flavorText,
       required final String? cropImage,
       required final int manaCost,
       required final DuelsDTO? duels,
@@ -777,19 +777,19 @@ abstract class _CardDTO implements CardDTO {
   @override
   int get collectible;
   @override
-  String get slug;
+  String? get slug;
   @override
-  String get name;
+  String? get name;
   @override
-  String get artistName;
+  String? get artistName;
   @override
-  String get text;
+  String? get text;
   @override
   String get image;
   @override
   String get imageGold;
   @override
-  String get flavorText;
+  String? get flavorText;
   @override
   String? get cropImage;
   @override

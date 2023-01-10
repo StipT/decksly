@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CardGalleryScreen extends StatefulWidget {
   const CardGalleryScreen({super.key});
@@ -79,27 +80,47 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                               return CardDetailsScreen(card);
                             })),
                             child: Image.network(
+                              // TODO Add image not found asset
                               card.image,
                               loadingBuilder: (context, widget, chunk) {
                                 return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
                                     ? widget
                                     : Container(
                                         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                                        child: Image.asset(assetPath(SUBFOLDER_MISC, "card_template_gold")));
+                                        child: Shimmer.fromColors(
+                                          baseColor: AppColors.spanishGrey,
+                                          highlightColor: AppColors.shimmerGrey,
+                                          child: Image.asset(
+                                            assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                                          ),
+                                        ),
+                                      );
                               },
                             ),
                           );
                         },
                         firstPageProgressIndicatorBuilder: (_) => Center(
-                          child: SpinKitRipple(
-                            color: AppColors.vanDykeBrown,
-                            size: 25.w,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                            child: Shimmer.fromColors(
+                              baseColor: AppColors.spanishGrey,
+                              highlightColor: AppColors.shimmerGrey,
+                              child: Image.asset(
+                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                              ),
+                            ),
                           ),
                         ),
                         newPageProgressIndicatorBuilder: (_) => Center(
-                          child: SpinKitRipple(
-                            color: AppColors.vanDykeBrown,
-                            size: 25.w,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                            child: Shimmer.fromColors(
+                              baseColor: AppColors.spanishGrey,
+                              highlightColor: AppColors.shimmerGrey,
+                              child: Image.asset(
+                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -121,13 +142,14 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       if (state.page.cardCount == 0) {
         _pagingController.refresh();
         _scrollController.jumpTo(0);
+       // _scrollController.animateTo(0, curve: Curves.easeIn, duration: Duration(milliseconds: 500));
         _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
         return;
       }
 
       if (state.page.page == 1) {
         _pagingController.refresh();
-        _scrollController.animateTo(0, curve: Curves.easeIn, duration: Duration(milliseconds: 500));
+        _scrollController.jumpTo(0);
       }
 
       if (state.page.pageCount > state.page.page) {

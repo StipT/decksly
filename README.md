@@ -1,4 +1,4 @@
-# decksly
+# Decksly
 
 Hearthstone card collector.
 

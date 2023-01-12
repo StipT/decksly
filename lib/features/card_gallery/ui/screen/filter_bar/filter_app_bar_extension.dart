@@ -17,7 +17,7 @@ class FilterAppBarExtension extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (context, state) {
       return Container(
         width: double.infinity,
         child: Stack(

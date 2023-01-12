@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'app/app.dart';
+
 Future<void> main() async {
   configureInjection();
   WidgetsFlutterBinding.ensureInitialized();

@@ -9,11 +9,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class HSDropdownButton extends StatelessWidget {
   const HSDropdownButton({
+    required this.height,
     required this.assetImagePath,
     required this.text,
     this.hideText = false,
   });
 
+  final double height;
   final String assetImagePath;
   final String text;
   final bool hideText;
@@ -21,9 +23,7 @@ class HSDropdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        left: 0.004.sw,
-      ),
+      height: height,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -31,12 +31,12 @@ class HSDropdownButton extends StatelessWidget {
           if (!hideText)
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 0.01.sw),
+                padding: EdgeInsets.only(left: 5.w),
                 child: AutoSizeText(
                   text,
-                  minFontSize: 8,
+                  minFontSize: 10,
                   maxLines: 1,
-                  overflow: TextOverflow.fade,
+                  overflow: TextOverflow.ellipsis,
                   style: FontStyles.bold15VanDykeBrown,
                 ),
               ),
@@ -52,18 +52,19 @@ class HSDropdownButton extends StatelessWidget {
     }
 
     final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(SVG_EXTENSION);
-    return Flexible(
+    return Container(
+      padding: EdgeInsets.only(left: 2.w),
       child: isSvg
           ? SvgPicture.asset(
               assetImagePath,
-              fit: BoxFit.fill,
+              height: height - 55.h,
+              fit: BoxFit.fitHeight,
               color: AppColors.gold,
-              width: 30.sp,
             )
           : Image.asset(
+              height: height - 50.h,
               assetImagePath,
-              fit: BoxFit.fill,
-              width: 30.sp,
+              fit: BoxFit.fitHeight,
             ),
     );
   }

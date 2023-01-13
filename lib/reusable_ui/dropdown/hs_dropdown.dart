@@ -14,12 +14,12 @@ import 'package:decksly/data/spell_school.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_selected_dropdown_button_overlay.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:decksly/reusable_ui/button/hs_dropdown_button.dart';
-import 'package:decksly/reusable_ui/dropdown/class_dropdown_item.dart';
 import 'package:decksly/reusable_ui/dropdown/custom_dropdown.dart';
-import 'package:decksly/reusable_ui/dropdown/set_dropdown_item.dart';
+import 'package:decksly/reusable_ui/dropdown/dropdown_item/class_dropdown_item.dart';
+import 'package:decksly/reusable_ui/dropdown/dropdown_item/set_dropdown_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,14 +44,14 @@ class HSDropdown extends StatelessWidget {
     required this.dropdownType,
     required this.selectedValue,
     required this.dropdownValues,
-    this.height,
-    this.width,
+    this.height = 100,
+    this.width = 70,
     this.dropdownWidth,
     required this.onChange,
   }) : super(key: key);
 
-  double? height;
-  double? width;
+  double height;
+  double width;
   double? dropdownWidth;
   final DropdownType dropdownType;
   final dynamic selectedValue;
@@ -61,28 +61,30 @@ class HSDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ?? 100,
-      width: width ?? 70,
+      height: height ,
+      width: width,
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 0.001.sh),
       child: Stack(
         children: [
           const HSVelvetBorder(),
-          HSButtonOverlay(isDropdownButton: _showIcon(dropdownType),),
+          HSButtonOverlay(
+            isDropdownButton: _showIcon(dropdownType),
+          ),
           CustomDropdown<String>(
               icon: Icon(Icons.keyboard_arrow_down, size: 20.sp),
-              selectedDropdownButtonOverlay:  HSSelectedDropdownButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
-              activeDropdownButtonOverlay:  HSActiveButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
+              selectedDropdownButtonOverlay: HSSelectedDropdownButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
+              activeDropdownButtonOverlay: HSActiveButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
               dropdownButton: (value) {
                 switch (dropdownType) {
                   case DropdownType.cardClass:
                     return HSDropdownButton(
-                      assetImagePath:
-                          assetPath(SUBFOLDER_CLASS, "${cardClassFromIndex(int.parse(value)).name}_icon"),
+                      height: height,
+                      assetImagePath: assetPath(SUBFOLDER_CLASS, "${cardClassFromIndex(int.parse(value)).name}_icon"),
                       text: cardClassFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.cardSet:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: assetPath(SUBFOLDER_SET, cardSetFromIndex(int.parse(value)).name,
                           fileExtension: SVG_EXTENSION),
                       text: cardSetFromIndex(int.parse(value)).localized(),
@@ -90,46 +92,55 @@ class HSDropdown extends StatelessWidget {
                     );
                   case DropdownType.mana:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: assetPath(SUBFOLDER_CLASS, value),
                       text: value,
                     );
                   case DropdownType.sortBy:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: NO_ASSET,
                       text: sortByFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.attack:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: assetPath(SUBFOLDER_MISC, "attack"),
                       text: attackFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.health:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: assetPath(SUBFOLDER_MISC, "health"),
                       text: healthFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.cardType:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: NO_ASSET,
                       text: cardTypeFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.minionType:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: NO_ASSET,
                       text: minionTypeFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.spellSchool:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: NO_ASSET,
                       text: spellSchoolFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.rarity:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: NO_ASSET,
                       text: rarityFromIndex(int.parse(value)).localized(),
                     );
                   case DropdownType.keywords:
                     return HSDropdownButton(
+                      height: height,
                       assetImagePath: NO_ASSET,
                       text: keywordFromIndex(int.parse(value)).localized(),
                     );
@@ -138,10 +149,11 @@ class HSDropdown extends StatelessWidget {
               onChange: (int index) => onChange(index),
               dropdownButtonStyle: DropdownButtonStyle(
                 mainAxisAlignment: MainAxisAlignment.start,
+                height: height,
                 width: width,
-                padding: EdgeInsets.only(left: 0.0075.sw),
+                padding: EdgeInsets.only(left: 3.w),
                 textStyle: FontStyles.bold15VanDykeBrown,
-                elevation: 1,
+                elevation: 1.sp,
                 backgroundColor: Colors.transparent,
                 primaryColor: AppColors.vanDykeBrown,
               ),
@@ -152,9 +164,9 @@ class HSDropdown extends StatelessWidget {
                   SUBFOLDER_DROPDOWN,
                   "dropdown_background",
                 ),
-                borderRadius: BorderRadius.circular(8),
-                elevation: 6,
-                padding: const EdgeInsets.all(5),
+                borderRadius: BorderRadius.circular(8.r),
+                elevation: 6.sp,
+                padding: EdgeInsets.symmetric(horizontal: 3.w),
               ),
               items: dropdownValues
                   .asMap()

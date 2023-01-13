@@ -113,6 +113,8 @@ flutter:
     - assets/background/velvet_background_center.jpg
     - assets/background/velvet_background_bottom.png
     - assets/background/splash.png
+    - assets/background/splash_icon.png
+
     # Shared
     - assets/shared/border_left_outline.png
     - assets/shared/border_center_outline.png

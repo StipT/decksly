@@ -25,7 +25,7 @@ class FilterAppBar extends StatefulWidget {
 
 class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMixin {
   bool isExtended = false;
-  double _height = 0.21.sh;
+  double _height = 90.h;
 
   @override
   void initState() {
@@ -40,34 +40,35 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
           height: _height,
-          width: double.infinity,
+          width: 1.sw,
           child: Stack(
             children: [
               const HSAppBarOverlay(),
               Column(
                 children: [
                   SizedBox(
-                    height: 0.2.sh,
+                    height: 90.h,
                     width: double.infinity,
                     child: Container(
-                      padding: EdgeInsets.only(left: 0.01.sw, top: 0.06.sh, bottom: 0.02.sh),
+                      padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 20.h, bottom: 8.h),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
                             child: HSDropdown(
+                              height: 90.h,
+                              width: 40.w,
+                              dropdownWidth: 125.w,
                               selectedValue: state.cardFilterParams.set ?? CardSet.standard.value,
                               dropdownType: DropdownType.cardSet,
                               dropdownValues: CardSet.values.map((e) => e.value).toList(),
-                              width: 35.w,
-                              dropdownWidth: 125.w,
                               onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
                                   .add(CardSetChangedEvent(cardSetFromIndex(value).value)),
                             ),
                           ),
                           HSDropdown(
-                            width: 0.2.sw,
-                            dropdownWidth: 0.225.sw,
+                            height: 90.h,
+                            width: 75.w,
                             selectedValue: state.cardFilterParams.heroClass ?? CardClass.allClasses.value,
                             dropdownType: DropdownType.cardClass,
                             dropdownValues: CardClass.values.map((e) => e.value).toList(),
@@ -85,8 +86,8 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             onChange: (text) =>
                                 BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
                           )),
-                          // TODO deck-12 Add filter Dialog
                           HSBarToggleButton(
+                            width: 30.w,
                             icon: SvgPicture.asset(
                               assetPath(SUBFOLDER_MISC, "filter", fileExtension: SVG_EXTENSION),
                               fit: BoxFit.fill,
@@ -102,8 +103,11 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                       ),
                     ),
                   ),
-                  if (isExtended)
-                    Flexible(child:  FilterAppBarExtension(),),
+                  Flexible(
+                    child: FilterAppBarExtension(
+                      height: isExtended ? 60.h : 0,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -116,13 +120,13 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
   void _toggleBarExtension() async {
     if (isExtended) {
       setState(() {
-        _height = 0.21.sh;
+        _height = 90.h;
         isExtended = false;
       });
     } else {
       setState(() {
         isExtended = true;
-        _height = 0.31.sh;
+        _height = 160.h;
       });
     }
   }

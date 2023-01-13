@@ -161,9 +161,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                             ),
                         child: Container(
                           padding: EdgeInsets.only(
-                            top: 0.015.sh,
-                            bottom: 0.015.sh,
-                            right: 0.01.sw,
+                            top: 7.h,
+                            bottom: 7.h,
+                            right: 5.w,
                           ),
                           decoration: BoxDecoration(
                             image: DecorationImage(

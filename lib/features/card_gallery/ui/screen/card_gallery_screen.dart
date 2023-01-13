@@ -10,7 +10,6 @@ import 'package:decksly/reusable_ui/no_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -54,7 +53,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(assetPath("background", "scroll_background")),
@@ -138,12 +137,12 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     if (state is CardsLoaded) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
-      log("Page ${state.page}, ");
-      if (state.page.cardCount == 0) {
+     // log("Page ${state.page}, ");
+      if (state.page.cardCount == 0 && state.page.page == 1) {
         _pagingController.refresh();
         _scrollController.jumpTo(0);
        // _scrollController.animateTo(0, curve: Curves.easeIn, duration: Duration(milliseconds: 500));
-        _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
+        _pagingController.appendLastPage(state.page.cards);
         return;
       }
 

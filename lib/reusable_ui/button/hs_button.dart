@@ -67,7 +67,7 @@ class HSBarToggleButton extends StatelessWidget {
   }
 
   Widget _showFilterBubble(int activeFilters) {
-    if (activeFilters.isFinite) {
+    if (activeFilters > 0) {
       return Positioned(
         bottom: 2.h,
         right: 2.w,

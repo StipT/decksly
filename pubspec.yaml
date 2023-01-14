@@ -116,9 +116,7 @@ flutter:
     - assets/background/splash_icon.png
 
     # Shared
-    - assets/shared/border_left_outline.png
-    - assets/shared/border_center_outline.png
-    - assets/shared/border_right_outline.png
+    - assets/shared/
 
     # Button
     - assets/button/button_border_left.png
@@ -199,22 +197,7 @@ flutter:
     - assets/class/warrior_icon.png
 
     # Misc
-    - assets/misc/mana.png
-    - assets/misc/mana_active.png
-    - assets/misc/mana_inactive.png
-    - assets/misc/golden_circle_border.png
-    - assets/misc/filter.svg
-    - assets/misc/divider.png
-    - assets/misc/line.png
-    - assets/misc/no_cards_found.png
-    - assets/misc/attack.png
-    - assets/misc/health.png
-    - assets/misc/filter_number_bubble.png
-    - assets/misc/side_bar_border.png
-    - assets/misc/left_bar_divider.png
-    - assets/misc/right_bar_divider.png
-    - assets/misc/card_template_gold.png
-    - assets/misc/card_template_grey.png
+    - assets/misc/
 
     # Localization
     - assets/localization/en-US.json

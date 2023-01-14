@@ -2,6 +2,7 @@ import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/data/card_set.dart';
+import 'package:decksly/data/sort_by.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar_extension.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
@@ -15,20 +16,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterAppBar extends StatefulWidget {
-  const FilterAppBar({Key? key, required this.activeFilters}) : super(key: key);
+  const FilterAppBar({Key? key, required this.height, this.forceCollapse}) : super(key: key);
 
-  final int activeFilters;
+  final double? height;
+  final bool? forceCollapse;
 
   @override
   State<FilterAppBar> createState() => _FilterAppBarState();
 }
 
 class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMixin {
-  bool isExtended = false;
-  double _height = 90.h;
+  bool _isExtended = false;
+  late double _height;
 
   @override
   void initState() {
+    _height = widget.height ?? 80.h;
     super.initState();
   }
 
@@ -36,9 +39,11 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
       builder: (BuildContext context, state) {
+        if (_isExtended == true && (widget.forceCollapse ?? false)) _toggleBarExtension();
+
         return AnimatedContainer(
-          curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: 300),
+          curve: Curves.bounceOut,
+          duration: const Duration(milliseconds: 500),
           height: _height,
           width: 1.sw,
           child: Stack(
@@ -47,7 +52,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
               Column(
                 children: [
                   SizedBox(
-                    height: 90.h,
+                    height: 80.h,
                     width: double.infinity,
                     child: Container(
                       padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 20.h, bottom: 8.h),
@@ -56,7 +61,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                         children: [
                           Container(
                             child: HSDropdown(
-                              height: 90.h,
+                              height: 80.h,
                               width: 40.w,
                               dropdownWidth: 125.w,
                               selectedValue: state.cardFilterParams.set ?? CardSet.standard.value,
@@ -67,7 +72,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             ),
                           ),
                           HSDropdown(
-                            height: 90.h,
+                            height: 80.h,
                             width: 75.w,
                             selectedValue: state.cardFilterParams.heroClass ?? CardClass.allClasses.value,
                             dropdownType: DropdownType.cardClass,
@@ -93,8 +98,8 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               fit: BoxFit.fill,
                               color: AppColors.bistreBrown,
                             ),
-                            isToggled: isExtended,
-                            activeFilters: widget.activeFilters,
+                            isToggled: _isExtended,
+                            activeFilters: extraFiltersActive(state),
                             onTap: () {
                               _toggleBarExtension();
                             },
@@ -105,7 +110,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                   ),
                   Flexible(
                     child: FilterAppBarExtension(
-                      height: isExtended ? 60.h : 0,
+                      height: _isExtended ? 50.h : 0,
                     ),
                   ),
                 ],
@@ -117,16 +122,47 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     );
   }
 
+  int extraFiltersActive(CardGalleryState state) {
+    int activeFilters = 0;
+    if (state.cardFilterParams.sort != null &&
+        state.cardFilterParams.sort!.isNotEmpty &&
+        state.cardFilterParams.sort != SortBy.manaAsc.value) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.attack != null && state.cardFilterParams.attack!.isNotEmpty) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.health != null && state.cardFilterParams.health!.isNotEmpty) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.type != null && state.cardFilterParams.type!.isNotEmpty) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.minionType != null && state.cardFilterParams.minionType!.isNotEmpty) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.spellSchool != null && state.cardFilterParams.spellSchool!.isNotEmpty) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.rarity != null && state.cardFilterParams.rarity!.isNotEmpty) {
+      activeFilters++;
+    }
+    if (state.cardFilterParams.keyword != null && state.cardFilterParams.keyword!.isNotEmpty) {
+      activeFilters++;
+    }
+    return activeFilters;
+  }
+
   void _toggleBarExtension() async {
-    if (isExtended) {
+    if (_isExtended) {
       setState(() {
-        _height = 90.h;
-        isExtended = false;
+        _height = 80.h;
+        _isExtended = false;
       });
     } else {
       setState(() {
-        isExtended = true;
-        _height = 160.h;
+        _isExtended = true;
+        _height = 140.h;
       });
     }
   }

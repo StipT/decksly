@@ -29,11 +29,11 @@ class FilterAppBarExtension extends StatelessWidget {
             ListView(
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
               children: [
                 HSDropdown(
                   width: 70.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.sort ?? SortBy.manaAsc.value,
                   dropdownType: DropdownType.sortBy,
                   dropdownValues: SortBy.values.map((e) => e.value).toList(),
@@ -42,7 +42,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 60.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.attack ?? Attack.any.value,
                   dropdownType: DropdownType.attack,
                   dropdownValues: Attack.values.map((e) => e.value).toList(),
@@ -51,7 +51,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 60.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.health ?? Health.any.value,
                   dropdownType: DropdownType.health,
                   dropdownValues: Health.values.map((e) => e.value).toList(),
@@ -60,7 +60,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 70.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.type ?? CardType.any.value,
                   dropdownType: DropdownType.cardType,
                   dropdownValues: CardType.values.map((e) => e.value).toList(),
@@ -69,7 +69,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 70.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.minionType ?? MinionType.any.value,
                   dropdownType: DropdownType.minionType,
                   dropdownValues: MinionType.values.map((e) => e.value).toList(),
@@ -78,7 +78,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 70.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.spellSchool ?? SpellSchool.any.value,
                   dropdownType: DropdownType.spellSchool,
                   dropdownValues: SpellSchool.values.map((e) => e.value).toList(),
@@ -87,7 +87,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 70.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.rarity ?? Rarity.any.value,
                   dropdownType: DropdownType.rarity,
                   dropdownValues: Rarity.values.map((e) => e.value).toList(),
@@ -96,7 +96,7 @@ class FilterAppBarExtension extends StatelessWidget {
                 ),
                 HSDropdown(
                   width: 70.w,
-                  height: 90.h,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.keyword ?? Keyword.any.value,
                   dropdownType: DropdownType.keywords,
                   dropdownValues: Keyword.values.map((e) => e.value).toList(),

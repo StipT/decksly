@@ -13,22 +13,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FilterAppBarExtension extends StatelessWidget {
-  const FilterAppBarExtension({Key? key}) : super(key: key);
+  const FilterAppBarExtension({Key? key, required this.height}) : super(key: key);
+
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (context, state) {
       return Container(
+        alignment: Alignment.center,
+        height: height,
         width: double.infinity,
         child: Stack(
           children: [
             ListView(
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
               children: [
                 HSDropdown(
-                  width: 0.2.sw,
+                  width: 70.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.sort ?? SortBy.manaAsc.value,
                   dropdownType: DropdownType.sortBy,
                   dropdownValues: SortBy.values.map((e) => e.value).toList(),
@@ -36,7 +41,8 @@ class FilterAppBarExtension extends StatelessWidget {
                       BlocProvider.of<CardGalleryBloc>(context).add(SortByChangedEvent(sortByFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.12.sw,
+                  width: 60.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.attack ?? Attack.any.value,
                   dropdownType: DropdownType.attack,
                   dropdownValues: Attack.values.map((e) => e.value).toList(),
@@ -44,15 +50,17 @@ class FilterAppBarExtension extends StatelessWidget {
                       .add(AttackFilterChangedEvent(attackFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.12.sw,
-                  selectedValue: state.cardFilterParams.type ?? Health.any.value,
+                  width: 60.w,
+                  height: 80.h,
+                  selectedValue: state.cardFilterParams.health ?? Health.any.value,
                   dropdownType: DropdownType.health,
                   dropdownValues: Health.values.map((e) => e.value).toList(),
                   onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
                       .add(HealthFilterChangedEvent(healthFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.2.sw,
+                  width: 70.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.type ?? CardType.any.value,
                   dropdownType: DropdownType.cardType,
                   dropdownValues: CardType.values.map((e) => e.value).toList(),
@@ -60,7 +68,8 @@ class FilterAppBarExtension extends StatelessWidget {
                       .add(CardTypeFilterChangedEvent(cardTypeFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.2.sw,
+                  width: 70.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.minionType ?? MinionType.any.value,
                   dropdownType: DropdownType.minionType,
                   dropdownValues: MinionType.values.map((e) => e.value).toList(),
@@ -68,7 +77,8 @@ class FilterAppBarExtension extends StatelessWidget {
                       .add(MinionTypeFilterChangedEvent(minionTypeFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.2.sw,
+                  width: 70.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.spellSchool ?? SpellSchool.any.value,
                   dropdownType: DropdownType.spellSchool,
                   dropdownValues: SpellSchool.values.map((e) => e.value).toList(),
@@ -76,7 +86,8 @@ class FilterAppBarExtension extends StatelessWidget {
                       .add(SpellSchoolFilterChangedEvent(spellSchoolFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.2.sw,
+                  width: 70.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.rarity ?? Rarity.any.value,
                   dropdownType: DropdownType.rarity,
                   dropdownValues: Rarity.values.map((e) => e.value).toList(),
@@ -84,7 +95,8 @@ class FilterAppBarExtension extends StatelessWidget {
                       .add(RarityFilterChangedEvent(rarityFromIndex(value).value)),
                 ),
                 HSDropdown(
-                  width: 0.2.sw,
+                  width: 70.w,
+                  height: 80.h,
                   selectedValue: state.cardFilterParams.keyword ?? Keyword.any.value,
                   dropdownType: DropdownType.keywords,
                   dropdownValues: Keyword.values.map((e) => e.value).toList(),

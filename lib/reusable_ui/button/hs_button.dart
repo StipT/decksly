@@ -8,9 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HSBarToggleButton extends StatelessWidget {
   const HSBarToggleButton(
-      {Key? key, this.label, this.icon, required this.onTap, required this.isToggled, required this.activeFilters})
+      {Key? key, this.label, this.icon, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
       : super(key: key);
   final String? label;
+  final double width;
   final Widget? icon;
   final bool isToggled;
   final int activeFilters;
@@ -18,62 +19,55 @@ class HSBarToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minHeight: 20.h,
-        maxHeight: 50.h,
-        minWidth: 15.w,
-        maxWidth: 30.w,
-      ),
-      child: Container(
-        alignment: Alignment.center,
-        margin: EdgeInsets.symmetric(vertical: 1.h),
-        child: InkWell(
-          onTap: () {
-            onTap();
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              const HSVelvetBorder(),
-              const HSButtonOverlay(),
-              if (isToggled) const HSActiveButtonOverlay(),
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.only(
-                  left: 5.w,
-                  right: 5.w,
-                  top: 10.h,
-                  bottom: 10.h,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          child: icon ?? const SizedBox(),
-                          width: 15.w,
-                        ),
-                      ],
-                    ),
-                    Text(
-                      label ?? "",
-                      style: FontStyles.bold15VanDykeBrown,
-                    )
-                  ],
-                ),
+    return Container(
+      width: width,
+      alignment: Alignment.center,
+      margin: EdgeInsets.symmetric(vertical: 1.h),
+      child: InkWell(
+        onTap: () {
+          onTap();
+        },
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            const HSVelvetBorder(),
+            const HSButtonOverlay(),
+            if (isToggled) const HSActiveButtonOverlay(),
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(
+                left: 5.w,
+                right: 5.w,
+                top: 10.h,
+                bottom: 10.h,
               ),
-              _showFilterBubble(activeFilters),
-            ],
-          ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        child: icon ?? const SizedBox(),
+                        width: 12.5.w,
+                      ),
+                    ],
+                  ),
+                  Text(
+                    label ?? "",
+                    style: FontStyles.bold15VanDykeBrown,
+                  )
+                ],
+              ),
+            ),
+            _showFilterBubble(activeFilters),
+          ],
         ),
       ),
     );
   }
 
   Widget _showFilterBubble(int activeFilters) {
-    if (activeFilters.isFinite) {
+    if (activeFilters > 0) {
       return Positioned(
         bottom: 2.h,
         right: 2.w,

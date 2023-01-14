@@ -121,6 +121,25 @@ class FontStyles {
     color: AppColors.vanDykeBrown,
   );
 
+  static TextStyle bold25WithShadow = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 25.sp,
+    color: AppColors.white,
+    shadows: const <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 5.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 8.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ],
+  );
+
   static TextStyle bold28 = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.bold,

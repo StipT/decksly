@@ -15,23 +15,21 @@ class NoResultsWidget extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Container(
-            width: 1.sw,
+          SizedBox(
             height: 200.h,
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
                 Positioned(
                   top: 160.h,
-                  child: Container(
-                      child: Image.asset(
+                  child: Image.asset(
                     assetPath(SUBFOLDER_MISC, "divider"),
-                    width: 0.7.sw,
-                  )),
+                    width: 300.w,
+                  ),
                 ),
                 Positioned(
                     top: 0,
-                    child: Container(
+                    child: SizedBox(
                         height: 200.h,
                         child: Image.asset(
                           assetPath(SUBFOLDER_MISC, "no_cards_found"),
@@ -47,17 +45,17 @@ class NoResultsWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 0.02.sh),
+            margin: EdgeInsets.only(top: 10.h),
             child: Text(
               LocaleKeys.tryRemovingSearchItems.tr(),
               style: FontStyles.regular17VanDykeBrown,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 0.05.sh),
+            margin: EdgeInsets.only(top: 10.h),
             child: Image.asset(
               assetPath(SUBFOLDER_MISC, "line"),
-              width: 0.7.sw,
+              width: 300.w,
             ),
           ),
         ],

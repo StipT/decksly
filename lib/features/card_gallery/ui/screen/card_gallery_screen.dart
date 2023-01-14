@@ -5,13 +5,14 @@ import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
+import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/no_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:logger/logger.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CardGalleryScreen extends StatefulWidget {
@@ -24,6 +25,8 @@ class CardGalleryScreen extends StatefulWidget {
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
   final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
+
+  bool? isSideMenuOpen;
 
   @override
   void initState() {
@@ -49,85 +52,21 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
           children: [
             Column(
               children: [
-                FilterAppBar(
-                  activeFilters: 2,
+                Stack(
+                  children: [
+                    FilterAppBar(forceCollapse: isSideMenuOpen ?? false, height: 80.h),
+                  ],
                 ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(assetPath("background", "scroll_background")),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: PagedGridView<int, CardDTO>(
-                      pagingController: _pagingController,
-                      scrollController: _scrollController,
-                      physics: const BouncingScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-                      padding: EdgeInsets.zero,
-                      builderDelegate: PagedChildBuilderDelegate<CardDTO>(
-                        animateTransitions: true,
-                        noItemsFoundIndicatorBuilder: (context) {
-                          return NoResultsWidget(
-                            onTap: () {},
-                          );
-                        },
-                        itemBuilder: (ctx, card, _) {
-                          return GestureDetector(
-                            onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
-                              return CardDetailsScreen(card);
-                            })),
-                            child: Image.network(
-                              // TODO Add image not found asset
-                              card.image,
-                              loadingBuilder: (context, widget, chunk) {
-                                return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
-                                    ? widget
-                                    : Container(
-                                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                                        child: Shimmer.fromColors(
-                                          baseColor: AppColors.spanishGrey,
-                                          highlightColor: AppColors.shimmerGrey,
-                                          child: Image.asset(
-                                            assetPath(SUBFOLDER_MISC, "card_template_grey"),
-                                          ),
-                                        ),
-                                      );
-                              },
-                            ),
-                          );
-                        },
-                        firstPageProgressIndicatorBuilder: (_) => Center(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                            child: Shimmer.fromColors(
-                              baseColor: AppColors.spanishGrey,
-                              highlightColor: AppColors.shimmerGrey,
-                              child: Image.asset(
-                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
-                              ),
-                            ),
-                          ),
-                        ),
-                        newPageProgressIndicatorBuilder: (_) => Center(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                            child: Shimmer.fromColors(
-                              baseColor: AppColors.spanishGrey,
-                              highlightColor: AppColors.shimmerGrey,
-                              child: Image.asset(
-                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                _cardList(),
               ],
+            ),
+            SideMenu(
+              onToggle: (isOpen) {
+                setState(() {
+                  isSideMenuOpen = isOpen;
+                  log("Side menu is open : ${isSideMenuOpen.toString()}", level: Level.error);
+                });
+              },
             ),
           ],
         ),
@@ -135,15 +74,101 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
     );
   }
 
+  Widget _cardList() {
+    return Expanded(
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 17.w),
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(assetPath("background", "scroll_background")),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: PagedGridView<int, CardDTO>(
+              pagingController: _pagingController,
+              scrollController: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+              padding: EdgeInsets.zero,
+              builderDelegate: PagedChildBuilderDelegate<CardDTO>(
+                animateTransitions: true,
+                noItemsFoundIndicatorBuilder: (context) {
+                  return NoResultsWidget(
+                    onTap: () {},
+                  );
+                },
+                itemBuilder: (ctx, card, _) {
+                  return GestureDetector(
+                    onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
+                      return CardDetailsScreen(card);
+                    })),
+                    child: Image.network(
+                      // TODO Add image not found asset
+                      card.image,
+                      loadingBuilder: (context, widget, chunk) {
+                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
+                            ? widget
+                            : Container(
+                                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                                child: Shimmer.fromColors(
+                                  baseColor: AppColors.spanishGrey,
+                                  highlightColor: AppColors.shimmerGrey,
+                                  child: Image.asset(
+                                    assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                                  ),
+                                ),
+                              );
+                      },
+                    ),
+                  );
+                },
+                firstPageProgressIndicatorBuilder: (_) => Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                    child: Shimmer.fromColors(
+                      baseColor: AppColors.spanishGrey,
+                      highlightColor: AppColors.shimmerGrey,
+                      child: Image.asset(
+                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                      ),
+                    ),
+                  ),
+                ),
+                newPageProgressIndicatorBuilder: (_) => Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                    child: Shimmer.fromColors(
+                      baseColor: AppColors.spanishGrey,
+                      highlightColor: AppColors.shimmerGrey,
+                      child: Image.asset(
+                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          if (isSideMenuOpen ?? false)
+            Container(
+              color: Colors.black87,
+            ),
+        ],
+      ),
+    );
+  }
+
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     if (state is CardsLoaded) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
-      log("Page ${state.page}, ");
-      if (state.page.cardCount == 0) {
+      // log("Page ${state.page}, ");
+      if (state.page.cardCount == 0 && state.page.page == 1) {
         _pagingController.refresh();
-        _scrollController.jumpTo(0);
-       // _scrollController.animateTo(0, curve: Curves.easeIn, duration: Duration(milliseconds: 500));
-        _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
+        _scrollController.animateTo(0, curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
+        _pagingController.appendLastPage(state.page.cards);
         return;
       }
 

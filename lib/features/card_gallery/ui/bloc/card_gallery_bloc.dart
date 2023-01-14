@@ -9,6 +9,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'card_gallery_event.dart';
@@ -17,6 +18,7 @@ part 'card_gallery_state.dart';
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase}) : super(const CardsInitial()) {
+    log("INITIAL BLOC ", level: Level.error);
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, state.cardFilterParams));
     on<CardSetChangedEvent>((event, emit) async => await handleCardSetChanged(emit, event.set));
     on<CardClassChangedEvent>((event, emit) async => await handleCardClassChanged(emit, event.heroClass));
@@ -55,18 +57,14 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
     resultOrFailure.fold(
       (failure) {
-        log(failure.message);
+        log(failure.message, level: Level.error);
         emit(CardsError(failure));
       },
       (cards) {
-
+    //    log(state.cardFilterParams.toString(), level: Level.error);
         emit(CardsLoaded(cards, updatedParams));
       },
     );
-  }
-
-  int extraFiltersActive() {
-    return 3;
   }
 
   Future<void> handleCardSetChanged(Emitter<CardGalleryState> emit, String set) async {

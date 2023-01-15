@@ -27,6 +27,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   final ScrollController _scrollController = ScrollController();
 
   bool? isSideMenuOpen;
+  bool isFilterBarExtended = false;
 
   @override
   void initState() {
@@ -50,24 +51,21 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       child: Scaffold(
         body: Stack(
           children: [
-            Column(
-              children: [
-                Stack(
-                  children: [
-                    FilterAppBar(forceCollapse: isSideMenuOpen ?? false, height: 80.h),
-                  ],
-                ),
-                _cardList(),
-              ],
-            ),
+            _cardList(),
             SideMenu(
               onToggle: (isOpen) {
                 setState(() {
                   isSideMenuOpen = isOpen;
-                  log("Side menu is open : ${isSideMenuOpen.toString()}", level: Level.error);
+                  isFilterBarExtended = false;
                 });
               },
             ),
+            FilterAppBar(forceCollapse: isSideMenuOpen ?? false, height: 80.h, onToggle: () {
+              setState(() {
+                isFilterBarExtended = !isFilterBarExtended;
+                log("isFilterBarExtended $isFilterBarExtended");
+              });
+            },),
           ],
         ),
       ),
@@ -75,18 +73,21 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   }
 
   Widget _cardList() {
-    return Expanded(
-      child: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 17.w),
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(assetPath("background", "scroll_background")),
-                fit: BoxFit.cover,
-              ),
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 17.w, top: 80.h,),
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(assetPath("background", "scroll_background")),
+              fit: BoxFit.cover,
             ),
+          ),
+          child: AnimatedPadding(
+            padding: EdgeInsets.only(top:  isFilterBarExtended ? 60.h : 0),
+            curve: Curves.bounceOut,
+            duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
               pagingController: _pagingController,
               scrollController: _scrollController,
@@ -106,7 +107,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                       return CardDetailsScreen(card);
                     })),
                     child: Image.network(
-                      // TODO Add image not found asset
+                      // TODO deck-28 Add image not found asset
                       card.image,
                       loadingBuilder: (context, widget, chunk) {
                         return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
@@ -125,18 +126,6 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     ),
                   );
                 },
-                firstPageProgressIndicatorBuilder: (_) => Center(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                    child: Shimmer.fromColors(
-                      baseColor: AppColors.spanishGrey,
-                      highlightColor: AppColors.shimmerGrey,
-                      child: Image.asset(
-                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
-                      ),
-                    ),
-                  ),
-                ),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
@@ -152,12 +141,12 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
               ),
             ),
           ),
-          if (isSideMenuOpen ?? false)
-            Container(
-              color: Colors.black87,
-            ),
-        ],
-      ),
+        ),
+        if (isSideMenuOpen ?? false)
+          Container(
+            color: Colors.black54,
+          ),
+      ],
     );
   }
 

@@ -25,6 +25,5 @@ Future<void> main() async {
 void _landscapeModeOnly() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
   ]);
 }

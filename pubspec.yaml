@@ -81,9 +81,9 @@ dependencies:
 
   # Util
   flutter_markdown: ^0.6.13
-  flutter_html: ^2.2.1
 
   # Dev
+  package_info_plus: ^1.4.0
   logger: ^1.1.0
 
 dev_dependencies:
@@ -107,101 +107,31 @@ flutter:
   uses-material-design: true
   assets:
     # Backgrounds
-    - assets/background/scroll_background.png
-    - assets/background/second_background.jpg
-    - assets/background/velvet_background_top.png
-    - assets/background/velvet_background_center.jpg
-    - assets/background/velvet_background_bottom.png
-    - assets/background/splash.png
-    - assets/background/splash_icon.png
+    - assets/background/
 
     # Shared
     - assets/shared/
 
     # Button
-    - assets/button/button_border_left.png
-    - assets/button/button_border_center.png
-    - assets/button/button_border_right.png
-    - assets/button/focused_button_left.png
-    - assets/button/focused_button_center.png
-    - assets/button/focused_button_right.png
+    - assets/button/
 
     # TextField
-    - assets/text_field/text_field_border_left.png
-    - assets/text_field/text_field_border_center.png
-    - assets/text_field/text_field_border_right.png
-    - assets/text_field/focused_text_field_left.png
-    - assets/text_field/focused_text_field_center.png
-    - assets/text_field/focused_text_field_right.png
+    - assets/text_field/
 
     # Dropdown
-    - assets/dropdown/dropdown_background.png
-    - assets/dropdown/dropdown_button_border_left.png
-    - assets/dropdown/selected_dropdown_button_left.png
-    - assets/dropdown/selected_dropdown_button_left_iconless.png
-    - assets/dropdown/selected_dropdown_button_center.png
-    - assets/dropdown/selected_dropdown_button_right.png
-    - assets/dropdown/focused_dropdown_button_left.png
+    - assets/dropdown/
 
     # Sets
-    - assets/set/standard.svg
-    - assets/set/wild.svg
-    - assets/set/classic.svg
-    - assets/set/currentArenaCards.svg
-    - assets/set/currentDuelsCards.svg
-    - assets/set/pathOfArthas.svg
-    - assets/set/marchOfTheLichKing.svg
-    - assets/set/murderAtCastleNathria.svg
-    - assets/set/voyageToTheSunkenCity.svg
-    - assets/set/fracturedInAlteracValley.svg
-    - assets/set/unitedInStormwind.svg
-    - assets/set/forgedInTheBarrens.svg
-    - assets/set/core.svg
-    - assets/set/madnessAtTheDarkmoonFaire.svg
-    - assets/set/scholomanceAcademy.svg
-    - assets/set/demonHunterInitiate.svg
-    - assets/set/ashesOfOutland.svg
-    - assets/set/galakrondsAwakening.svg
-    - assets/set/descentOfDragons.svg
-    - assets/set/saviorsOfUldum.svg
-    - assets/set/riseOfShadows.svg
-    - assets/set/rastakhansRumble.svg
-    - assets/set/theBoomsdayProject.svg
-    - assets/set/theWitchwood.svg
-    - assets/set/koboltsAndCatacombs.svg
-    - assets/set/knightsOfTheFrozenThrone.svg
-    - assets/set/journeyToUnGoro.svg
-    - assets/set/meanStreetsOfGadgetzan.svg
-    - assets/set/oneNightInKarazhan.svg
-    - assets/set/whispersOfTheOldGods.svg
-    - assets/set/leagueOfExplorers.svg
-    - assets/set/theGrandTournament.svg
-    - assets/set/blackrockMountain.svg
-    - assets/set/goblinsVsGnomes.svg
-    - assets/set/curseOfNaxxramas.svg
-    - assets/set/legacy.svg
+    - assets/set/
 
     # Class
-    - assets/class/allClasses_icon.png
-    - assets/class/neutral_icon.png
-    - assets/class/deathKnight_icon.png
-    - assets/class/demonHunter_icon.png
-    - assets/class/druid_icon.png
-    - assets/class/hunter_icon.png
-    - assets/class/mage_icon.png
-    - assets/class/paladin_icon.png
-    - assets/class/priest_icon.png
-    - assets/class/rogue_icon.png
-    - assets/class/shaman_icon.png
-    - assets/class/warlock_icon.png
-    - assets/class/warrior_icon.png
+    - assets/class/
 
     # Misc
     - assets/misc/
 
     # Localization
-    - assets/localization/en-US.json
-    - assets/localization/hr-HR.json
+    - assets/localization/
 
   fonts:
     - family: Belwe

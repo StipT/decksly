@@ -29,7 +29,7 @@ class FilterAppBarExtension extends StatelessWidget {
             ListView(
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
               children: [
                 HSDropdown(
                   width: 70.w,

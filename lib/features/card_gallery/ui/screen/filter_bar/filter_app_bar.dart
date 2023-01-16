@@ -16,10 +16,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterAppBar extends StatefulWidget {
-  const FilterAppBar({Key? key, required this.height, this.forceCollapse}) : super(key: key);
+  const FilterAppBar({Key? key, required this.height, this.forceCollapse, required this.onToggle}) : super(key: key);
 
   final double? height;
   final bool? forceCollapse;
+  final VoidCallback onToggle;
 
   @override
   State<FilterAppBar> createState() => _FilterAppBarState();
@@ -165,5 +166,6 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
         _height = 140.h;
       });
     }
+    widget.onToggle();
   }
 }

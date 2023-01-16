@@ -1,9 +1,11 @@
-import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/application.constants.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu_item.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key? key, required this.onToggle}) : super(key: key);
@@ -20,10 +22,12 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
 
-  @override
-  void initState() {
-    super.initState();
+  String version = "0.0.0";
 
+  @override
+  void initState() async {
+    super.initState();
+    await getAppVersion();
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(CurvedAnimation(
       parent: _animationController,
@@ -34,7 +38,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      left: isExtended ? 0 : -100.w,
+      left: isExtended ? 0.w : -100.w,
       top: 80.h,
       curve: Curves.bounceOut,
       duration: const Duration(milliseconds: 500),
@@ -66,76 +70,48 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            assetPath(SUBFOLDER_BACKGROUND, "splash_icon"),
-                            color: AppColors.spanishGrey,
-                            fit: BoxFit.fitWidth,
-                            width: 20.w,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 5.w),
-                            child: Text(
-                              "Decksly",
-                              style: FontStyles.bold25WithShadow,
-                            ),
-                          ),
-                        ],
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                    ),
+                    SideMenuItem(
+                      type: SideMenuItemType.cardLibrary,
+                      isSelected: true,
                     ),
                     Container(
                       child: Image.asset(
                         assetPath(SUBFOLDER_MISC, "velvet_divider"),
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.fill,
+                        height: 2.h,
                         width: 80.w,
                       ),
                     ),
                     Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 5.w),
-                            child: Text(
-                              "Card Library",
-                              style: FontStyles.bold22WithShadow,
-                            ),
-                          ),
-                        ],
+                      padding: EdgeInsets.only(top: 5.h),
+                      child: SideMenuItem(
+                        type: SideMenuItemType.deckBuilder,
+                        isSelected: false,
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
                     ),
                     Container(
                       child: Image.asset(
                         assetPath(SUBFOLDER_MISC, "velvet_divider"),
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.fill,
+                        height: 2.h,
                         width: 80.w,
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      padding: EdgeInsets.only(top: 30.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Deck Builder",
+                            "Language:",
                             style: FontStyles.bold22WithShadow,
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      child: Image.asset(
-                        assetPath(SUBFOLDER_MISC, "velvet_divider"),
-                        fit: BoxFit.fitWidth,
-                        width: 80.w,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 25.h),
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Row(
                         children: [
@@ -163,6 +139,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
+
+                    Container(child: Text("$APP_NAME v${version}", style: FontStyles.regular15,)),
                   ],
                 ),
               ),
@@ -182,7 +160,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                         padding: EdgeInsets.only(
                           top: 2.h,
                           bottom: 2.h,
-                          left: 2.w,
+                          left: 1.w,
                         ),
                         child: RotationTransition(
                           turns: _rotateAnimation,
@@ -202,6 +180,11 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  Future<void> getAppVersion() async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    version = packageInfo.version;
   }
 
   void _toggleSideMenu({bool close = false}) async {
@@ -230,10 +213,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         behavior: HitTestBehavior.opaque,
         // full screen container to register taps anywhere and close drop down
         child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Container()
-        ),
+            height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width, child: Container()),
       ),
     );
   }

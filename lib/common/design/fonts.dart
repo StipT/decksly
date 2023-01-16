@@ -9,6 +9,13 @@ class FontStyles {
 
   // Regular Belwe
 
+  static TextStyle regular15 = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.w400,
+    fontSize: 15.sp,
+    color: AppColors.white,
+  );
+
   static TextStyle regular17 = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w400,
@@ -100,6 +107,25 @@ class FontStyles {
     fontWeight: FontWeight.bold,
     fontSize: 22.sp,
     color: AppColors.white,
+    shadows: const <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 5.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 8.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ],
+  );
+
+  static TextStyle bold22GoldWithShadow = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 22.sp,
+    color: AppColors.gold,
     shadows: const <Shadow>[
       Shadow(
         offset: Offset(1, 1),

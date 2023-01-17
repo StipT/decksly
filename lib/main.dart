@@ -15,10 +15,11 @@ Future<void> main() async {
   runApp(EasyLocalization(
     supportedLocales: const [
       Locale('en', 'US'),
-      Locale('hr', 'HR')
+      Locale('de', 'DE'),
+      Locale('ja', 'JP'),
     ],
       path: 'assets/localization',
-      fallbackLocale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('ja', 'JP'),
       child: const DeckslyApp()),);
 }
 

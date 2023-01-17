@@ -25,9 +25,9 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   String version = "0.0.0";
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    await getAppVersion();
+    getAppVersion();
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(CurvedAnimation(
       parent: _animationController,
@@ -59,6 +59,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                   "velvet_background_center",
                   fileExtension: JPG_EXTENSION,
                 ),
+                width: 117.w,
+                height: 365.h,
                 fit: BoxFit.fill,
               ),
               Image.asset(
@@ -72,7 +74,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10.h),
                     ),
-                    SideMenuItem(
+                    const SideMenuItem(
                       type: SideMenuItemType.cardLibrary,
                       isSelected: true,
                     ),
@@ -86,7 +88,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 5.h),
-                      child: SideMenuItem(
+                      child: const SideMenuItem(
                         type: SideMenuItemType.deckBuilder,
                         isSelected: false,
                       ),
@@ -140,7 +142,6 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                       ),
                     ),
 
-                    Container(child: Text("$APP_NAME v${version}", style: FontStyles.regular15,)),
                   ],
                 ),
               ),

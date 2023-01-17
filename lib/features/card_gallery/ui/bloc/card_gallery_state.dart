@@ -18,7 +18,7 @@ class CardsInitial extends CardGalleryState {
           const CardFilterParams(
             page: 0,
             pageSize: 20,
-            locale: "en_US",
+            locale: "ja_JP",
             gameMode: "constructed",
             set: "standard",
             collectible: "1",

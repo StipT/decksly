@@ -17,8 +17,6 @@ abstract class  LocaleKeys {
   static const standard = 'standard';
   static const wild = 'wild';
   static const classic = 'classic';
-  static const currentArenaCards = 'currentArenaCards';
-  static const currentDuelsCards = 'currentDuelsCards';
   static const pathOfArthas = 'pathOfArthas';
   static const marchOfTheLichKing = 'marchOfTheLichKing';
   static const murderAtCastleNathria = 'murderAtCastleNathria';

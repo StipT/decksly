@@ -139,5 +139,9 @@
   "holy": "聖なる",
   "shadow": "影",
   "fel": "フェル",
-  "any": "どれでも"
+  "any": "どれでも",
+  "artist" : "アーティスト：",
+  "cardLibrary": "カード ライブラリ",
+  "deckBuilder": "デッキビルダー",
+  "language": "言語"
 }

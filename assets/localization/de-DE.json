@@ -139,5 +139,9 @@
   "holy": "Heilig",
   "shadow": "Schatten",
   "fel": "Fel",
-  "any": "Beliebig"
+  "any": "Beliebig",
+  "artist" : "Künstler: ",
+  "cardLibrary": "Kartenbibliothek",
+  "deckBuilder": "Deckbauer",
+  "language": "Sprache"
 }

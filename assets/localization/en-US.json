@@ -139,5 +139,9 @@
   "holy": "Holy",
   "shadow": "Shadow",
   "fel": "Fel",
-  "any": "Any"
+  "any": "Any",
+  "artist" : "Artist: ",
+  "cardLibrary": "Card Library",
+  "deckBuilder": "Deck Builder",
+  "language": "Language"
 }

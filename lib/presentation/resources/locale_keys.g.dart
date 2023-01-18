@@ -142,5 +142,9 @@ abstract class  LocaleKeys {
   static const shadow = 'shadow';
   static const fel = 'fel';
   static const any = 'any';
+  static const artist = 'artist';
+  static const cardLibrary = 'cardLibrary';
+  static const deckBuilder = 'deckBuilder';
+  static const language = 'language';
 
 }

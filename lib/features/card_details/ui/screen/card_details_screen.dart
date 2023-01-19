@@ -1,6 +1,8 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -111,9 +113,9 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                               text: TextSpan(
                                 children: [
                                   // TODO Add localization
-                                  const TextSpan(
-                                    text: 'Artist: ',
-                                    style: TextStyle(color: AppColors.navajoWhite),
+                                  TextSpan(
+                                    text: LocaleKeys.artist.tr(),
+                                    style: const TextStyle(color: AppColors.navajoWhite),
                                   ),
                                   TextSpan(text: widget.card.artistName, style: FontStyles.regular17),
                                 ],

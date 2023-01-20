@@ -18,6 +18,7 @@ Future<void> main() async {
       Locale('de', 'DE'),
       Locale('ja', 'JP'),
     ],
+      saveLocale: true,
       path: 'assets/localization',
       fallbackLocale: const Locale('de', 'DE'),
       child: const DeckslyApp()),);
@@ -26,5 +27,6 @@ Future<void> main() async {
 void _landscapeModeOnly() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
   ]);
 }

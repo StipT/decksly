@@ -11,4 +11,5 @@ class AppColors {
   static const Color darkChestnutBrown = Color(0xff967463);
   static const Color spanishGrey = Color(0xffA09E9C);
   static const Color shimmerGrey = Color(0xffd0cccc);
+  static const Color velvet = Color(0xff521212);
 }

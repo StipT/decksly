@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
@@ -6,58 +7,66 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-enum SideMenuItemType {
+enum FeatureItemType {
   cardLibrary,
   deckBuilder,
 }
 
-class SideMenuItem extends StatelessWidget {
-  const SideMenuItem({required this.type, required this.isSelected});
+class FeatureItem extends StatelessWidget {
+  const FeatureItem({required this.type, required this.isSelected, required this.onTap});
 
-  final SideMenuItemType type;
+  final FeatureItemType type;
   final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       margin: EdgeInsets.only(
         top: 10.h,
         left: 5.w,
         right: 5.w,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _getImage(type, isSelected),
-          Expanded(
-            child: Container(child: _getTitle(type, isSelected), padding: EdgeInsets.only(left: 5.w),),
-          ),
-        ],
+      child: InkWell(
+        onTap: () => onTap(),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _getImage(type, isSelected),
+            Expanded(
+              child: Container(
+                child: _getTitle(type, isSelected),
+                padding: EdgeInsets.only(left: 5.w),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _getImage(SideMenuItemType type, bool isSelected) {
+  Widget _getImage(FeatureItemType type, bool isSelected) {
     switch (type) {
-      case SideMenuItemType.cardLibrary:
+      case FeatureItemType.cardLibrary:
         return Image.asset(assetPath(SUBFOLDER_MISC, isSelected ? "card_library_selected" : "card_library"));
-      case SideMenuItemType.deckBuilder:
+      case FeatureItemType.deckBuilder:
         return Image.asset(assetPath(SUBFOLDER_MISC, isSelected ? "deck_builder_selected" : "deck_builder"));
     }
   }
 
-  Widget _getTitle(SideMenuItemType type, bool isSelected) {
+  Widget _getTitle(FeatureItemType type, bool isSelected) {
     switch (type) {
-      case SideMenuItemType.cardLibrary:
-        return Text(
+      case FeatureItemType.cardLibrary:
+        return AutoSizeText(
           LocaleKeys.cardLibrary.tr(),
           style: _getTextStyle(isSelected),
+          maxLines: 2,
         );
-      case SideMenuItemType.deckBuilder:
-        return Text(
+      case FeatureItemType.deckBuilder:
+        return AutoSizeText(
           LocaleKeys.deckBuilder.tr(),
           style: _getTextStyle(isSelected),
+          maxLines: 2,
         );
     }
   }

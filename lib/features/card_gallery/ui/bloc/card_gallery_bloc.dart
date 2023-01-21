@@ -36,6 +36,7 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
 
     on<RarityFilterChangedEvent>((event, emit) async => await handleRarityFilterChangedEvent(emit, event.rarity));
     on<KeywordFilterChangedEvent>((event, emit) async => await handleKeywordFilterChangedEvent(emit, event.keyword));
+    on<LanguageChangedEvent>((event, emit) async => await handleLanguageChangedEvent(emit, event.language));
     _streamInternetConnectionState();
   }
 
@@ -124,6 +125,12 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
 
   Future<void> handleKeywordFilterChangedEvent(Emitter<CardGalleryState> emit, String keyword) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(keyword: keyword, page: 0);
+    await handleFetchCards(emit, params);
+  }
+
+  Future<void> handleLanguageChangedEvent(Emitter<CardGalleryState> emit, String language) async {
+    final CardFilterParams params = state.cardFilterParams.copyWith(locale: language, page: 0);
+
     await handleFetchCards(emit, params);
   }
 }

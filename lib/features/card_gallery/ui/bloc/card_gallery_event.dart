@@ -69,3 +69,8 @@ class KeywordFilterChangedEvent extends CardGalleryEvent {
   final String keyword;
   const KeywordFilterChangedEvent(this.keyword);
 }
+
+class LanguageChangedEvent extends CardGalleryEvent {
+  final String language;
+  const LanguageChangedEvent(this.language);
+}

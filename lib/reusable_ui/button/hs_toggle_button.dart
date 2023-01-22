@@ -6,14 +6,15 @@ import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HSButton extends StatelessWidget {
-  const HSButton(
-      {Key? key, this.label, this.icon, required this.onTap, required this.width, required this.isDisabled,})
+class HSBarToggleButton extends StatelessWidget {
+  const HSBarToggleButton(
+      {Key? key, this.label, this.icon, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
       : super(key: key);
   final String? label;
   final double width;
   final Widget? icon;
-  final bool isDisabled;
+  final bool isToggled;
+  final int activeFilters;
   final VoidCallback onTap;
 
   @override
@@ -29,40 +30,60 @@ class HSButton extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            const HSVelvetBorder(),
             const HSButtonOverlay(),
-         //   if (isToggled) const HSActiveButtonOverlay(),
+            if (isToggled) const HSActiveButtonOverlay(),
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.only(
+              margin: EdgeInsets.only(
+                left: 5.w,
                 right: 5.w,
                 top: 10.h,
                 bottom: 10.h,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 2.5.h, horizontal: 2.5.w),
                         child: icon ?? const SizedBox(),
-
+                        width: 12.5.w,
                       ),
                     ],
                   ),
-                  Container(
-                    child: Text(
-                      label ?? "",
-                      style: FontStyles.bold15VanDykeBrown,
-                    ),
+                  Text(
+                    label ?? "",
+                    style: FontStyles.bold15VanDykeBrown,
                   )
                 ],
               ),
             ),
+            _showFilterBubble(activeFilters),
           ],
         ),
       ),
     );
+  }
+
+  Widget _showFilterBubble(int activeFilters) {
+    if (activeFilters > 0) {
+      return Positioned(
+        bottom: 2.h,
+        right: 2.w,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(assetPath("misc", "filter_number_bubble"), width: 10.w),
+            Text(
+              activeFilters.toString(),
+              textAlign: TextAlign.center,
+              style: FontStyles.bold15,
+            ),
+          ],
+        ),
+      );
+    }
+    return const SizedBox();
   }
 }

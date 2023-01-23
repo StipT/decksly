@@ -8,9 +8,11 @@ import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_ba
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/no_results_widget.dart';
+import 'package:decksly/reusable_ui/spinner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:logger/logger.dart';
 import 'package:shimmer/shimmer.dart';
@@ -126,6 +128,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     ),
                   );
                 },
+                firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.spanishGrey),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),

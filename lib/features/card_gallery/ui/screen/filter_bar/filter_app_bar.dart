@@ -6,8 +6,9 @@ import 'package:decksly/data/sort_by.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar_extension.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_appbar_overlay.dart';
-import 'package:decksly/reusable_ui/button/hs_button.dart';
+import 'package:decksly/reusable_ui/button/hs_toggle_button.dart';
 import 'package:decksly/reusable_ui/dropdown/hs_dropdown.dart';
 import 'package:decksly/reusable_ui/text_field/hs_text_field.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +90,11 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               )),
                           Expanded(
                               child: HSTextField(
+                            hint: LocaleKeys.search,
+                            isSearchTextField: true,
                             onChange: (text) =>
                                 BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
+                            theme: TextFieldTheme.velvet,
                           )),
                           HSBarToggleButton(
                             width: 30.w,

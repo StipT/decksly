@@ -25,8 +25,8 @@ class SetDropdownHeader extends StatelessWidget implements SetListItem {
         style: FontStyles.bold17Grey,
       ),
       padding: EdgeInsets.symmetric(
-        vertical: 1.h,
-        horizontal: 1.w,
+        vertical: 0.5.h,
+        horizontal: 2.w,
       ),
     );
   }
@@ -47,10 +47,10 @@ class SetDropdownItem extends StatelessWidget implements SetListItem {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: 3.w,
-        right: 3.w,
+        left: 6.w,
+        right: 6.w,
       ),
-      padding: EdgeInsets.symmetric(vertical: 1.h),
+      padding: EdgeInsets.symmetric(vertical: 0.5.h),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -59,12 +59,12 @@ class SetDropdownItem extends StatelessWidget implements SetListItem {
                   assetImagePath,
                   fit: BoxFit.fill,
                   color: AppColors.gold,
-                  width: 15.w,
+                  width: 30.w,
                 )
               : const SizedBox(),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(left: 3.w),
+              padding: EdgeInsets.only(left: 6.w),
               child: AutoSizeText(
                 text,
                 style: isSelected ? FontStyles.bold17Gold : FontStyles.bold17,

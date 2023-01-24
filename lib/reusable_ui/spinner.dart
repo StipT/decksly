@@ -10,16 +10,16 @@ class HSSpinner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 25.w,
-      height: 25.h,
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+      width: 50.w,
+      height: 12.5.h,
+      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
       child: Shimmer.fromColors(
         baseColor: AppColors.spanishGrey,
         highlightColor: AppColors.shimmerGrey,
         child: Image.asset(
           assetPath(SUBFOLDER_BACKGROUND, "splash_icon"),
-          height: 10.h,
-          width: 10.w,
+          height: 5.h,
+          width: 20.w,
         ),
       ),
     );

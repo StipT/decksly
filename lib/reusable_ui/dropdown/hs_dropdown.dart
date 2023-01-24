@@ -44,8 +44,8 @@ class HSDropdown extends StatelessWidget {
     required this.dropdownType,
     required this.selectedValue,
     required this.dropdownValues,
-    this.height = 100,
-    this.width = 70,
+    this.height = 50,
+    this.width = 140,
     this.dropdownWidth,
     required this.onChange,
   }) : super(key: key);
@@ -151,7 +151,7 @@ class HSDropdown extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 height: height,
                 width: width,
-                padding: EdgeInsets.only(left: 3.w),
+                padding: EdgeInsets.only(left: 6.w),
                 textStyle: FontStyles.bold15VanDykeBrown,
                 elevation: 1.sp,
                 backgroundColor: Colors.transparent,
@@ -166,7 +166,7 @@ class HSDropdown extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(8.r),
                 elevation: 6.sp,
-                padding: EdgeInsets.symmetric(horizontal: 3.w),
+                padding: EdgeInsets.symmetric(horizontal: 6.w),
               ),
               items: dropdownValues
                   .asMap()

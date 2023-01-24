@@ -71,9 +71,9 @@ class _HSTextFieldState extends State<HSTextField> {
                 Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(
-                    top: 1.h,
-                    left: 10.w,
-                    right: 2.w,
+                    top: 0.5.h,
+                    left: 20.w,
+                    right: 4.w,
                   ),
                   child: TextField(
                     focusNode: _focus,
@@ -141,12 +141,12 @@ class _HSTextFieldState extends State<HSTextField> {
         return EdgeInsets.zero;
       case TextFieldTheme.purpleVelvet:
         return EdgeInsets.only(
-          left: 8.w,
-          right: 2.w,
-          top: 1.h,
+          left: 16.w,
+          right: 4.w,
+          top: 0.5.h,
         );
       case TextFieldTheme.wood:
-        return EdgeInsets.symmetric(vertical: 1.h, horizontal: 12.w);
+        return EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 24.w);
     }
   }
 }

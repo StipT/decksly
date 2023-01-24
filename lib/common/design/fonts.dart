@@ -53,6 +53,13 @@ class FontStyles {
 
   // Bold Belwe
 
+  static TextStyle bold12 = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 12.sp,
+    color: AppColors.white,
+  );
+
   static TextStyle bold15 = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.bold,
@@ -117,6 +124,25 @@ class FontStyles {
         offset: Offset(1, 1),
         blurRadius: 8.0,
         color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ],
+  );
+
+  static TextStyle bold22WithShadow50 = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 22.sp,
+    color: AppColors.white50,
+    shadows: const <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 5.0,
+        color: AppColors.black50,
+      ),
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 8.0,
+        color: AppColors.black50,
       ),
     ],
   );

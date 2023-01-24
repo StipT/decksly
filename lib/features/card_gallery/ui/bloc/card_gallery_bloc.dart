@@ -18,7 +18,6 @@ part 'card_gallery_state.dart';
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase}) : super(const CardsInitial()) {
-    log("INITIAL BLOC ", level: Level.error);
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, state.cardFilterParams));
     on<CardSetChangedEvent>((event, emit) async => await handleCardSetChanged(emit, event.set));
     on<CardClassChangedEvent>((event, emit) async => await handleCardClassChanged(emit, event.heroClass));

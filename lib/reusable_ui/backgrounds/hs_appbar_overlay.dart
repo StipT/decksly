@@ -31,14 +31,14 @@ class HSAppBarOverlay extends StatelessWidget {
                 Image.asset(
                   assetPath(SUBFOLDER_BACKGROUND, "velvet_background_top"),
                   width: double.infinity,
-                  height: 20.h,
+                  height: 10.h,
                   fit: BoxFit.fill,
                 ),
                 Expanded(child: const SizedBox()),
                 Image.asset(
                   assetPath(SUBFOLDER_BACKGROUND, "velvet_background_bottom"),
                   width: double.infinity,
-                  height: 20.h,
+                  height: 10.h,
                   fit: BoxFit.fill,
                 ),
               ],

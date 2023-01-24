@@ -37,7 +37,7 @@ class LanguageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 1.h),
+      margin: EdgeInsets.symmetric(vertical: 0.5.h),
       child: InkWell(
         onTap: () {
           onTap();
@@ -72,7 +72,7 @@ class LanguageButton extends StatelessWidget {
       child: Image.asset(
         assetPath(SUBFOLDER_MISC, imageAssetName),
         fit: BoxFit.fitWidth,
-        width: 30.w,
+        width: 60.w,
       ),
     );
   }

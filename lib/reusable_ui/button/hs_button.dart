@@ -34,9 +34,9 @@ class HSButton extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(
-                right: 5.w,
-                top: 10.h,
-                bottom: 10.h,
+                right: 10.w,
+                top: 5.h,
+                bottom: 5.h,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -45,7 +45,7 @@ class HSButton extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 2.5.h, horizontal: 2.5.w),
+                        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
                         child: icon ?? const SizedBox(),
 
                       ),

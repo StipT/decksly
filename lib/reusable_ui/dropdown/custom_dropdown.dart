@@ -103,7 +103,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                     ],
                     if (!widget.hideIcon)
                       Container(
-                        padding: EdgeInsets.only(right: 5.w),
+                        padding: EdgeInsets.only(right: 10.w),
                         child: RotationTransition(
                           turns: _rotateAnimation,
                           child: widget.icon,
@@ -161,9 +161,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                             ),
                         child: Container(
                           padding: EdgeInsets.only(
-                            top: 7.h,
-                            bottom: 7.h,
-                            right: 5.w,
+                            top: 3.5.h,
+                            bottom: 3.5.h,
+                            right: 10.w,
                           ),
                           decoration: BoxDecoration(
                             image: DecorationImage(

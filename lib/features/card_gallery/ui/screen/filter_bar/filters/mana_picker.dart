@@ -37,8 +37,8 @@ class _ManaPickerState extends State<ManaPicker> {
           if (activeItems.contains(true)) const HSActiveTextFieldOverlay(),
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: 3.w,
-              vertical: 5.h,
+              horizontal: 6.w,
+              vertical: 2.5.h,
             ),
             child: ListView.builder(
               shrinkWrap: true,
@@ -91,7 +91,7 @@ class ManaItem extends StatelessWidget {
         onTap();
       },
       child: Container(
-        width: 14.4.w,
+        width: 28.8.w,
         alignment: Alignment.center,
         child: Stack(
           children: [
@@ -99,7 +99,7 @@ class ManaItem extends StatelessWidget {
               alignment: Alignment.center,
               child: Image.asset(
                 assetPath(SUBFOLDER_MISC, "mana_inactive"),
-                width: 14.4.w,
+                width: 28.8.w,
                 fit: BoxFit.fill,
               ),
             ),
@@ -108,7 +108,7 @@ class ManaItem extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Image.asset(
                   assetPath(SUBFOLDER_MISC, "mana_active"),
-                  width: 14.4.w,
+                  width: 28.8.w,
                   fit: BoxFit.fill,
                 ),
               ),

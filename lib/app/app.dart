@@ -3,6 +3,7 @@ import 'package:decksly/common/application.constants.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
+import 'package:decksly/features/deck_selector/ui/bloc/deck_creator_bloc.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckslyApp extends StatelessWidget {
-  const DeckslyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -19,9 +18,12 @@ class DeckslyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<CardGalleryBloc>(),
         ),
+        BlocProvider(
+          create: (_) => getIt<DeckCreatorBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(375, 787),
+        designSize: const Size(787, 375),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
@@ -44,4 +46,6 @@ class DeckslyApp extends StatelessWidget {
       ),
     );
   }
+
+  const DeckslyApp({super.key});
 }

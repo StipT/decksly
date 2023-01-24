@@ -13,10 +13,11 @@ import '../common/util/network_info.dart' as _i5;
 import '../features/card_gallery/domain/repository/cards_repository.dart'
     as _i6;
 import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'
-    as _i7;
-import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i8;
+    as _i8;
+import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i9;
+import '../features/deck_selector/ui/bloc/deck_creator_bloc.dart' as _i7;
 import '../repository/remote_source/api/api_service.dart' as _i3;
-import 'util_module.dart' as _i9; // ignore_for_file: unnecessary_lambdas
+import 'util_module.dart' as _i10; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -39,13 +40,15 @@ _i1.GetIt $initGetIt(
         get<_i3.ApiService>(),
         get<_i5.NetworkInfo>(),
       ));
-  gh.lazySingleton<_i7.FetchCardsUsecase>(
-      () => _i7.FetchCardsUsecase(get<_i6.CardsRepository>()));
-  gh.factory<_i8.CardGalleryBloc>(() => _i8.CardGalleryBloc(
+  gh.factory<_i7.DeckCreatorBloc>(
+      () => _i7.DeckCreatorBloc(get<_i5.NetworkInfo>()));
+  gh.lazySingleton<_i8.FetchCardsUsecase>(
+      () => _i8.FetchCardsUsecase(get<_i6.CardsRepository>()));
+  gh.factory<_i9.CardGalleryBloc>(() => _i9.CardGalleryBloc(
         get<_i5.NetworkInfo>(),
-        fetchCardsUsecase: get<_i7.FetchCardsUsecase>(),
+        fetchCardsUsecase: get<_i8.FetchCardsUsecase>(),
       ));
   return get;
 }
 
-class _$UtilModule extends _i9.UtilModule {}
+class _$UtilModule extends _i10.UtilModule {}

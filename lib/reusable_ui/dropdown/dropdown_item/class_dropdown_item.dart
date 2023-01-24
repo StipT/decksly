@@ -19,10 +19,10 @@ class HSDropdownItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
+      height: 25.h,
       margin: EdgeInsets.only(
-        bottom: 1.h,
-        left: 1.w,
+        bottom: 0.5.h,
+        left: 2.w,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -33,24 +33,24 @@ class HSDropdownItem extends StatelessWidget {
                 child: Image.asset(
                   assetPath("misc", "golden_circle_border"),
                   fit: BoxFit.fill,
-                  width: 15.w,
+                  width: 30.w,
                 ),
               ),
               Center(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
+                  padding: EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 2.w),
                     child: assetImagePath.isNotEmpty
                         ? Image.asset(
                             assetImagePath,
                             fit: BoxFit.fill,
-                            width: 12.5.w,
+                            width: 25.w,
                           )
                         : const SizedBox()),
               ),
             ]),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(left: 3.w),
+              padding: EdgeInsets.only(left: 6.w),
               child: AutoSizeText(
                 text,
                 maxLines: 1,

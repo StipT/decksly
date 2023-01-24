@@ -50,14 +50,14 @@ class _DetailScreenState extends State<CardDetailsScreen> {
         child: Stack(
           children: [
             Positioned(
-                top: 50.h,
-                right: 30.w,
+                top: 25.h,
+                right: 60.w,
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Icon(
                     Icons.close,
                     color: Colors.white,
-                    size: 20.w,
+                    size: 40.w,
                   ),
                 )),
             Row(
@@ -85,7 +85,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                   child: GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: EdgeInsets.only(right: 45.w),
+                      padding: EdgeInsets.only(right: 90.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -102,12 +102,12 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                             ),
                             child: Text(
                               widget.card.flavorText ?? "",
-                              style: FontStyles.regular20Grey,
+                              style: FontStyles.regular17Grey,
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                              vertical: 10.h,
+                              vertical: 5.h,
                             ),
                             child: RichText(
                               text: TextSpan(

@@ -31,7 +31,7 @@ class HSDropdownButton extends StatelessWidget {
           if (!hideText)
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 5.w),
+                padding: EdgeInsets.only(left: 10.w),
                 child: AutoSizeText(
                   text,
                   minFontSize: 10,
@@ -53,16 +53,16 @@ class HSDropdownButton extends StatelessWidget {
 
     final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(SVG_EXTENSION);
     return Container(
-      padding: EdgeInsets.only(left: 2.w),
+      padding: EdgeInsets.only(left: 4.w),
       child: isSvg
           ? SvgPicture.asset(
               assetImagePath,
-              height: height - 55.h,
+              height: height - 27.5.h,
               fit: BoxFit.fitHeight,
               color: AppColors.gold,
             )
           : Image.asset(
-              height: height - 50.h,
+              height: height - 25.h,
               assetImagePath,
               fit: BoxFit.fitHeight,
             ),

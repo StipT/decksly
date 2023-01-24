@@ -62,7 +62,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 });
               },
             ),
-            FilterAppBar(forceCollapse: isSideMenuOpen ?? false, height: 80.h, onToggle: () {
+            FilterAppBar(forceCollapse: isSideMenuOpen ?? false, height: 40.h, onToggle: () {
               setState(() {
                 isFilterBarExtended = !isFilterBarExtended;
                 log("isFilterBarExtended $isFilterBarExtended");
@@ -78,8 +78,8 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 17.w, top: 80.h,),
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          margin: EdgeInsets.only(left: 32.w, top: 40.h,),
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(assetPath("background", "scroll_background")),
@@ -87,7 +87,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
             ),
           ),
           child: AnimatedPadding(
-            padding: EdgeInsets.only(top:  isFilterBarExtended ? 60.h : 0),
+            padding: EdgeInsets.only(top:  isFilterBarExtended ? 30.h : 0),
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
@@ -115,7 +115,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                         return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
                             ? widget
                             : Container(
-                                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                                padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
                                 child: Shimmer.fromColors(
                                   baseColor: AppColors.spanishGrey,
                                   highlightColor: AppColors.shimmerGrey,
@@ -131,7 +131,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.spanishGrey),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+                    padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
                     child: Shimmer.fromColors(
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,

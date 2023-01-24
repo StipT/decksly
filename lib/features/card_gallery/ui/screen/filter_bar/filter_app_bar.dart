@@ -11,6 +11,7 @@ import 'package:decksly/reusable_ui/backgrounds/hs_appbar_overlay.dart';
 import 'package:decksly/reusable_ui/button/hs_toggle_button.dart';
 import 'package:decksly/reusable_ui/dropdown/hs_dropdown.dart';
 import 'package:decksly/reusable_ui/text_field/hs_text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
 
   @override
   void initState() {
-    _height = widget.height ?? 80.h;
+    _height = widget.height ?? 40.h;
     super.initState();
   }
 
@@ -54,18 +55,18 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
               Column(
                 children: [
                   SizedBox(
-                    height: 80.h,
+                    height: 40.h,
                     width: double.infinity,
                     child: Container(
-                      padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 20.h, bottom: 8.h),
+                      padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 10.h, bottom: 4.h),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
                             child: HSDropdown(
-                              height: 80.h,
-                              width: 40.w,
-                              dropdownWidth: 125.w,
+                              height: 40.h,
+                              width: 80.w,
+                              dropdownWidth: 250.w,
                               selectedValue: state.cardFilterParams.set ?? CardSet.standard.value,
                               dropdownType: DropdownType.cardSet,
                               dropdownValues: CardSet.values.map((e) => e.value).toList(),
@@ -74,8 +75,8 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             ),
                           ),
                           HSDropdown(
-                            height: 80.h,
-                            width: 75.w,
+                            height: 40.h,
+                            width: 150.w,
                             selectedValue: state.cardFilterParams.heroClass ?? CardClass.allClasses.value,
                             dropdownType: DropdownType.cardClass,
                             dropdownValues: CardClass.values.map((e) => e.value).toList(),
@@ -83,21 +84,21 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                                 .add(CardClassChangedEvent(cardClassFromIndex(value).value)),
                           ),
                           SizedBox(
-                              width: 165.w,
+                              width: 330.w,
                               child: ManaPicker(
                                 onChange: (mana) =>
                                     BlocProvider.of<CardGalleryBloc>(context).add(ManaFilterChangedEvent(mana)),
                               )),
                           Expanded(
                               child: HSTextField(
-                            hint: LocaleKeys.search,
+                            hint: LocaleKeys.search.tr(),
                             isSearchTextField: true,
                             onChange: (text) =>
                                 BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
                             theme: TextFieldTheme.velvet,
                           )),
                           HSBarToggleButton(
-                            width: 30.w,
+                            width: 60.w,
                             icon: SvgPicture.asset(
                               assetPath(SUBFOLDER_MISC, "filter", fileExtension: SVG_EXTENSION),
                               fit: BoxFit.fill,
@@ -115,7 +116,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                   ),
                   Flexible(
                     child: FilterAppBarExtension(
-                      height: _isExtended ? 50.h : 0,
+                      height: _isExtended ? 25.h : 0,
                     ),
                   ),
                 ],
@@ -161,13 +162,13 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
   void _toggleBarExtension() async {
     if (_isExtended) {
       setState(() {
-        _height = 80.h;
+        _height = 40.h;
         _isExtended = false;
       });
     } else {
       setState(() {
         _isExtended = true;
-        _height = 140.h;
+        _height = 70.h;
       });
     }
     widget.onToggle();

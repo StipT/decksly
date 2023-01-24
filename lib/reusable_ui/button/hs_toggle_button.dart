@@ -22,7 +22,7 @@ class HSBarToggleButton extends StatelessWidget {
     return Container(
       width: width,
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 1.h),
+      margin: EdgeInsets.symmetric(vertical: 0.5.h),
       child: InkWell(
         onTap: () {
           onTap();
@@ -36,10 +36,10 @@ class HSBarToggleButton extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.only(
-                left: 5.w,
-                right: 5.w,
-                top: 10.h,
-                bottom: 10.h,
+                left: 10.w,
+                right: 10.w,
+                top: 5.h,
+                bottom: 5.h,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -48,7 +48,7 @@ class HSBarToggleButton extends StatelessWidget {
                     children: [
                       Container(
                         child: icon ?? const SizedBox(),
-                        width: 12.5.w,
+                        width: 25.w,
                       ),
                     ],
                   ),
@@ -69,12 +69,12 @@ class HSBarToggleButton extends StatelessWidget {
   Widget _showFilterBubble(int activeFilters) {
     if (activeFilters > 0) {
       return Positioned(
-        bottom: 2.h,
-        right: 2.w,
+        bottom: 1.h,
+        right: 4.w,
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset(assetPath("misc", "filter_number_bubble"), width: 10.w),
+            Image.asset(assetPath("misc", "filter_number_bubble"), width: 20.w),
             Text(
               activeFilters.toString(),
               textAlign: TextAlign.center,

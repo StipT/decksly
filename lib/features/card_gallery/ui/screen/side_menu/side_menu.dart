@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
-import 'package:decksly/features/card_gallery/ui/screen/side_menu/language_button.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/feature_item.dart';
+import 'package:decksly/features/card_gallery/ui/screen/side_menu/language_button.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_border.dart';
@@ -11,8 +11,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key? key, required this.onToggle}) : super(key: key);
@@ -25,16 +23,12 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   bool isExtended = false;
-  late OverlayEntry _overlayEntry;
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
-
-  String version = "0.0.0";
 
   @override
   void initState() {
     super.initState();
-    getAppVersion();
     _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(CurvedAnimation(
       parent: _animationController,
@@ -56,7 +50,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                 behavior: HitTestBehavior.opaque,
                 // full screen container to register taps anywhere and close drop down
                 child: Container(
-                    margin: EdgeInsets.only(top: 0.15.sh),
+                    margin: EdgeInsets.only(top: 0.1.sh),
                     child: Container(
                       height: 0.9.sh,
                       width: 1.sw,
@@ -64,8 +58,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     )),
               ),
             AnimatedPositioned(
-              left: isExtended ? 0.w : -100.w,
-              top: 80.h,
+              left: isExtended ? 0.w : -200.w,
+              top: 40.h,
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
               child: GestureDetector(
@@ -74,8 +68,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  width: 117.w,
-                  height: 365.h,
+                  width: 234.w,
+                  height: 172.h,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
@@ -85,8 +79,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                           "velvet_background_center",
                           fileExtension: JPG_EXTENSION,
                         ),
-                        width: 117.w,
-                        height: 365.h,
+                        width: 234.w,
+                        height: 182.5.h,
                         fit: BoxFit.fill,
                       ),
                       Image.asset(
@@ -95,33 +89,33 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                       ),
                       Container(
                         padding: EdgeInsets.only(
-                          left: 10.w,
-                          right: 15.w,
+                          left: 20.w,
+                          right: 30.w,
                         ),
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.only(top: 20.h),
+                              padding: EdgeInsets.only(top: 10.h),
                             ),
-                             FeatureItem(
+                            FeatureItem(
                               type: FeatureItemType.cardLibrary,
                               isSelected: true,
-                               onTap: (){},
+                              onTap: () {},
                             ),
                             Container(
                               child: Image.asset(
                                 assetPath(SUBFOLDER_MISC, "velvet_divider"),
                                 fit: BoxFit.fill,
-                                height: 2.h,
-                                width: 80.w,
+                                height: 1.h,
+                                width: 160.w,
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 5.h),
-                              child:  FeatureItem(
+                              padding: EdgeInsets.only(top: 2.5.h),
+                              child: FeatureItem(
                                 type: FeatureItemType.deckBuilder,
                                 isSelected: false,
-                                onTap: (){
+                                onTap: () {
                                   DeckSelectorRoute.open(context);
                                 },
                               ),
@@ -130,12 +124,12 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               child: Image.asset(
                                 assetPath(SUBFOLDER_MISC, "velvet_divider"),
                                 fit: BoxFit.fill,
-                                height: 2.h,
-                                width: 80.w,
+                                height: 1.h,
+                                width: 40.w,
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 40.h),
+                              padding: EdgeInsets.only(top: 20.h),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -147,7 +141,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+                              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -155,11 +149,10 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       isSelected: false,
                                       type: LanguageButtonType.english,
                                       onTap: () {
-
                                         context.setLocale(Locale('en', 'US'));
                                         print(context.locale.toString());
                                         BlocProvider.of<CardGalleryBloc>(context)
-                                          .add(LanguageChangedEvent(LanguageButtonType.english.value));
+                                            .add(LanguageChangedEvent(LanguageButtonType.english.value));
                                       },
                                     ),
                                   ),
@@ -171,7 +164,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                         context.setLocale(Locale('de', 'DE'));
                                         print(context.locale.toString());
                                         BlocProvider.of<CardGalleryBloc>(context)
-                                          .add(LanguageChangedEvent(LanguageButtonType.german.value));
+                                            .add(LanguageChangedEvent(LanguageButtonType.german.value));
                                       },
                                     ),
                                   ),
@@ -183,7 +176,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                         context.setLocale(Locale('ja', 'JP'));
                                         print(context.locale.toString());
                                         BlocProvider.of<CardGalleryBloc>(context)
-                                          .add(LanguageChangedEvent(LanguageButtonType.japanese.value));
+                                            .add(LanguageChangedEvent(LanguageButtonType.japanese.value));
                                       },
                                     ),
                                   ),
@@ -194,29 +187,29 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                         ),
                       ),
                       Positioned(
-                        left: 103.w,
-                        top: 120.h,
+                        left: 206.w,
+                        top: 60.h,
                         child: Container(
-                          width: 14.w,
-                          height: 85.h,
+                          width: 28.w,
+                          height: 42.5.h,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(horizontal: 1.w),
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
                               const HSWoodBorder(),
                               Container(
                                 padding: EdgeInsets.only(
-                                  top: 2.h,
-                                  bottom: 2.h,
-                                  left: 1.w,
+                                  top: 1.h,
+                                  bottom: 1.h,
+                                  left: 2.w,
                                 ),
                                 child: RotationTransition(
                                   turns: _rotateAnimation,
                                   child: Image.asset(
                                     assetPath(SUBFOLDER_MISC, "arrow"),
                                     fit: BoxFit.fill,
-                                    width: 7.5.w,
+                                    width: 15.w,
                                   ),
                                 ),
                               ),
@@ -233,11 +226,6 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         ),
       );
     });
-  }
-
-  Future<void> getAppVersion() async {
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    version = packageInfo.version;
   }
 
   void _toggleSideMenu({bool close = false}) async {

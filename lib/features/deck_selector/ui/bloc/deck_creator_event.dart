@@ -2,11 +2,10 @@ part of 'deck_creator_bloc.dart';
 
 @immutable
 abstract class DeckCreatorEvent {
-   const DeckCreatorEvent();
+  const DeckCreatorEvent();
 }
 
-class LoadCreatedDecksEvent extends DeckCreatorEvent {
-}
+class LoadCreatedDecksEvent extends DeckCreatorEvent {}
 
 class ImportDeckEvent extends DeckCreatorEvent {
   final String deckCode;

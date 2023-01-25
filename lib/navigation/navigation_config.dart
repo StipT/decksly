@@ -1,4 +1,5 @@
 import 'package:decksly/features/card_gallery/ui/screen/card_gallery_screen.dart';
+import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
 import 'package:decksly/features/deck_selector/ui/screen/deck_creator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ final appRouter = GoRouter(
   routes: [
     CardGalleryRoute(),
     DeckSelectorRoute(),
+    DeckBuilderRoute(),
   ],
   urlPathStrategy: UrlPathStrategy.path,
 );
@@ -32,6 +34,27 @@ class CardGalleryRoute extends GoRoute {
   static void open(BuildContext context) => context.go(route());
 }
 
+class DeckBuilderRoute extends GoRoute {
+  DeckBuilderRoute({
+    super.path = _path,
+    super.builder = _builder,
+  }) : super(routes: _routes);
+
+  static const String _path = '/deck-builder';
+
+  static String route() => '/deck-builder';
+
+  static Widget _builder(
+      BuildContext ctx,
+      GoRouterState state,
+      ) =>
+      const DeckBuilderScreen();
+
+  static final _routes = <GoRoute>[];
+
+  static void open(BuildContext context) => context.go(route());
+}
+
 class DeckSelectorRoute extends GoRoute {
   DeckSelectorRoute({
     super.path = _path,
@@ -51,7 +74,7 @@ class DeckSelectorRoute extends GoRoute {
   static CustomTransitionPage buildPageWithHSTransition<T>() {
     return CustomTransitionPage<void>(
       child: const DeckSelectorScreen(),
-      transitionDuration: Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 500),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
 
         const begin = Offset(0.0, -1.0);

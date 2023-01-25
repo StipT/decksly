@@ -51,6 +51,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
     return BlocListener<CardGalleryBloc, CardGalleryState>(
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             _cardList(),

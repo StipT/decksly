@@ -35,6 +35,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<DeckCreatorBloc, DeckCreatorState>(builder: (BuildContext context, state) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             const HSDeckCreatorBackground(),
@@ -210,7 +211,8 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                       type: e,
                       isSelected: e == state.heroClass,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(ClassBadgeType.mage));
+                        BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
+                        DeckBuilderRoute.open(context);
                       }))
                   .toList()
                   .sublist(0, 6),
@@ -223,7 +225,8 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                       type: e,
                       isSelected: e == state.heroClass,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(ClassBadgeType.hunter));
+                        BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
+                        DeckBuilderRoute.open(context);
                       }))
                   .toList()
                   .sublist(6, 11),

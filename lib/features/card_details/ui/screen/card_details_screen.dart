@@ -44,6 +44,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       body: Container(
         height: 1.sh,

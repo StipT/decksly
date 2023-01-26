@@ -143,5 +143,9 @@
   "artist" : "アーティスト：",
   "cardLibrary": "カード ライブラリ",
   "deckBuilder": "デッキビルダー",
-  "language": "言語"
+  "language": "言語",
+  "close": "近い",
+  "load": "ロード",
+  "import": "輸入",
+  "pasteADeckCodeHere": "ここにデッキコードを貼り付けます"
 }

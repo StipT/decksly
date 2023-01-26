@@ -143,5 +143,9 @@
   "artist" : "Künstler: ",
   "cardLibrary": "Kartenbibliothek",
   "deckBuilder": "Deck\nbauer",
-  "language": "Sprache"
+  "language": "Sprache",
+  "close": "Schließen",
+  "load": "Belastung",
+  "import": "Importieren",
+  "pasteADeckCodeHere": "Fügen Sie hier einen Deckcode ein"
 }

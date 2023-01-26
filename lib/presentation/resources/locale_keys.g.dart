@@ -146,5 +146,9 @@ abstract class  LocaleKeys {
   static const cardLibrary = 'cardLibrary';
   static const deckBuilder = 'deckBuilder';
   static const language = 'language';
+  static const close = 'close';
+  static const load = 'load';
+  static const import = 'import';
+  static const pasteADeckCodeHere = 'pasteADeckCodeHere';
 
 }

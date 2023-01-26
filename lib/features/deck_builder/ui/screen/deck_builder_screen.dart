@@ -72,7 +72,6 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
               onToggle: () {
                 setState(() {
                   isFilterBarExtended = !isFilterBarExtended;
-                  log("isFilterBarExtended $isFilterBarExtended");
                 });
               },
             ),
@@ -93,7 +92,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             ),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(assetPath("background", "scroll_background")),
+                image: AssetImage(assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
                 fit: BoxFit.fill,
               ),
             ),
@@ -204,7 +203,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
           padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
           curve: Curves.bounceOut,
           duration: const Duration(milliseconds: 500),
-          child: HSDeckListBackground()),
+          child: const HSDeckListBackground()),
     );
   }
 }

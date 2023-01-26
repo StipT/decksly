@@ -4,10 +4,12 @@ import 'package:decksly/features/deck_selector/ui/bloc/deck_creator_bloc.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_class_badge.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
 import 'package:decksly/navigation/navigation_config.dart';
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_deck_creator_background.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
 import 'package:decksly/reusable_ui/button/hs_button.dart';
 import 'package:decksly/reusable_ui/text_field/hs_text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,14 +76,14 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                               child: HSTextField(
                             onChange: (change) {},
                             theme: TextFieldTheme.none,
-                            hint: "Paste a deck code here",
+                            hint: LocaleKeys.pasteADeckCodeHere.tr(),
                           )),
                         ),
                         Container(
                           child: HSButton(
                             width: 100.w,
                             isDisabled: false,
-                            label: "Import",
+                            label: LocaleKeys.import.tr(),
                             onTap: () {},
                           ),
                         ),
@@ -102,7 +104,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                     child: HSButton(
                       width: 140.w,
                       isDisabled: false,
-                      label: "Load",
+                      label: LocaleKeys.load.tr(),
                       onTap: () {
                         CardGalleryRoute.open(context);
                       },
@@ -127,7 +129,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                     child: HSButton(
                       width: 140.w,
                       isDisabled: false,
-                      label: "Close",
+                      label: LocaleKeys.close.tr(),
                       onTap: () {
                         CardGalleryRoute.open(context);
                       },

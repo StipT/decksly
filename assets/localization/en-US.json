@@ -143,5 +143,9 @@
   "artist" : "Artist: ",
   "cardLibrary": "Card Library",
   "deckBuilder": "Deck Builder",
-  "language": "Language"
+  "language": "Language",
+  "close": "Close",
+  "load": "Load",
+  "import": "Import",
+  "pasteADeckCodeHere": "Paste a deck code here"
 }

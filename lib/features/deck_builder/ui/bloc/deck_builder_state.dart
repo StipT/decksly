@@ -1,8 +1,8 @@
 part of 'deck_builder_bloc.dart';
 
 @immutable
-abstract class CardGalleryState extends Equatable {
-  const CardGalleryState(this.page, this.cardFilterParams);
+abstract class DeckBuilderState extends Equatable {
+  const DeckBuilderState(this.page, this.cardFilterParams);
 
   final CardsPage page;
   final CardFilterParams cardFilterParams;
@@ -11,7 +11,7 @@ abstract class CardGalleryState extends Equatable {
   List<Object?> get props => [page.cards, page.cardCount, cardFilterParams, page.pageCount];
 }
 
-class CardsInitial extends CardGalleryState {
+class CardsInitial extends DeckBuilderState {
   const CardsInitial()
       : super(
           const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0),
@@ -27,14 +27,14 @@ class CardsInitial extends CardGalleryState {
         );
 }
 
-class CardsLoaded extends CardGalleryState {
+class CardsLoaded extends DeckBuilderState {
   const CardsLoaded(
     super.cards,
     super.cardFilterParams,
   );
 }
 
-class CardsError extends CardGalleryState {
+class CardsError extends DeckBuilderState {
   const CardsError(this.failure)
       : super(
           const CardsPage(cards: [], cardCount: 0, pageCount: 0, page: 0),

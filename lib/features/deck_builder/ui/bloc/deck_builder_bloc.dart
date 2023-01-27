@@ -5,6 +5,7 @@ import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
+import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +17,8 @@ part 'deck_builder_event.dart';
 part 'deck_builder_state.dart';
 
 @injectable
-class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
-  CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase}) : super(const CardsInitial()) {
+class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
+  DeckBuilderBloc(this._networkInfo, {required this.fetchCardsUsecase}) : super(const CardsInitial()) {
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, state.cardFilterParams));
     on<CardSetChangedEvent>((event, emit) async => await handleCardSetChanged(emit, event.set));
     on<CardClassChangedEvent>((event, emit) async => await handleCardClassChanged(emit, event.heroClass));
@@ -50,7 +51,7 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   }
 
   Future<void> handleFetchCards(
-    Emitter<CardGalleryState> emit,
+    Emitter<DeckBuilderState> emit,
     CardFilterParams cardFilterParams,
   ) async {
     final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
@@ -67,67 +68,67 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     );
   }
 
-  Future<void> handleCardSetChanged(Emitter<CardGalleryState> emit, String set) async {
+  Future<void> handleCardSetChanged(Emitter<DeckBuilderState> emit, String set) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(set: set, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleCardClassChanged(Emitter<CardGalleryState> emit, String heroClass) async {
+  Future<void> handleCardClassChanged(Emitter<DeckBuilderState> emit, String heroClass) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(heroClass: heroClass, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleManaFilterChangedEvent(Emitter<CardGalleryState> emit, String manaCost) async {
+  Future<void> handleManaFilterChangedEvent(Emitter<DeckBuilderState> emit, String manaCost) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(manaCost: manaCost, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleSearchFilterChangedEvent(Emitter<CardGalleryState> emit, String textFilter) async {
+  Future<void> handleSearchFilterChangedEvent(Emitter<DeckBuilderState> emit, String textFilter) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(textFilter: textFilter, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleSortByChangedEvent(Emitter<CardGalleryState> emit, String sort) async {
+  Future<void> handleSortByChangedEvent(Emitter<DeckBuilderState> emit, String sort) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(sort: sort, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleAttackFilterChangedEvent(Emitter<CardGalleryState> emit, String attack) async {
+  Future<void> handleAttackFilterChangedEvent(Emitter<DeckBuilderState> emit, String attack) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(attack: attack, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleHealthFilterChangedEvent(Emitter<CardGalleryState> emit, String health) async {
+  Future<void> handleHealthFilterChangedEvent(Emitter<DeckBuilderState> emit, String health) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(health: health, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleCardTypeFilterChangedEvent(Emitter<CardGalleryState> emit, String type) async {
+  Future<void> handleCardTypeFilterChangedEvent(Emitter<DeckBuilderState> emit, String type) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(type: type, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleMinionTypeFilterChangedEvent(Emitter<CardGalleryState> emit, String minionType) async {
+  Future<void> handleMinionTypeFilterChangedEvent(Emitter<DeckBuilderState> emit, String minionType) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(minionType: minionType, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleSpellSchoolFilterChangedEvent(Emitter<CardGalleryState> emit, String spellSchool) async {
+  Future<void> handleSpellSchoolFilterChangedEvent(Emitter<DeckBuilderState> emit, String spellSchool) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(spellSchool: spellSchool, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleRarityFilterChangedEvent(Emitter<CardGalleryState> emit, String rarity) async {
+  Future<void> handleRarityFilterChangedEvent(Emitter<DeckBuilderState> emit, String rarity) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(rarity: rarity, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleKeywordFilterChangedEvent(Emitter<CardGalleryState> emit, String keyword) async {
+  Future<void> handleKeywordFilterChangedEvent(Emitter<DeckBuilderState> emit, String keyword) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(keyword: keyword, page: 0);
     await handleFetchCards(emit, params);
   }
 
-  Future<void> handleLanguageChangedEvent(Emitter<CardGalleryState> emit, String language) async {
+  Future<void> handleLanguageChangedEvent(Emitter<DeckBuilderState> emit, String language) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(locale: language, page: 0);
 
     await handleFetchCards(emit, params);

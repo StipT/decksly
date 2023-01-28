@@ -48,6 +48,24 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                 Expanded(child: _getClassSelector(state)),
               ],
             ),
+            if(state.gameMode == ModeBadgeType.wild)
+            Positioned(
+              width: 125.w,
+              top: 36.h,
+              left: 18.w,
+              child: Image.asset(
+                assetPath(SUBFOLDER_MISC, "wild_branch_left"),
+              ),
+            ),
+            if(state.gameMode == ModeBadgeType.wild)
+            Positioned(
+              width: 125.w,
+              top: 36.h,
+              right: 18.w,
+              child: Image.asset(
+                assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+              ),
+            ),
           ],
         ),
       );
@@ -210,7 +228,8 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                 child: Row(
               children: ClassBadgeType.values
                   .map((e) => HSClassBadge(
-                      type: e,
+                      classType: e,
+                      modeType: state.gameMode,
                       isSelected: e == state.heroClass,
                       onTap: () {
                         BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
@@ -224,7 +243,8 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: ClassBadgeType.values
                   .map((e) => HSClassBadge(
-                      type: e,
+                      classType: e,
+                      modeType: state.gameMode,
                       isSelected: e == state.heroClass,
                       onTap: () {
                         BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));

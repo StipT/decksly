@@ -40,6 +40,9 @@ class DeckslyApp extends StatelessWidget {
               primaryColor: AppColors.vanDykeBrown,
               splashColor: AppColors.bistreBrown,
               colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.gold),
+              textSelectionTheme: TextSelectionThemeData(
+                cursorColor: AppColors.gold,
+              ),
             ),
           );
         },

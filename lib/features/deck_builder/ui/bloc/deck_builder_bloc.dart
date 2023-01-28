@@ -130,7 +130,6 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
 
   Future<void> handleLanguageChangedEvent(Emitter<DeckBuilderState> emit, String language) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(locale: language, page: 0);
-
     await handleFetchCards(emit, params);
   }
 }

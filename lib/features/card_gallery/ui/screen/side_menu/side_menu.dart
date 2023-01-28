@@ -13,9 +13,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({Key? key, required this.onToggle}) : super(key: key);
+  const SideMenu({Key? key, required this.onToggle, required this.inDeckBuilderMode}) : super(key: key);
 
   final void Function(bool) onToggle;
+  final bool inDeckBuilderMode;
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -39,7 +40,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
-      return Container(
+      return SizedBox(
         width: 1.sw,
         height: 1.sh,
         child: Stack(
@@ -99,8 +100,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                             ),
                             FeatureItem(
                               type: FeatureItemType.cardLibrary,
-                              isSelected: true,
-                              onTap: () {},
+                              isSelected: !widget.inDeckBuilderMode,
+                              onTap: () => widget.inDeckBuilderMode ? CardGalleryRoute.open(context) : null,
                             ),
                             Container(
                               child: Image.asset(
@@ -114,10 +115,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               padding: EdgeInsets.only(top: 2.5.h),
                               child: FeatureItem(
                                 type: FeatureItemType.deckBuilder,
-                                isSelected: false,
-                                onTap: () {
-                                  DeckSelectorRoute.open(context);
-                                },
+                                isSelected: widget.inDeckBuilderMode,
+                                onTap: () => widget.inDeckBuilderMode ? null : DeckSelectorRoute.open(context),
                               ),
                             ),
                             Container(

@@ -8,13 +8,11 @@ import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_ba
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/no_results_widget.dart';
-import 'package:decksly/reusable_ui/spinner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:logger/logger.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CardGalleryScreen extends StatefulWidget {
@@ -62,13 +60,18 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                   isFilterBarExtended = false;
                 });
               },
+              inDeckBuilderMode: false,
             ),
-            FilterAppBar(forceCollapse: isSideMenuOpen ?? false, height: 40.h, onToggle: () {
-              setState(() {
-                isFilterBarExtended = !isFilterBarExtended;
-                log("isFilterBarExtended $isFilterBarExtended");
-              });
-            },),
+            FilterAppBar(
+              forceCollapse: isSideMenuOpen ?? false,
+              height: 40.h,
+              onToggle: () {
+                setState(() {
+                  isFilterBarExtended = !isFilterBarExtended;
+                  log("isFilterBarExtended $isFilterBarExtended");
+                });
+              },
+            ),
           ],
         ),
       ),
@@ -79,7 +82,10 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(left: 32.w, top: 40.h,),
+          margin: EdgeInsets.only(
+            left: 32.w,
+            top: 40.h,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -88,7 +94,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
             ),
           ),
           child: AnimatedPadding(
-            padding: EdgeInsets.only(top:  isFilterBarExtended ? 30.h : 0),
+            padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(

@@ -1,5 +1,7 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_selector/ui/bloc/deck_creator_bloc.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_class_badge.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
@@ -48,7 +50,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                 Expanded(child: _getClassSelector(state)),
               ],
             ),
-            if(state.gameMode == ModeBadgeType.wild)
+            if(state.gameMode == DeckType.wild)
             Positioned(
               width: 125.w,
               top: 36.h,
@@ -57,7 +59,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                 assetPath(SUBFOLDER_MISC, "wild_branch_left"),
               ),
             ),
-            if(state.gameMode == ModeBadgeType.wild)
+            if(state.gameMode == DeckType.wild)
             Positioned(
               width: 125.w,
               top: 36.h,
@@ -178,23 +180,23 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                       padding: EdgeInsets.only(right: 20.w),
                       child: Image.asset(assetPath(SUBFOLDER_MISC, "velvet_ornament_left"))),
                   HSModeBadge(
-                      type: ModeBadgeType.standard,
-                      isSelected: ModeBadgeType.standard == state.gameMode,
+                      type: DeckType.standard,
+                      isSelected: DeckType.standard == state.gameMode,
                       onTap: () {
                         BlocProvider.of<DeckCreatorBloc>(context)
-                            .add(const ChangeGameModeEvent(ModeBadgeType.standard));
+                            .add(const ChangeGameModeEvent(DeckType.standard));
                       }),
                   HSModeBadge(
-                      type: ModeBadgeType.classic,
-                      isSelected: ModeBadgeType.classic == state.gameMode,
+                      type: DeckType.classic,
+                      isSelected: DeckType.classic == state.gameMode,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(const ChangeGameModeEvent(ModeBadgeType.classic));
+                        BlocProvider.of<DeckCreatorBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
                       }),
                   HSModeBadge(
-                      type: ModeBadgeType.wild,
-                      isSelected: ModeBadgeType.wild == state.gameMode,
+                      type: DeckType.wild,
+                      isSelected: DeckType.wild == state.gameMode,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(const ChangeGameModeEvent(ModeBadgeType.wild));
+                        BlocProvider.of<DeckCreatorBloc>(context).add(const ChangeGameModeEvent(DeckType.wild));
                       }),
                   Container(
                       padding: EdgeInsets.only(left: 20.w),
@@ -226,7 +228,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
           children: [
             Expanded(
                 child: Row(
-              children: ClassBadgeType.values
+              children: DeckClass.values
                   .map((e) => HSClassBadge(
                       classType: e,
                       modeType: state.gameMode,
@@ -241,7 +243,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
             Expanded(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: ClassBadgeType.values
+              children: DeckClass.values
                   .map((e) => HSClassBadge(
                       classType: e,
                       modeType: state.gameMode,

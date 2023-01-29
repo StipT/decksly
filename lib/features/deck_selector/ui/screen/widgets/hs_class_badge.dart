@@ -2,24 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/data/card_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-enum ClassBadgeType {
-  deathKnight,
-  demonHunter,
-  druid,
-  hunter,
-  mage,
-  paladin,
-  priest,
-  rogue,
-  shaman,
-  warlock,
-  warrior,
-}
 
 class HSClassBadge extends StatelessWidget {
   const HSClassBadge({
@@ -29,8 +17,8 @@ class HSClassBadge extends StatelessWidget {
     required this.onTap,
   });
 
-  final ClassBadgeType classType;
-  final ModeBadgeType modeType;
+  final DeckClass classType;
+  final DeckType modeType;
   final bool isSelected;
 
   final VoidCallback onTap;
@@ -63,7 +51,7 @@ class HSClassBadge extends StatelessWidget {
                   _getTitle(classType),
                   maxLines: 1,
                   minFontSize: 8,
-                  style: FontStyles.bold12,
+                  style: FontStyles.bold11WithShadow,
                 ),
               ),
             ),
@@ -73,7 +61,7 @@ class HSClassBadge extends StatelessWidget {
     );
   }
 
-  Widget _getImage(ClassBadgeType type, bool isSelected, bool isDisabled) {
+  Widget _getImage(DeckClass type, bool isSelected, bool isDisabled) {
     return Image.asset(
       assetPath(SUBFOLDER_CLASS, _getImageAsset(type)),
       color: isDisabled ? const Color.fromRGBO(255, 255, 255, 0.4) : null,
@@ -81,86 +69,86 @@ class HSClassBadge extends StatelessWidget {
     );
   }
 
-  String _getImageAsset(ClassBadgeType type) {
+  String _getImageAsset(DeckClass type) {
     switch (type) {
-      case ClassBadgeType.deathKnight:
+      case DeckClass.deathKnight:
         return "death_knight_badge";
-      case ClassBadgeType.demonHunter:
+      case DeckClass.demonHunter:
         return "demon_hunter_badge";
-      case ClassBadgeType.druid:
+      case DeckClass.druid:
         return "druid_badge";
-      case ClassBadgeType.hunter:
+      case DeckClass.hunter:
         return "hunter_badge";
-      case ClassBadgeType.mage:
+      case DeckClass.mage:
         return "mage_badge";
-      case ClassBadgeType.paladin:
+      case DeckClass.paladin:
         return "paladin_badge";
-      case ClassBadgeType.priest:
+      case DeckClass.priest:
         return "priest_badge";
-      case ClassBadgeType.rogue:
+      case DeckClass.rogue:
         return "rogue_badge";
-      case ClassBadgeType.shaman:
+      case DeckClass.shaman:
         return "shaman_badge";
-      case ClassBadgeType.warlock:
+      case DeckClass.warlock:
         return "warlock_badge";
-      case ClassBadgeType.warrior:
+      case DeckClass.warrior:
         return "warrior_badge";
     }
   }
 
-  String _getTitle(ClassBadgeType type) {
+  String _getTitle(DeckClass type) {
     switch (type) {
-      case ClassBadgeType.deathKnight:
+      case DeckClass.deathKnight:
         return CardClass.deathKnight.localized();
 
-      case ClassBadgeType.demonHunter:
+      case DeckClass.demonHunter:
         return CardClass.demonHunter.localized();
 
-      case ClassBadgeType.druid:
+      case DeckClass.druid:
         return CardClass.druid.localized();
 
-      case ClassBadgeType.hunter:
+      case DeckClass.hunter:
         return CardClass.hunter.localized();
 
-      case ClassBadgeType.mage:
+      case DeckClass.mage:
         return CardClass.mage.localized();
 
-      case ClassBadgeType.paladin:
+      case DeckClass.paladin:
         return CardClass.paladin.localized();
 
-      case ClassBadgeType.priest:
+      case DeckClass.priest:
         return CardClass.priest.localized();
 
-      case ClassBadgeType.rogue:
+      case DeckClass.rogue:
         return CardClass.rogue.localized();
 
-      case ClassBadgeType.shaman:
+      case DeckClass.shaman:
         return CardClass.shaman.localized();
 
-      case ClassBadgeType.warlock:
+      case DeckClass.warlock:
         return CardClass.warlock.localized();
 
-      case ClassBadgeType.warrior:
+      case DeckClass.warrior:
         return CardClass.warrior.localized();
     }
   }
 
-  bool _isClassDisabled(ModeBadgeType modeType, ClassBadgeType classType) {
-    if (modeType == ModeBadgeType.classic) {
+  bool _isClassDisabled(DeckType modeType, DeckClass classType) {
+    if (modeType == DeckType.classic) {
       switch (classType) {
-        case ClassBadgeType.deathKnight:
-        case ClassBadgeType.demonHunter:
+        case DeckClass.deathKnight:
+        case DeckClass.demonHunter:
           return true;
 
-        case ClassBadgeType.druid:
-        case ClassBadgeType.hunter:
-        case ClassBadgeType.mage:
-        case ClassBadgeType.paladin:
-        case ClassBadgeType.priest:
-        case ClassBadgeType.rogue:
-        case ClassBadgeType.shaman:
-        case ClassBadgeType.warlock:
-        case ClassBadgeType.warrior:
+        case DeckClass.druid:
+        case DeckClass.hunter:
+        case DeckClass.mage:
+        case DeckClass.paladin:
+        case DeckClass.priest:
+        case DeckClass.rogue:
+        case DeckClass.shaman:
+        case DeckClass.warlock:
+        case DeckClass.warrior:
           return false;
       }
     }

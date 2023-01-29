@@ -1,11 +1,12 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
-import 'package:decksly/features/deck_builder/ui/screen/widgets/hs_deck_list_background.dart';
+import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/no_results_widget.dart';
 import 'package:flutter/material.dart';
@@ -50,33 +51,37 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            Row(
-              children: [
-                _cardList(),
-                _deckList(),
-              ],
-            ),
-            SideMenu(
-              onToggle: (isOpen) {
-                setState(() {
-                  isSideMenuOpen = isOpen;
-                  isFilterBarExtended = false;
-                });
-              },
-              inDeckBuilderMode: true,
-            ),
-            FilterAppBar(
-              forceCollapse: isSideMenuOpen ?? false,
-              height: 40.h,
-              onToggle: () {
-                setState(() {
-                  isFilterBarExtended = !isFilterBarExtended;
-                });
-              },
-            ),
-          ],
+        body: Container(
+          height: 1.sh,
+          width: 1.sw,
+          child: Stack(
+            children: [
+              Row(
+                children: [
+                  _cardList(),
+                  _deckList(),
+                ],
+              ),
+              SideMenu(
+                onToggle: (isOpen) {
+                  setState(() {
+                    isSideMenuOpen = isOpen;
+                    isFilterBarExtended = false;
+                  });
+                },
+                inDeckBuilderMode: true,
+              ),
+              FilterAppBar(
+                forceCollapse: isSideMenuOpen ?? false,
+                height: 40.h,
+                onToggle: () {
+                  setState(() {
+                    isFilterBarExtended = !isFilterBarExtended;
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -198,13 +203,12 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   _deckList() {
     return Container(
       width: 234.w,
-      color: AppColors.vanDykeBrown,
-      margin: EdgeInsets.only(top: 0.18.sh),
-      child: AnimatedPadding(
-          padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
-          curve: Curves.bounceOut,
-          duration: const Duration(milliseconds: 500),
-          child: const HSDeckListBackground()),
+      child: DeckListMenu(
+        width: 234.w,
+        isFilterBarExtended: isFilterBarExtended,
+        onCreateNewDeck: () => log("onCreateNewDeck"),
+        onSave: () => log("onCreateNewDeck"),
+      ),
     );
   }
 }

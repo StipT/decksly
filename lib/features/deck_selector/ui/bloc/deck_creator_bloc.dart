@@ -1,18 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/common/util/failures.dart';
 import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
-import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
-import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_class_badge.dart';
-import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
-import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'deck_creator_event.dart';
@@ -33,7 +27,8 @@ class DeckCreatorBloc extends Bloc<DeckCreatorEvent, DeckCreatorState> {
 
   final NetworkInfo _networkInfo;
   late final Stream<bool> internetConnectionState;
- // final LoadCreatedDecksUsecase fetchCardsUsecase;
+
+  // final LoadCreatedDecksUsecase fetchCardsUsecase;
 
   void _streamInternetConnectionState() {
     internetConnectionState = _networkInfo.resultStream
@@ -41,16 +36,15 @@ class DeckCreatorBloc extends Bloc<DeckCreatorEvent, DeckCreatorState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-
   handleClose(Emitter<DeckCreatorState> emit) {}
 
   handleSelectLoadedDeckEvent(Emitter<DeckCreatorState> emit, String deckId) {}
 
-  handleChangeGameModeEvent(Emitter<DeckCreatorState> emit, ModeBadgeType gameMode) {
+  handleChangeGameModeEvent(Emitter<DeckCreatorState> emit, DeckType gameMode) {
     emit(DeckCreatorChanged(state.deckCode, gameMode, state.heroClass, state.selectedDeckId));
   }
 
-  handleSelectClassEvent(Emitter<DeckCreatorState> emit, ClassBadgeType heroClass) {
+  handleSelectClassEvent(Emitter<DeckCreatorState> emit, DeckClass heroClass) {
     emit(DeckCreatorChanged(state.deckCode, state.gameMode, heroClass, state.selectedDeckId));
     // navigateToDeckBuilder(state.gameMode, state.heroClass);
   }
@@ -61,6 +55,4 @@ class DeckCreatorBloc extends Bloc<DeckCreatorEvent, DeckCreatorState> {
     emit(DeckCreatorChanged(deckCode, state.gameMode, state.heroClass, state.selectedDeckId));
     // fetchDeckUsecase();
   }
-
-
 }

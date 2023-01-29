@@ -3,6 +3,7 @@ import 'package:decksly/common/application.constants.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
+import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_selector/ui/bloc/deck_creator_bloc.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,6 +21,9 @@ class DeckslyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => getIt<DeckCreatorBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<DeckBuilderBloc>(),
         ),
       ],
       child: ScreenUtilInit(

@@ -13,7 +13,7 @@ class ImportDeckEvent extends DeckCreatorEvent {
 }
 
 class ChangeGameModeEvent extends DeckCreatorEvent {
-  final ModeBadgeType gameMode;
+  final DeckType gameMode;
   const ChangeGameModeEvent(this.gameMode);
 }
 
@@ -23,7 +23,7 @@ class SelectLoadedDeckEvent extends DeckCreatorEvent {
 }
 
 class SelectClassEvent extends DeckCreatorEvent {
-  final ClassBadgeType heroClass;
+  final DeckClass heroClass;
   const SelectClassEvent(this.heroClass);
 }
 

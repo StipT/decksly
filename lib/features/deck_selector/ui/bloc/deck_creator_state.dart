@@ -5,8 +5,8 @@ abstract class DeckCreatorState extends Equatable {
   const DeckCreatorState(this.deckCode, this.gameMode, this.heroClass, this.selectedDeckId);
 
   final String deckCode;
-  final ModeBadgeType gameMode;
-  final ClassBadgeType? heroClass;
+  final DeckType gameMode;
+  final DeckClass? heroClass;
   final String? selectedDeckId;
 
   @override
@@ -14,7 +14,7 @@ abstract class DeckCreatorState extends Equatable {
 }
 
 class DeckCreatorInitial extends DeckCreatorState {
-  const DeckCreatorInitial() : super("", ModeBadgeType.standard, null, null);
+  const DeckCreatorInitial() : super("", DeckType.standard, null, null);
 }
 
 class DeckCreatorChanged extends DeckCreatorState {

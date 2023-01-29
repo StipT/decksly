@@ -15,9 +15,10 @@ import '../features/card_gallery/domain/repository/cards_repository.dart'
 import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'
     as _i8;
 import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i9;
+import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i10;
 import '../features/deck_selector/ui/bloc/deck_creator_bloc.dart' as _i7;
 import '../repository/remote_source/api/api_service.dart' as _i3;
-import 'util_module.dart' as _i10; // ignore_for_file: unnecessary_lambdas
+import 'util_module.dart' as _i11; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -48,7 +49,11 @@ _i1.GetIt $initGetIt(
         get<_i5.NetworkInfo>(),
         fetchCardsUsecase: get<_i8.FetchCardsUsecase>(),
       ));
+  gh.factory<_i10.DeckBuilderBloc>(() => _i10.DeckBuilderBloc(
+        get<_i5.NetworkInfo>(),
+        fetchCardsUsecase: get<_i8.FetchCardsUsecase>(),
+      ));
   return get;
 }
 
-class _$UtilModule extends _i10.UtilModule {}
+class _$UtilModule extends _i11.UtilModule {}

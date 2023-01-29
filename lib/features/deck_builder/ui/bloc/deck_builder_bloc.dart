@@ -5,6 +5,9 @@ import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +66,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       },
       (cards) {
     //    log(state.cardFilterParams.toString(), level: Level.error);
-        emit(CardsLoaded(cards, updatedParams));
+        emit(CardsLoaded(Deck(cards: [], classType: DeckClass.warlock, modeType: DeckType.standard), cards, updatedParams));
       },
     );
   }

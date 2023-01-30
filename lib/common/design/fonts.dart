@@ -53,6 +53,13 @@ class FontStyles {
 
   // Bold Belwe
 
+  static TextStyle bold11 = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.w900,
+    fontSize: 11.sp,
+    color: AppColors.white,
+  );
+
   static TextStyle bold11WithShadow = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.bold,

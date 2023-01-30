@@ -147,5 +147,7 @@
   "close": "Close",
   "load": "Load",
   "import": "Import",
-  "pasteADeckCodeHere": "Paste a deck code here"
+  "pasteADeckCodeHere": "Paste a deck code here",
+  "tapCardsToAddThemOrHold" : "Tap cards to add them or hold to see more details",
+  "copyDeckCode" : "COPY DECK CODE"
 }

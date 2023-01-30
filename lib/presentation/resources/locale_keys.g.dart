@@ -150,5 +150,7 @@ abstract class  LocaleKeys {
   static const load = 'load';
   static const import = 'import';
   static const pasteADeckCodeHere = 'pasteADeckCodeHere';
+  static const tapCardsToAddThemOrHold = 'tapCardsToAddThemOrHold';
+  static const copyDeckCode = 'copyDeckCode';
 
 }

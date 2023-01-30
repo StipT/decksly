@@ -147,5 +147,7 @@
   "close": "Schließen",
   "load": "Belastung",
   "import": "Importieren",
-  "pasteADeckCodeHere": "Fügen Sie hier einen Deckcode ein"
+  "pasteADeckCodeHere": "Fügen Sie hier einen Deckcode ein",
+  "tapCardsToAddThemOrHold" : "Tippen Sie auf Karten, um sie hinzuzufügen, oder halten Sie sie gedrückt, um weitere Details anzuzeigen",
+  "copyDeckCode" : "DECKCODE KOPIEREN"
 }

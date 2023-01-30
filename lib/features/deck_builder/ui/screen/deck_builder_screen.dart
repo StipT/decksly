@@ -51,7 +51,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Container(
+        body: SizedBox(
           height: 1.sh,
           width: 1.sw,
           child: Stack(
@@ -201,7 +201,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   _deckList() {
-    return Container(
+    return SizedBox(
       width: 234.w,
       child: DeckListMenu(
         width: 234.w,

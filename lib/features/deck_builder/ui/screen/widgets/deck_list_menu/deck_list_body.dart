@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
+import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,9 +23,10 @@ class DeckListBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-                Text(
-                  "Click cards to add them or paste a deck code",
+                AutoSizeText(
+                  LocaleKeys.tapCardsToAddThemOrHold.tr(),
                   style: FontStyles.bold11Purple,
+                  minFontSize: 9,
                   textAlign: TextAlign.center,
                 )
               ],

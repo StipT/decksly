@@ -40,6 +40,8 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
     on<RarityFilterChangedEvent>((event, emit) async => await handleRarityFilterChangedEvent(emit, event.rarity));
     on<KeywordFilterChangedEvent>((event, emit) async => await handleKeywordFilterChangedEvent(emit, event.keyword));
     on<LanguageChangedEvent>((event, emit) async => await handleLanguageChangedEvent(emit, event.language));
+    on<DeckChangedEvent>((event, emit) async => await handleDeckChanged(emit, event.deck));
+
     _streamInternetConnectionState();
   }
 
@@ -134,5 +136,10 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
   Future<void> handleLanguageChangedEvent(Emitter<DeckBuilderState> emit, String language) async {
     final CardFilterParams params = state.cardFilterParams.copyWith(locale: language, page: 0);
     await handleFetchCards(emit, params);
+  }
+
+  Future<void> handleDeckChanged(Emitter<DeckBuilderState> emit, Deck deck) async {
+    final Deck changedDeck = state.deck.copyWith(classType: deck.classType, modeType: deck.modeType, cards: deck.cards);
+    emit(CardsLoaded(changedDeck, state.page, state.cardFilterParams));
   }
 }

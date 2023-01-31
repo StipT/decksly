@@ -2,6 +2,7 @@ import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
+import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
 import 'package:decksly/features/deck_selector/ui/bloc/deck_creator_bloc.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_class_badge.dart';
 import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
@@ -235,7 +236,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                       isSelected: e == state.heroClass,
                       onTap: () {
                         BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context);
+                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.gameMode, state.heroClass));
                       }))
                   .toList()
                   .sublist(0, 6),
@@ -250,7 +251,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                       isSelected: e == state.heroClass,
                       onTap: () {
                         BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context);
+                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.gameMode, state.heroClass));
                       }))
                   .toList()
                   .sublist(6, 11),

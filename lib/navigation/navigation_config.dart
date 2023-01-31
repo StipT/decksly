@@ -45,30 +45,38 @@ class DeckBuilderRoute extends GoRoute {
   static String route() => '/deck-builder';
 
   static Widget _builder(
-      BuildContext ctx,
-      GoRouterState state,
-      ) =>
-      const DeckBuilderScreen();
+    BuildContext ctx,
+    GoRouterState state,
+  ) {
+    final arguments = state.extra as DeckBuilderArguments;
+
+    return DeckBuilderScreen(
+      deckBuilderArguments: arguments,
+    );
+  }
 
   static final _routes = <GoRoute>[];
 
-  static void open(BuildContext context) => context.go(route());
+  static void open(BuildContext context, DeckBuilderArguments arguments) => context.go(route(), extra: arguments);
 }
 
 class DeckSelectorRoute extends GoRoute {
   DeckSelectorRoute({
     super.path = _path,
     super.builder = _builder,
-  }) : super(routes: _routes, pageBuilder: (context, state) => buildPageWithHSTransition(),);
+  }) : super(
+          routes: _routes,
+          pageBuilder: (context, state) => buildPageWithHSTransition(),
+        );
 
   static const String _path = '/deck-selector';
 
   static String route() => '/deck-selector';
 
   static Widget _builder(
-      BuildContext ctx,
-      GoRouterState state,
-      ) =>
+    BuildContext ctx,
+    GoRouterState state,
+  ) =>
       const DeckSelectorScreen();
 
   static CustomTransitionPage buildPageWithHSTransition<T>() {
@@ -76,14 +84,12 @@ class DeckSelectorRoute extends GoRoute {
       child: const DeckSelectorScreen(),
       transitionDuration: const Duration(milliseconds: 500),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-
         const begin = Offset(0.0, -1.0);
         const end = Offset.zero;
         const curve = Curves.bounceOut;
 
         final tween = Tween(begin: begin, end: end);
         final curvedAnimation = CurvedAnimation(
-
           parent: animation,
           curve: curve,
         );

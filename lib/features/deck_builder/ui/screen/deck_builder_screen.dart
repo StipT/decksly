@@ -6,6 +6,10 @@ import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart'
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
+import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/no_results_widget.dart';
@@ -16,8 +20,20 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shimmer/shimmer.dart';
 
+class DeckBuilderArguments {
+  const DeckBuilderArguments(this.deckType, this.deckClass);
+
+  final DeckType? deckType;
+  final DeckClass? deckClass;
+}
+
 class DeckBuilderScreen extends StatefulWidget {
-  const DeckBuilderScreen({super.key});
+  const DeckBuilderScreen({
+    super.key,
+    required this.deckBuilderArguments,
+  });
+
+  final DeckBuilderArguments deckBuilderArguments;
 
   @override
   State<DeckBuilderScreen> createState() => _DeckBuilderScreenState();
@@ -32,8 +48,18 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
   @override
   void initState() {
+    BlocProvider.of<DeckBuilderBloc>(context).add(
+      DeckChangedEvent(
+        Deck(
+          cards: [],
+          modeType: widget.deckBuilderArguments.deckType ?? DeckType.standard,
+          classType: widget.deckBuilderArguments.deckClass ?? DeckClass.warrior,
+        ),
+      ),
+    );
+
     _pagingController.addPageRequestListener((pageKey) {
-      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(pageKey));
+      BlocProvider.of<DeckBuilderBloc>(context).add(FetchCardsEvent(pageKey));
     });
     super.initState();
   }

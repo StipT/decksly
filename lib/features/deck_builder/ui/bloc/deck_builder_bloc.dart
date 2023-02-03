@@ -17,7 +17,6 @@ import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'deck_builder_event.dart';
-part 'deck_builder_state.dart';
 
 @injectable
 class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {

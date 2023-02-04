@@ -161,6 +161,11 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
+    state.when(initial: (
+        cards, cardParams){},
+        loading: (cardParams){},
+        loaded: (cards) {},
+        failure: (failure) {});
     if (state is CardsLoaded) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
       // log("Page ${state.page}, ");

@@ -6,9 +6,9 @@ part 'cards_page.freezed.dart';
 @freezed
 class CardsPage with _$CardsPage {
   const factory CardsPage({
-    required List<CardDTO> cards,
-    required int cardCount,
-    required int pageCount,
-    required int page,
+    @Default([]) List<CardDTO>? cards,
+    @Default(0) int? cardCount,
+    @Default(0) int? pageCount,
+    @Default(0) int? page,
   }) = _CardsPage;
 }

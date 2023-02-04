@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CardsPage {
-  List<CardDTO> get cards => throw _privateConstructorUsedError;
-  int get cardCount => throw _privateConstructorUsedError;
-  int get pageCount => throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
+  List<CardDTO>? get cards => throw _privateConstructorUsedError;
+  int? get cardCount => throw _privateConstructorUsedError;
+  int? get pageCount => throw _privateConstructorUsedError;
+  int? get page => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CardsPageCopyWith<CardsPage> get copyWith =>
@@ -31,7 +31,7 @@ abstract class $CardsPageCopyWith<$Res> {
   factory $CardsPageCopyWith(CardsPage value, $Res Function(CardsPage) then) =
       _$CardsPageCopyWithImpl<$Res, CardsPage>;
   @useResult
-  $Res call({List<CardDTO> cards, int cardCount, int pageCount, int page});
+  $Res call({List<CardDTO>? cards, int? cardCount, int? pageCount, int? page});
 }
 
 /// @nodoc
@@ -47,28 +47,28 @@ class _$CardsPageCopyWithImpl<$Res, $Val extends CardsPage>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cards = null,
-    Object? cardCount = null,
-    Object? pageCount = null,
-    Object? page = null,
+    Object? cards = freezed,
+    Object? cardCount = freezed,
+    Object? pageCount = freezed,
+    Object? page = freezed,
   }) {
     return _then(_value.copyWith(
-      cards: null == cards
+      cards: freezed == cards
           ? _value.cards
           : cards // ignore: cast_nullable_to_non_nullable
-              as List<CardDTO>,
-      cardCount: null == cardCount
+              as List<CardDTO>?,
+      cardCount: freezed == cardCount
           ? _value.cardCount
           : cardCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      pageCount: null == pageCount
+              as int?,
+      pageCount: freezed == pageCount
           ? _value.pageCount
           : pageCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      page: null == page
+              as int?,
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -80,7 +80,7 @@ abstract class _$$_CardsPageCopyWith<$Res> implements $CardsPageCopyWith<$Res> {
       __$$_CardsPageCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<CardDTO> cards, int cardCount, int pageCount, int page});
+  $Res call({List<CardDTO>? cards, int? cardCount, int? pageCount, int? page});
 }
 
 /// @nodoc
@@ -94,28 +94,28 @@ class __$$_CardsPageCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cards = null,
-    Object? cardCount = null,
-    Object? pageCount = null,
-    Object? page = null,
+    Object? cards = freezed,
+    Object? cardCount = freezed,
+    Object? pageCount = freezed,
+    Object? page = freezed,
   }) {
     return _then(_$_CardsPage(
-      cards: null == cards
+      cards: freezed == cards
           ? _value._cards
           : cards // ignore: cast_nullable_to_non_nullable
-              as List<CardDTO>,
-      cardCount: null == cardCount
+              as List<CardDTO>?,
+      cardCount: freezed == cardCount
           ? _value.cardCount
           : cardCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      pageCount: null == pageCount
+              as int?,
+      pageCount: freezed == pageCount
           ? _value.pageCount
           : pageCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      page: null == page
+              as int?,
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -124,26 +124,32 @@ class __$$_CardsPageCopyWithImpl<$Res>
 
 class _$_CardsPage implements _CardsPage {
   const _$_CardsPage(
-      {required final List<CardDTO> cards,
-      required this.cardCount,
-      required this.pageCount,
-      required this.page})
+      {final List<CardDTO>? cards = const [],
+      this.cardCount = 0,
+      this.pageCount = 0,
+      this.page = 0})
       : _cards = cards;
 
-  final List<CardDTO> _cards;
+  final List<CardDTO>? _cards;
   @override
-  List<CardDTO> get cards {
+  @JsonKey()
+  List<CardDTO>? get cards {
+    final value = _cards;
+    if (value == null) return null;
     if (_cards is EqualUnmodifiableListView) return _cards;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cards);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int cardCount;
+  @JsonKey()
+  final int? cardCount;
   @override
-  final int pageCount;
+  @JsonKey()
+  final int? pageCount;
   @override
-  final int page;
+  @JsonKey()
+  final int? page;
 
   @override
   String toString() {
@@ -176,19 +182,19 @@ class _$_CardsPage implements _CardsPage {
 
 abstract class _CardsPage implements CardsPage {
   const factory _CardsPage(
-      {required final List<CardDTO> cards,
-      required final int cardCount,
-      required final int pageCount,
-      required final int page}) = _$_CardsPage;
+      {final List<CardDTO>? cards,
+      final int? cardCount,
+      final int? pageCount,
+      final int? page}) = _$_CardsPage;
 
   @override
-  List<CardDTO> get cards;
+  List<CardDTO>? get cards;
   @override
-  int get cardCount;
+  int? get cardCount;
   @override
-  int get pageCount;
+  int? get pageCount;
   @override
-  int get page;
+  int? get page;
   @override
   @JsonKey(ignore: true)
   _$$_CardsPageCopyWith<_$_CardsPage> get copyWith =>

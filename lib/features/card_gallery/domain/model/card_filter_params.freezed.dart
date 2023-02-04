@@ -303,57 +303,74 @@ class __$$_CardFilterParamsCopyWithImpl<$Res>
 
 class _$_CardFilterParams implements _CardFilterParams {
   const _$_CardFilterParams(
-      {this.pageSize,
-      this.page,
-      this.locale,
-      this.set,
-      this.heroClass,
-      this.manaCost,
-      this.attack,
-      this.health,
-      this.collectible,
-      this.rarity,
-      this.type,
-      this.minionType,
-      this.keyword,
-      this.textFilter,
-      this.gameMode,
-      this.spellSchool,
-      this.sort});
+      {this.pageSize = 0,
+      this.page = 0,
+      this.locale = "en_US",
+      this.set = "",
+      this.heroClass = "",
+      this.manaCost = "",
+      this.attack = "",
+      this.health = "",
+      this.collectible = "",
+      this.rarity = "",
+      this.type = "",
+      this.minionType = "",
+      this.keyword = "",
+      this.textFilter = "",
+      this.gameMode = "standard",
+      this.spellSchool = "",
+      this.sort = "manaCost:asc"});
 
   @override
+  @JsonKey()
   final int? pageSize;
   @override
+  @JsonKey()
   final num? page;
   @override
+  @JsonKey()
   final String? locale;
   @override
+  @JsonKey()
   final String? set;
   @override
+  @JsonKey()
   final String? heroClass;
   @override
+  @JsonKey()
   final String? manaCost;
   @override
+  @JsonKey()
   final String? attack;
   @override
+  @JsonKey()
   final String? health;
   @override
+  @JsonKey()
   final String? collectible;
   @override
+  @JsonKey()
   final String? rarity;
   @override
+  @JsonKey()
   final String? type;
   @override
+  @JsonKey()
   final String? minionType;
   @override
+  @JsonKey()
   final String? keyword;
   @override
+  @JsonKey()
   final String? textFilter;
   @override
+  @JsonKey()
   final String? gameMode;
   @override
+  @JsonKey()
   final String? spellSchool;
   @override
+  @JsonKey()
   final String? sort;
 
   @override

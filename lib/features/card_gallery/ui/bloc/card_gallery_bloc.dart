@@ -47,20 +47,15 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);
-        emit(CardGalleryState.failure(failure: failure));
+        emit(CardGalleryState.failure(failure: failure, cardFilterParams: updatedParams));
       },
       (cards) {
-        emit(CardGalleryState.loaded(page: cards));
+        emit(CardGalleryState.fetched(cardFilterParams: updatedParams, page: cards));
       },
     );
   }
 
   Future<void> handleCardFilterParamsChanged(Emitter<CardGalleryState> emit, CardFilterParams cardFilterParams) async {
-    state.maybeMap(
-      loading: (state) {
-        emit(CardGalleryState.fetching(cardFilterParams: cardFilterParams));
-      },
-      orElse: () {},
-    );
+    emit(CardGalleryState.fetching(cardFilterParams: cardFilterParams.copyWith(page: 0)));
   }
 }

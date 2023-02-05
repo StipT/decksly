@@ -42,14 +42,16 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
             child: Stack(
               children: [
                 Image.asset(
-                  assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.classType), fileExtension: JPG_EXTENSION),
+                "",
+            //assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.classType), fileExtension: JPG_EXTENSION),
                   fit: BoxFit.fill,
                 ),
                 Image.asset(
-                  assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.modeType)),
+                  "",
+                  //assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.modeType)),
                   fit: BoxFit.fill,
                 ),
-                if(isExpanded) Image.asset(assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.modeType))),
+                if(isExpanded) Image.asset("assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.modeType))"),
                 _headerContent(),
                 Positioned(right: 12.5.w, top: 12.5.h, child: Image.asset(
                   assetPath(SUBFOLDER_MISC, "arrow"),

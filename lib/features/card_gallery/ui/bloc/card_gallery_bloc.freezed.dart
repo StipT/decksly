@@ -16,31 +16,39 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CardGalleryState {
+  CardFilterParams get cardFilterParams => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CardsPage page, CardFilterParams cardFilterParams)
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
         initial,
     required TResult Function(CardFilterParams cardFilterParams) fetching,
-    required TResult Function(CardsPage page) loaded,
-    required TResult Function(Failure failure) failure,
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
+        fetched,
+    required TResult Function(
+            CardFilterParams cardFilterParams, Failure failure)
+        failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult? Function(CardFilterParams cardFilterParams)? fetching,
-    TResult? Function(CardsPage page)? loaded,
-    TResult? Function(Failure failure)? failure,
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult? Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult Function(CardFilterParams cardFilterParams)? fetching,
-    TResult Function(CardsPage page)? loaded,
-    TResult Function(Failure failure)? failure,
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +56,7 @@ mixin _$CardGalleryState {
   TResult map<TResult extends Object?>({
     required TResult Function(_CardGalleryInitial value) initial,
     required TResult Function(_CardGalleryLoading value) fetching,
-    required TResult Function(_CardGalleryLoaded value) loaded,
+    required TResult Function(_CardGalleryLoaded value) fetched,
     required TResult Function(_CardGalleryError value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,7 +64,7 @@ mixin _$CardGalleryState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CardGalleryInitial value)? initial,
     TResult? Function(_CardGalleryLoading value)? fetching,
-    TResult? Function(_CardGalleryLoaded value)? loaded,
+    TResult? Function(_CardGalleryLoaded value)? fetched,
     TResult? Function(_CardGalleryError value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,10 +72,14 @@ mixin _$CardGalleryState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CardGalleryInitial value)? initial,
     TResult Function(_CardGalleryLoading value)? fetching,
-    TResult Function(_CardGalleryLoaded value)? loaded,
+    TResult Function(_CardGalleryLoaded value)? fetched,
     TResult Function(_CardGalleryError value)? failure,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CardGalleryStateCopyWith<CardGalleryState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -76,6 +88,10 @@ abstract class $CardGalleryStateCopyWith<$Res> {
   factory $CardGalleryStateCopyWith(
           CardGalleryState value, $Res Function(CardGalleryState) then) =
       _$CardGalleryStateCopyWithImpl<$Res, CardGalleryState>;
+  @useResult
+  $Res call({CardFilterParams cardFilterParams});
+
+  $CardFilterParamsCopyWith<$Res> get cardFilterParams;
 }
 
 /// @nodoc
@@ -87,18 +103,42 @@ class _$CardGalleryStateCopyWithImpl<$Res, $Val extends CardGalleryState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cardFilterParams = null,
+  }) {
+    return _then(_value.copyWith(
+      cardFilterParams: null == cardFilterParams
+          ? _value.cardFilterParams
+          : cardFilterParams // ignore: cast_nullable_to_non_nullable
+              as CardFilterParams,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CardFilterParamsCopyWith<$Res> get cardFilterParams {
+    return $CardFilterParamsCopyWith<$Res>(_value.cardFilterParams, (value) {
+      return _then(_value.copyWith(cardFilterParams: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_CardGalleryInitialCopyWith<$Res> {
+abstract class _$$_CardGalleryInitialCopyWith<$Res>
+    implements $CardGalleryStateCopyWith<$Res> {
   factory _$$_CardGalleryInitialCopyWith(_$_CardGalleryInitial value,
           $Res Function(_$_CardGalleryInitial) then) =
       __$$_CardGalleryInitialCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({CardsPage page, CardFilterParams cardFilterParams});
+  $Res call({CardFilterParams cardFilterParams, CardsPage page});
 
-  $CardsPageCopyWith<$Res> get page;
+  @override
   $CardFilterParamsCopyWith<$Res> get cardFilterParams;
+  $CardsPageCopyWith<$Res> get page;
 }
 
 /// @nodoc
@@ -112,18 +152,18 @@ class __$$_CardGalleryInitialCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = null,
     Object? cardFilterParams = null,
+    Object? page = null,
   }) {
     return _then(_$_CardGalleryInitial(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as CardsPage,
       cardFilterParams: null == cardFilterParams
           ? _value.cardFilterParams
           : cardFilterParams // ignore: cast_nullable_to_non_nullable
               as CardFilterParams,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as CardsPage,
     ));
   }
 
@@ -134,30 +174,22 @@ class __$$_CardGalleryInitialCopyWithImpl<$Res>
       return _then(_value.copyWith(page: value));
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CardFilterParamsCopyWith<$Res> get cardFilterParams {
-    return $CardFilterParamsCopyWith<$Res>(_value.cardFilterParams, (value) {
-      return _then(_value.copyWith(cardFilterParams: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_CardGalleryInitial implements _CardGalleryInitial {
   const _$_CardGalleryInitial(
-      {required this.page, required this.cardFilterParams});
+      {required this.cardFilterParams, required this.page});
 
   @override
-  final CardsPage page;
-  @override
   final CardFilterParams cardFilterParams;
+  @override
+  final CardsPage page;
 
   @override
   String toString() {
-    return 'CardGalleryState.initial(page: $page, cardFilterParams: $cardFilterParams)';
+    return 'CardGalleryState.initial(cardFilterParams: $cardFilterParams, page: $page)';
   }
 
   @override
@@ -165,13 +197,13 @@ class _$_CardGalleryInitial implements _CardGalleryInitial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CardGalleryInitial &&
-            (identical(other.page, page) || other.page == page) &&
             (identical(other.cardFilterParams, cardFilterParams) ||
-                other.cardFilterParams == cardFilterParams));
+                other.cardFilterParams == cardFilterParams) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, page, cardFilterParams);
+  int get hashCode => Object.hash(runtimeType, cardFilterParams, page);
 
   @JsonKey(ignore: true)
   @override
@@ -183,39 +215,46 @@ class _$_CardGalleryInitial implements _CardGalleryInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CardsPage page, CardFilterParams cardFilterParams)
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
         initial,
     required TResult Function(CardFilterParams cardFilterParams) fetching,
-    required TResult Function(CardsPage page) loaded,
-    required TResult Function(Failure failure) failure,
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
+        fetched,
+    required TResult Function(
+            CardFilterParams cardFilterParams, Failure failure)
+        failure,
   }) {
-    return initial(page, cardFilterParams);
+    return initial(cardFilterParams, page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult? Function(CardFilterParams cardFilterParams)? fetching,
-    TResult? Function(CardsPage page)? loaded,
-    TResult? Function(Failure failure)? failure,
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult? Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
   }) {
-    return initial?.call(page, cardFilterParams);
+    return initial?.call(cardFilterParams, page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult Function(CardFilterParams cardFilterParams)? fetching,
-    TResult Function(CardsPage page)? loaded,
-    TResult Function(Failure failure)? failure,
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(page, cardFilterParams);
+      return initial(cardFilterParams, page);
     }
     return orElse();
   }
@@ -225,7 +264,7 @@ class _$_CardGalleryInitial implements _CardGalleryInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_CardGalleryInitial value) initial,
     required TResult Function(_CardGalleryLoading value) fetching,
-    required TResult Function(_CardGalleryLoaded value) loaded,
+    required TResult Function(_CardGalleryLoaded value) fetched,
     required TResult Function(_CardGalleryError value) failure,
   }) {
     return initial(this);
@@ -236,7 +275,7 @@ class _$_CardGalleryInitial implements _CardGalleryInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CardGalleryInitial value)? initial,
     TResult? Function(_CardGalleryLoading value)? fetching,
-    TResult? Function(_CardGalleryLoaded value)? loaded,
+    TResult? Function(_CardGalleryLoaded value)? fetched,
     TResult? Function(_CardGalleryError value)? failure,
   }) {
     return initial?.call(this);
@@ -247,7 +286,7 @@ class _$_CardGalleryInitial implements _CardGalleryInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CardGalleryInitial value)? initial,
     TResult Function(_CardGalleryLoading value)? fetching,
-    TResult Function(_CardGalleryLoaded value)? loaded,
+    TResult Function(_CardGalleryLoaded value)? fetched,
     TResult Function(_CardGalleryError value)? failure,
     required TResult orElse(),
   }) {
@@ -260,25 +299,29 @@ class _$_CardGalleryInitial implements _CardGalleryInitial {
 
 abstract class _CardGalleryInitial implements CardGalleryState {
   const factory _CardGalleryInitial(
-          {required final CardsPage page,
-          required final CardFilterParams cardFilterParams}) =
-      _$_CardGalleryInitial;
+      {required final CardFilterParams cardFilterParams,
+      required final CardsPage page}) = _$_CardGalleryInitial;
 
-  CardsPage get page;
+  @override
   CardFilterParams get cardFilterParams;
+  CardsPage get page;
+  @override
   @JsonKey(ignore: true)
   _$$_CardGalleryInitialCopyWith<_$_CardGalleryInitial> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CardGalleryLoadingCopyWith<$Res> {
+abstract class _$$_CardGalleryLoadingCopyWith<$Res>
+    implements $CardGalleryStateCopyWith<$Res> {
   factory _$$_CardGalleryLoadingCopyWith(_$_CardGalleryLoading value,
           $Res Function(_$_CardGalleryLoading) then) =
       __$$_CardGalleryLoadingCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({CardFilterParams cardFilterParams});
 
+  @override
   $CardFilterParamsCopyWith<$Res> get cardFilterParams;
 }
 
@@ -301,14 +344,6 @@ class __$$_CardGalleryLoadingCopyWithImpl<$Res>
           : cardFilterParams // ignore: cast_nullable_to_non_nullable
               as CardFilterParams,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CardFilterParamsCopyWith<$Res> get cardFilterParams {
-    return $CardFilterParamsCopyWith<$Res>(_value.cardFilterParams, (value) {
-      return _then(_value.copyWith(cardFilterParams: value));
-    });
   }
 }
 
@@ -347,11 +382,14 @@ class _$_CardGalleryLoading implements _CardGalleryLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CardsPage page, CardFilterParams cardFilterParams)
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
         initial,
     required TResult Function(CardFilterParams cardFilterParams) fetching,
-    required TResult Function(CardsPage page) loaded,
-    required TResult Function(Failure failure) failure,
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
+        fetched,
+    required TResult Function(
+            CardFilterParams cardFilterParams, Failure failure)
+        failure,
   }) {
     return fetching(cardFilterParams);
   }
@@ -359,11 +397,13 @@ class _$_CardGalleryLoading implements _CardGalleryLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult? Function(CardFilterParams cardFilterParams)? fetching,
-    TResult? Function(CardsPage page)? loaded,
-    TResult? Function(Failure failure)? failure,
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult? Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
   }) {
     return fetching?.call(cardFilterParams);
   }
@@ -371,11 +411,13 @@ class _$_CardGalleryLoading implements _CardGalleryLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult Function(CardFilterParams cardFilterParams)? fetching,
-    TResult Function(CardsPage page)? loaded,
-    TResult Function(Failure failure)? failure,
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
     required TResult orElse(),
   }) {
     if (fetching != null) {
@@ -389,7 +431,7 @@ class _$_CardGalleryLoading implements _CardGalleryLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_CardGalleryInitial value) initial,
     required TResult Function(_CardGalleryLoading value) fetching,
-    required TResult Function(_CardGalleryLoaded value) loaded,
+    required TResult Function(_CardGalleryLoaded value) fetched,
     required TResult Function(_CardGalleryError value) failure,
   }) {
     return fetching(this);
@@ -400,7 +442,7 @@ class _$_CardGalleryLoading implements _CardGalleryLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CardGalleryInitial value)? initial,
     TResult? Function(_CardGalleryLoading value)? fetching,
-    TResult? Function(_CardGalleryLoaded value)? loaded,
+    TResult? Function(_CardGalleryLoaded value)? fetched,
     TResult? Function(_CardGalleryError value)? failure,
   }) {
     return fetching?.call(this);
@@ -411,7 +453,7 @@ class _$_CardGalleryLoading implements _CardGalleryLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CardGalleryInitial value)? initial,
     TResult Function(_CardGalleryLoading value)? fetching,
-    TResult Function(_CardGalleryLoaded value)? loaded,
+    TResult Function(_CardGalleryLoaded value)? fetched,
     TResult Function(_CardGalleryError value)? failure,
     required TResult orElse(),
   }) {
@@ -427,20 +469,26 @@ abstract class _CardGalleryLoading implements CardGalleryState {
           {required final CardFilterParams cardFilterParams}) =
       _$_CardGalleryLoading;
 
+  @override
   CardFilterParams get cardFilterParams;
+  @override
   @JsonKey(ignore: true)
   _$$_CardGalleryLoadingCopyWith<_$_CardGalleryLoading> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CardGalleryLoadedCopyWith<$Res> {
+abstract class _$$_CardGalleryLoadedCopyWith<$Res>
+    implements $CardGalleryStateCopyWith<$Res> {
   factory _$$_CardGalleryLoadedCopyWith(_$_CardGalleryLoaded value,
           $Res Function(_$_CardGalleryLoaded) then) =
       __$$_CardGalleryLoadedCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({CardsPage page});
+  $Res call({CardFilterParams cardFilterParams, CardsPage page});
 
+  @override
+  $CardFilterParamsCopyWith<$Res> get cardFilterParams;
   $CardsPageCopyWith<$Res> get page;
 }
 
@@ -455,9 +503,14 @@ class __$$_CardGalleryLoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? cardFilterParams = null,
     Object? page = null,
   }) {
     return _then(_$_CardGalleryLoaded(
+      cardFilterParams: null == cardFilterParams
+          ? _value.cardFilterParams
+          : cardFilterParams // ignore: cast_nullable_to_non_nullable
+              as CardFilterParams,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -477,14 +530,17 @@ class __$$_CardGalleryLoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CardGalleryLoaded implements _CardGalleryLoaded {
-  const _$_CardGalleryLoaded({required this.page});
+  const _$_CardGalleryLoaded(
+      {required this.cardFilterParams, required this.page});
 
+  @override
+  final CardFilterParams cardFilterParams;
   @override
   final CardsPage page;
 
   @override
   String toString() {
-    return 'CardGalleryState.loaded(page: $page)';
+    return 'CardGalleryState.fetched(cardFilterParams: $cardFilterParams, page: $page)';
   }
 
   @override
@@ -492,11 +548,13 @@ class _$_CardGalleryLoaded implements _CardGalleryLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CardGalleryLoaded &&
+            (identical(other.cardFilterParams, cardFilterParams) ||
+                other.cardFilterParams == cardFilterParams) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, page);
+  int get hashCode => Object.hash(runtimeType, cardFilterParams, page);
 
   @JsonKey(ignore: true)
   @override
@@ -508,39 +566,46 @@ class _$_CardGalleryLoaded implements _CardGalleryLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CardsPage page, CardFilterParams cardFilterParams)
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
         initial,
     required TResult Function(CardFilterParams cardFilterParams) fetching,
-    required TResult Function(CardsPage page) loaded,
-    required TResult Function(Failure failure) failure,
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
+        fetched,
+    required TResult Function(
+            CardFilterParams cardFilterParams, Failure failure)
+        failure,
   }) {
-    return loaded(page);
+    return fetched(cardFilterParams, page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult? Function(CardFilterParams cardFilterParams)? fetching,
-    TResult? Function(CardsPage page)? loaded,
-    TResult? Function(Failure failure)? failure,
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult? Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
   }) {
-    return loaded?.call(page);
+    return fetched?.call(cardFilterParams, page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult Function(CardFilterParams cardFilterParams)? fetching,
-    TResult Function(CardsPage page)? loaded,
-    TResult Function(Failure failure)? failure,
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(page);
+    if (fetched != null) {
+      return fetched(cardFilterParams, page);
     }
     return orElse();
   }
@@ -550,10 +615,10 @@ class _$_CardGalleryLoaded implements _CardGalleryLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_CardGalleryInitial value) initial,
     required TResult Function(_CardGalleryLoading value) fetching,
-    required TResult Function(_CardGalleryLoaded value) loaded,
+    required TResult Function(_CardGalleryLoaded value) fetched,
     required TResult Function(_CardGalleryError value) failure,
   }) {
-    return loaded(this);
+    return fetched(this);
   }
 
   @override
@@ -561,10 +626,10 @@ class _$_CardGalleryLoaded implements _CardGalleryLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CardGalleryInitial value)? initial,
     TResult? Function(_CardGalleryLoading value)? fetching,
-    TResult? Function(_CardGalleryLoaded value)? loaded,
+    TResult? Function(_CardGalleryLoaded value)? fetched,
     TResult? Function(_CardGalleryError value)? failure,
   }) {
-    return loaded?.call(this);
+    return fetched?.call(this);
   }
 
   @override
@@ -572,34 +637,43 @@ class _$_CardGalleryLoaded implements _CardGalleryLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CardGalleryInitial value)? initial,
     TResult Function(_CardGalleryLoading value)? fetching,
-    TResult Function(_CardGalleryLoaded value)? loaded,
+    TResult Function(_CardGalleryLoaded value)? fetched,
     TResult Function(_CardGalleryError value)? failure,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    if (fetched != null) {
+      return fetched(this);
     }
     return orElse();
   }
 }
 
 abstract class _CardGalleryLoaded implements CardGalleryState {
-  const factory _CardGalleryLoaded({required final CardsPage page}) =
-      _$_CardGalleryLoaded;
+  const factory _CardGalleryLoaded(
+      {required final CardFilterParams cardFilterParams,
+      required final CardsPage page}) = _$_CardGalleryLoaded;
 
+  @override
+  CardFilterParams get cardFilterParams;
   CardsPage get page;
+  @override
   @JsonKey(ignore: true)
   _$$_CardGalleryLoadedCopyWith<_$_CardGalleryLoaded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CardGalleryErrorCopyWith<$Res> {
+abstract class _$$_CardGalleryErrorCopyWith<$Res>
+    implements $CardGalleryStateCopyWith<$Res> {
   factory _$$_CardGalleryErrorCopyWith(
           _$_CardGalleryError value, $Res Function(_$_CardGalleryError) then) =
       __$$_CardGalleryErrorCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({Failure failure});
+  $Res call({CardFilterParams cardFilterParams, Failure failure});
+
+  @override
+  $CardFilterParamsCopyWith<$Res> get cardFilterParams;
 }
 
 /// @nodoc
@@ -613,9 +687,14 @@ class __$$_CardGalleryErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? cardFilterParams = null,
     Object? failure = null,
   }) {
     return _then(_$_CardGalleryError(
+      cardFilterParams: null == cardFilterParams
+          ? _value.cardFilterParams
+          : cardFilterParams // ignore: cast_nullable_to_non_nullable
+              as CardFilterParams,
       failure: null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -627,14 +706,17 @@ class __$$_CardGalleryErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CardGalleryError implements _CardGalleryError {
-  const _$_CardGalleryError({required this.failure});
+  const _$_CardGalleryError(
+      {required this.cardFilterParams, required this.failure});
 
+  @override
+  final CardFilterParams cardFilterParams;
   @override
   final Failure failure;
 
   @override
   String toString() {
-    return 'CardGalleryState.failure(failure: $failure)';
+    return 'CardGalleryState.failure(cardFilterParams: $cardFilterParams, failure: $failure)';
   }
 
   @override
@@ -642,11 +724,13 @@ class _$_CardGalleryError implements _CardGalleryError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CardGalleryError &&
+            (identical(other.cardFilterParams, cardFilterParams) ||
+                other.cardFilterParams == cardFilterParams) &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure);
+  int get hashCode => Object.hash(runtimeType, cardFilterParams, failure);
 
   @JsonKey(ignore: true)
   @override
@@ -657,39 +741,46 @@ class _$_CardGalleryError implements _CardGalleryError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(CardsPage page, CardFilterParams cardFilterParams)
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
         initial,
     required TResult Function(CardFilterParams cardFilterParams) fetching,
-    required TResult Function(CardsPage page) loaded,
-    required TResult Function(Failure failure) failure,
+    required TResult Function(CardFilterParams cardFilterParams, CardsPage page)
+        fetched,
+    required TResult Function(
+            CardFilterParams cardFilterParams, Failure failure)
+        failure,
   }) {
-    return failure(this.failure);
+    return failure(cardFilterParams, this.failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult? Function(CardFilterParams cardFilterParams)? fetching,
-    TResult? Function(CardsPage page)? loaded,
-    TResult? Function(Failure failure)? failure,
+    TResult? Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult? Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
   }) {
-    return failure?.call(this.failure);
+    return failure?.call(cardFilterParams, this.failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CardsPage page, CardFilterParams cardFilterParams)?
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
         initial,
     TResult Function(CardFilterParams cardFilterParams)? fetching,
-    TResult Function(CardsPage page)? loaded,
-    TResult Function(Failure failure)? failure,
+    TResult Function(CardFilterParams cardFilterParams, CardsPage page)?
+        fetched,
+    TResult Function(CardFilterParams cardFilterParams, Failure failure)?
+        failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(this.failure);
+      return failure(cardFilterParams, this.failure);
     }
     return orElse();
   }
@@ -699,7 +790,7 @@ class _$_CardGalleryError implements _CardGalleryError {
   TResult map<TResult extends Object?>({
     required TResult Function(_CardGalleryInitial value) initial,
     required TResult Function(_CardGalleryLoading value) fetching,
-    required TResult Function(_CardGalleryLoaded value) loaded,
+    required TResult Function(_CardGalleryLoaded value) fetched,
     required TResult Function(_CardGalleryError value) failure,
   }) {
     return failure(this);
@@ -710,7 +801,7 @@ class _$_CardGalleryError implements _CardGalleryError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CardGalleryInitial value)? initial,
     TResult? Function(_CardGalleryLoading value)? fetching,
-    TResult? Function(_CardGalleryLoaded value)? loaded,
+    TResult? Function(_CardGalleryLoaded value)? fetched,
     TResult? Function(_CardGalleryError value)? failure,
   }) {
     return failure?.call(this);
@@ -721,7 +812,7 @@ class _$_CardGalleryError implements _CardGalleryError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CardGalleryInitial value)? initial,
     TResult Function(_CardGalleryLoading value)? fetching,
-    TResult Function(_CardGalleryLoaded value)? loaded,
+    TResult Function(_CardGalleryLoaded value)? fetched,
     TResult Function(_CardGalleryError value)? failure,
     required TResult orElse(),
   }) {
@@ -733,10 +824,14 @@ class _$_CardGalleryError implements _CardGalleryError {
 }
 
 abstract class _CardGalleryError implements CardGalleryState {
-  const factory _CardGalleryError({required final Failure failure}) =
-      _$_CardGalleryError;
+  const factory _CardGalleryError(
+      {required final CardFilterParams cardFilterParams,
+      required final Failure failure}) = _$_CardGalleryError;
 
+  @override
+  CardFilterParams get cardFilterParams;
   Failure get failure;
+  @override
   @JsonKey(ignore: true)
   _$$_CardGalleryErrorCopyWith<_$_CardGalleryError> get copyWith =>
       throw _privateConstructorUsedError;

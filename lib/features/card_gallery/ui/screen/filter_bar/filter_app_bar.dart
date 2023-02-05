@@ -3,6 +3,7 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/data/card_set.dart';
 import 'package:decksly/data/sort_by.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar_extension.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
@@ -43,7 +44,6 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
       builder: (BuildContext context, state) {
         if (_isExtended == true && (widget.forceCollapse ?? false)) _toggleBarExtension();
-
         return AnimatedContainer(
           curve: Curves.bounceOut,
           duration: const Duration(milliseconds: 500),
@@ -70,8 +70,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               selectedValue: state.cardFilterParams.set ?? CardSet.standard.value,
                               dropdownType: DropdownType.cardSet,
                               dropdownValues: CardSet.values.map((e) => e.value).toList(),
-                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                                  .add(CardSetChangedEvent(cardSetFromIndex(value).value)),
+                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
+                                  CardFilterParamsChangedEvent(
+                                      state.cardFilterParams.copyWith(set: cardSetFromIndex(value).value))),
                             ),
                           ),
                           HSDropdown(
@@ -80,21 +81,22 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             selectedValue: state.cardFilterParams.heroClass ?? CardClass.allClasses.value,
                             dropdownType: DropdownType.cardClass,
                             dropdownValues: CardClass.values.map((e) => e.value).toList(),
-                            onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                                .add(CardClassChangedEvent(cardClassFromIndex(value).value)),
+                            onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
+                                CardFilterParamsChangedEvent(
+                                    state.cardFilterParams.copyWith(heroClass: cardClassFromIndex(value).value))),
                           ),
                           SizedBox(
                               width: 330.w,
                               child: ManaPicker(
-                                onChange: (mana) =>
-                                    BlocProvider.of<CardGalleryBloc>(context).add(ManaFilterChangedEvent(mana)),
+                                onChange: (mana) => BlocProvider.of<CardGalleryBloc>(context)
+                                    .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(manaCost: mana))),
                               )),
                           Expanded(
                               child: HSTextField(
                             hint: LocaleKeys.search.tr(),
                             isSearchTextField: true,
-                            onChange: (text) =>
-                                BlocProvider.of<CardGalleryBloc>(context).add(SearchFilterChangedEvent(text)),
+                            onChange: (text) => BlocProvider.of<CardGalleryBloc>(context)
+                                .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(textFilter: text))),
                             theme: TextFieldTheme.velvet,
                           )),
                           HSBarToggleButton(
@@ -105,7 +107,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               color: AppColors.bistreBrown,
                             ),
                             isToggled: _isExtended,
-                            activeFilters: extraFiltersActive(state),
+                            activeFilters: extraFiltersActive(state.cardFilterParams),
                             onTap: () {
                               _toggleBarExtension();
                             },
@@ -117,6 +119,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                   Flexible(
                     child: FilterAppBarExtension(
                       height: _isExtended ? 25.h : 0,
+                      cardFilterParams: state.cardFilterParams,
                     ),
                   ),
                 ],
@@ -128,32 +131,32 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     );
   }
 
-  int extraFiltersActive(CardGalleryState state) {
+  int extraFiltersActive(CardFilterParams cardFilterParams) {
     int activeFilters = 0;
-    if (state.cardFilterParams.sort != null &&
-        state.cardFilterParams.sort!.isNotEmpty &&
-        state.cardFilterParams.sort != SortBy.manaAsc.value) {
+    if (cardFilterParams.sort != null &&
+        cardFilterParams.sort!.isNotEmpty &&
+        cardFilterParams.sort != SortBy.manaAsc.value) {
       activeFilters++;
     }
-    if (state.cardFilterParams.attack != null && state.cardFilterParams.attack!.isNotEmpty) {
+    if (cardFilterParams.attack != null && cardFilterParams.attack!.isNotEmpty) {
       activeFilters++;
     }
-    if (state.cardFilterParams.health != null && state.cardFilterParams.health!.isNotEmpty) {
+    if (cardFilterParams.health != null && cardFilterParams.health!.isNotEmpty) {
       activeFilters++;
     }
-    if (state.cardFilterParams.type != null && state.cardFilterParams.type!.isNotEmpty) {
+    if (cardFilterParams.type != null && cardFilterParams.type!.isNotEmpty) {
       activeFilters++;
     }
-    if (state.cardFilterParams.minionType != null && state.cardFilterParams.minionType!.isNotEmpty) {
+    if (cardFilterParams.minionType != null && cardFilterParams.minionType!.isNotEmpty) {
       activeFilters++;
     }
-    if (state.cardFilterParams.spellSchool != null && state.cardFilterParams.spellSchool!.isNotEmpty) {
+    if (cardFilterParams.spellSchool != null && cardFilterParams.spellSchool!.isNotEmpty) {
       activeFilters++;
     }
-    if (state.cardFilterParams.rarity != null && state.cardFilterParams.rarity!.isNotEmpty) {
+    if (cardFilterParams.rarity != null && cardFilterParams.rarity!.isNotEmpty) {
       activeFilters++;
     }
-    if (state.cardFilterParams.keyword != null && state.cardFilterParams.keyword!.isNotEmpty) {
+    if (cardFilterParams.keyword != null && cardFilterParams.keyword!.isNotEmpty) {
       activeFilters++;
     }
     return activeFilters;

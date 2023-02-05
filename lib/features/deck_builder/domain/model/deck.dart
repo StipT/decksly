@@ -8,8 +8,8 @@ part 'deck.freezed.dart';
 @freezed
 class Deck with _$Deck {
   const factory Deck({
-    required List<CardDTO> cards,
-    required DeckType modeType,
-    required DeckClass classType,
+    @Default([]) List<CardDTO> cards,
+    @Default(DeckType.standard) DeckType modeType,
+    @Default(DeckClass.warrior) DeckClass classType,
   }) = _Deck;
 }

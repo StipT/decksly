@@ -4,7 +4,6 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

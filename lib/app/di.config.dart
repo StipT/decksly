@@ -16,7 +16,7 @@ import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'
     as _i8;
 import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i9;
 import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i10;
-import '../features/deck_selector/ui/bloc/deck_creator_bloc.dart' as _i7;
+import '../features/deck_selection/ui/bloc/deck_selection_bloc.dart' as _i7;
 import '../repository/remote_source/api/api_service.dart' as _i3;
 import 'util_module.dart' as _i11; // ignore_for_file: unnecessary_lambdas
 
@@ -41,8 +41,8 @@ _i1.GetIt $initGetIt(
         get<_i3.ApiService>(),
         get<_i5.NetworkInfo>(),
       ));
-  gh.factory<_i7.DeckCreatorBloc>(
-      () => _i7.DeckCreatorBloc(get<_i5.NetworkInfo>()));
+  gh.factory<_i7.DeckSelectionBloc>(
+      () => _i7.DeckSelectionBloc(get<_i5.NetworkInfo>()));
   gh.lazySingleton<_i8.FetchCardsUsecase>(
       () => _i8.FetchCardsUsecase(get<_i6.CardsRepository>()));
   gh.factory<_i9.CardGalleryBloc>(() => _i9.CardGalleryBloc(

@@ -1,14 +1,15 @@
+import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
-import 'package:decksly/features/deck_selector/ui/bloc/deck_creator_bloc.dart';
-import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_class_badge.dart';
-import 'package:decksly/features/deck_selector/ui/screen/widgets/hs_mode_badge.dart';
+import 'package:decksly/features/deck_selection/ui/bloc/deck_selection_bloc.dart';
+import 'package:decksly/features/deck_selection/ui/screen/widgets/hs_class_badge.dart';
+import 'package:decksly/features/deck_selection/ui/screen/widgets/hs_mode_badge.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_deck_creator_background.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_deck_selection_background.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
 import 'package:decksly/reusable_ui/button/hs_button.dart';
 import 'package:decksly/reusable_ui/text_field/hs_text_field.dart';
@@ -18,14 +19,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DeckSelectorScreen extends StatefulWidget {
-  const DeckSelectorScreen({super.key});
+class DeckSelectionScreen extends StatefulWidget {
+  const DeckSelectionScreen({super.key});
 
   @override
-  State<DeckSelectorScreen> createState() => _DeckSelectorScreenState();
+  State<DeckSelectionScreen> createState() => _DeckSelectionScreenState();
 }
 
-class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
+class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
   @override
   void initState() {
     super.initState();
@@ -38,12 +39,12 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DeckCreatorBloc, DeckCreatorState>(builder: (BuildContext context, state) {
+    return BlocBuilder<DeckSelectionBloc, DeckSelectionState>(builder: (BuildContext context, state) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
-            const HSDeckCreatorBackground(),
+            const HSDeckSelectionBackground(),
             Column(
               children: [
                 _getAppBar(state),
@@ -51,31 +52,31 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                 Expanded(child: _getClassSelector(state)),
               ],
             ),
-            if(state.gameMode == DeckType.wild)
-            Positioned(
-              width: 125.w,
-              top: 36.h,
-              left: 18.w,
-              child: Image.asset(
-                assetPath(SUBFOLDER_MISC, "wild_branch_left"),
+            if (state.deckType == DeckType.wild)
+              Positioned(
+                width: 125.w,
+                top: 36.h,
+                left: 18.w,
+                child: Image.asset(
+                  assetPath(SUBFOLDER_MISC, "wild_branch_left"),
+                ),
               ),
-            ),
-            if(state.gameMode == DeckType.wild)
-            Positioned(
-              width: 125.w,
-              top: 36.h,
-              right: 18.w,
-              child: Image.asset(
-                assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+            if (state.deckType == DeckType.wild)
+              Positioned(
+                width: 125.w,
+                top: 36.h,
+                right: 18.w,
+                child: Image.asset(
+                  assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+                ),
               ),
-            ),
           ],
         ),
       );
     });
   }
 
-  Widget _getAppBar(DeckCreatorState state) {
+  Widget _getAppBar(DeckSelectionState state) {
     return Container(
       height: 35.h,
       padding: EdgeInsets.only(top: 7.5.h, bottom: 2.5.h, right: 10.w),
@@ -164,7 +165,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
     );
   }
 
-  Widget _getModeSelector(DeckCreatorState state) {
+  Widget _getModeSelector(DeckSelectionState state) {
     return Container(
       width: 1.sw,
       height: 42.5.h,
@@ -182,22 +183,21 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
                       child: Image.asset(assetPath(SUBFOLDER_MISC, "velvet_ornament_left"))),
                   HSModeBadge(
                       type: DeckType.standard,
-                      isSelected: DeckType.standard == state.gameMode,
+                      isSelected: DeckType.standard == state.deckType,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context)
-                            .add(const ChangeGameModeEvent(DeckType.standard));
+                        BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.standard));
                       }),
                   HSModeBadge(
                       type: DeckType.classic,
-                      isSelected: DeckType.classic == state.gameMode,
+                      isSelected: DeckType.classic == state.deckType,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
+                        BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
                       }),
                   HSModeBadge(
                       type: DeckType.wild,
-                      isSelected: DeckType.wild == state.gameMode,
+                      isSelected: DeckType.wild == state.deckType,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(const ChangeGameModeEvent(DeckType.wild));
+                        BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.wild));
                       }),
                   Container(
                       padding: EdgeInsets.only(left: 20.w),
@@ -222,7 +222,7 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
     );
   }
 
-  Widget _getClassSelector(DeckCreatorState state) {
+  Widget _getClassSelector(DeckSelectionState state) {
     return Container(
         width: 0.93.sw,
         child: Column(
@@ -232,11 +232,11 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
               children: DeckClass.values
                   .map((e) => HSClassBadge(
                       classType: e,
-                      modeType: state.gameMode,
-                      isSelected: e == state.heroClass,
+                      modeType: state.deckType,
+                      isSelected: e == state.deckClass,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.gameMode, state.heroClass));
+                        BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
+                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, state.deckClass));
                       }))
                   .toList()
                   .sublist(0, 6),
@@ -247,11 +247,11 @@ class _DeckSelectorScreenState extends State<DeckSelectorScreen> {
               children: DeckClass.values
                   .map((e) => HSClassBadge(
                       classType: e,
-                      modeType: state.gameMode,
-                      isSelected: e == state.heroClass,
+                      modeType: state.deckType,
+                      isSelected: e == state.deckClass,
                       onTap: () {
-                        BlocProvider.of<DeckCreatorBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.gameMode, state.heroClass));
+                        BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
+                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, state.deckClass));
                       }))
                   .toList()
                   .sublist(6, 11),

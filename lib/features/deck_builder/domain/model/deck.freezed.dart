@@ -109,13 +109,14 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
 
 class _$_Deck implements _Deck {
   const _$_Deck(
-      {required final List<CardDTO> cards,
-      required this.modeType,
-      required this.classType})
+      {final List<CardDTO> cards = const [],
+      this.modeType = DeckType.standard,
+      this.classType = DeckClass.warrior})
       : _cards = cards;
 
   final List<CardDTO> _cards;
   @override
+  @JsonKey()
   List<CardDTO> get cards {
     if (_cards is EqualUnmodifiableListView) return _cards;
     // ignore: implicit_dynamic_type
@@ -123,8 +124,10 @@ class _$_Deck implements _Deck {
   }
 
   @override
+  @JsonKey()
   final DeckType modeType;
   @override
+  @JsonKey()
   final DeckClass classType;
 
   @override
@@ -157,9 +160,9 @@ class _$_Deck implements _Deck {
 
 abstract class _Deck implements Deck {
   const factory _Deck(
-      {required final List<CardDTO> cards,
-      required final DeckType modeType,
-      required final DeckClass classType}) = _$_Deck;
+      {final List<CardDTO> cards,
+      final DeckType modeType,
+      final DeckClass classType}) = _$_Deck;
 
   @override
   List<CardDTO> get cards;

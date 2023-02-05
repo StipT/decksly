@@ -3,6 +3,7 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
@@ -59,7 +60,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     );
 
     _pagingController.addPageRequestListener((pageKey) {
-      BlocProvider.of<DeckBuilderBloc>(context).add(FetchCardsEvent(pageKey));
+      //  BlocProvider.of<DeckBuilderBloc>(context).add(FetchCardsEvent(pageKey));
     });
     super.initState();
   }
@@ -75,40 +76,45 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CardGalleryBloc, CardGalleryState>(
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SizedBox(
-          height: 1.sh,
-          width: 1.sw,
-          child: Stack(
-            children: [
-              Row(
+      child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
+        builder: (BuildContext context, state) {
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: SizedBox(
+              height: 1.sh,
+              width: 1.sw,
+              child: Stack(
                 children: [
-                  _cardList(),
-                  _deckList(),
+                  Row(
+                    children: [
+                      _cardList(),
+                      _deckList(),
+                    ],
+                  ),
+                  SideMenu(
+                    onToggle: (isOpen) {
+                      setState(() {
+                        isSideMenuOpen = isOpen;
+                        isFilterBarExtended = false;
+                      });
+                    },
+                    inDeckBuilderMode: true,
+                    cardFilterParams: CardFilterParams(),
+                  ),
+                  FilterAppBar(
+                    forceCollapse: isSideMenuOpen ?? false,
+                    height: 40.h,
+                    onToggle: () {
+                      setState(() {
+                        isFilterBarExtended = !isFilterBarExtended;
+                      });
+                    },
+                  ),
                 ],
               ),
-              SideMenu(
-                onToggle: (isOpen) {
-                  setState(() {
-                    isSideMenuOpen = isOpen;
-                    isFilterBarExtended = false;
-                  });
-                },
-                inDeckBuilderMode: true,
-              ),
-              FilterAppBar(
-                forceCollapse: isSideMenuOpen ?? false,
-                height: 40.h,
-                onToggle: () {
-                  setState(() {
-                    isFilterBarExtended = !isFilterBarExtended;
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -197,6 +203,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
+    /*
     if (state is CardsLoaded) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
       if (state.page.cardCount == 0 && state.page.page == 1) {
@@ -224,6 +231,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         ),
       );
     }
+
+     */
   }
 
   _deckList() {

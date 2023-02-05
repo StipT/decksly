@@ -1,3 +1,4 @@
+import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
@@ -30,14 +31,6 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   bool isFilterBarExtended = false;
 
   @override
-  void initState() {
-    _pagingController.addPageRequestListener((pageKey) {
-      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(pageKey));
-    });
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _pagingController.dispose();
     _scrollController.dispose();
@@ -48,33 +41,44 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CardGalleryBloc, CardGalleryState>(
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            _cardList(),
-            SideMenu(
-              onToggle: (isOpen) {
-                setState(() {
-                  isSideMenuOpen = isOpen;
-                  isFilterBarExtended = false;
-                });
-              },
-              inDeckBuilderMode: false,
-            ),
-            FilterAppBar(
-              forceCollapse: isSideMenuOpen ?? false,
-              height: 40.h,
-              onToggle: () {
-                setState(() {
-                  isFilterBarExtended = !isFilterBarExtended;
-                  log("isFilterBarExtended $isFilterBarExtended");
-                });
-              },
-            ),
-          ],
-        ),
-      ),
+      child: BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
+
+        state.maybeWhen(
+          initial: (cardParams, cards) {
+            BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(cardParams));
+          },
+          orElse: () {},
+        );
+
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children: [
+              _cardList(),
+              SideMenu(
+                onToggle: (isOpen) {
+                  setState(() {
+                    isSideMenuOpen = isOpen;
+                    isFilterBarExtended = false;
+                  });
+                },
+                inDeckBuilderMode: false,
+                cardFilterParams: state.cardFilterParams,
+              ),
+              FilterAppBar(
+                forceCollapse: isSideMenuOpen ?? false,
+                height: 40.h,
+                onToggle: () {
+                  setState(() {
+                    isFilterBarExtended = !isFilterBarExtended;
+                    log("isFilterBarExtended $isFilterBarExtended");
+                  });
+                },
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 
@@ -161,38 +165,36 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
-    state.when(initial: (
-        cards, cardParams){},
-        loading: (cardParams){},
-        loaded: (cards) {},
-        failure: (failure) {});
-    if (state is CardsLoaded) {
+    state.when(initial: (cards, cardParams) {
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
+    }, fetching: (cardParams) {
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
+    }, fetched: (cardParams, cards) {
       final nextPageKey = _pagingController.nextPageKey ?? 0;
-      // log("Page ${state.page}, ");
-      if (state.page.cardCount == 0 && state.page.page == 1) {
+      if (cards.cardCount == 0 && cards.page == 1) {
         _pagingController.refresh();
         _scrollController.animateTo(0, curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
-        _pagingController.appendLastPage(state.page.cards);
+        _pagingController.appendLastPage(cards.cards!);
         return;
       }
 
-      if (state.page.page == 1) {
+      if (cards.page == 1) {
         _pagingController.refresh();
         _scrollController.jumpTo(0);
       }
 
-      if (state.page.pageCount > state.page.page) {
-        _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
+      if (cards.pageCount! > cards.page!) {
+        _pagingController.appendPage(cards.cards!, nextPageKey + cards.cards!.length);
       } else {
-        _pagingController.appendLastPage(state.page.cards);
+        _pagingController.appendLastPage(cards.cards!);
       }
-    } else if (state is CardsError) {
-      _pagingController.error = state.failure;
+    }, failure: (filterParams, failure) {
+      _pagingController.error = failure;
       ScaffoldMessenger.of(ctx).showSnackBar(
         SnackBar(
-          content: Text(state.failure.message),
+          content: Text(failure.message),
         ),
       );
-    }
+    });
   }
 }

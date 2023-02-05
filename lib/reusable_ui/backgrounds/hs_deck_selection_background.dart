@@ -1,8 +1,8 @@
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/widgets.dart';
 
-class HSDeckCreatorBackground extends StatelessWidget {
-  const HSDeckCreatorBackground({Key? key}) : super(key: key);
+class HSDeckSelectionBackground extends StatelessWidget {
+  const HSDeckSelectionBackground({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

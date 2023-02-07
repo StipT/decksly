@@ -170,6 +170,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
     }, fetching: (cardParams) {
       BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, fetched: (cardParams, cards) {
+      log(cardParams.toString());
       final nextPageKey = _pagingController.nextPageKey ?? 0;
       if (cards.cardCount == 0 && cards.page == 1) {
         _pagingController.refresh();

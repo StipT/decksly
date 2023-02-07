@@ -1,6 +1,7 @@
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
@@ -236,7 +237,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isSelected: e == state.deckClass,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, state.deckClass));
+                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
                       }))
                   .toList()
                   .sublist(0, 6),

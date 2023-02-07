@@ -59,9 +59,10 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       ),
     );
 
-    _pagingController.addPageRequestListener((pageKey) {
-      //  BlocProvider.of<DeckBuilderBloc>(context).add(FetchCardsEvent(pageKey));
-    });
+    BlocProvider.of<CardGalleryBloc>(context).add(
+      CardFilterParamsChangedEvent(BlocProvider.of<CardGalleryBloc>(context).state.cardFilterParams.copyWith(heroClass: widget.deckBuilderArguments.deckClass!.name, set: widget.deckBuilderArguments.deckType!.name))
+    );
+
     super.initState();
   }
 
@@ -78,42 +79,51 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
       child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: SizedBox(
-              height: 1.sh,
-              width: 1.sw,
-              child: Stack(
-                children: [
-                  Row(
-                    children: [
-                      _cardList(),
-                      _deckList(),
-                    ],
-                  ),
-                  SideMenu(
-                    onToggle: (isOpen) {
-                      setState(() {
-                        isSideMenuOpen = isOpen;
-                        isFilterBarExtended = false;
-                      });
-                    },
-                    inDeckBuilderMode: true,
-                    cardFilterParams: CardFilterParams(),
-                  ),
-                  FilterAppBar(
-                    forceCollapse: isSideMenuOpen ?? false,
-                    height: 40.h,
-                    onToggle: () {
-                      setState(() {
-                        isFilterBarExtended = !isFilterBarExtended;
-                      });
-                    },
-                  ),
-                ],
+          return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
+            state.maybeWhen(
+              initial: (cardParams, cards) {
+                BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(cardParams));
+              },
+              orElse: () {},
+            );
+
+            return Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: SizedBox(
+                height: 1.sh,
+                width: 1.sw,
+                child: Stack(
+                  children: [
+                    Row(
+                      children: [
+                        _cardList(),
+                        _deckList(),
+                      ],
+                    ),
+                    SideMenu(
+                      onToggle: (isOpen) {
+                        setState(() {
+                          isSideMenuOpen = isOpen;
+                          isFilterBarExtended = false;
+                        });
+                      },
+                      inDeckBuilderMode: true,
+                      cardFilterParams: CardFilterParams(),
+                    ),
+                    FilterAppBar(
+                      forceCollapse: isSideMenuOpen ?? false,
+                      height: 40.h,
+                      onToggle: () {
+                        setState(() {
+                          isFilterBarExtended = !isFilterBarExtended;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          });
         },
       ),
     );
@@ -203,36 +213,38 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
-    /*
-    if (state is CardsLoaded) {
+    state.when(initial: (cards, cardParams) {
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
+    }, fetching: (cardParams) {
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
+    }, fetched: (cardParams, cards) {
+      log(cardParams.toString());
       final nextPageKey = _pagingController.nextPageKey ?? 0;
-      if (state.page.cardCount == 0 && state.page.page == 1) {
+      if (cards.cardCount == 0 && cards.page == 1) {
         _pagingController.refresh();
         _scrollController.animateTo(0, curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
-        _pagingController.appendLastPage(state.page.cards);
+        _pagingController.appendLastPage(cards.cards!);
         return;
       }
 
-      if (state.page.page == 1) {
+      if (cards.page == 1) {
         _pagingController.refresh();
         _scrollController.jumpTo(0);
       }
 
-      if (state.page.pageCount > state.page.page) {
-        _pagingController.appendPage(state.page.cards, nextPageKey + state.page.cards.length);
+      if (cards.pageCount! > cards.page!) {
+        _pagingController.appendPage(cards.cards!, nextPageKey + cards.cards!.length);
       } else {
-        _pagingController.appendLastPage(state.page.cards);
+        _pagingController.appendLastPage(cards.cards!);
       }
-    } else if (state is CardsError) {
-      _pagingController.error = state.failure;
+    }, failure: (filterParams, failure) {
+      _pagingController.error = failure;
       ScaffoldMessenger.of(ctx).showSnackBar(
         SnackBar(
-          content: Text(state.failure.message),
+          content: Text(failure.message),
         ),
       );
-    }
-
-     */
+    });
   }
 
   _deckList() {

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
+import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_card_item.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class DeckListBody extends StatelessWidget {
       builder: (BuildContext context, state) {
         return Expanded(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 4.h),
+            margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 4.h),
                 child: state.deck.cards.isEmpty ?
                 AutoSizeText(
                   LocaleKeys.tapCardsToAddThemOrHold.tr(),
@@ -27,11 +28,12 @@ class DeckListBody extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ) :
                   ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: state.deck.cards.length,
                     itemBuilder: (context, index) {
+                      print(state.deck.cards.toString());
                       print(state.deck.cards[index].name ?? "Name");
-                      return Text(state.deck.cards[index].name ?? "Name");
+                      return DeckCardItem(card: state.deck.cards[index], amount: "1", onTapInfo: (){}, onTapMinus: (){}, onTapPlus: (){},);
                     }
                   ),
           ),

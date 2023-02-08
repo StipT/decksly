@@ -1,24 +1,22 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
+import 'package:decksly/reusable_ui/backgrounds/hs_deck_card_item_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckCardItem extends StatelessWidget {
   const DeckCardItem({
-    required this.name,
+    required this.card,
     required this.amount,
-    required this.isLegendary,
-    required this.cropImageUrl,
     required this.onTapPlus,
     required this.onTapMinus,
     required this.onTapInfo,
   });
 
-  final String name;
+  final CardDTO card;
   final String amount;
-  final bool isLegendary;
-  final String cropImageUrl;
   final VoidCallback onTapPlus;
   final VoidCallback onTapMinus;
   final VoidCallback onTapInfo;
@@ -28,17 +26,23 @@ class DeckCardItem extends StatelessWidget {
     return GestureDetector(
       onLongPress: () => onTapInfo,
       child: Container(
+        height: 15.h,
         child: Stack(
           children: [
-            Image.network(
-              cropImageUrl,
-              fit: BoxFit.fill,
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 6.w),
+              width: double.infinity,
+              child: Image.network(
+                card.cropImage ?? "",
+                fit: BoxFit.cover,
+              ),
             ),
+            const HSDeckCardItemBackground(),
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  isLegendary
+                card.rarityId == 2
                       ? const Icon(
                           Icons.star,
                           color: AppColors.gold,
@@ -48,8 +52,8 @@ class DeckCardItem extends StatelessWidget {
                           style: FontStyles.bold11Gold,
                         ),
                   Text(
-                    name,
-                    style: FontStyles.bold11Gold,
+                    card.name ?? "",
+                    style: FontStyles.bold11WithShadow,
                   )
                 ],
               ),

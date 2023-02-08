@@ -5,6 +5,7 @@ import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,8 +24,9 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase})
       : super(const CardGalleryState.initial(cardFilterParams: CardFilterParams(), page: CardsPage())) {
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.cardFilterParams));
-    on<CardFilterParamsChangedEvent>(
-        (event, emit) async => await handleCardFilterParamsChanged(emit, event.cardFilterParams));
+    on<CardFilterParamsChangedEvent>((event, emit) async => await handleCardFilterParamsChanged(emit, event.cardFilterParams));
+    on<ToggleClassCardsEvent>((event, emit) => handleToggleClassCards(emit, event.deckCLass));
+    on<ToggleNeutralCardsEvent>((event, emit) => handleToggleNeutralCards(emit, event.deckCLass));
     _streamInternetConnectionState();
   }
 
@@ -57,5 +59,27 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
 
   Future<void> handleCardFilterParamsChanged(Emitter<CardGalleryState> emit, CardFilterParams cardFilterParams) async {
     emit(CardGalleryState.fetching(cardFilterParams: cardFilterParams.copyWith(page: 0)));
+  }
+
+  Future<void> handleToggleClassCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
+    List<String> classes = [];
+    classes.addAll(state.cardFilterParams.heroClass);
+    if(classes.contains(deckClass.name)) {
+      classes.remove(deckClass.name);
+    } else {
+      classes.add(deckClass.name);
+    }
+    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes)));
+  }
+
+  Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
+    List<String> classes = [];
+    classes.addAll(state.cardFilterParams.heroClass);
+    if(classes.contains("neutral")) {
+      classes.remove("neutral");
+    } else {
+      classes.add("neutral");
+    }
+    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes)));
   }
 }

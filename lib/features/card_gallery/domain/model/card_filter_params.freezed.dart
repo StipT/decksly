@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CardFilterParams {
   int? get pageSize => throw _privateConstructorUsedError;
   num? get page => throw _privateConstructorUsedError;
-  String? get locale => throw _privateConstructorUsedError;
-  String? get set => throw _privateConstructorUsedError;
-  String? get heroClass => throw _privateConstructorUsedError;
-  String? get manaCost => throw _privateConstructorUsedError;
-  String? get attack => throw _privateConstructorUsedError;
-  String? get health => throw _privateConstructorUsedError;
-  String? get collectible => throw _privateConstructorUsedError;
-  String? get rarity => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
-  String? get minionType => throw _privateConstructorUsedError;
-  String? get keyword => throw _privateConstructorUsedError;
-  String? get textFilter => throw _privateConstructorUsedError;
-  String? get gameMode => throw _privateConstructorUsedError;
-  String? get spellSchool => throw _privateConstructorUsedError;
-  String? get sort => throw _privateConstructorUsedError;
+  String get locale => throw _privateConstructorUsedError;
+  String get set => throw _privateConstructorUsedError;
+  List<String> get heroClass => throw _privateConstructorUsedError;
+  String get manaCost => throw _privateConstructorUsedError;
+  String get attack => throw _privateConstructorUsedError;
+  String get health => throw _privateConstructorUsedError;
+  String get collectible => throw _privateConstructorUsedError;
+  String get rarity => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+  String get minionType => throw _privateConstructorUsedError;
+  String get keyword => throw _privateConstructorUsedError;
+  String get textFilter => throw _privateConstructorUsedError;
+  String get gameMode => throw _privateConstructorUsedError;
+  String get spellSchool => throw _privateConstructorUsedError;
+  String get sort => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CardFilterParamsCopyWith<CardFilterParams> get copyWith =>
@@ -48,21 +48,21 @@ abstract class $CardFilterParamsCopyWith<$Res> {
   $Res call(
       {int? pageSize,
       num? page,
-      String? locale,
-      String? set,
-      String? heroClass,
-      String? manaCost,
-      String? attack,
-      String? health,
-      String? collectible,
-      String? rarity,
-      String? type,
-      String? minionType,
-      String? keyword,
-      String? textFilter,
-      String? gameMode,
-      String? spellSchool,
-      String? sort});
+      String locale,
+      String set,
+      List<String> heroClass,
+      String manaCost,
+      String attack,
+      String health,
+      String collectible,
+      String rarity,
+      String type,
+      String minionType,
+      String keyword,
+      String textFilter,
+      String gameMode,
+      String spellSchool,
+      String sort});
 }
 
 /// @nodoc
@@ -80,21 +80,21 @@ class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams>
   $Res call({
     Object? pageSize = freezed,
     Object? page = freezed,
-    Object? locale = freezed,
-    Object? set = freezed,
-    Object? heroClass = freezed,
-    Object? manaCost = freezed,
-    Object? attack = freezed,
-    Object? health = freezed,
-    Object? collectible = freezed,
-    Object? rarity = freezed,
-    Object? type = freezed,
-    Object? minionType = freezed,
-    Object? keyword = freezed,
-    Object? textFilter = freezed,
-    Object? gameMode = freezed,
-    Object? spellSchool = freezed,
-    Object? sort = freezed,
+    Object? locale = null,
+    Object? set = null,
+    Object? heroClass = null,
+    Object? manaCost = null,
+    Object? attack = null,
+    Object? health = null,
+    Object? collectible = null,
+    Object? rarity = null,
+    Object? type = null,
+    Object? minionType = null,
+    Object? keyword = null,
+    Object? textFilter = null,
+    Object? gameMode = null,
+    Object? spellSchool = null,
+    Object? sort = null,
   }) {
     return _then(_value.copyWith(
       pageSize: freezed == pageSize
@@ -105,66 +105,66 @@ class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as num?,
-      locale: freezed == locale
+      locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
-              as String?,
-      set: freezed == set
+              as String,
+      set: null == set
           ? _value.set
           : set // ignore: cast_nullable_to_non_nullable
-              as String?,
-      heroClass: freezed == heroClass
+              as String,
+      heroClass: null == heroClass
           ? _value.heroClass
           : heroClass // ignore: cast_nullable_to_non_nullable
-              as String?,
-      manaCost: freezed == manaCost
+              as List<String>,
+      manaCost: null == manaCost
           ? _value.manaCost
           : manaCost // ignore: cast_nullable_to_non_nullable
-              as String?,
-      attack: freezed == attack
+              as String,
+      attack: null == attack
           ? _value.attack
           : attack // ignore: cast_nullable_to_non_nullable
-              as String?,
-      health: freezed == health
+              as String,
+      health: null == health
           ? _value.health
           : health // ignore: cast_nullable_to_non_nullable
-              as String?,
-      collectible: freezed == collectible
+              as String,
+      collectible: null == collectible
           ? _value.collectible
           : collectible // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rarity: freezed == rarity
+              as String,
+      rarity: null == rarity
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: freezed == type
+              as String,
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
-      minionType: freezed == minionType
+              as String,
+      minionType: null == minionType
           ? _value.minionType
           : minionType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      keyword: freezed == keyword
+              as String,
+      keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
-              as String?,
-      textFilter: freezed == textFilter
+              as String,
+      textFilter: null == textFilter
           ? _value.textFilter
           : textFilter // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gameMode: freezed == gameMode
+              as String,
+      gameMode: null == gameMode
           ? _value.gameMode
           : gameMode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      spellSchool: freezed == spellSchool
+              as String,
+      spellSchool: null == spellSchool
           ? _value.spellSchool
           : spellSchool // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sort: freezed == sort
+              as String,
+      sort: null == sort
           ? _value.sort
           : sort // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -180,21 +180,21 @@ abstract class _$$_CardFilterParamsCopyWith<$Res>
   $Res call(
       {int? pageSize,
       num? page,
-      String? locale,
-      String? set,
-      String? heroClass,
-      String? manaCost,
-      String? attack,
-      String? health,
-      String? collectible,
-      String? rarity,
-      String? type,
-      String? minionType,
-      String? keyword,
-      String? textFilter,
-      String? gameMode,
-      String? spellSchool,
-      String? sort});
+      String locale,
+      String set,
+      List<String> heroClass,
+      String manaCost,
+      String attack,
+      String health,
+      String collectible,
+      String rarity,
+      String type,
+      String minionType,
+      String keyword,
+      String textFilter,
+      String gameMode,
+      String spellSchool,
+      String sort});
 }
 
 /// @nodoc
@@ -210,21 +210,21 @@ class __$$_CardFilterParamsCopyWithImpl<$Res>
   $Res call({
     Object? pageSize = freezed,
     Object? page = freezed,
-    Object? locale = freezed,
-    Object? set = freezed,
-    Object? heroClass = freezed,
-    Object? manaCost = freezed,
-    Object? attack = freezed,
-    Object? health = freezed,
-    Object? collectible = freezed,
-    Object? rarity = freezed,
-    Object? type = freezed,
-    Object? minionType = freezed,
-    Object? keyword = freezed,
-    Object? textFilter = freezed,
-    Object? gameMode = freezed,
-    Object? spellSchool = freezed,
-    Object? sort = freezed,
+    Object? locale = null,
+    Object? set = null,
+    Object? heroClass = null,
+    Object? manaCost = null,
+    Object? attack = null,
+    Object? health = null,
+    Object? collectible = null,
+    Object? rarity = null,
+    Object? type = null,
+    Object? minionType = null,
+    Object? keyword = null,
+    Object? textFilter = null,
+    Object? gameMode = null,
+    Object? spellSchool = null,
+    Object? sort = null,
   }) {
     return _then(_$_CardFilterParams(
       pageSize: freezed == pageSize
@@ -235,66 +235,66 @@ class __$$_CardFilterParamsCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as num?,
-      locale: freezed == locale
+      locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
-              as String?,
-      set: freezed == set
+              as String,
+      set: null == set
           ? _value.set
           : set // ignore: cast_nullable_to_non_nullable
-              as String?,
-      heroClass: freezed == heroClass
-          ? _value.heroClass
+              as String,
+      heroClass: null == heroClass
+          ? _value._heroClass
           : heroClass // ignore: cast_nullable_to_non_nullable
-              as String?,
-      manaCost: freezed == manaCost
+              as List<String>,
+      manaCost: null == manaCost
           ? _value.manaCost
           : manaCost // ignore: cast_nullable_to_non_nullable
-              as String?,
-      attack: freezed == attack
+              as String,
+      attack: null == attack
           ? _value.attack
           : attack // ignore: cast_nullable_to_non_nullable
-              as String?,
-      health: freezed == health
+              as String,
+      health: null == health
           ? _value.health
           : health // ignore: cast_nullable_to_non_nullable
-              as String?,
-      collectible: freezed == collectible
+              as String,
+      collectible: null == collectible
           ? _value.collectible
           : collectible // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rarity: freezed == rarity
+              as String,
+      rarity: null == rarity
           ? _value.rarity
           : rarity // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: freezed == type
+              as String,
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String?,
-      minionType: freezed == minionType
+              as String,
+      minionType: null == minionType
           ? _value.minionType
           : minionType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      keyword: freezed == keyword
+              as String,
+      keyword: null == keyword
           ? _value.keyword
           : keyword // ignore: cast_nullable_to_non_nullable
-              as String?,
-      textFilter: freezed == textFilter
+              as String,
+      textFilter: null == textFilter
           ? _value.textFilter
           : textFilter // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gameMode: freezed == gameMode
+              as String,
+      gameMode: null == gameMode
           ? _value.gameMode
           : gameMode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      spellSchool: freezed == spellSchool
+              as String,
+      spellSchool: null == spellSchool
           ? _value.spellSchool
           : spellSchool // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sort: freezed == sort
+              as String,
+      sort: null == sort
           ? _value.sort
           : sort // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -307,7 +307,7 @@ class _$_CardFilterParams implements _CardFilterParams {
       this.page = 0,
       this.locale = "en_US",
       this.set = "standard",
-      this.heroClass = "",
+      final List<String> heroClass = const [],
       this.manaCost = "",
       this.attack = "",
       this.health = "",
@@ -319,7 +319,8 @@ class _$_CardFilterParams implements _CardFilterParams {
       this.textFilter = "",
       this.gameMode = "constructed",
       this.spellSchool = "",
-      this.sort = "manaCost:asc"});
+      this.sort = "manaCost:asc"})
+      : _heroClass = heroClass;
 
   @override
   @JsonKey()
@@ -329,49 +330,55 @@ class _$_CardFilterParams implements _CardFilterParams {
   final num? page;
   @override
   @JsonKey()
-  final String? locale;
+  final String locale;
   @override
   @JsonKey()
-  final String? set;
+  final String set;
+  final List<String> _heroClass;
   @override
   @JsonKey()
-  final String? heroClass;
+  List<String> get heroClass {
+    if (_heroClass is EqualUnmodifiableListView) return _heroClass;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_heroClass);
+  }
+
   @override
   @JsonKey()
-  final String? manaCost;
+  final String manaCost;
   @override
   @JsonKey()
-  final String? attack;
+  final String attack;
   @override
   @JsonKey()
-  final String? health;
+  final String health;
   @override
   @JsonKey()
-  final String? collectible;
+  final String collectible;
   @override
   @JsonKey()
-  final String? rarity;
+  final String rarity;
   @override
   @JsonKey()
-  final String? type;
+  final String type;
   @override
   @JsonKey()
-  final String? minionType;
+  final String minionType;
   @override
   @JsonKey()
-  final String? keyword;
+  final String keyword;
   @override
   @JsonKey()
-  final String? textFilter;
+  final String textFilter;
   @override
   @JsonKey()
-  final String? gameMode;
+  final String gameMode;
   @override
   @JsonKey()
-  final String? spellSchool;
+  final String spellSchool;
   @override
   @JsonKey()
-  final String? sort;
+  final String sort;
 
   @override
   String toString() {
@@ -388,8 +395,8 @@ class _$_CardFilterParams implements _CardFilterParams {
             (identical(other.page, page) || other.page == page) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.set, set) || other.set == set) &&
-            (identical(other.heroClass, heroClass) ||
-                other.heroClass == heroClass) &&
+            const DeepCollectionEquality()
+                .equals(other._heroClass, _heroClass) &&
             (identical(other.manaCost, manaCost) ||
                 other.manaCost == manaCost) &&
             (identical(other.attack, attack) || other.attack == attack) &&
@@ -417,7 +424,7 @@ class _$_CardFilterParams implements _CardFilterParams {
       page,
       locale,
       set,
-      heroClass,
+      const DeepCollectionEquality().hash(_heroClass),
       manaCost,
       attack,
       health,
@@ -442,56 +449,56 @@ abstract class _CardFilterParams implements CardFilterParams {
   const factory _CardFilterParams(
       {final int? pageSize,
       final num? page,
-      final String? locale,
-      final String? set,
-      final String? heroClass,
-      final String? manaCost,
-      final String? attack,
-      final String? health,
-      final String? collectible,
-      final String? rarity,
-      final String? type,
-      final String? minionType,
-      final String? keyword,
-      final String? textFilter,
-      final String? gameMode,
-      final String? spellSchool,
-      final String? sort}) = _$_CardFilterParams;
+      final String locale,
+      final String set,
+      final List<String> heroClass,
+      final String manaCost,
+      final String attack,
+      final String health,
+      final String collectible,
+      final String rarity,
+      final String type,
+      final String minionType,
+      final String keyword,
+      final String textFilter,
+      final String gameMode,
+      final String spellSchool,
+      final String sort}) = _$_CardFilterParams;
 
   @override
   int? get pageSize;
   @override
   num? get page;
   @override
-  String? get locale;
+  String get locale;
   @override
-  String? get set;
+  String get set;
   @override
-  String? get heroClass;
+  List<String> get heroClass;
   @override
-  String? get manaCost;
+  String get manaCost;
   @override
-  String? get attack;
+  String get attack;
   @override
-  String? get health;
+  String get health;
   @override
-  String? get collectible;
+  String get collectible;
   @override
-  String? get rarity;
+  String get rarity;
   @override
-  String? get type;
+  String get type;
   @override
-  String? get minionType;
+  String get minionType;
   @override
-  String? get keyword;
+  String get keyword;
   @override
-  String? get textFilter;
+  String get textFilter;
   @override
-  String? get gameMode;
+  String get gameMode;
   @override
-  String? get spellSchool;
+  String get spellSchool;
   @override
-  String? get sort;
+  String get sort;
   @override
   @JsonKey(ignore: true)
   _$$_CardFilterParamsCopyWith<_$_CardFilterParams> get copyWith =>

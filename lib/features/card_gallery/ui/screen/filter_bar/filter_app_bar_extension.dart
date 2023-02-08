@@ -35,7 +35,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 140.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.sort ?? SortBy.manaAsc.value,
+                selectedValue: cardFilterParams.sort,
                 dropdownType: DropdownType.sortBy,
                 dropdownValues: SortBy.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
@@ -44,7 +44,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 120.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.attack ?? Attack.any.value,
+                selectedValue: cardFilterParams.attack,
                 dropdownType: DropdownType.attack,
                 dropdownValues: Attack.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
@@ -53,7 +53,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 120.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.health ?? Health.any.value,
+                selectedValue: cardFilterParams.health,
                 dropdownType: DropdownType.health,
                 dropdownValues: Health.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
@@ -62,7 +62,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 140.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.type ?? CardType.any.value,
+                selectedValue: cardFilterParams.type,
                 dropdownType: DropdownType.cardType,
                 dropdownValues: CardType.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
@@ -71,7 +71,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 140.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.minionType ?? MinionType.any.value,
+                selectedValue: cardFilterParams.minionType,
                 dropdownType: DropdownType.minionType,
                 dropdownValues: MinionType.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(
@@ -80,7 +80,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 140.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.spellSchool ?? SpellSchool.any.value,
+                selectedValue: cardFilterParams.spellSchool,
                 dropdownType: DropdownType.spellSchool,
                 dropdownValues: SpellSchool.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(
@@ -89,7 +89,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 140.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.rarity ?? Rarity.any.value,
+                selectedValue: cardFilterParams.rarity,
                 dropdownType: DropdownType.rarity,
                 dropdownValues: Rarity.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
@@ -98,7 +98,7 @@ class FilterAppBarExtension extends StatelessWidget {
               HSDropdown(
                 width: 140.w,
                 height: 40.h,
-                selectedValue: cardFilterParams.keyword ?? Keyword.any.value,
+                selectedValue: cardFilterParams.keyword,
                 dropdownType: DropdownType.keywords,
                 dropdownValues: Keyword.values.map((e) => e.value).toList(),
                 onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(

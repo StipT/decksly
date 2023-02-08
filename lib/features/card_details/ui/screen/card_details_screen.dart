@@ -1,5 +1,6 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -55,10 +56,10 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                 right: 60.w,
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 40.w,
+                  child: Image.asset(
+                    assetPath(SUBFOLDER_MISC, "close"),
+                    fit: BoxFit.fill,
+                    width: 40.w,
                   ),
                 )),
             Row(

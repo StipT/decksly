@@ -19,18 +19,21 @@ class DeckListBody extends StatelessWidget {
         return Expanded(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 4.h),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
+                child: state.deck.cards.isEmpty ?
                 AutoSizeText(
                   LocaleKeys.tapCardsToAddThemOrHold.tr(),
                   style: FontStyles.bold11Purple,
                   minFontSize: 9,
                   textAlign: TextAlign.center,
-                )
-              ],
-            ),
+                ) :
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.deck.cards.length,
+                    itemBuilder: (context, index) {
+                      print(state.deck.cards[index].name ?? "Name");
+                      return Text(state.deck.cards[index].name ?? "Name");
+                    }
+                  ),
           ),
         );
       },

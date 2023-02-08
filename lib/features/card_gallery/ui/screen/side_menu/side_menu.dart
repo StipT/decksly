@@ -14,9 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({Key? key, required this.onToggle, required this.inDeckBuilderMode, required this.cardFilterParams}) : super(key: key);
+  const SideMenu({Key? key, required this.onToggle, required this.inDeckBuilderMode}) : super(key: key);
 
-  final CardFilterParams cardFilterParams;
   final void Function(bool) onToggle;
   final bool inDeckBuilderMode;
 
@@ -147,35 +146,35 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                 children: [
                                   Expanded(
                                     child: LanguageButton(
-                                      isSelected: widget.cardFilterParams.locale == LanguageButtonType.english.value,
+                                      isSelected: state.cardFilterParams.locale == LanguageButtonType.english.value,
                                       type: LanguageButtonType.english,
                                       onTap: () {
                                         context.setLocale(Locale('en', 'US'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(widget.cardFilterParams.copyWith(locale: LanguageButtonType.english.value)));
+                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(locale: LanguageButtonType.english.value)));
                                       },
                                     ),
                                   ),
                                   Expanded(
                                     child: LanguageButton(
-                                      isSelected: widget.cardFilterParams.locale == LanguageButtonType.german.value,
+                                      isSelected: state.cardFilterParams.locale == LanguageButtonType.german.value,
                                       type: LanguageButtonType.german,
                                       onTap: () {
                                         context.setLocale(Locale('de', 'DE'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(widget.cardFilterParams.copyWith(locale: LanguageButtonType.german.value)));
+                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(locale: LanguageButtonType.german.value)));
 
                                       },
                                     ),
                                   ),
                                   Expanded(
                                     child: LanguageButton(
-                                      isSelected: widget.cardFilterParams.locale == LanguageButtonType.japanese.value,
+                                      isSelected: state.cardFilterParams.locale == LanguageButtonType.japanese.value,
                                       type: LanguageButtonType.japanese,
                                       onTap: () {
                                         context.setLocale(Locale('ja', 'JP'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(widget.cardFilterParams.copyWith(locale: LanguageButtonType.japanese.value)));
+                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(locale: LanguageButtonType.japanese.value)));
 
                                       },
                                     ),

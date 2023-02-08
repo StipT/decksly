@@ -13,27 +13,30 @@ class NoResultsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: Column(
         children: [
           SizedBox(
-            height: 100.h,
+            height: 90.h,
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
                 Positioned(
-                  top: 80.h,
-                  child: Image.asset(
-                    assetPath(SUBFOLDER_MISC, "divider"),
-                    width: 600.w,
+                  top: 70.h,
+                  child: Container(
+                    child: Image.asset(
+                      assetPath(SUBFOLDER_MISC, "divider"),
+
+                    ),
                   ),
                 ),
                 Positioned(
                     top: 0,
                     child: SizedBox(
-                        height: 100.h,
+                        height: 90.h,
                         child: Image.asset(
                           assetPath(SUBFOLDER_MISC, "no_cards_found"),
-                          height: 100.h,
+                          height: 90.h,
                         ))),
               ],
             ),
@@ -45,17 +48,17 @@ class NoResultsWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 5.h),
+            margin: EdgeInsets.only(top: 2.5.h),
             child: Text(
               LocaleKeys.tryRemovingSearchItems.tr(),
               style: FontStyles.regular17VanDykeBrown,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 5.h),
+            margin: EdgeInsets.only(top: 2.5.h),
             child: Image.asset(
               assetPath(SUBFOLDER_MISC, "line"),
-              width: 600.w,
+
             ),
           ),
         ],

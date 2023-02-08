@@ -63,9 +63,9 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                   });
                 },
                 inDeckBuilderMode: false,
-                cardFilterParams: state.cardFilterParams,
               ),
               FilterAppBar(
+
                 forceCollapse: isSideMenuOpen ?? false,
                 height: 40.h,
                 onToggle: () {

@@ -252,7 +252,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isSelected: e == state.deckClass,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, state.deckClass));
+                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
                       }))
                   .toList()
                   .sublist(6, 11),

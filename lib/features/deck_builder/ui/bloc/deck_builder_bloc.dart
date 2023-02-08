@@ -20,8 +20,8 @@ part 'deck_builder_state.dart';
 class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
   DeckBuilderBloc(this._networkInfo, {required this.fetchCardsUsecase})
       : super(const DeckBuilderState.initial(deck: Deck())) {
-    on<DeckChangedEvent>((event, emit) async => await handleDeckChanged(emit, event.deck));
-
+    on<DeckChangedEvent>((event, emit) => handleDeckChanged(emit, event.deck));
+    on<AddCardEvent>((event, emit) => handleAddCard(emit, event.card));
     _streamInternetConnectionState();
   }
 
@@ -35,8 +35,15 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-  Future<void> handleDeckChanged(Emitter<DeckBuilderState> emit, Deck deck) async {
+  void handleDeckChanged(Emitter<DeckBuilderState> emit, Deck deck) {
     final Deck changedDeck = state.deck.copyWith(classType: deck.classType, modeType: deck.modeType, cards: deck.cards);
     emit(DeckBuilderState.changed(deck: changedDeck));
+  }
+
+  void handleAddCard(Emitter<DeckBuilderState> emit, CardDTO card) {
+    List<CardDTO> cards =  [];
+    cards.addAll(state.deck.cards);
+    cards.add(card);
+    emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
   }
 }

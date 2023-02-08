@@ -3,7 +3,6 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
@@ -59,9 +58,12 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       ),
     );
 
-    BlocProvider.of<CardGalleryBloc>(context).add(
-      CardFilterParamsChangedEvent(BlocProvider.of<CardGalleryBloc>(context).state.cardFilterParams.copyWith(heroClass: widget.deckBuilderArguments.deckClass!.name, set: widget.deckBuilderArguments.deckType!.name))
-    );
+    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(BlocProvider.of<CardGalleryBloc>(context)
+        .state
+        .cardFilterParams
+        .copyWith(
+            heroClass: [widget.deckBuilderArguments.deckClass?.name ?? "", "neutral"],
+            set: widget.deckBuilderArguments.deckType?.name ?? "standard")));
 
     super.initState();
   }
@@ -80,13 +82,6 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
           return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
-            state.maybeWhen(
-              initial: (cardParams, cards) {
-                BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(cardParams));
-              },
-              orElse: () {},
-            );
-
             return Scaffold(
               resizeToAvoidBottomInset: false,
               body: SizedBox(
@@ -108,9 +103,9 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                         });
                       },
                       inDeckBuilderMode: true,
-                      cardFilterParams: CardFilterParams(),
                     ),
                     FilterAppBar(
+                      deckClass: widget.deckBuilderArguments.deckClass,
                       forceCollapse: isSideMenuOpen ?? false,
                       height: 40.h,
                       onToggle: () {
@@ -163,9 +158,10 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                   },
                   itemBuilder: (ctx, card, _) {
                     return GestureDetector(
-                      onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
+                      onLongPress: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                         return CardDetailsScreen(card);
                       })),
+                      onTap: () => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
                       child: Image.network(
                         // TODO deck-28 Add image not found asset
                         card.image,

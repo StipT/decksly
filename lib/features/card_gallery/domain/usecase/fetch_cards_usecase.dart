@@ -23,7 +23,7 @@ class FetchCardsUsecase extends UseCase<CardsPage, CardFilterParams> {
         locale: params.locale,
         collectible: params.collectible,
         set: params.set,
-        heroClass: params.heroClass,
+        heroClass: params.heroClass.join(","),
         manaCost: params.manaCost,
         textFilter: params.textFilter,
         sort: params.sort,

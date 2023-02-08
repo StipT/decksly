@@ -44,8 +44,8 @@ class HSDropdown extends StatelessWidget {
     required this.dropdownType,
     required this.selectedValue,
     required this.dropdownValues,
-    this.height = 50,
-    this.width = 140,
+    this.height = 40,
+    this.width = 150,
     this.dropdownWidth,
     required this.onChange,
   }) : super(key: key);

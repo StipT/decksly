@@ -31,9 +31,9 @@ class DeckListBody extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemCount: state.deck.cards.length,
                     itemBuilder: (context, index) {
-                      print(state.deck.cards.toString());
-                      print(state.deck.cards[index].name ?? "Name");
-                      return DeckCardItem(card: state.deck.cards[index], amount: "1", onTapInfo: (){}, onTapMinus: (){}, onTapPlus: (){},);
+                      int amount = state.deck.cards.where((element) => element == state.deck.cards[index]).length;
+                      print(amount);
+                      return DeckCardItem(card: state.deck.cards[index], amount: amount, onTapInfo: (){}, onTapMinus: (){}, onTapPlus: (){},);
                     }
                   ),
           ),

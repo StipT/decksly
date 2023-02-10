@@ -4,7 +4,6 @@ import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -40,10 +39,26 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
     emit(DeckBuilderState.changed(deck: changedDeck));
   }
 
-  void handleAddCard(Emitter<DeckBuilderState> emit, CardDTO card) {
-    List<CardDTO> cards =  [];
+  void handleAddCard(Emitter<DeckBuilderState> emit, CardDTO deckCard) {
+    List<CardDTO> cards = [];
     cards.addAll(state.deck.cards);
-    cards.add(card);
+
+    if(cards.length >= 30) {
+      return;
+    }
+
+    if (deckCard.rarityId == 5 && cards.contains(deckCard)) {
+      return;
+    }
+
+    if (cards.where((element) => element == deckCard).length > 1) {
+      return;
+    }
+
+    cards.add(deckCard);
+
+    cards.sort((card1, card2) {return card1.manaCost.compareTo(card2.manaCost);});
+
     emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
   }
 }

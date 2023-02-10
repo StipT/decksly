@@ -1,5 +1,6 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_deck_card_item_background.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,7 @@ class DeckCardItem extends StatelessWidget {
   });
 
   final CardDTO card;
-  final String amount;
+  final int amount;
   final VoidCallback onTapPlus;
   final VoidCallback onTapMinus;
   final VoidCallback onTapInfo;
@@ -29,55 +30,77 @@ class DeckCardItem extends StatelessWidget {
         height: 15.h,
         child: Stack(
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 6.w),
-              width: double.infinity,
-              child: Image.network(
-                card.cropImage ?? "",
-                fit: BoxFit.cover,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: AppColors.ebonyClay,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Stack(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 6.w),
+                        width: double.infinity,
+                        child: Image.network(
+                          card.cropImage ?? "",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Image.asset(
+                        assetPath(SUBFOLDER_MISC, "deck_card_item_fill"),
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
             const HSDeckCardItemBackground(),
             Container(
+              alignment: Alignment.center,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                card.rarityId == 2
-                      ? const Icon(
-                          Icons.star,
-                          color: AppColors.gold,
-                        )
-                      : Text(
-                          amount,
-                          style: FontStyles.bold11Gold,
-                        ),
-                  Text(
-                    card.name ?? "",
-                    style: FontStyles.bold11WithShadow,
-                  )
+                  Container(
+                    margin: EdgeInsets.only(left: 5.5.w),
+                    width: 16.w,
+                    child: Text(
+                      card.manaCost.toString(),
+                      textAlign: TextAlign.center,
+                      style: FontStyles.bold17WithShadow,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 7.5.w, right: 6.w),
+                    width: 150.w,
+                    child: Text(
+                      card.name ?? "",
+                      style: FontStyles.bold11WithShadow,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  if (card.rarityId == 5)
+                    Expanded(
+                      child: Image.asset(
+                        assetPath(SUBFOLDER_MISC, "legendary_star"),
+                        width: 12.5.w,
+                      ),
+                    ),
+                  if (amount == 2)
+                    Expanded(
+                      child: Text(
+                        amount.toString(),
+                        style: FontStyles.bold11Gold,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                 ],
               ),
             ),
-            Container(
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => onTapPlus,
-                    child: Text(
-                      "+",
-                      style: FontStyles.bold11Gold,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => onTapPlus,
-                    child: Text(
-                      "-",
-                      style: FontStyles.bold11Gold,
-                    ),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
         padding: EdgeInsets.symmetric(

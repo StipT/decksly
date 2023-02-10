@@ -7,32 +7,38 @@ class HSDeckCardItemBackground extends StatelessWidget {
   final bool isDropdownButton;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Stack(
       children: [
-        SizedBox(
-          height: double.infinity,
-          child: Image.asset(
-            assetPath(SUBFOLDER_MISC, "deck_card_item_start"),
-            fit: BoxFit.fill,
-          ),
-        ),
-        Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: Image.asset(
-              assetPath(SUBFOLDER_MISC, "deck_card_item_center"),
-              fit: BoxFit.fill,
+
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: double.infinity,
+              child: Image.asset(
+                assetPath(SUBFOLDER_MISC, "deck_card_item_start"),
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-        ),
-        SizedBox(
-          height: double.infinity,
-          child: Image.asset(
-            assetPath(SUBFOLDER_MISC, "deck_card_item_end"),
-            fit: BoxFit.fill,
-          ),
+            Expanded(
+              child: SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  assetPath(SUBFOLDER_MISC, "deck_card_item_center"),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: double.infinity,
+              child: Image.asset(
+                assetPath(SUBFOLDER_MISC, "deck_card_item_end"),
+                fit: BoxFit.fill,
+              ),
+            ),
+
+          ],
         ),
       ],
     );

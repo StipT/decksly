@@ -15,4 +15,5 @@ class AppColors {
   static const Color shimmerGrey = Color(0xffd0cccc);
   static const Color velvet = Color(0xff521212);
   static const Color purple = Color(0xffa285a9);
+  static const Color ebonyClay = Color(0xff292e3c);
 }

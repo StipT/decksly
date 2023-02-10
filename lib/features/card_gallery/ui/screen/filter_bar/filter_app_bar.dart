@@ -141,30 +141,29 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
 
   int extraFiltersActive(CardFilterParams cardFilterParams) {
     int activeFilters = 0;
-    if (cardFilterParams.sort != null &&
-        cardFilterParams.sort.isNotEmpty &&
+    if (cardFilterParams.sort.isNotEmpty &&
         cardFilterParams.sort != SortBy.manaAsc.value) {
       activeFilters++;
     }
-    if (cardFilterParams.attack != null && cardFilterParams.attack.isNotEmpty) {
+    if (cardFilterParams.attack.isNotEmpty) {
       activeFilters++;
     }
-    if (cardFilterParams.health != null && cardFilterParams.health.isNotEmpty) {
+    if ( cardFilterParams.health.isNotEmpty) {
       activeFilters++;
     }
-    if (cardFilterParams.type != null && cardFilterParams.type.isNotEmpty) {
+    if ( cardFilterParams.type.isNotEmpty) {
       activeFilters++;
     }
-    if (cardFilterParams.minionType != null && cardFilterParams.minionType.isNotEmpty) {
+    if (cardFilterParams.minionType.isNotEmpty) {
       activeFilters++;
     }
-    if (cardFilterParams.spellSchool != null && cardFilterParams.spellSchool.isNotEmpty) {
+    if (cardFilterParams.spellSchool.isNotEmpty) {
       activeFilters++;
     }
-    if (cardFilterParams.rarity != null && cardFilterParams.rarity.isNotEmpty) {
+    if ( cardFilterParams.rarity.isNotEmpty) {
       activeFilters++;
     }
-    if (cardFilterParams.keyword != null && cardFilterParams.keyword.isNotEmpty) {
+    if (cardFilterParams.keyword.isNotEmpty) {
       activeFilters++;
     }
     return activeFilters;

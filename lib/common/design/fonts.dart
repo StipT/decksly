@@ -114,6 +114,44 @@ class FontStyles {
     color: AppColors.white,
   );
 
+  static TextStyle bold17WithShadow = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 17.sp,
+    color: AppColors.white,
+    shadows: const <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 5.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 8.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ],
+  );
+
+  static TextStyle bold17GoldWithShadow = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 17.sp,
+    color: AppColors.gold,
+    shadows: const <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 5.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 8.0,
+        color: Color.fromARGB(255, 0, 0, 0),
+      ),
+    ],
+  );
+
   static TextStyle bold17DarkChestnutBrown = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w700,

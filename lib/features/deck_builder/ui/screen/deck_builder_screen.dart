@@ -4,6 +4,7 @@ import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
+import 'package:decksly/features/card_gallery/ui/screen/card_item.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
@@ -148,7 +149,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                 scrollController: _scrollController,
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                padding: EdgeInsets.zero,
+
                 builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                   animateTransitions: true,
                   noItemsFoundIndicatorBuilder: (context) {
@@ -157,28 +158,39 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                     );
                   },
                   itemBuilder: (ctx, card, _) {
+                    return CardItem(
+                      card: card,
+                      onLongPress: (card) => Navigator.push(context, HeroDialogRoute(builder: (context) {
+                        return CardDetailsScreen(card);
+                      })),
+                      onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
+                      inDeckBuilderMode: true,
+                    );
                     return GestureDetector(
                       onLongPress: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                         return CardDetailsScreen(card);
                       })),
                       onTap: () => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
-                      child: Image.network(
-                        // TODO deck-28 Add image not found asset
-                        card.image,
-                        loadingBuilder: (context, widget, chunk) {
-                          return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
-                              ? widget
-                              : Container(
-                                  padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
-                                  child: Shimmer.fromColors(
-                                    baseColor: AppColors.spanishGrey,
-                                    highlightColor: AppColors.shimmerGrey,
-                                    child: Image.asset(
-                                      assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                      child: Container(
+                        color: Colors.green,
+                        child: Image.network(
+                          // TODO deck-28 Add image not found asset
+                          card.image,
+                          loadingBuilder: (context, widget, chunk) {
+                            return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
+                                ? widget
+                                : Container(
+                                    padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                                    child: Shimmer.fromColors(
+                                      baseColor: AppColors.spanishGrey,
+                                      highlightColor: AppColors.shimmerGrey,
+                                      child: Image.asset(
+                                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                                      ),
                                     ),
-                                  ),
-                                );
-                        },
+                                  );
+                          },
+                        ),
                       ),
                     );
                   },

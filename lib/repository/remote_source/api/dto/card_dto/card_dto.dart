@@ -16,7 +16,7 @@ class CardDTO with _$CardDTO {
     required int rarityId,
     required int collectible,
     required String? slug,
-    required String? name,
+    required String name,
     required String? artistName,
     required String? text,
     required String image,

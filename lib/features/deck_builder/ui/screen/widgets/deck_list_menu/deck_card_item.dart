@@ -83,14 +83,14 @@ class DeckCardItem extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  if (card.rarityId == 5)
+                  if (card.rarityId == 5 && amount == 1)
                     Expanded(
                       child: Image.asset(
                         assetPath(SUBFOLDER_MISC, "legendary_star"),
                         width: 12.5.w,
                       ),
                     ),
-                  if (amount == 2)
+                  if (card.rarityId != 5 && amount == 2)
                     Expanded(
                       child: Text(
                         amount.toString(),

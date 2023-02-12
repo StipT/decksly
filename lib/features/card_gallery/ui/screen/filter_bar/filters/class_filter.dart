@@ -1,7 +1,6 @@
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,41 +34,56 @@ class _ClassFilterState extends State<ClassFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
-        builder: (BuildContext context, state) {
-          return Container(
-            height: widget.height,
-            width: widget.width,
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Stack(
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
+      return Container(
+        height: widget.height,
+        width: widget.width,
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              assetPath(SUBFOLDER_MISC, "class_filter"),
+              fit: BoxFit.fitHeight,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  assetPath(SUBFOLDER_MISC, "class_filter"),
-                  fit: BoxFit.fitHeight,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: widget.onToggleClassFilter,
-                        child: Container(
-                          padding: EdgeInsets.only(
-                            top: 5.h,
-                            bottom: 5.h,
+                Expanded(
+                  child: GestureDetector(
+                    onTap: widget.onToggleClassFilter,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 3.w),
+                      child: Stack(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 5.w,
+                              top: 5.h,
+                              bottom: 5.h,
+                            ),
+                            child: Image.asset(
+                              assetPath(SUBFOLDER_CLASS, _getClassIcon(widget.deckClass)),
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
-                          child: Image.asset(
-                            assetPath(SUBFOLDER_CLASS, _getClassIcon(widget.deckClass)),
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
+                          if (state.cardFilterParams.heroClass.contains(widget.deckClass.name))
+                            Image.asset(
+                              assetPath(SUBFOLDER_MISC, "class_filter_selected"),
+                            ),
+                        ],
                       ),
                     ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: widget.onToggleNeutralFilter,
-                        child: Container(
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: widget.onToggleNeutralFilter,
+                    child: Stack(
+                      children: [
+                        Container(
                           padding: EdgeInsets.only(
+                            left: 5.w,
                             top: 5.h,
                             bottom: 5.h,
                           ),
@@ -78,37 +92,20 @@ class _ClassFilterState extends State<ClassFilter> {
                             fit: BoxFit.fitHeight,
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 3.5.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      if(state.cardFilterParams.heroClass.contains(widget.deckClass.name))
-                        GestureDetector(
-                          onTap: widget.onToggleClassFilter,
-                          child: Image.asset(
+                        if (state.cardFilterParams.heroClass.contains("neutral"))
+                          Image.asset(
                             assetPath(SUBFOLDER_MISC, "class_filter_selected"),
                           ),
-                        ),
-                      if(state.cardFilterParams.heroClass.contains("neutral"))
-                      GestureDetector(
-                        onTap: widget.onToggleNeutralFilter,
-                        child: Image.asset(
-                          assetPath(SUBFOLDER_MISC, "class_filter_selected"),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
-          );
-        }
-    );
+          ],
+        ),
+      );
+    });
   }
 
   String _getClassIcon(DeckClass deckClass) {

@@ -1,5 +1,6 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/data/card_set.dart';
 import 'package:decksly/data/sort_by.dart';
@@ -9,6 +10,7 @@ import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_ba
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/class_filter.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_appbar_overlay.dart';
 import 'package:decksly/reusable_ui/button/hs_toggle_button.dart';
@@ -27,11 +29,13 @@ class FilterAppBar extends StatefulWidget {
     this.forceCollapse,
     required this.onToggle,
     this.deckClass,
+    this.deckType,
   }) : super(key: key);
 
   final double? height;
   final bool? forceCollapse;
   DeckClass? deckClass;
+  DeckType? deckType;
   final VoidCallback onToggle;
 
   @override
@@ -78,9 +82,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               height: 40.h,
                               width: 80.w,
                               dropdownWidth: 250.w,
-                              selectedValue: state.cardFilterParams.set ?? CardSet.standard.value,
+                              selectedValue: state.cardFilterParams.set,
                               dropdownType: DropdownType.cardSet,
-                              dropdownValues: CardSet.values.map((e) => e.value).toList(),
+                              dropdownValues: getCardSets(subCollection: SubCollection.all),
                               onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
                                   CardFilterParamsChangedEvent(
                                       state.cardFilterParams.copyWith(set: cardSetFromIndex(value).value))),
@@ -141,17 +145,16 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
 
   int extraFiltersActive(CardFilterParams cardFilterParams) {
     int activeFilters = 0;
-    if (cardFilterParams.sort.isNotEmpty &&
-        cardFilterParams.sort != SortBy.manaAsc.value) {
+    if (cardFilterParams.sort.isNotEmpty && cardFilterParams.sort != SortBy.manaAsc.value) {
       activeFilters++;
     }
     if (cardFilterParams.attack.isNotEmpty) {
       activeFilters++;
     }
-    if ( cardFilterParams.health.isNotEmpty) {
+    if (cardFilterParams.health.isNotEmpty) {
       activeFilters++;
     }
-    if ( cardFilterParams.type.isNotEmpty) {
+    if (cardFilterParams.type.isNotEmpty) {
       activeFilters++;
     }
     if (cardFilterParams.minionType.isNotEmpty) {
@@ -160,7 +163,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     if (cardFilterParams.spellSchool.isNotEmpty) {
       activeFilters++;
     }
-    if ( cardFilterParams.rarity.isNotEmpty) {
+    if (cardFilterParams.rarity.isNotEmpty) {
       activeFilters++;
     }
     if (cardFilterParams.keyword.isNotEmpty) {
@@ -188,12 +191,10 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     return deckClass != null
         ? ClassFilter(
             onToggleClassFilter: () {
-              BlocProvider.of<CardGalleryBloc>(context)
-                  .add(ToggleClassCardsEvent(deckClass));
+              BlocProvider.of<CardGalleryBloc>(context).add(ToggleClassCardsEvent(deckClass));
             },
             onToggleNeutralFilter: () {
-              BlocProvider.of<CardGalleryBloc>(context)
-                  .add(ToggleNeutralCardsEvent(deckClass));
+              BlocProvider.of<CardGalleryBloc>(context).add(ToggleNeutralCardsEvent(deckClass));
             },
             deckClass: deckClass,
             height: 60.h,
@@ -214,5 +215,20 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
               ),
             ),
           );
+  }
+
+  List<Object> _setDropDownValues(DeckType? deckType) {
+    log(deckType.toString());
+      switch(deckType) {
+
+        case DeckType.standard:
+          return getCardSets(subCollection: SubCollection.standardSets);
+        case DeckType.classic:
+          return getCardSets(subCollection: SubCollection.classicSets);
+        case DeckType.wild:
+          return getCardSets(subCollection: SubCollection.wildSets);
+        default:
+        return getCardSets(subCollection: SubCollection.all);
+      }
   }
 }

@@ -15,7 +15,7 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       rarityId: json['rarityId'] as int,
       collectible: json['collectible'] as int,
       slug: json['slug'] as String?,
-      name: json['name'] as String?,
+      name: json['name'] as String,
       artistName: json['artistName'] as String?,
       text: json['text'] as String?,
       image: json['image'] as String,

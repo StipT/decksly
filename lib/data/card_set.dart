@@ -249,6 +249,7 @@ enum SubCollection {
   all,
   gameModes,
   standardSets,
+  classicSets,
   wildSets,
 }
 
@@ -260,6 +261,8 @@ List<CardSet> getCardSets({SubCollection subCollection = SubCollection.all}) {
       return _getGameModes();
     case SubCollection.standardSets:
       return _getStandardSets();
+    case SubCollection.classicSets:
+      return _getClassicSets();
     case SubCollection.wildSets:
       return _getWildSets();
   }
@@ -280,6 +283,10 @@ List<CardSet> _getStandardSets() => [
       CardSet.unitedInStormwind,
       CardSet.forgedInTheBarrens,
       CardSet.core,
+    ];
+
+List<CardSet> _getClassicSets() => [
+      CardSet.classic
     ];
 
 List<CardSet> _getWildSets() => [

@@ -50,7 +50,7 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                   fit: BoxFit.fill,
                 ),
                 if (isExpanded) Image.asset(assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.modeType))),
-                _headerContent(),
+                _headerContent(state),
                 Positioned(
                   right: 12.5.w,
                   top: 12.5.h,
@@ -115,7 +115,7 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
     }
   }
 
-  _headerContent() {
+  _headerContent(DeckBuilderState state) {
     return Container(
         child: Row(
       children: [
@@ -151,7 +151,8 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                 )),
                 Flexible(
                     child: AutoSizeText(
-                  "0/30",
+                      "0/30",
+              //    "${state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element)}/30",
                   style: FontStyles.bold11Gold,
                   textAlign: TextAlign.start,
                   minFontSize: 8,

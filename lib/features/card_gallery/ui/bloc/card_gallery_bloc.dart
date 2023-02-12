@@ -24,7 +24,8 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase})
       : super(const CardGalleryState.initial(cardFilterParams: CardFilterParams(), page: CardsPage())) {
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.cardFilterParams));
-    on<CardFilterParamsChangedEvent>((event, emit) async => await handleCardFilterParamsChanged(emit, event.cardFilterParams));
+    on<CardFilterParamsChangedEvent>(
+        (event, emit) async => await handleCardFilterParamsChanged(emit, event.cardFilterParams));
     on<ToggleClassCardsEvent>((event, emit) => handleToggleClassCards(emit, event.deckCLass));
     on<ToggleNeutralCardsEvent>((event, emit) => handleToggleNeutralCards(emit, event.deckCLass));
     _streamInternetConnectionState();
@@ -64,22 +65,28 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   Future<void> handleToggleClassCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
-    if(classes.contains(deckClass.name)) {
+    if (classes.contains(deckClass.name) && classes.length == 1) {
+      classes.remove(deckClass.name);
+      classes.add("neutral");
+    } else if (classes.contains(deckClass.name) && classes.length > 1) {
       classes.remove(deckClass.name);
     } else {
       classes.add(deckClass.name);
     }
-    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes)));
+    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
   }
 
   Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
-    if(classes.contains("neutral")) {
+    if (classes.contains("neutral") && classes.length == 1) {
+      classes.remove("neutral");
+      classes.add(deckClass.name);
+    } else if (classes.contains("neutral") && classes.length > 1) {
       classes.remove("neutral");
     } else {
       classes.add("neutral");
     }
-    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes)));
+    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
   }
 }

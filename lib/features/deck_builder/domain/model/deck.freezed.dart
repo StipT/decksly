@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Deck {
-  List<CardDTO> get cards => throw _privateConstructorUsedError;
+  List<DeckCard> get cards => throw _privateConstructorUsedError;
   DeckType get modeType => throw _privateConstructorUsedError;
   DeckClass get classType => throw _privateConstructorUsedError;
 
@@ -29,7 +29,7 @@ abstract class $DeckCopyWith<$Res> {
   factory $DeckCopyWith(Deck value, $Res Function(Deck) then) =
       _$DeckCopyWithImpl<$Res, Deck>;
   @useResult
-  $Res call({List<CardDTO> cards, DeckType modeType, DeckClass classType});
+  $Res call({List<DeckCard> cards, DeckType modeType, DeckClass classType});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck>
       cards: null == cards
           ? _value.cards
           : cards // ignore: cast_nullable_to_non_nullable
-              as List<CardDTO>,
+              as List<DeckCard>,
       modeType: null == modeType
           ? _value.modeType
           : modeType // ignore: cast_nullable_to_non_nullable
@@ -72,7 +72,7 @@ abstract class _$$_DeckCopyWith<$Res> implements $DeckCopyWith<$Res> {
       __$$_DeckCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<CardDTO> cards, DeckType modeType, DeckClass classType});
+  $Res call({List<DeckCard> cards, DeckType modeType, DeckClass classType});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
       cards: null == cards
           ? _value._cards
           : cards // ignore: cast_nullable_to_non_nullable
-              as List<CardDTO>,
+              as List<DeckCard>,
       modeType: null == modeType
           ? _value.modeType
           : modeType // ignore: cast_nullable_to_non_nullable
@@ -109,15 +109,15 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
 
 class _$_Deck implements _Deck {
   const _$_Deck(
-      {final List<CardDTO> cards = const [],
+      {final List<DeckCard> cards = const [],
       this.modeType = DeckType.standard,
       this.classType = DeckClass.warrior})
       : _cards = cards;
 
-  final List<CardDTO> _cards;
+  final List<DeckCard> _cards;
   @override
   @JsonKey()
-  List<CardDTO> get cards {
+  List<DeckCard> get cards {
     if (_cards is EqualUnmodifiableListView) return _cards;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cards);
@@ -160,12 +160,12 @@ class _$_Deck implements _Deck {
 
 abstract class _Deck implements Deck {
   const factory _Deck(
-      {final List<CardDTO> cards,
+      {final List<DeckCard> cards,
       final DeckType modeType,
       final DeckClass classType}) = _$_Deck;
 
   @override
-  List<CardDTO> get cards;
+  List<DeckCard> get cards;
   @override
   DeckType get modeType;
   @override

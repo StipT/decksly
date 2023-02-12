@@ -33,7 +33,7 @@ class DeckListBody extends StatelessWidget {
                     itemBuilder: (context, index) {
                       int amount = state.deck.cards.where((element) => element == state.deck.cards[index]).length;
                       print(amount);
-                      return DeckCardItem(card: state.deck.cards[index], amount: amount, onTapInfo: (){}, onTapMinus: (){}, onTapPlus: (){},);
+                      return DeckCardItem(card: state.deck.cards[index].card, amount: state.deck.cards[index].amount, onTapInfo: (){}, onTapMinus: (){}, onTapPlus: (){},);
                     }
                   ),
           ),

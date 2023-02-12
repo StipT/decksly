@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
@@ -106,6 +107,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                       inDeckBuilderMode: true,
                     ),
                     FilterAppBar(
+                      deckType: widget.deckBuilderArguments.deckType,
                       deckClass: widget.deckBuilderArguments.deckClass,
                       forceCollapse: isSideMenuOpen ?? false,
                       height: 40.h,
@@ -126,83 +128,58 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   Widget _cardList() {
-    return Expanded(
-      child: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-              left: 32.w,
-              top: 40.h,
-            ),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
-                fit: BoxFit.fill,
+    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(builder: (BuildContext context, state) {
+      return Expanded(
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                left: 32.w,
+                top: 40.h,
               ),
-            ),
-            child: AnimatedPadding(
-              padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
-              curve: Curves.bounceOut,
-              duration: const Duration(milliseconds: 500),
-              child: PagedGridView<int, CardDTO>(
-                pagingController: _pagingController,
-                scrollController: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-
-                builderDelegate: PagedChildBuilderDelegate<CardDTO>(
-                  animateTransitions: true,
-                  noItemsFoundIndicatorBuilder: (context) {
-                    return NoResultsWidget(
-                      onTap: () {},
-                    );
-                  },
-                  itemBuilder: (ctx, card, _) {
-                    return CardItem(
-                      card: card,
-                      onLongPress: (card) => Navigator.push(context, HeroDialogRoute(builder: (context) {
-                        return CardDetailsScreen(card);
-                      })),
-                      onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
-                      inDeckBuilderMode: true,
-                    );
-                    return GestureDetector(
-                      onLongPress: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
-                        return CardDetailsScreen(card);
-                      })),
-                      onTap: () => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              child: AnimatedPadding(
+                padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
+                curve: Curves.bounceOut,
+                duration: const Duration(milliseconds: 500),
+                child: PagedGridView<int, CardDTO>(
+                  pagingController: _pagingController,
+                  scrollController: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisExtent: 120.h),
+                  builderDelegate: PagedChildBuilderDelegate<CardDTO>(
+                    animateTransitions: true,
+                    noItemsFoundIndicatorBuilder: (context) {
+                      return NoResultsWidget(
+                        onTap: () {},
+                      );
+                    },
+                    itemBuilder: (ctx, card, _) {
+                      return CardItem(
+                        card: card,
+                        amount: state.deck.cards.firstWhereOrNull((element) => element.card == card)?.amount ?? 0,
+                        onLongPress: (card) => Navigator.push(context, HeroDialogRoute(builder: (context) {
+                          return CardDetailsScreen(card);
+                        })),
+                        onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
+                        inDeckBuilderMode: true,
+                      );
+                    },
+                    firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.spanishGrey),
+                    newPageProgressIndicatorBuilder: (_) => Center(
                       child: Container(
-                        color: Colors.green,
-                        child: Image.network(
-                          // TODO deck-28 Add image not found asset
-                          card.image,
-                          loadingBuilder: (context, widget, chunk) {
-                            return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
-                                ? widget
-                                : Container(
-                                    padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
-                                    child: Shimmer.fromColors(
-                                      baseColor: AppColors.spanishGrey,
-                                      highlightColor: AppColors.shimmerGrey,
-                                      child: Image.asset(
-                                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
-                                      ),
-                                    ),
-                                  );
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                  firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.spanishGrey),
-                  newPageProgressIndicatorBuilder: (_) => Center(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
-                      child: Shimmer.fromColors(
-                        baseColor: AppColors.spanishGrey,
-                        highlightColor: AppColors.shimmerGrey,
-                        child: Image.asset(
-                          assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                        child: Shimmer.fromColors(
+                          baseColor: AppColors.spanishGrey,
+                          highlightColor: AppColors.shimmerGrey,
+                          child: Image.asset(
+                            assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                          ),
                         ),
                       ),
                     ),
@@ -210,14 +187,14 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                 ),
               ),
             ),
-          ),
-          if (isSideMenuOpen ?? false)
-            Container(
-              color: Colors.black54,
-            ),
-        ],
-      ),
-    );
+            if (isSideMenuOpen ?? false)
+              Container(
+                color: Colors.black54,
+              ),
+          ],
+        ),
+      );
+    });
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {

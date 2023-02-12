@@ -28,7 +28,7 @@ mixin _$CardDTO {
   int get rarityId => throw _privateConstructorUsedError;
   int get collectible => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String? get artistName => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
@@ -69,7 +69,7 @@ abstract class $CardDTOCopyWith<$Res> {
       int rarityId,
       int collectible,
       String? slug,
-      String? name,
+      String name,
       String? artistName,
       String? text,
       String image,
@@ -116,7 +116,7 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
     Object? rarityId = null,
     Object? collectible = null,
     Object? slug = freezed,
-    Object? name = freezed,
+    Object? name = null,
     Object? artistName = freezed,
     Object? text = freezed,
     Object? image = null,
@@ -171,10 +171,10 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       artistName: freezed == artistName
           ? _value.artistName
           : artistName // ignore: cast_nullable_to_non_nullable
@@ -299,7 +299,7 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
       int rarityId,
       int collectible,
       String? slug,
-      String? name,
+      String name,
       String? artistName,
       String? text,
       String image,
@@ -345,7 +345,7 @@ class __$$_CardDTOCopyWithImpl<$Res>
     Object? rarityId = null,
     Object? collectible = null,
     Object? slug = freezed,
-    Object? name = freezed,
+    Object? name = null,
     Object? artistName = freezed,
     Object? text = freezed,
     Object? image = null,
@@ -400,10 +400,10 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       artistName: freezed == artistName
           ? _value.artistName
           : artistName // ignore: cast_nullable_to_non_nullable
@@ -546,7 +546,7 @@ class _$_CardDTO implements _CardDTO {
   @override
   final String? slug;
   @override
-  final String? name;
+  final String name;
   @override
   final String? artistName;
   @override
@@ -738,7 +738,7 @@ abstract class _CardDTO implements CardDTO {
       required final int rarityId,
       required final int collectible,
       required final String? slug,
-      required final String? name,
+      required final String name,
       required final String? artistName,
       required final String? text,
       required final String image,
@@ -779,7 +779,7 @@ abstract class _CardDTO implements CardDTO {
   @override
   String? get slug;
   @override
-  String? get name;
+  String get name;
   @override
   String? get artistName;
   @override

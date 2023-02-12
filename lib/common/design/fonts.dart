@@ -93,6 +93,13 @@ class FontStyles {
     color: AppColors.gold,
   );
 
+  static TextStyle bold12VanDykeBrown = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.w700,
+    fontSize: 12.sp,
+    color: AppColors.vanDykeBrown,
+  );
+
   static TextStyle bold15 = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.bold,
@@ -105,6 +112,13 @@ class FontStyles {
     fontWeight: FontWeight.w700,
     fontSize: 15.sp,
     color: AppColors.vanDykeBrown,
+  );
+
+  static TextStyle bold15Gold = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 15.sp,
+    color: AppColors.gold,
   );
 
   static TextStyle bold17 = TextStyle(

@@ -4,6 +4,7 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
+import 'package:decksly/reusable_ui/text_field/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,6 +20,7 @@ class DeckListHeader extends StatefulWidget {
 
 class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStateMixin {
   bool isExpanded = false;
+  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void initState() {
@@ -144,15 +146,24 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Flexible(
-                    child: AutoSizeText(
-                  "Standard Paladin Deck",
-                  style: FontStyles.bold11WithShadow,
-                  minFontSize: 8,
-                )),
+                  child: TextField(
+                    onChanged: (searchString) {
+                      _debouncer.run(() {
+
+                      });
+
+                      },
+
+                    style: FontStyles.bold17,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: FontStyles.bold17DarkChestnutBrown,
+                    ),
+                  ),
+                ),
                 Flexible(
                     child: AutoSizeText(
-                      "0/30",
-              //    "${state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element)}/30",
+                  "${state.deck.cards.isNotEmpty ? state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element) : "0"}/30",
                   style: FontStyles.bold11Gold,
                   textAlign: TextAlign.start,
                   minFontSize: 8,

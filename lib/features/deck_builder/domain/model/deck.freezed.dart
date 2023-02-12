@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Deck {
+  String get name => throw _privateConstructorUsedError;
   List<DeckCard> get cards => throw _privateConstructorUsedError;
   DeckType get modeType => throw _privateConstructorUsedError;
   DeckClass get classType => throw _privateConstructorUsedError;
@@ -29,7 +30,11 @@ abstract class $DeckCopyWith<$Res> {
   factory $DeckCopyWith(Deck value, $Res Function(Deck) then) =
       _$DeckCopyWithImpl<$Res, Deck>;
   @useResult
-  $Res call({List<DeckCard> cards, DeckType modeType, DeckClass classType});
+  $Res call(
+      {String name,
+      List<DeckCard> cards,
+      DeckType modeType,
+      DeckClass classType});
 }
 
 /// @nodoc
@@ -45,11 +50,16 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? cards = null,
     Object? modeType = null,
     Object? classType = null,
   }) {
     return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       cards: null == cards
           ? _value.cards
           : cards // ignore: cast_nullable_to_non_nullable
@@ -72,7 +82,11 @@ abstract class _$$_DeckCopyWith<$Res> implements $DeckCopyWith<$Res> {
       __$$_DeckCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<DeckCard> cards, DeckType modeType, DeckClass classType});
+  $Res call(
+      {String name,
+      List<DeckCard> cards,
+      DeckType modeType,
+      DeckClass classType});
 }
 
 /// @nodoc
@@ -84,11 +98,16 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? cards = null,
     Object? modeType = null,
     Object? classType = null,
   }) {
     return _then(_$_Deck(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       cards: null == cards
           ? _value._cards
           : cards // ignore: cast_nullable_to_non_nullable
@@ -109,11 +128,15 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
 
 class _$_Deck implements _Deck {
   const _$_Deck(
-      {final List<DeckCard> cards = const [],
+      {this.name = "",
+      final List<DeckCard> cards = const [],
       this.modeType = DeckType.standard,
       this.classType = DeckClass.warrior})
       : _cards = cards;
 
+  @override
+  @JsonKey()
+  final String name;
   final List<DeckCard> _cards;
   @override
   @JsonKey()
@@ -132,7 +155,7 @@ class _$_Deck implements _Deck {
 
   @override
   String toString() {
-    return 'Deck(cards: $cards, modeType: $modeType, classType: $classType)';
+    return 'Deck(name: $name, cards: $cards, modeType: $modeType, classType: $classType)';
   }
 
   @override
@@ -140,6 +163,7 @@ class _$_Deck implements _Deck {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Deck &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._cards, _cards) &&
             (identical(other.modeType, modeType) ||
                 other.modeType == modeType) &&
@@ -148,7 +172,7 @@ class _$_Deck implements _Deck {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
+  int get hashCode => Object.hash(runtimeType, name,
       const DeepCollectionEquality().hash(_cards), modeType, classType);
 
   @JsonKey(ignore: true)
@@ -160,10 +184,13 @@ class _$_Deck implements _Deck {
 
 abstract class _Deck implements Deck {
   const factory _Deck(
-      {final List<DeckCard> cards,
+      {final String name,
+      final List<DeckCard> cards,
       final DeckType modeType,
       final DeckClass classType}) = _$_Deck;
 
+  @override
+  String get name;
   @override
   List<DeckCard> get cards;
   @override

@@ -94,7 +94,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                         children: [
                           Container(
                             child: Text(
-                              widget.card.name ?? "",
+                              widget.card.name,
                               style: FontStyles.bold28,
                             ),
                           ),

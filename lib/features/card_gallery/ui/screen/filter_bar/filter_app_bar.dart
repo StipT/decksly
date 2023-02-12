@@ -205,7 +205,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
             child: HSDropdown(
               height: 40.h,
               width: 150.w,
-              selectedValue: state.cardFilterParams.heroClass,
+              selectedValue: state.cardFilterParams.heroClass.toString(),
               dropdownType: DropdownType.cardClass,
               dropdownValues: CardClass.values.map((e) => e.value).toList(),
               onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(

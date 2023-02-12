@@ -23,6 +23,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       : super(const DeckBuilderState.initial(deck: Deck())) {
     on<DeckChangedEvent>((event, emit) => handleDeckChanged(emit, event.deck));
     on<AddCardEvent>((event, emit) => handleAddCard(emit, event.card));
+    on<RemoveCardEvent>((event, emit) => handleRemoveCard(emit, event.card));
     _streamInternetConnectionState();
   }
 
@@ -37,7 +38,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
   }
 
   void handleDeckChanged(Emitter<DeckBuilderState> emit, Deck deck) {
-    final Deck changedDeck = state.deck.copyWith(classType: deck.classType, modeType: deck.modeType, cards: deck.cards);
+    final Deck changedDeck = state.deck.copyWith(name: deck.name, classType: deck.classType, modeType: deck.modeType, cards: deck.cards);
     emit(DeckBuilderState.changed(deck: changedDeck));
   }
 
@@ -47,7 +48,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
 
     final duplicateCardOrNull = cards.firstWhereOrNull((element) => element.card == card);
 
-    if (cards.length >= 30) {
+    if (cards.isNotEmpty && cards.map((e) => e.amount).reduce((value, element) => value += element) >= 30) {
       return;
     }
 
@@ -55,7 +56,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       return;
     }
 
-    if(duplicateCardOrNull != null && duplicateCardOrNull.amount > 1) {
+    if (duplicateCardOrNull != null && duplicateCardOrNull.amount > 1) {
       return;
     }
 
@@ -67,7 +68,35 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
     }
 
     cards.sort((deckCard1, deckCard2) {
-      if(deckCard1.card.manaCost == deckCard2.card.manaCost) {
+      if (deckCard1.card.manaCost == deckCard2.card.manaCost) {
+        return deckCard1.card.name.compareTo(deckCard2.card.name);
+      } else {
+        return deckCard1.card.manaCost.compareTo(deckCard2.card.manaCost);
+      }
+    });
+
+    emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
+  }
+
+  void handleRemoveCard(Emitter<DeckBuilderState> emit, CardDTO card) {
+    List<DeckCard> cards = [];
+    cards.addAll(state.deck.cards);
+
+    final duplicateCardOrNull = cards.firstWhereOrNull((element) => element.card == card);
+
+    if (duplicateCardOrNull == null) {
+      return;
+    }
+
+    if (cards.where((element) => (element.card == card) && (element.amount == 2)).isNotEmpty) {
+      cards.removeWhere((element) => element.card == card);
+      cards.add(DeckCard(card: card, amount: 1));
+    } else {
+      cards.removeWhere((element) => element.card == card);
+    }
+
+    cards.sort((deckCard1, deckCard2) {
+      if (deckCard1.card.manaCost == deckCard2.card.manaCost) {
         return deckCard1.card.name.compareTo(deckCard2.card.name);
       } else {
         return deckCard1.card.manaCost.compareTo(deckCard2.card.manaCost);

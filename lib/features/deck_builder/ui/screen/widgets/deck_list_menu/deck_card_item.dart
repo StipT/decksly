@@ -11,23 +11,23 @@ class DeckCardItem extends StatelessWidget {
   const DeckCardItem({
     required this.card,
     required this.amount,
-    required this.onTapPlus,
-    required this.onTapMinus,
-    required this.onTapInfo,
+    required this.onTap,
+    required this.onLongPress,
   });
 
   final CardDTO card;
   final int amount;
-  final VoidCallback onTapPlus;
-  final VoidCallback onTapMinus;
-  final VoidCallback onTapInfo;
+
+  final Function(CardDTO) onTap;
+  final Function(CardDTO) onLongPress;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () => onTapInfo,
+      onTap: () => onTap(card),
+      onLongPress: () => onLongPress(card),
       child: Container(
-        height: 15.h,
+        height: 16.h,
         child: Stack(
           children: [
             Row(
@@ -78,7 +78,7 @@ class DeckCardItem extends StatelessWidget {
                     margin: EdgeInsets.only(left: 7.5.w, right: 6.w),
                     width: 150.w,
                     child: Text(
-                      card.name ?? "",
+                      card.name,
                       style: FontStyles.bold11WithShadow,
                       textAlign: TextAlign.start,
                     ),

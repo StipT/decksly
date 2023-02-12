@@ -151,15 +151,16 @@ class HSDropdown extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 height: height,
                 width: width,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
                 padding: EdgeInsets.only(left: 6.w),
-                textStyle: FontStyles.bold15VanDykeBrown,
+                textStyle: FontStyles.bold12VanDykeBrown,
                 elevation: 1.sp,
                 backgroundColor: Colors.transparent,
                 primaryColor: AppColors.vanDykeBrown,
               ),
               dropdownStyle: DropdownStyle(
                 width: dropdownWidth,
-                textStyle: FontStyles.bold15,
+                textStyle: FontStyles.bold11,
                 dropdownBackgroundAssetPath: assetPath(
                   SUBFOLDER_DROPDOWN,
                   "dropdown_background",
@@ -183,7 +184,8 @@ class HSDropdown extends StatelessWidget {
                   value: selectedValue,
                   child: _getDropdownItem(index, dropdownType, isSelected: true),
                 );
-              }),
+
+              },),
         ],
       ),
     );

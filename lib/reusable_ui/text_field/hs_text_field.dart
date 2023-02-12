@@ -78,15 +78,7 @@ class _HSTextFieldState extends State<HSTextField> {
                   child: TextField(
                     focusNode: _focus,
                     controller: _textEditingController,
-                    onChanged: (searchString) {
-                      setState(() {
-                        isEmpty = _textEditingController.text.trim().isEmpty;
-                      });
-
-                      _debouncer.run(() {
-                        widget.onChange(searchString);
-                      });
-                    },
+                    // TODO Deck name input
                     style: FontStyles.bold17,
                     decoration: InputDecoration(
                       border: InputBorder.none,

@@ -1,15 +1,17 @@
 import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HSButton extends StatelessWidget {
-  const HSButton(
-      {Key? key, this.label, this.icon, required this.onTap, required this.width, required this.isDisabled,})
-      : super(key: key);
+  const HSButton({
+    Key? key,
+    this.label,
+    this.icon,
+    required this.onTap,
+    required this.width,
+    required this.isDisabled,
+  }) : super(key: key);
   final String? label;
   final double width;
   final Widget? icon;
@@ -30,7 +32,7 @@ class HSButton extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             const HSButtonOverlay(),
-         //   if (isToggled) const HSActiveButtonOverlay(),
+            //   if (isToggled) const HSActiveButtonOverlay(),
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(
@@ -47,7 +49,6 @@ class HSButton extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
                         child: icon ?? const SizedBox(),
-
                       ),
                     ],
                   ),

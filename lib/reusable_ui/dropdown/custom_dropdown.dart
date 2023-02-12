@@ -57,7 +57,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   void initState() {
     super.initState();
 
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
     _expandAnimation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -75,16 +75,17 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
       link: _layerLink,
       child: Stack(
         children: [
-          if(_isOpen)
-            widget.activeDropdownButtonOverlay ?? const SizedBox(),
-          if(_currentIndex != 0 && !_isOpen)
-            widget.selectedDropdownButtonOverlay ?? const SizedBox(),
+          if (_isOpen) widget.activeDropdownButtonOverlay ?? const SizedBox(),
+          if (_currentIndex != 0 && !_isOpen) widget.selectedDropdownButtonOverlay ?? const SizedBox(),
           Container(
             color: Colors.transparent,
             width: style.width,
             height: style.height,
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  color: Colors.transparent,
+                ),
                 textStyle: style.textStyle,
                 padding: style.padding,
                 primary: style.primaryColor,
@@ -181,18 +182,17 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                                 shrinkWrap: true,
                                 itemCount: widget.items.length,
                                 itemBuilder: (context, index) {
-                                  final DropdownItem<String> selectedItem = widget.selectedItem(_currentIndex) as DropdownItem<String>;
+                                  final DropdownItem<String> selectedItem = widget.selectedItem(_currentIndex);
                                   final item = widget.items.asMap().entries.toList()[index];
                                   print("Selected item ${item.value.value}, ${selectedItem.value}");
                                   if (item.value.value == selectedItem.value) {
                                     return InkWell(
-                                      onTap: () {
-                                        setState(() => _currentIndex = index);
-                                        widget.onChange(index);
-                                        _toggleDropdown();
-                                      },
-                                      child: selectedItem.child
-                                    );
+                                        onTap: () {
+                                          setState(() => _currentIndex = index);
+                                          widget.onChange(index);
+                                          _toggleDropdown();
+                                        },
+                                        child: selectedItem.child);
                                   } else {
                                     return InkWell(
                                       onTap: () {
@@ -203,7 +203,6 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                                       child: item.value as Widget,
                                     );
                                   }
-
                                 },
                               )),
                         ),

@@ -67,7 +67,7 @@ class SetDropdownItem extends StatelessWidget implements SetListItem {
               padding: EdgeInsets.only(left: 6.w),
               child: AutoSizeText(
                 text,
-                style: isSelected ? FontStyles.bold17Gold : FontStyles.bold17,
+                style: isSelected ? FontStyles.bold15Gold : FontStyles.bold15,
                 overflow: TextOverflow.fade,
                 minFontSize: 10,
               ),

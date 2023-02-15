@@ -37,20 +37,6 @@ class FontStyles {
     color: AppColors.vanDykeBrown,
   );
 
-  static TextStyle regular20 = TextStyle(
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.w400,
-    fontSize: 20.sp,
-    color: AppColors.white,
-  );
-
-  static TextStyle regular20Grey = TextStyle(
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.w400,
-    fontSize: 20.sp,
-    color: Colors.grey,
-  );
-
   // Bold Belwe
 
   static TextStyle bold11 = TextStyle(
@@ -147,25 +133,6 @@ class FontStyles {
     ],
   );
 
-  static TextStyle bold17GoldWithShadow = TextStyle(
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.bold,
-    fontSize: 17.sp,
-    color: AppColors.gold,
-    shadows: const <Shadow>[
-      Shadow(
-        offset: Offset(1, 1),
-        blurRadius: 5.0,
-        color: Color.fromARGB(255, 0, 0, 0),
-      ),
-      Shadow(
-        offset: Offset(1, 1),
-        blurRadius: 8.0,
-        color: Color.fromARGB(255, 0, 0, 0),
-      ),
-    ],
-  );
-
   static TextStyle bold17DarkChestnutBrown = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w700,
@@ -209,25 +176,6 @@ class FontStyles {
         offset: Offset(1, 1),
         blurRadius: 8.0,
         color: Color.fromARGB(255, 0, 0, 0),
-      ),
-    ],
-  );
-
-  static TextStyle bold22WithShadow50 = TextStyle(
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.bold,
-    fontSize: 22.sp,
-    color: AppColors.white50,
-    shadows: const <Shadow>[
-      Shadow(
-        offset: Offset(1, 1),
-        blurRadius: 5.0,
-        color: AppColors.black50,
-      ),
-      Shadow(
-        offset: Offset(1, 1),
-        blurRadius: 8.0,
-        color: AppColors.black50,
       ),
     ],
   );
@@ -293,17 +241,4 @@ class FontStyles {
     color: AppColors.white,
   );
 
-  static TextStyle light17 = TextStyle(
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.w300,
-    fontSize: 17.sp,
-    color: AppColors.white,
-  );
-
-  static TextStyle light22 = TextStyle(
-    fontFamily: FONT_FAMILY,
-    fontWeight: FontWeight.w300,
-    fontSize: 22.sp,
-    color: AppColors.white,
-  );
 }

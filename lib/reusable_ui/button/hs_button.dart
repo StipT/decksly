@@ -1,3 +1,4 @@
+import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
 import 'package:flutter/material.dart';
@@ -24,45 +25,46 @@ class HSButton extends StatelessWidget {
       width: width,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(vertical: 1.h),
-      child: InkWell(
-        onTap: () {
-          onTap();
-        },
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            const HSButtonOverlay(),
-            //   if (isToggled) const HSActiveButtonOverlay(),
-            Container(
-              alignment: Alignment.center,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const HSButtonOverlay(),
+          //   if (isToggled) const HSActiveButtonOverlay(),
+          OutlinedButton(
+            onPressed: onTap,
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(
+                color: Colors.transparent,
+              ),
+              textStyle: FontStyles.bold15VanDykeBrown,
               padding: EdgeInsets.only(
                 right: 10.w,
                 top: 5.h,
                 bottom: 5.h,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
-                        child: icon ?? const SizedBox(),
-                      ),
-                    ],
-                  ),
-                  Container(
+              primary: AppColors.vanDykeBrown,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 1.h, bottom: 1.h, right: 2.5.w, left: 10.w),
+                  child: icon ?? const SizedBox(),
+                ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
                     child: Text(
                       label ?? "",
-                      style: FontStyles.bold15VanDykeBrown,
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

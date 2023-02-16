@@ -125,7 +125,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 Container(
                     margin: EdgeInsets.only(left: 25.w, right: 25.w),
                     child: HSButton(
-                      width: 140.w,
+                      width: 100.w,
                       isDisabled: false,
                       label: LocaleKeys.load.tr(),
                       onTap: () {
@@ -150,7 +150,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 Container(
                     margin: EdgeInsets.only(left: 25.w, right: 25.w),
                     child: HSButton(
-                      width: 140.w,
+                      width: 100.w,
                       isDisabled: false,
                       label: LocaleKeys.close.tr(),
                       onTap: () {

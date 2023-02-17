@@ -1,3 +1,4 @@
+import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
@@ -27,20 +28,88 @@ class DeckListFooter extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                flex: 2, child: Container(margin: EdgeInsets.only(left: 6.w, top: 2.h, bottom: 3.h), child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(assetPath(SUBFOLDER_MISC, "copy_deck_button"),),
-                  Text(LocaleKeys.copyDeckCode.tr(), style: FontStyles.bold11,),
-                ],
-              )),),
+                flex: 3,
+                child: createDeckButton(),
+              ),
               Image.asset(assetPath(SUBFOLDER_MISC, "wood_divider")),
-              Container(margin: EdgeInsets.only(right: 5.w, top: 2.h, bottom: 3.h),
-                  child: Image.asset(assetPath(SUBFOLDER_MISC, "new_deck_button"),)),
+              Expanded(
+                child: startNewButton(),
+              ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget startNewButton() {
+    return Container(
+      margin: EdgeInsets.only(right: 5.w, top: 2.h, bottom: 3.h),
+      child: Stack(
+        children: [
+          Image.asset(
+            assetPath(SUBFOLDER_MISC, "new_deck_button"),
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.fill,
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(
+                color: Colors.transparent,
+              ),
+              textStyle: FontStyles.bold15,
+              primary: AppColors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+            ),
+            child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget createDeckButton() {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 7.5.w,
+        bottom: 2.5.w,
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            assetPath(SUBFOLDER_MISC, "copy_deck_button"),
+            fit: BoxFit.fill,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 2.5.h),
+            child: OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  color: Colors.transparent,
+                ),
+                textStyle: FontStyles.bold15,
+                primary: AppColors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+              ),
+              child: Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  child: Text(
+                    LocaleKeys.copyDeckCode.tr(),
+                    style: FontStyles.bold11,
+                  )),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

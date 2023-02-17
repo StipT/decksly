@@ -1,3 +1,4 @@
+import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
@@ -8,9 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HSBarToggleButton extends StatelessWidget {
   const HSBarToggleButton(
-      {Key? key, this.label, this.icon, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
+      {Key? key, this.icon, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
       : super(key: key);
-  final String? label;
   final double width;
   final Widget? icon;
   final bool isToggled;
@@ -23,45 +23,33 @@ class HSBarToggleButton extends StatelessWidget {
       width: width,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(vertical: 0.5.h),
-      child: InkWell(
-        onTap: () {
-          onTap();
-        },
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            const HSVelvetBorder(),
-            const HSButtonOverlay(),
-            if (isToggled) const HSActiveButtonOverlay(),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(
-                left: 10.w,
-                right: 10.w,
-                top: 5.h,
-                bottom: 5.h,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const HSVelvetBorder(),
+          const HSButtonOverlay(),
+          if (isToggled) const HSActiveButtonOverlay(),
+          OutlinedButton(
+            onPressed: onTap,
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(
+                color: Colors.transparent,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        child: icon ?? const SizedBox(),
-                        width: 25.w,
-                      ),
-                    ],
-                  ),
-                  Text(
-                    label ?? "",
-                    style: FontStyles.bold15VanDykeBrown,
-                  )
-                ],
+              textStyle: FontStyles.bold15VanDykeBrown,
+              padding: EdgeInsets.symmetric(
+                vertical: 10.w,
+                horizontal: 8.h,
               ),
+              primary: AppColors.vanDykeBrown,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
             ),
-            _showFilterBubble(activeFilters),
-          ],
-        ),
+            child: Container(
+              alignment: Alignment.center,
+              child: icon ?? const SizedBox(),
+            ),
+          ),
+          _showFilterBubble(activeFilters),
+        ],
       ),
     );
   }

@@ -1,14 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
 import 'package:decksly/features/deck_selection/ui/bloc/deck_selection_bloc.dart';
 import 'package:decksly/features/deck_selection/ui/screen/widgets/hs_class_badge.dart';
 import 'package:decksly/features/deck_selection/ui/screen/widgets/hs_mode_badge.dart';
-import 'package:decksly/navigation/navigation_config.dart';
+import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_deck_selection_background.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
@@ -20,11 +20,19 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DeckSelectionScreen extends StatefulWidget {
+class DeckSelectionScreen extends StatefulWidget implements AutoRouteWrapper {
   const DeckSelectionScreen({super.key});
 
   @override
   State<DeckSelectionScreen> createState() => _DeckSelectionScreenState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<DeckSelectionBloc>(),
+      child: this,
+    );
+  }
 }
 
 class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
@@ -129,7 +137,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isDisabled: false,
                       label: LocaleKeys.load.tr(),
                       onTap: () {
-                        CardGalleryRoute.open(context);
+                        context.pushRoute(const CardGalleryRoute());
+                        //   CardGalleryRoute.open(context);
                       },
                       icon: Container(
                           alignment: Alignment.center,
@@ -154,7 +163,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isDisabled: false,
                       label: LocaleKeys.close.tr(),
                       onTap: () {
-                        CardGalleryRoute.open(context);
+                        context.pushRoute(const CardGalleryRoute());
                       },
                       icon: Image.asset(assetPath(SUBFOLDER_MISC, "close")),
                     )),
@@ -237,7 +246,9 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isSelected: e == state.deckClass,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
+                        context
+                            .pushRoute(DeckBuilderRoute(deckBuilderArguments: DeckBuilderArguments(state.deckType, e)));
+                        //      DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
                       }))
                   .toList()
                   .sublist(0, 6),
@@ -252,7 +263,9 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isSelected: e == state.deckClass,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
-                        DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
+                        context
+                            .pushRoute(DeckBuilderRoute(deckBuilderArguments: DeckBuilderArguments(state.deckType, e)));
+                        //   DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
                       }))
                   .toList()
                   .sublist(6, 11),

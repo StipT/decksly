@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
@@ -5,6 +6,7 @@ import 'package:decksly/features/card_gallery/domain/model/card_filter_params.da
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/feature_item.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/language_button.dart';
+import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/navigation/navigation_config.dart';
 import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_border.dart';
@@ -102,7 +104,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                             FeatureItem(
                               type: FeatureItemType.cardLibrary,
                               isSelected: !widget.inDeckBuilderMode,
-                              onTap: () => widget.inDeckBuilderMode ? CardGalleryRoute.open(context) : null,
+                              onTap: () => widget.inDeckBuilderMode ? context.replaceRoute(const CardGalleryRoute()) : null
                             ),
                             Container(
                               child: Image.asset(
@@ -117,7 +119,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               child: FeatureItem(
                                 type: FeatureItemType.deckBuilder,
                                 isSelected: widget.inDeckBuilderMode,
-                                onTap: () => widget.inDeckBuilderMode ? null : DeckSelectionRoute.open(context),
+                                onTap: () => widget.inDeckBuilderMode ? null : context.replaceRoute(const DeckSelectionRoute()),
                               ),
                             ),
                             Container(

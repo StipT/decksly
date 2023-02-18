@@ -43,7 +43,7 @@ dependencies:
   injectable: ^1.5.3
 
   # Navigation
-  go_router: ^3.0.4
+  auto_route: ^5.0.4
 
   # Testing
   #mocktail: ^0.3.0
@@ -69,10 +69,9 @@ dependencies:
   # UI
   flutter_screenutil: ^5.6.0
   cupertino_icons: ^1.0.2
-  flutter_native_splash: ^1.2.1
   infinite_scroll_pagination: ^3.2.0
   foil: ^0.9.0+1
-  flutter_svg: ^0.23.0+1
+  flutter_svg: ^1.1.6
   auto_size_text: ^3.0.0-nullsafety.0
   xl: ^0.9.1
   flip_card: ^0.6.0
@@ -92,7 +91,7 @@ dev_dependencies:
   json_serializable: ^6.3.1
   injectable_generator: ^1.5.3
   retrofit_generator: ^4.1.1
-
+  auto_route_generator: ^5.0.3
   flutter_test:
     sdk: flutter
 

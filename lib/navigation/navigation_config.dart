@@ -1,3 +1,4 @@
+/*
 import 'package:decksly/app/di.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/card_gallery_screen.dart';
@@ -114,3 +115,4 @@ class DeckSelectionRoute extends GoRoute {
 
   static void open(BuildContext context) => context.go(route());
 }
+*/

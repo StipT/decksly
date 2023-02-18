@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
+import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
@@ -29,7 +31,7 @@ class DeckBuilderArguments {
   final DeckClass? deckClass;
 }
 
-class DeckBuilderScreen extends StatefulWidget {
+class DeckBuilderScreen extends StatefulWidget implements AutoRouteWrapper {
   const DeckBuilderScreen({
     super.key,
     required this.deckBuilderArguments,
@@ -39,6 +41,17 @@ class DeckBuilderScreen extends StatefulWidget {
 
   @override
   State<DeckBuilderScreen> createState() => _DeckBuilderScreenState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<CardGalleryBloc>()),
+        BlocProvider(create: (_) => getIt<DeckBuilderBloc>()),
+      ],
+      child: this,
+    );
+  }
 }
 
 class _DeckBuilderScreenState extends State<DeckBuilderScreen> {

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
@@ -16,11 +17,19 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CardGalleryScreen extends StatefulWidget {
+class CardGalleryScreen extends StatefulWidget implements AutoRouteWrapper {
   const CardGalleryScreen({super.key});
 
   @override
   State<CardGalleryScreen> createState() => _CardGalleryScreenState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<CardGalleryBloc>(),
+      child: this,
+    );
+  }
 }
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
@@ -42,7 +51,6 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
     return BlocListener<CardGalleryBloc, CardGalleryState>(
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
       child: BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
-
         state.maybeWhen(
           initial: (cardParams, cards) {
             BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(cardParams));
@@ -65,7 +73,6 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 inDeckBuilderMode: false,
               ),
               FilterAppBar(
-
                 forceCollapse: isSideMenuOpen ?? false,
                 height: 40.h,
                 onToggle: () {

@@ -8,13 +8,17 @@ abstract class DeckSelectionEvent {
 class LoadCreatedDecksEvent extends DeckSelectionEvent {}
 
 class ImportDeckEvent extends DeckSelectionEvent {
-  final String deckCode;
-  const ImportDeckEvent(this.deckCode);
+  const ImportDeckEvent();
 }
 
 class ChangeGameModeEvent extends DeckSelectionEvent {
   final DeckType gameMode;
   const ChangeGameModeEvent(this.gameMode);
+}
+
+class ChangeDeckCodeEvent extends DeckSelectionEvent {
+  final String deckCode;
+  const ChangeDeckCodeEvent(this.deckCode);
 }
 
 class SelectLoadedDeckEvent extends DeckSelectionEvent {

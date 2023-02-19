@@ -21,7 +21,7 @@ Future<void> main() async {
       saveLocale: true,
       path: 'assets/localization',
       fallbackLocale: const Locale('de', 'DE'),
-      child: const DeckslyApp()),);
+      child: DeckslyApp()),);
 }
 
 void _landscapeModeOnly() {

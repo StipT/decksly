@@ -10,9 +10,35 @@ part 'app_router.gr.dart';
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
     AutoRoute(page: CardGalleryScreen, initial: true, maintainState: true, ),
-    AutoRoute(page: DeckSelectionScreen),
-    AutoRoute(page: DeckBuilderScreen),
+    CustomRoute(page: DeckSelectionScreen, transitionsBuilder: bounceInTransition),
+    CustomRoute(page: DeckBuilderScreen, transitionsBuilder: bounceOutTransition),
   ],
 )
-// extend the generated private router
+
 class AppRouter extends _$AppRouter{}
+
+Widget bounceInTransition(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  const begin = Offset(0.0, -1.0);
+  const end = Offset.zero;
+
+  final tween = Tween(begin: begin, end: end);
+  final curvedAnimation = CurvedAnimation(
+    parent: animation,
+    curve: Curves.bounceOut,
+    reverseCurve: Curves.easeOutBack,
+  );
+  return SlideTransition(position: tween.animate(curvedAnimation), child: child);
+}
+
+Widget bounceOutTransition(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  const begin = Offset(0.0, -1.0);
+  const end = Offset.zero;
+
+  final tween = Tween(begin: begin, end: end);
+  final curvedAnimation = CurvedAnimation(
+    parent: animation,
+    curve: Curves.easeOutBack,
+    reverseCurve: Curves.bounceOut,
+  );
+  return SlideTransition(position: tween.animate(curvedAnimation), child: child);
+}

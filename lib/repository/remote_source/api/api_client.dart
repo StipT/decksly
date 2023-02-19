@@ -1,5 +1,6 @@
 import 'package:decksly/common/application.constants.dart';
 import 'package:decksly/repository/remote_source/api/models/response/cards_response/cards_response.dart';
+import 'package:decksly/repository/remote_source/api/models/response/deck_response/deck_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -37,20 +38,16 @@ abstract class ApiClient {
     @Query("gameMode") String? gameMode,
   });
 
-//TODO deck-15 Create request/response models for fetching decks/deck codes
-/*
     @GET('/hearthstone/deck')
   Future<DeckResponse> getDeck(
     @Query("locale") String locale,
-    @Query("code") String code,
-    @Query("hero") String hero,
+    @Query("code") String deckCode,
   );
 
   @GET('/hearthstone/deck')
-  Future<DeckCodeResponse> getDeckCode(
+  Future<DeckResponse> getDeckCode(
     @Query("locale") String locale,
-    @Query("ids") String ids, // Comma separated ID list
-    @Query("hero") String hero,
+    @Query("ids") String ids,
+    @Query("hero") String deckClass,
   );
-*/
 }

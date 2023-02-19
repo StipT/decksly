@@ -1,13 +1,12 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
 import 'package:decksly/reusable_ui/text_field/debouncer.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum TextFieldTheme {
@@ -17,19 +16,25 @@ enum TextFieldTheme {
   wood,
 }
 
+enum TextFieldSuffix {
+  none,
+  search,
+  paste,
+}
+
 class HSTextField extends StatefulWidget {
   const HSTextField({
     Key? key,
-    required this.onChange,
     required this.theme,
+    required this.suffix,
+    this.onChange,
     this.hint,
-    this.isSearchTextField = false,
   }) : super(key: key);
 
-  final void Function(String) onChange;
+  final void Function(String)? onChange;
   final TextFieldTheme theme;
+  final TextFieldSuffix suffix;
   final String? hint;
-  final bool isSearchTextField;
 
   @override
   State<HSTextField> createState() => _HSTextFieldState();
@@ -78,27 +83,19 @@ class _HSTextFieldState extends State<HSTextField> {
                   child: TextField(
                     focusNode: _focus,
                     controller: _textEditingController,
-                    // TODO Deck name input
+                    onChanged: (searchString) {
+                      setState(() {
+                        isEmpty = _textEditingController.text.trim().isEmpty;
+                      });
+
+                      _debouncer.run(() {
+                        widget.onChange!(searchString);
+                      });
+                    },
                     style: FontStyles.bold17,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      suffixIcon: widget.isSearchTextField
-                          ? IconButton(
-                              onPressed: () {
-                                if (!isEmpty) {
-                                  setState(() {
-                                    _textEditingController.clear();
-                                    isEmpty = _textEditingController.text.isEmpty;
-                                    widget.onChange(_textEditingController.text);
-                                  });
-                                }
-                              },
-                              icon: Icon(
-                                isEmpty ? Icons.search : Icons.close,
-                              ),
-                              color: AppColors.gold,
-                            )
-                          : const SizedBox(),
+                      suffixIcon: _suffixIcon(widget.suffix),
                       hintText: widget.hint,
                       hintStyle: FontStyles.bold17DarkChestnutBrown,
                     ),
@@ -110,6 +107,37 @@ class _HSTextFieldState extends State<HSTextField> {
         ],
       ),
     );
+  }
+
+  Widget _suffixIcon(TextFieldSuffix suffix) {
+    switch (suffix) {
+      case TextFieldSuffix.none:
+        return const SizedBox();
+      case TextFieldSuffix.search:
+        return IconButton(
+          onPressed: () {
+            if (!isEmpty) {
+              setState(() {
+                _textEditingController.clear();
+                isEmpty = _textEditingController.text.isEmpty;
+                widget.onChange!(_textEditingController.text);
+              });
+            }
+          },
+          icon: Icon(
+            isEmpty ? Icons.search : Icons.close,
+          ),
+          color: AppColors.gold,
+        );
+      case TextFieldSuffix.paste:
+        return IconButton(
+          onPressed: () {
+            Clipboard.getData(Clipboard.kTextPlain).then((value){
+              _textEditingController.text = value?.text ?? "";
+            });
+          }, icon: const Icon(Icons.paste, color: AppColors.gold,),
+        );
+    }
   }
 
   Widget _getBorder(TextFieldTheme theme) {

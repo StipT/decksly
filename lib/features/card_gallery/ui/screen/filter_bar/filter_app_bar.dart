@@ -102,7 +102,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             padding: EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
                             child: HSTextField(
                               hint: LocaleKeys.search.tr(),
-                              isSearchTextField: true,
+                              suffix: TextFieldSuffix.search,
                               onChange: (text) => BlocProvider.of<CardGalleryBloc>(context)
                                   .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(textFilter: text))),
                               theme: TextFieldTheme.velvet,

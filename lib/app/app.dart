@@ -2,16 +2,15 @@ import 'package:decksly/common/application.constants.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/navigation/app_router.dart';
-import 'package:decksly/navigation/navigation_config.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckslyApp extends StatelessWidget {
+  final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
-
     return ScreenUtilInit(
       designSize: const Size(787, 375),
       minTextAdapt: true,
@@ -39,5 +38,5 @@ class DeckslyApp extends StatelessWidget {
     );
   }
 
-  const DeckslyApp({super.key});
+  DeckslyApp({super.key});
 }

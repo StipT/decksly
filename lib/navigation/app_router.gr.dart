@@ -20,23 +20,30 @@ class _$AppRouter extends RootStackRouter {
     CardGalleryRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const CardGalleryScreen(),
+        child: WrappedRoute(child: const CardGalleryScreen()),
       );
     },
     DeckSelectionRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return CustomPage<dynamic>(
         routeData: routeData,
-        child: const DeckSelectionScreen(),
+        child: WrappedRoute(child: const DeckSelectionScreen()),
+        transitionsBuilder: bounceInTransition,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     DeckBuilderRoute.name: (routeData) {
       final args = routeData.argsAs<DeckBuilderRouteArgs>();
-      return MaterialPageX<dynamic>(
+      return CustomPage<dynamic>(
         routeData: routeData,
-        child: DeckBuilderScreen(
+        child: WrappedRoute(
+            child: DeckBuilderScreen(
           key: args.key,
           deckBuilderArguments: args.deckBuilderArguments,
-        ),
+        )),
+        transitionsBuilder: bounceOutTransition,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
   };

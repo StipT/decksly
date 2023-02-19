@@ -48,7 +48,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DeckSelectionBloc, DeckSelectionState>(builder: (BuildContext context, state) {
+    return BlocBuilder<DeckSelectionBloc, DeckSelectionState>(
+        builder: (BuildContext context, state) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(
@@ -105,7 +106,10 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                         Expanded(
                           child: Container(
                               child: HSTextField(
-                            onChange: (change) {},
+                            onChange: (text) =>
+                                BlocProvider.of<DeckSelectionBloc>(context)
+                                    .add(ChangeDeckCodeEvent(text)),
+                            suffix: TextFieldSuffix.paste,
                             theme: TextFieldTheme.none,
                             hint: LocaleKeys.pasteADeckCodeHere.tr(),
                           )),
@@ -115,7 +119,9 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                             width: 100.w,
                             isDisabled: false,
                             label: LocaleKeys.import.tr(),
-                            onTap: () {},
+                            onTap: () =>
+                                BlocProvider.of<DeckSelectionBloc>(context)
+                                    .add(const ImportDeckEvent()),
                           ),
                         ),
                       ],
@@ -163,7 +169,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       isDisabled: false,
                       label: LocaleKeys.close.tr(),
                       onTap: () {
-                        context.pushRoute(const CardGalleryRoute());
+                        print("Navigate nback");
+                        context.navigateBack();
                       },
                       icon: Image.asset(assetPath(SUBFOLDER_MISC, "close")),
                     )),
@@ -190,28 +197,33 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(right: 20.w),
-                      child: Image.asset(assetPath(SUBFOLDER_MISC, "velvet_ornament_left"))),
+                      child: Image.asset(
+                          assetPath(SUBFOLDER_MISC, "velvet_ornament_left"))),
                   HSModeBadge(
                       type: DeckType.standard,
                       isSelected: DeckType.standard == state.deckType,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.standard));
+                        BlocProvider.of<DeckSelectionBloc>(context)
+                            .add(const ChangeGameModeEvent(DeckType.standard));
                       }),
                   HSModeBadge(
                       type: DeckType.classic,
                       isSelected: DeckType.classic == state.deckType,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
+                        BlocProvider.of<DeckSelectionBloc>(context)
+                            .add(const ChangeGameModeEvent(DeckType.classic));
                       }),
                   HSModeBadge(
                       type: DeckType.wild,
                       isSelected: DeckType.wild == state.deckType,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.wild));
+                        BlocProvider.of<DeckSelectionBloc>(context)
+                            .add(const ChangeGameModeEvent(DeckType.wild));
                       }),
                   Container(
                       padding: EdgeInsets.only(left: 20.w),
-                      child: Image.asset(assetPath(SUBFOLDER_MISC, "velvet_ornament_right"))),
+                      child: Image.asset(
+                          assetPath(SUBFOLDER_MISC, "velvet_ornament_right"))),
                 ],
               ),
             ),
@@ -245,9 +257,11 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       modeType: state.deckType,
                       isSelected: e == state.deckClass,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
-                        context
-                            .pushRoute(DeckBuilderRoute(deckBuilderArguments: DeckBuilderArguments(state.deckType, e)));
+                        BlocProvider.of<DeckSelectionBloc>(context)
+                            .add(SelectClassEvent(e));
+                        context.pushRoute(DeckBuilderRoute(
+                            deckBuilderArguments:
+                                DeckBuilderArguments(state.deckType, e)));
                         //      DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
                       }))
                   .toList()
@@ -262,9 +276,11 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       modeType: state.deckType,
                       isSelected: e == state.deckClass,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
-                        context
-                            .pushRoute(DeckBuilderRoute(deckBuilderArguments: DeckBuilderArguments(state.deckType, e)));
+                        BlocProvider.of<DeckSelectionBloc>(context)
+                            .add(SelectClassEvent(e));
+                        context.pushRoute(DeckBuilderRoute(
+                            deckBuilderArguments:
+                                DeckBuilderArguments(state.deckType, e)));
                         //   DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
                       }))
                   .toList()

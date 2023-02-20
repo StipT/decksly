@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/common/util/failures.dart';
 import 'package:decksly/common/util/network_info.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_selection/domain/usecase/fetch_deck_usecase.dart';
@@ -10,9 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
-import 'package:rxdart/rxdart.dart';
 
-part 'deck_creator_bloc.freezed.dart';
+part 'deck_selection_bloc.freezed.dart';
 
 part 'deck_selection_event.dart';
 
@@ -21,14 +21,8 @@ part 'deck_selection_state.dart';
 @injectable
 class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
   DeckSelectionBloc(this.fetchDeckUsecase)
-      : super(const DeckSelectionState.initial(
-          deckCode: "",
-          deckType: DeckType.standard,
-          deckClass: null,
-          selectedDeckId: null,
-        )) {
-    on<ImportDeckEvent>(
-        (event, emit) => handleImportDeck(emit));
+      : super(const DeckSelectionState.initial(deck: Deck())) {
+    on<ImportDeckEvent>((event, emit) => handleImportDeck(emit));
 
     on<LoadCreatedDecksEvent>(
         (event, emit) async => handleLoadCreatedDecks(emit));
@@ -50,28 +44,21 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
 
   final FetchDeckUsecase fetchDeckUsecase;
 
-  Future<void> handleImportDeck(
-      Emitter<DeckSelectionState> emit) async {
-    final deckCode = state.deckCode;
+  Future<void> handleImportDeck(Emitter<DeckSelectionState> emit) async {
+    final deckCode = state.deck.code;
     final resultOrFailure = await fetchDeckUsecase(deckCode);
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);
         emit(DeckSelectionState.failure(
           failure: failure,
-          deckCode: deckCode,
-          deckClass: state.deckClass,
-          deckType: state.deckType,
-          selectedDeckId: state.selectedDeckId,
+          deck: state.deck,
         ));
       },
       (deck) {
         log(deck.toString(), level: Level.warning);
-        emit(DeckSelectionState.changed(
-          deckCode: deckCode,
-          deckClass: state.deckClass,
-          deckType: state.deckType,
-          selectedDeckId: state.selectedDeckId,
+        emit(DeckSelectionState.deckImported(
+          deck: deck,
         ));
       },
     );
@@ -83,36 +70,24 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
       Emitter<DeckSelectionState> emit, String deckId) {}
 
   void handleChangeGameModeEvent(
-      Emitter<DeckSelectionState> emit, DeckType deckType) {
-    final updatedState = state.copyWith(deckType: deckType);
+      Emitter<DeckSelectionState> emit, DeckType type) {
+    final deck = state.deck.copyWith(type: type);
     emit(DeckSelectionState.changed(
-      deckCode: updatedState.deckCode,
-      deckType: updatedState.deckType,
-      deckClass: updatedState.deckClass,
-      selectedDeckId: updatedState.selectedDeckId,
+      deck: deck,
     ));
   }
 
-  handleChangeDeckCodeEvent(Emitter<DeckSelectionState> emit, String deckCode) {
-    final updatedState = state.copyWith(deckCode: deckCode);
+  handleChangeDeckCodeEvent(Emitter<DeckSelectionState> emit, String code) {
+    final deck = state.deck.copyWith(code: code);
     emit(DeckSelectionState.changed(
-      deckCode: updatedState.deckCode,
-      deckType: updatedState.deckType,
-      deckClass: updatedState.deckClass,
-      selectedDeckId: updatedState.selectedDeckId,
+      deck: deck,
     ));
   }
 
-  void handleSelectClassEvent(
-      Emitter<DeckSelectionState> emit, DeckClass deckClass) {
-    final updatedState = state.copyWith(deckClass: deckClass);
-    emit(DeckSelectionState.changed(
-      deckCode: updatedState.deckCode,
-      deckType: updatedState.deckType,
-      deckClass: updatedState.deckClass,
-      selectedDeckId: updatedState.selectedDeckId,
-    ));
-    //    navigateToDeckBuilder(state.deckType, state.deckClass);
+  void handleSelectClassEvent(Emitter<DeckSelectionState> emit, DeckClass deckClass) {
+    final deck = state.deck.copyWith(heroClass: deckClass);
+    emit(DeckSelectionState.changed(deck: deck));
   }
+
   void handleLoadCreatedDecks(Emitter<DeckSelectionState> emit) {}
 }

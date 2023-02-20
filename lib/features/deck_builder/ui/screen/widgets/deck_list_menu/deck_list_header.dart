@@ -44,14 +44,14 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
             child: Stack(
               children: [
                 Image.asset(
-                  assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.classType), fileExtension: JPG_EXTENSION),
+                  assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.heroClass), fileExtension: JPG_EXTENSION),
                   fit: BoxFit.fill,
                 ),
                 Image.asset(
-                  assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.modeType)),
+                  assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.type)),
                   fit: BoxFit.fill,
                 ),
-                if (isExpanded) Image.asset(assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.modeType))),
+                if (isExpanded) Image.asset(assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.type))),
                 _headerContent(state),
                 Positioned(
                   right: 12.5.w,
@@ -146,25 +146,16 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Flexible(
-                  child: TextField(
-                    onChanged: (searchString) {
-                      _debouncer.run(() {
-
-                      });
-
-                      },
-
-                    style: FontStyles.bold17,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: FontStyles.bold17DarkChestnutBrown,
-                    ),
+                  child: AutoSizeText(
+                    "${state.deck.type.localized()} ${state.deck.heroClass.localized()} Deck",
+                    style: FontStyles.bold11WithShadow,
                   ),
                 ),
                 Flexible(
                     child: AutoSizeText(
                   "${state.deck.cards.isNotEmpty ? state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element) : "0"}/30",
                   style: FontStyles.bold11Gold,
+                  overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
                   minFontSize: 8,
                 )),

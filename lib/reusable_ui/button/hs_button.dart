@@ -31,7 +31,7 @@ class HSButton extends StatelessWidget {
           const HSButtonOverlay(),
           //   if (isToggled) const HSActiveButtonOverlay(),
           OutlinedButton(
-            onPressed: onTap,
+            onPressed: isDisabled ? null : onTap,
             style: OutlinedButton.styleFrom(
               side: const BorderSide(
                 color: Colors.transparent,

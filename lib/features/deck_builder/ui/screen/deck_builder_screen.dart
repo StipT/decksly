@@ -11,12 +11,10 @@ import 'package:decksly/features/card_gallery/ui/screen/card_item.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
-import 'package:decksly/reusable_ui/no_results_widget.dart';
+import 'package:decksly/reusable_ui/misc/no_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,20 +22,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shimmer/shimmer.dart';
 
-class DeckBuilderArguments {
-  const DeckBuilderArguments(this.deckType, this.deckClass);
-
-  final DeckType? deckType;
-  final DeckClass? deckClass;
-}
-
 class DeckBuilderScreen extends StatefulWidget implements AutoRouteWrapper {
   const DeckBuilderScreen({
     super.key,
-    required this.deckBuilderArguments,
+    required this.deck,
   });
 
-  final DeckBuilderArguments deckBuilderArguments;
+  final Deck deck;
 
   @override
   State<DeckBuilderScreen> createState() => _DeckBuilderScreenState();
@@ -66,9 +57,9 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     BlocProvider.of<DeckBuilderBloc>(context).add(
       DeckChangedEvent(
         Deck(
-          cards: [],
-          modeType: widget.deckBuilderArguments.deckType ?? DeckType.standard,
-          classType: widget.deckBuilderArguments.deckClass ?? DeckClass.warrior,
+          cards: widget.deck.cards,
+          type: widget.deck.type ,
+          heroClass: widget.deck.heroClass,
         ),
       ),
     );
@@ -77,8 +68,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         .state
         .cardFilterParams
         .copyWith(
-            heroClass: [widget.deckBuilderArguments.deckClass?.name ?? "", "neutral"],
-            set: widget.deckBuilderArguments.deckType?.name ?? "standard")));
+            heroClass: [widget.deck.heroClass.name , "neutral"],
+            set: widget.deck.type.name)));
 
     super.initState();
   }
@@ -120,8 +111,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                       inDeckBuilderMode: true,
                     ),
                     FilterAppBar(
-                      deckType: widget.deckBuilderArguments.deckType,
-                      deckClass: widget.deckBuilderArguments.deckClass,
+                      deckType: widget.deck.type,
+                      deckClass: widget.deck.heroClass,
                       forceCollapse: isSideMenuOpen ?? false,
                       height: 40.h,
                       onToggle: () {

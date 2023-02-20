@@ -39,7 +39,7 @@ class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(
             child: DeckBuilderScreen(
           key: args.key,
-          deckBuilderArguments: args.deckBuilderArguments,
+          deck: args.deck,
         )),
         transitionsBuilder: bounceOutTransition,
         opaque: true,
@@ -94,13 +94,13 @@ class DeckSelectionRoute extends PageRouteInfo<void> {
 class DeckBuilderRoute extends PageRouteInfo<DeckBuilderRouteArgs> {
   DeckBuilderRoute({
     Key? key,
-    required DeckBuilderArguments deckBuilderArguments,
+    required Deck deck,
   }) : super(
           DeckBuilderRoute.name,
           path: '/deck-builder-screen',
           args: DeckBuilderRouteArgs(
             key: key,
-            deckBuilderArguments: deckBuilderArguments,
+            deck: deck,
           ),
         );
 
@@ -110,15 +110,15 @@ class DeckBuilderRoute extends PageRouteInfo<DeckBuilderRouteArgs> {
 class DeckBuilderRouteArgs {
   const DeckBuilderRouteArgs({
     this.key,
-    required this.deckBuilderArguments,
+    required this.deck,
   });
 
   final Key? key;
 
-  final DeckBuilderArguments deckBuilderArguments;
+  final Deck deck;
 
   @override
   String toString() {
-    return 'DeckBuilderRouteArgs{key: $key, deckBuilderArguments: $deckBuilderArguments}';
+    return 'DeckBuilderRouteArgs{key: $key, deck: $deck}';
   }
 }

@@ -58,6 +58,9 @@ dependencies:
   flutter_secure_storage: ^7.0.0
   connectivity_plus: ^2.3.4
 
+  # Local storage
+  shared_preferences: ^2.0.17
+
   # Firebase
   firebase_storage: ^10.2.7
   firebase_core: ^1.14.0

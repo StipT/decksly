@@ -36,7 +36,7 @@ class HSClassBadge extends StatelessWidget {
             Stack(
               children: [
                 _getImage(classType, isSelected, isDisabled),
-                if (isSelected) Image.asset(assetPath(SUBFOLDER_MISC, "class_badge_selected")),
+            //    if (isSelected) Image.asset(assetPath(SUBFOLDER_MISC, "class_badge_selected")),
               ],
             ),
             Positioned(

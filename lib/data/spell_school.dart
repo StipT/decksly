@@ -1,4 +1,5 @@
-import 'package:decksly/presentation/resources/locale_keys.g.dart';
+
+import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 enum SpellSchool {

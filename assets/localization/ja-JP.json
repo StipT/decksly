@@ -149,5 +149,7 @@
   "import": "輸入",
   "pasteADeckCodeHere": "ここにデッキコードを貼り付けます",
   "tapCardsToAddThemOrHold" : "カードをタップして追加するか、長押しして詳細を表示します",
-  "copyDeckCode" : "デッキコードをコピー"
+  "copyDeckCode" : "デッキコードをコピー",
+  "deck": "デッキ",
+  "thereWasAnErrorReadingTheDeckCode": "デッキ コードの読み取り中にエラーが発生しました"
 }

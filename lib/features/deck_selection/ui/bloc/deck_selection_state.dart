@@ -1,8 +1,9 @@
 part of 'deck_selection_bloc.dart';
 
 @Freezed()
-class DeckSelectionState with _$DeckCreatorState {
-  const factory DeckSelectionState.initial({required String deckCode, required DeckType deckType, required DeckClass? deckClass, required String? selectedDeckId,}) = _DeckCreatorInitial;
-  const factory DeckSelectionState.changed({required String deckCode, required DeckType deckType, required DeckClass? deckClass, required String? selectedDeckId,}) = _DeckCreatorChanged;
-  const factory DeckSelectionState.failure({required String deckCode, required DeckType deckType, required DeckClass? deckClass, required String? selectedDeckId, required Failure failure,}) = _DeckCreatorFailure;
+class DeckSelectionState with _$DeckSelectionState {
+  const factory DeckSelectionState.initial({required Deck deck}) = _DeckSelectionInitial;
+  const factory DeckSelectionState.changed({required Deck deck}) = _DeckSelectionChanged;
+  const factory DeckSelectionState.deckImported({required Deck deck}) = _DeckSelectionImported;
+  const factory DeckSelectionState.failure({required Deck deck, required Failure failure}) = _DeckSelectionFailure;
 }

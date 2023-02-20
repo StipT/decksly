@@ -11,7 +11,7 @@ import 'package:decksly/data/minion_type.dart';
 import 'package:decksly/data/rarity.dart';
 import 'package:decksly/data/sort_by.dart';
 import 'package:decksly/data/spell_school.dart';
-import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_selected_dropdown_button_overlay.dart';

@@ -16,6 +16,13 @@ class FontStyles {
     color: AppColors.white,
   );
 
+  static TextStyle regular15Black = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 15.sp,
+    color: Colors.black,
+  );
+
   static TextStyle regular17 = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w400,

@@ -11,7 +11,7 @@ import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/class
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_appbar_overlay.dart';
 import 'package:decksly/reusable_ui/button/hs_toggle_button.dart';
 import 'package:decksly/reusable_ui/dropdown/hs_dropdown.dart';

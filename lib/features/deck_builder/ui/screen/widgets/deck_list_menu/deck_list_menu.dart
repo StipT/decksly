@@ -1,6 +1,5 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_body.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_footer.dart';
@@ -28,7 +27,8 @@ class DeckListMenu extends StatefulWidget {
   State<DeckListMenu> createState() => _DeckListMenuState();
 }
 
-class _DeckListMenuState extends State<DeckListMenu> with TickerProviderStateMixin {
+class _DeckListMenuState extends State<DeckListMenu>
+    with TickerProviderStateMixin {
   late double _width;
   late bool _isFilterBarExtended;
 
@@ -61,9 +61,14 @@ class _DeckListMenuState extends State<DeckListMenu> with TickerProviderStateMix
                   const HSDeckListBackground(),
                   Column(
                     children: [
-                      DeckListHeader(onConvertMode: () => {},),
-                     const DeckListBody(),
-                      DeckListFooter(onCreateNewDeck: () => {}, onSave: () => {},),
+                      DeckListHeader(
+                        onConvertMode: () => {},
+                      ),
+                      const DeckListBody(),
+                      DeckListFooter(
+                        onCreateNewDeck: () => {},
+                        onSave: () => {},
+                      ),
                     ],
                   )
                 ],

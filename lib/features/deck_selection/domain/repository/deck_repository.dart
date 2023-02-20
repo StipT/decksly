@@ -30,8 +30,8 @@ class DeckRepositoryImpl extends DeckRepository {
     final deckResponse = await _apiService.apiClient.getDeck("en_US", deckCode);
     return Deck(
       cards: deckResponse.cards.toDeckCards(),
-      classType: deckClassFromValue(deckResponse.deckClass?.slug ?? "warrior"),
-      modeType: deckTypeFromValue(deckResponse.deckType),
+      heroClass: deckClassFromValue(deckResponse.deckClass?.slug ?? "warrior"),
+      type: deckTypeFromValue(deckResponse.deckType),
       name: "",
     );
   }

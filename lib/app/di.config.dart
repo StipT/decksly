@@ -14,15 +14,16 @@ import '../features/card_gallery/domain/repository/cards_repository.dart'
     as _i6;
 import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'
     as _i8;
-import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i10;
-import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i11;
+import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i11;
+import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i12;
 import '../features/deck_selection/domain/repository/deck_repository.dart'
     as _i7;
 import '../features/deck_selection/domain/usecase/fetch_deck_usecase.dart'
     as _i9;
-import '../features/deck_selection/ui/bloc/deck_selection_bloc.dart' as _i12;
+import '../features/deck_selection/ui/bloc/deck_selection_bloc.dart' as _i13;
 import '../repository/remote_source/api/api_service.dart' as _i3;
-import 'util_module.dart' as _i13; // ignore_for_file: unnecessary_lambdas
+import 'bloc/app_bloc.dart' as _i10;
+import 'util_module.dart' as _i14; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -53,17 +54,19 @@ _i1.GetIt $initGetIt(
       () => _i8.FetchCardsUsecase(get<_i6.CardsRepository>()));
   gh.lazySingleton<_i9.FetchDeckUsecase>(
       () => _i9.FetchDeckUsecase(get<_i7.DeckRepository>()));
-  gh.factory<_i10.CardGalleryBloc>(() => _i10.CardGalleryBloc(
+  gh.factory<_i10.AppBloc>(
+      () => _i10.AppBloc(fetchCardsUsecase: get<_i8.FetchCardsUsecase>()));
+  gh.factory<_i11.CardGalleryBloc>(() => _i11.CardGalleryBloc(
         get<_i5.NetworkInfo>(),
         fetchCardsUsecase: get<_i8.FetchCardsUsecase>(),
       ));
-  gh.factory<_i11.DeckBuilderBloc>(() => _i11.DeckBuilderBloc(
+  gh.factory<_i12.DeckBuilderBloc>(() => _i12.DeckBuilderBloc(
         get<_i5.NetworkInfo>(),
         fetchCardsUsecase: get<_i8.FetchCardsUsecase>(),
       ));
-  gh.factory<_i12.DeckSelectionBloc>(
-      () => _i12.DeckSelectionBloc(get<_i9.FetchDeckUsecase>()));
+  gh.factory<_i13.DeckSelectionBloc>(
+      () => _i13.DeckSelectionBloc(get<_i9.FetchDeckUsecase>()));
   return get;
 }
 
-class _$UtilModule extends _i13.UtilModule {}
+class _$UtilModule extends _i14.UtilModule {}

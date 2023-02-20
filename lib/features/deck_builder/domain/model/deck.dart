@@ -10,9 +10,10 @@ part 'deck.freezed.dart';
 class Deck with _$Deck {
   const factory Deck({
     @Default("") String name,
+    @Default("") String code,
     @Default([]) List<DeckCard> cards,
-    @Default(DeckType.standard) DeckType modeType,
-    @Default(DeckClass.warrior) DeckClass classType,
+    @Default(DeckType.standard) DeckType type,
+    @Default(DeckClass.warrior) DeckClass heroClass,
   }) = _Deck;
 }
 

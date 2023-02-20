@@ -3,7 +3,7 @@ import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/hs_alert_dialog.dart';
-import 'package:decksly/presentation/resources/locale_keys.g.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class DeckListFooter extends StatelessWidget {
               ),
               Image.asset(assetPath(SUBFOLDER_MISC, "wood_divider")),
               Expanded(
-                child: startNewButton(),
+                child: startNewButton(context),
               ),
             ],
           ),
@@ -43,7 +43,7 @@ class DeckListFooter extends StatelessWidget {
     );
   }
 
-  Widget startNewButton() {
+  Widget startNewButton(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 5.w, top: 2.h, bottom: 3.h),
       child: Stack(
@@ -55,7 +55,9 @@ class DeckListFooter extends StatelessWidget {
             fit: BoxFit.fill,
           ),
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              hsAlertDialog(context, (p0) => {});
+            },
             style: OutlinedButton.styleFrom(
               side: const BorderSide(
                 color: Colors.transparent,
@@ -92,7 +94,7 @@ class DeckListFooter extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 2.5.h),
             child: OutlinedButton(
               onPressed: () {
-                hsAlertDialog(context, (p0) => {});
+
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(

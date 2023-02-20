@@ -149,5 +149,7 @@
   "import": "Import",
   "pasteADeckCodeHere": "Paste a deck code here",
   "tapCardsToAddThemOrHold" : "Tap cards to add them or hold to see more details",
-  "copyDeckCode" : "COPY DECK CODE"
+  "copyDeckCode" : "COPY DECK CODE",
+  "deck": "Deck",
+  "thereWasAnErrorReadingTheDeckCode": "There was an error reading the deck code"
 }

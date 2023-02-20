@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
 import 'package:decksly/features/deck_selection/ui/bloc/deck_selection_bloc.dart';
 import 'package:decksly/features/deck_selection/ui/screen/widgets/hs_class_badge.dart';
 import 'package:decksly/features/deck_selection/ui/screen/widgets/hs_mode_badge.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:decksly/navigation/app_router.dart';
-import 'package:decksly/presentation/resources/locale_keys.g.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_deck_selection_background.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
 import 'package:decksly/reusable_ui/button/hs_button.dart';
@@ -50,37 +51,42 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<DeckSelectionBloc, DeckSelectionState>(
         builder: (BuildContext context, state) {
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            const HSDeckSelectionBackground(),
-            Column(
-              children: [
-                _getAppBar(state),
-                _getModeSelector(state),
-                Expanded(child: _getClassSelector(state)),
-              ],
-            ),
-            if (state.deckType == DeckType.wild)
-              Positioned(
-                width: 125.w,
-                top: 36.h,
-                left: 18.w,
-                child: Image.asset(
-                  assetPath(SUBFOLDER_MISC, "wild_branch_left"),
-                ),
+      return BlocListener<DeckSelectionBloc, DeckSelectionState>(
+        listener: (context, state) {
+          listenForDeckImport(context, state);
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children: [
+              const HSDeckSelectionBackground(),
+              Column(
+                children: [
+                  _getAppBar(state),
+                  _getModeSelector(state),
+                  Expanded(child: _getClassSelector(state)),
+                ],
               ),
-            if (state.deckType == DeckType.wild)
-              Positioned(
-                width: 125.w,
-                top: 36.h,
-                right: 18.w,
-                child: Image.asset(
-                  assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+              if (state.deck.type == DeckType.wild)
+                Positioned(
+                  width: 125.w,
+                  top: 36.h,
+                  left: 18.w,
+                  child: Image.asset(
+                    assetPath(SUBFOLDER_MISC, "wild_branch_left"),
+                  ),
                 ),
-              ),
-          ],
+              if (state.deck.type == DeckType.wild)
+                Positioned(
+                  width: 125.w,
+                  top: 36.h,
+                  right: 18.w,
+                  child: Image.asset(
+                    assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+                  ),
+                ),
+            ],
+          ),
         ),
       );
     });
@@ -117,7 +123,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                         Container(
                           child: HSButton(
                             width: 100.w,
-                            isDisabled: false,
+                            isDisabled: state.deck.code.isEmpty,
                             label: LocaleKeys.import.tr(),
                             onTap: () =>
                                 BlocProvider.of<DeckSelectionBloc>(context)
@@ -141,35 +147,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     child: HSButton(
                       width: 100.w,
                       isDisabled: false,
-                      label: LocaleKeys.load.tr(),
-                      onTap: () {
-                        context.pushRoute(const CardGalleryRoute());
-                        //   CardGalleryRoute.open(context);
-                      },
-                      icon: Container(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.save,
-                            color: AppColors.vanDykeBrown,
-                            size: 20.w,
-                          )),
-                    )),
-              ],
-            ),
-          ),
-          Container(
-            width: 140.w,
-            child: Stack(
-              children: [
-                const HSWoodHorizontalBorder(),
-                Container(
-                    margin: EdgeInsets.only(left: 25.w, right: 25.w),
-                    child: HSButton(
-                      width: 100.w,
-                      isDisabled: false,
                       label: LocaleKeys.close.tr(),
                       onTap: () {
-                        print("Navigate nback");
                         context.navigateBack();
                       },
                       icon: Image.asset(assetPath(SUBFOLDER_MISC, "close")),
@@ -201,21 +180,21 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                           assetPath(SUBFOLDER_MISC, "velvet_ornament_left"))),
                   HSModeBadge(
                       type: DeckType.standard,
-                      isSelected: DeckType.standard == state.deckType,
+                      isSelected: DeckType.standard == state.deck.type,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context)
                             .add(const ChangeGameModeEvent(DeckType.standard));
                       }),
                   HSModeBadge(
                       type: DeckType.classic,
-                      isSelected: DeckType.classic == state.deckType,
+                      isSelected: DeckType.classic == state.deck.type,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context)
                             .add(const ChangeGameModeEvent(DeckType.classic));
                       }),
                   HSModeBadge(
                       type: DeckType.wild,
-                      isSelected: DeckType.wild == state.deckType,
+                      isSelected: DeckType.wild == state.deck.type,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context)
                             .add(const ChangeGameModeEvent(DeckType.wild));
@@ -254,15 +233,16 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
               children: DeckClass.values
                   .map((e) => HSClassBadge(
                       classType: e,
-                      modeType: state.deckType,
-                      isSelected: e == state.deckClass,
+                      modeType: state.deck.type,
+                      isSelected: e == state.deck.heroClass,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context)
                             .add(SelectClassEvent(e));
-                        context.pushRoute(DeckBuilderRoute(
-                            deckBuilderArguments:
-                                DeckBuilderArguments(state.deckType, e)));
-                        //      DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
+                        context.pushRoute(
+                          DeckBuilderRoute(
+                            deck: Deck(type: state.deck.type, heroClass: e),
+                          ),
+                        );
                       }))
                   .toList()
                   .sublist(0, 6),
@@ -273,20 +253,70 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
               children: DeckClass.values
                   .map((e) => HSClassBadge(
                       classType: e,
-                      modeType: state.deckType,
-                      isSelected: e == state.deckClass,
+                      modeType: state.deck.type,
+                      isSelected: e == state.deck.heroClass,
                       onTap: () {
                         BlocProvider.of<DeckSelectionBloc>(context)
                             .add(SelectClassEvent(e));
-                        context.pushRoute(DeckBuilderRoute(
-                            deckBuilderArguments:
-                                DeckBuilderArguments(state.deckType, e)));
-                        //   DeckBuilderRoute.open(context, DeckBuilderArguments(state.deckType, e));
+                        context.pushRoute(
+                          DeckBuilderRoute(
+                            deck: Deck(type: state.deck.type, heroClass: e),
+                          ),
+                        );
                       }))
                   .toList()
                   .sublist(6, 11),
             )),
           ],
         ));
+  }
+
+  void listenForDeckImport(BuildContext context, DeckSelectionState state) {
+    state.whenOrNull(
+        failure: (deck, failure) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                margin: EdgeInsets.symmetric(horizontal: 200.w, vertical: 5.h),
+                content: Container(
+                  height: 30.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    border: Border.all(color: AppColors.gold, width: 1.sp),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        30.r,
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        assetPath(SUBFOLDER_MISC, "alert"),
+                        height: 30.h,
+                      ),
+                      Text(
+                        'There was an error reading the deck code',
+                        style: FontStyles.regular15Black,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+        deckImported: (deck) =>
+            context.pushRoute(DeckBuilderRoute(deck: deck)));
   }
 }

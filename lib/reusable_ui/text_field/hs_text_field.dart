@@ -27,11 +27,11 @@ class HSTextField extends StatefulWidget {
     Key? key,
     required this.theme,
     required this.suffix,
-    this.onChange,
+    required this.onChange,
     this.hint,
   }) : super(key: key);
 
-  final void Function(String)? onChange;
+  final void Function(String) onChange;
   final TextFieldTheme theme;
   final TextFieldSuffix suffix;
   final String? hint;
@@ -89,7 +89,7 @@ class _HSTextFieldState extends State<HSTextField> {
                       });
 
                       _debouncer.run(() {
-                        widget.onChange!(searchString);
+                        widget.onChange(searchString);
                       });
                     },
                     style: FontStyles.bold17,
@@ -133,7 +133,11 @@ class _HSTextFieldState extends State<HSTextField> {
         return IconButton(
           onPressed: () {
             Clipboard.getData(Clipboard.kTextPlain).then((value){
-              _textEditingController.text = value?.text ?? "";
+              setState(() {
+                _textEditingController.text = value?.text ?? "";
+                isEmpty = _textEditingController.text.trim().isEmpty;
+                widget.onChange(_textEditingController.text);
+              });
             });
           }, icon: const Icon(Icons.paste, color: AppColors.gold,),
         );

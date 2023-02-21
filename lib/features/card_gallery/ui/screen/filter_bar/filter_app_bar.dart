@@ -42,7 +42,8 @@ class FilterAppBar extends StatefulWidget {
   State<FilterAppBar> createState() => _FilterAppBarState();
 }
 
-class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMixin {
+class _FilterAppBarState extends State<FilterAppBar>
+    with TickerProviderStateMixin {
   bool _isExtended = false;
   late double _height;
 
@@ -56,7 +57,8 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
       builder: (BuildContext context, state) {
-        if (_isExtended == true && (widget.forceCollapse ?? false)) _toggleBarExtension();
+        if (_isExtended == true && (widget.forceCollapse ?? false))
+          _toggleBarExtension();
         return AnimatedContainer(
           curve: Curves.bounceOut,
           duration: const Duration(milliseconds: 500),
@@ -71,7 +73,8 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                     height: 40.h,
                     width: double.infinity,
                     child: Container(
-                      padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 7.5.h, bottom: 2.5.h),
+                      padding: EdgeInsets.only(
+                          left: 4.w, right: 4.w, top: 7.5.h, bottom: 2.5.h),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -84,18 +87,26 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               dropdownWidth: 250.w,
                               selectedValue: state.cardFilterParams.set,
                               dropdownType: DropdownType.cardSet,
-                              dropdownValues: getCardSets(subCollection: SubCollection.all),
-                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
-                                  CardFilterParamsChangedEvent(
-                                      state.cardFilterParams.copyWith(set: cardSetFromIndex(value).value))),
+                              dropdownValues:
+                                  getCardSets(subCollection: SubCollection.all),
+                              onChange: (value) =>
+                                  BlocProvider.of<CardGalleryBloc>(context).add(
+                                      CardFilterParamsChangedEvent(
+                                          state.cardFilterParams.copyWith(
+                                              set: cardSetFromIndex(value)
+                                                  .value))),
                             ),
                           ),
                           Container(
                               width: 330.w,
-                              padding: EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
+                              padding:
+                                  EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
                               child: ManaPicker(
-                                onChange: (mana) => BlocProvider.of<CardGalleryBloc>(context)
-                                    .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(manaCost: mana))),
+                                onChange: (mana) =>
+                                    BlocProvider.of<CardGalleryBloc>(context)
+                                        .add(CardFilterParamsChangedEvent(state
+                                            .cardFilterParams
+                                            .copyWith(manaCost: mana))),
                               )),
                           Expanded(
                               child: Container(
@@ -103,8 +114,11 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             child: HSTextField(
                               hint: LocaleKeys.search.tr(),
                               suffix: TextFieldSuffix.search,
-                              onChange: (text) => BlocProvider.of<CardGalleryBloc>(context)
-                                  .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(textFilter: text))),
+                              onChange: (text) =>
+                                  BlocProvider.of<CardGalleryBloc>(context).add(
+                                      CardFilterParamsChangedEvent(state
+                                          .cardFilterParams
+                                          .copyWith(textFilter: text))),
                               theme: TextFieldTheme.velvet,
                             ),
                           )),
@@ -113,12 +127,14 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             child: HSBarToggleButton(
                               width: 60.w,
                               icon: SvgPicture.asset(
-                                assetPath(SUBFOLDER_MISC, "filter", fileExtension: SVG_EXTENSION),
+                                assetPath(SUBFOLDER_MISC, "filter",
+                                    fileExtension: SVG_EXTENSION),
                                 fit: BoxFit.fill,
                                 color: AppColors.bistreBrown,
                               ),
                               isToggled: _isExtended,
-                              activeFilters: extraFiltersActive(state.cardFilterParams),
+                              activeFilters:
+                                  extraFiltersActive(state.cardFilterParams),
                               onTap: () {
                                 _toggleBarExtension();
                               },
@@ -145,7 +161,8 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
 
   int extraFiltersActive(CardFilterParams cardFilterParams) {
     int activeFilters = 0;
-    if (cardFilterParams.sort.isNotEmpty && cardFilterParams.sort != SortBy.manaAsc.value) {
+    if (cardFilterParams.sort.isNotEmpty &&
+        cardFilterParams.sort != SortBy.manaAsc.value) {
       activeFilters++;
     }
     if (cardFilterParams.attack.isNotEmpty) {
@@ -173,28 +190,32 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
   }
 
   void _toggleBarExtension() async {
-    if (_isExtended) {
-      setState(() {
-        _height = 40.h;
-        _isExtended = false;
-      });
-    } else {
-      setState(() {
-        _isExtended = true;
-        _height = 70.h;
-      });
-    }
-    widget.onToggle();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_isExtended) {
+        setState(() {
+          _height = 40.h;
+          _isExtended = false;
+        });
+      } else {
+        setState(() {
+          _isExtended = true;
+          _height = 70.h;
+        });
+      }
+      widget.onToggle();
+    });
   }
 
   Widget _classFilter(DeckClass? deckClass, CardGalleryState state) {
     return deckClass != null
         ? ClassFilter(
             onToggleClassFilter: () {
-              BlocProvider.of<CardGalleryBloc>(context).add(ToggleClassCardsEvent(deckClass));
+              BlocProvider.of<CardGalleryBloc>(context)
+                  .add(ToggleClassCardsEvent(deckClass));
             },
             onToggleNeutralFilter: () {
-              BlocProvider.of<CardGalleryBloc>(context).add(ToggleNeutralCardsEvent(deckClass));
+              BlocProvider.of<CardGalleryBloc>(context)
+                  .add(ToggleNeutralCardsEvent(deckClass));
             },
             deckClass: deckClass,
             height: 60.h,
@@ -208,9 +229,11 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
               selectedValue: state.cardFilterParams.heroClass.toString(),
               dropdownType: DropdownType.cardClass,
               dropdownValues: CardClass.values.map((e) => e.value).toList(),
-              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
+              onChange: (value) =>
+                  BlocProvider.of<CardGalleryBloc>(context).add(
                 CardFilterParamsChangedEvent(
-                  state.cardFilterParams.copyWith(heroClass: [cardClassFromIndex(value).value]),
+                  state.cardFilterParams
+                      .copyWith(heroClass: [cardClassFromIndex(value).value]),
                 ),
               ),
             ),
@@ -219,16 +242,15 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
 
   List<Object> _setDropDownValues(DeckType? deckType) {
     log(deckType.toString());
-      switch(deckType) {
-
-        case DeckType.standard:
-          return getCardSets(subCollection: SubCollection.standardSets);
-        case DeckType.classic:
-          return getCardSets(subCollection: SubCollection.classicSets);
-        case DeckType.wild:
-          return getCardSets(subCollection: SubCollection.wildSets);
-        default:
+    switch (deckType) {
+      case DeckType.standard:
+        return getCardSets(subCollection: SubCollection.standardSets);
+      case DeckType.classic:
+        return getCardSets(subCollection: SubCollection.classicSets);
+      case DeckType.wild:
+        return getCardSets(subCollection: SubCollection.wildSets);
+      default:
         return getCardSets(subCollection: SubCollection.all);
-      }
+    }
   }
 }

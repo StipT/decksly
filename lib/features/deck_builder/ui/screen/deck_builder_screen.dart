@@ -63,7 +63,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         ),
       ),
     );
-
+    BlocProvider.of<CardGalleryBloc>(context).add(const ReadLocaleEvent());
     BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(BlocProvider.of<CardGalleryBloc>(context)
         .state
         .cardFilterParams

@@ -6,6 +6,7 @@ import 'package:decksly/features/card_gallery/domain/model/card_filter_params.da
 import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
+import 'package:decksly/repository/local_source/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,17 +22,29 @@ part 'card_gallery_state.dart';
 
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
-  CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase})
-      : super( CardGalleryState.initial(cardFilterParams: CardFilterParams(), page: CardsPage())) {
-    on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.cardFilterParams));
-    on<CardFilterParamsChangedEvent>(
-        (event, emit) async => await handleCardFilterParamsChanged(emit, event.cardFilterParams));
-    on<ToggleClassCardsEvent>((event, emit) => handleToggleClassCards(emit, event.deckCLass));
-    on<ToggleNeutralCardsEvent>((event, emit) => handleToggleNeutralCards(emit, event.deckCLass));
+  CardGalleryBloc(this._networkInfo, this._localStorage,
+      {required this.fetchCardsUsecase})
+      : super(const CardGalleryState.initial(
+      cardFilterParams: CardFilterParams(), page: CardsPage())) {
+    on<FetchCardsEvent>(
+            (event, emit) => handleFetchCards(emit, event.cardFilterParams));
+
+    on<ReadLocaleEvent>(
+            (event, emit) => handleReadLocale(emit));
+
+    on<ChangeLocaleEvent>((event, emit) => handleChangeLocale(emit, event.locale));
+
+    on<CardFilterParamsChangedEvent>((event, emit) async =>
+    await handleCardFilterParamsChanged(emit, event.cardFilterParams));
+    on<ToggleClassCardsEvent>(
+            (event, emit) => handleToggleClassCards(emit, event.deckCLass));
+    on<ToggleNeutralCardsEvent>(
+            (event, emit) => handleToggleNeutralCards(emit, event.deckCLass));
     _streamInternetConnectionState();
   }
 
   final NetworkInfo _networkInfo;
+  final LocalStorage _localStorage;
   late final Stream<bool> internetConnectionState;
 
   final FetchCardsUsecase fetchCardsUsecase;
@@ -42,28 +55,32 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-  Future<void> handleFetchCards(
-    Emitter<CardGalleryState> emit,
-    CardFilterParams cardFilterParams,
-  ) async {
-    final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
+  Future<void> handleFetchCards(Emitter<CardGalleryState> emit,
+      CardFilterParams cardFilterParams,) async {
+    final updatedParams =
+    cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
     resultOrFailure.fold(
-      (failure) {
+          (failure) {
         log(failure.message, level: Level.error);
-        emit(CardGalleryState.failure(failure: failure, cardFilterParams: updatedParams));
+        emit(CardGalleryState.failure(
+            failure: failure, cardFilterParams: updatedParams));
       },
-      (cards) {
-        emit(CardGalleryState.fetched(cardFilterParams: updatedParams, page: cards));
+          (cards) {
+        emit(CardGalleryState.fetched(
+            cardFilterParams: updatedParams, page: cards));
       },
     );
   }
 
-  Future<void> handleCardFilterParamsChanged(Emitter<CardGalleryState> emit, CardFilterParams cardFilterParams) async {
-    emit(CardGalleryState.fetching(cardFilterParams: cardFilterParams.copyWith(page: 0)));
+  Future<void> handleCardFilterParamsChanged(Emitter<CardGalleryState> emit,
+      CardFilterParams cardFilterParams) async {
+    emit(CardGalleryState.fetching(
+        cardFilterParams: cardFilterParams.copyWith(page: 0)));
   }
 
-  Future<void> handleToggleClassCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
+  Future<void> handleToggleClassCards(Emitter<CardGalleryState> emit,
+      DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains(deckClass.name) && classes.length == 1) {
@@ -74,10 +91,13 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     } else {
       classes.add(deckClass.name);
     }
-    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
+    emit(CardGalleryState.fetching(
+        cardFilterParams:
+        state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
   }
 
-  Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
+  Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit,
+      DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains("neutral") && classes.length == 1) {
@@ -88,6 +108,20 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     } else {
       classes.add("neutral");
     }
-    emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
+    emit(CardGalleryState.fetching(
+        cardFilterParams:
+        state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
+  }
+
+  Future<void> handleReadLocale(Emitter<CardGalleryState> emit) async {
+    final locale = await _localStorage.readLocaleSetting();
+    emit(CardGalleryState.fetching(
+        cardFilterParams: state.cardFilterParams.copyWith(locale: locale)));
+  }
+
+  Future<void> handleChangeLocale(Emitter<CardGalleryState> emit, String locale) async {
+    _localStorage.editLocaleSetting(locale);
+    emit(CardGalleryState.fetching(
+        cardFilterParams: state.cardFilterParams.copyWith(locale: locale)));
   }
 }

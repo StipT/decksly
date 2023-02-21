@@ -36,7 +36,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
 
-  bool? isSideMenuOpen;
+  bool isSideMenuExtended = false;
   bool isFilterBarExtended = false;
 
   @override
@@ -53,7 +53,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       child: BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
         state.maybeWhen(
           initial: (cardParams, cards) {
-            BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(cardParams));
+            BlocProvider.of<CardGalleryBloc>(context).add(const ReadLocaleEvent());
           },
           orElse: () {},
         );
@@ -64,21 +64,21 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
             children: [
               _cardList(),
               SideMenu(
+                forceCollapse: isFilterBarExtended,
                 onToggle: (isOpen) {
                   setState(() {
-                    isSideMenuOpen = isOpen;
+                    isSideMenuExtended = isOpen;
                     isFilterBarExtended = false;
                   });
                 },
                 inDeckBuilderMode: false,
               ),
               FilterAppBar(
-                forceCollapse: isSideMenuOpen ?? false,
+                forceCollapse: isSideMenuExtended,
                 height: 40.h,
                 onToggle: () {
                   setState(() {
                     isFilterBarExtended = !isFilterBarExtended;
-                    log("isFilterBarExtended $isFilterBarExtended");
                   });
                 },
               ),
@@ -163,7 +163,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
             ),
           ),
         ),
-        if (isSideMenuOpen ?? false)
+        if (isSideMenuExtended ?? false)
           Container(
             color: Colors.black54,
           ),

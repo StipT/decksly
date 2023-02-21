@@ -14,9 +14,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({Key? key, required this.onToggle, required this.inDeckBuilderMode}) : super(key: key);
+  const SideMenu({
+    Key? key,
+    required this.onToggle,
+    this.forceCollapse,
+    required this.inDeckBuilderMode,
+  }) : super(key: key);
 
   final void Function(bool) onToggle;
+  final bool? forceCollapse;
   final bool inDeckBuilderMode;
 
   @override
@@ -24,14 +30,15 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
-  bool isExtended = false;
+  bool _isExtended = false;
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -40,13 +47,15 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
+    if (_isExtended == true && (widget.forceCollapse ?? false)) _toggleSideMenu(close: true);
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
+        builder: (BuildContext context, state) {
       return SizedBox(
         width: 1.sw,
         height: 1.sh,
         child: Stack(
           children: [
-            if (isExtended)
+            if (_isExtended)
               GestureDetector(
                 onTap: () => _toggleSideMenu(close: true),
                 behavior: HitTestBehavior.opaque,
@@ -60,7 +69,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     )),
               ),
             AnimatedPositioned(
-              left: isExtended ? 0.w : -200.w,
+              left: _isExtended ? 0.w : -200.w,
               top: 40.h,
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
@@ -100,10 +109,12 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               padding: EdgeInsets.only(top: 10.h),
                             ),
                             FeatureItem(
-                              type: FeatureItemType.cardLibrary,
-                              isSelected: !widget.inDeckBuilderMode,
-                              onTap: () => widget.inDeckBuilderMode ? context.pushRoute(const CardGalleryRoute()) : null
-                            ),
+                                type: FeatureItemType.cardLibrary,
+                                isSelected: !widget.inDeckBuilderMode,
+                                onTap: () => widget.inDeckBuilderMode
+                                    ? context
+                                        .pushRoute(const CardGalleryRoute())
+                                    : null),
                             Container(
                               child: Image.asset(
                                 assetPath(SUBFOLDER_MISC, "velvet_divider"),
@@ -117,7 +128,10 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               child: FeatureItem(
                                 type: FeatureItemType.deckBuilder,
                                 isSelected: widget.inDeckBuilderMode,
-                                onTap: () => widget.inDeckBuilderMode ? null : context.pushRoute(const DeckSelectionRoute()),
+                                onTap: () => widget.inDeckBuilderMode
+                                    ? null
+                                    : context
+                                        .pushRoute(const DeckSelectionRoute()),
                               ),
                             ),
                             Container(
@@ -141,41 +155,47 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 5.h),
                               child: Row(
                                 children: [
                                   Expanded(
                                     child: LanguageButton(
-                                      isSelected: state.cardFilterParams.locale == LanguageButtonType.english.value,
+                                      isSelected:
+                                          state.cardFilterParams.locale ==
+                                              LanguageButtonType.english.value,
                                       type: LanguageButtonType.english,
                                       onTap: () {
                                         context.setLocale(Locale('en', 'US'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(locale: LanguageButtonType.english.value)));
-                                      },
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: LanguageButton(
-                                      isSelected: state.cardFilterParams.locale == LanguageButtonType.german.value,
-                                      type: LanguageButtonType.german,
-                                      onTap: () {
-                                        context.setLocale(Locale('de', 'DE'));
-                                        print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(locale: LanguageButtonType.german.value)));
+                                        BlocProvider.of<CardGalleryBloc>(context).add(ChangeLocaleEvent(LanguageButtonType.english.value));
 
                                       },
                                     ),
                                   ),
                                   Expanded(
                                     child: LanguageButton(
-                                      isSelected: state.cardFilterParams.locale == LanguageButtonType.japanese.value,
+                                      isSelected:
+                                          state.cardFilterParams.locale ==
+                                              LanguageButtonType.german.value,
+                                      type: LanguageButtonType.german,
+                                      onTap: () {
+                                        context.setLocale(Locale('de', 'DE'));
+                                        BlocProvider.of<CardGalleryBloc>(context).add(ChangeLocaleEvent(LanguageButtonType.german.value));
+
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: LanguageButton(
+                                      isSelected:
+                                          state.cardFilterParams.locale ==
+                                              LanguageButtonType.japanese.value,
                                       type: LanguageButtonType.japanese,
                                       onTap: () {
                                         context.setLocale(Locale('ja', 'JP'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(locale: LanguageButtonType.japanese.value)));
-
+                                        BlocProvider.of<CardGalleryBloc>(context).add(ChangeLocaleEvent(LanguageButtonType.japanese.value));
                                       },
                                     ),
                                   ),
@@ -228,33 +248,19 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   }
 
   void _toggleSideMenu({bool close = false}) async {
-    if (isExtended && close) {
+    if (_isExtended && close) {
       await _animationController.reverse();
       //   _overlayEntry.remove();
       setState(() {
-        isExtended = false;
+        _isExtended = false;
       });
-    } else if (!isExtended && !close) {
+    } else if (!_isExtended && !close) {
       // _overlayEntry = _createOverlay();
       //   Overlay.of(context)?.insert(_overlayEntry);
-      setState(() => isExtended = true);
+      setState(() => _isExtended = true);
       _animationController.forward();
     }
 
-    widget.onToggle(isExtended);
-  }
-
-  OverlayEntry _createOverlay() {
-    return OverlayEntry(
-      // full screen GestureDetector to register when ał
-      // user has clicked away from the dropdown
-      builder: (context) => GestureDetector(
-        onTap: () => _toggleSideMenu(close: true),
-        behavior: HitTestBehavior.opaque,
-        // full screen container to register taps anywhere and close drop down
-        child: SizedBox(
-            height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width, child: Container()),
-      ),
-    );
+    widget.onToggle(_isExtended);
   }
 }

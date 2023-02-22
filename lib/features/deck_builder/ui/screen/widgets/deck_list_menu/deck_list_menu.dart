@@ -14,14 +14,10 @@ class DeckListMenu extends StatefulWidget {
     Key? key,
     required this.width,
     required this.isFilterBarExtended,
-    required this.onSave,
-    required this.onCreateNewDeck,
   }) : super(key: key);
 
   final double? width;
   final bool isFilterBarExtended;
-  final VoidCallback onSave;
-  final VoidCallback onCreateNewDeck;
 
   @override
   State<DeckListMenu> createState() => _DeckListMenuState();

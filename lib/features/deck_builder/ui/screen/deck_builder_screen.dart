@@ -51,7 +51,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
 
-  bool? isSideMenuOpen;
+  bool isSideMenuExtended = false;
   bool isFilterBarExtended = false;
 
   @override
@@ -109,24 +109,15 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                         ],
                       ),
                       SideMenu(
-                        onToggle: (isOpen) {
-                          setState(() {
-                            isSideMenuOpen = isOpen;
-                            isFilterBarExtended = false;
-                          });
-                        },
+                        isExtended: isSideMenuExtended,
+                        onToggle: () => _onSideMenuToggle(),
                         inDeckBuilderMode: true,
                       ),
                       FilterAppBar(
                         deckType: widget.deck.type,
                         deckClass: widget.deck.heroClass,
-                        forceCollapse: isSideMenuOpen ?? false,
-                        height: 40.h,
-                        onToggle: () {
-                          setState(() {
-                            isFilterBarExtended = !isFilterBarExtended;
-                          });
-                        },
+                        isExtended: isFilterBarExtended,
+                        onToggle: () => _onFilterAppBarToggle(),
                       ),
                     ],
                   ),
@@ -211,13 +202,48 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                 ),
               ),
             ),
-            if (isSideMenuOpen ?? false)
+            if (isSideMenuExtended)
               Container(
                 color: Colors.black54,
               ),
           ],
         ),
       );
+    });
+  }
+
+  Widget _deckList() {
+    return SizedBox(
+      width: 234.w,
+      child: AnimatedPadding(
+        padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
+        curve: Curves.bounceOut,
+        duration: const Duration(milliseconds: 500),
+        child: DeckListMenu(
+          width: 234.w,
+          isFilterBarExtended: isFilterBarExtended,
+        ),
+      ),
+    );
+  }
+
+  void _onSideMenuToggle() {
+    setState(() {
+      isSideMenuExtended = !isSideMenuExtended;
+
+      if (isSideMenuExtended && isFilterBarExtended) {
+        isFilterBarExtended = false;
+      }
+    });
+  }
+
+  void _onFilterAppBarToggle() {
+    setState(() {
+      isFilterBarExtended = !isFilterBarExtended;
+
+      if (isSideMenuExtended && isFilterBarExtended) {
+        isSideMenuExtended = false;
+      }
     });
   }
 
@@ -258,17 +284,5 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         ),
       );
     });
-  }
-
-  _deckList() {
-    return SizedBox(
-      width: 234.w,
-      child: DeckListMenu(
-        width: 234.w,
-        isFilterBarExtended: isFilterBarExtended,
-        onCreateNewDeck: () => log("onCreateNewDeck"),
-        onSave: () => log("onCreateNewDeck"),
-      ),
-    );
   }
 }

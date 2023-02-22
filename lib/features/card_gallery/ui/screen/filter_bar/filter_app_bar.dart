@@ -25,15 +25,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 class FilterAppBar extends StatefulWidget {
   FilterAppBar({
     Key? key,
-    required this.height,
-    this.forceCollapse,
+    required this.isExtended,
     required this.onToggle,
     this.deckClass,
     this.deckType,
   }) : super(key: key);
 
-  final double? height;
-  final bool? forceCollapse;
+  bool isExtended;
   DeckClass? deckClass;
   DeckType? deckType;
   final VoidCallback onToggle;
@@ -44,25 +42,15 @@ class FilterAppBar extends StatefulWidget {
 
 class _FilterAppBarState extends State<FilterAppBar>
     with TickerProviderStateMixin {
-  bool _isExtended = false;
-  late double _height;
-
-  @override
-  void initState() {
-    _height = widget.height ?? 40.h;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
       builder: (BuildContext context, state) {
-        if (_isExtended == true && (widget.forceCollapse ?? false))
-          _toggleBarExtension();
         return AnimatedContainer(
           curve: Curves.bounceOut,
           duration: const Duration(milliseconds: 500),
-          height: _height,
+          height: widget.isExtended ? 70.h : 40.h,
           width: 1.sw,
           child: Stack(
             children: [
@@ -132,7 +120,7 @@ class _FilterAppBarState extends State<FilterAppBar>
                                 fit: BoxFit.fill,
                                 color: AppColors.bistreBrown,
                               ),
-                              isToggled: _isExtended,
+                              isToggled: widget.isExtended,
                               activeFilters:
                                   extraFiltersActive(state.cardFilterParams),
                               onTap: () {
@@ -146,7 +134,7 @@ class _FilterAppBarState extends State<FilterAppBar>
                   ),
                   Flexible(
                     child: FilterAppBarExtension(
-                      height: _isExtended ? 25.h : 0,
+                      height: widget.isExtended ? 25.h : 0,
                       cardFilterParams: state.cardFilterParams,
                     ),
                   ),
@@ -190,20 +178,7 @@ class _FilterAppBarState extends State<FilterAppBar>
   }
 
   void _toggleBarExtension() async {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_isExtended) {
-        setState(() {
-          _height = 40.h;
-          _isExtended = false;
-        });
-      } else {
-        setState(() {
-          _isExtended = true;
-          _height = 70.h;
-        });
-      }
       widget.onToggle();
-    });
   }
 
   Widget _classFilter(DeckClass? deckClass, CardGalleryState state) {

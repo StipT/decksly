@@ -17,12 +17,12 @@ class SideMenu extends StatefulWidget {
   const SideMenu({
     Key? key,
     required this.onToggle,
-    this.forceCollapse,
+    required this.isExtended,
     required this.inDeckBuilderMode,
   }) : super(key: key);
 
-  final void Function(bool) onToggle;
-  final bool? forceCollapse;
+  final VoidCallback onToggle;
+  final bool isExtended;
   final bool inDeckBuilderMode;
 
   @override
@@ -30,7 +30,6 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
-  bool _isExtended = false;
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
 
@@ -47,7 +46,6 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (_isExtended == true && (widget.forceCollapse ?? false)) _toggleSideMenu(close: true);
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
         builder: (BuildContext context, state) {
       return SizedBox(
@@ -55,9 +53,9 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         height: 1.sh,
         child: Stack(
           children: [
-            if (_isExtended)
+            if (widget.isExtended)
               GestureDetector(
-                onTap: () => _toggleSideMenu(close: true),
+                onTap: () => _toggleSideMenu(),
                 behavior: HitTestBehavior.opaque,
                 // full screen container to register taps anywhere and close drop down
                 child: Container(
@@ -69,7 +67,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     )),
               ),
             AnimatedPositioned(
-              left: _isExtended ? 0.w : -200.w,
+              left: widget.isExtended ? 0.w : -200.w,
               top: 40.h,
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
@@ -250,20 +248,12 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
     });
   }
 
-  void _toggleSideMenu({bool close = false}) async {
-    if (_isExtended && close) {
+  void _toggleSideMenu() async {
+    if (widget.isExtended) {
       await _animationController.reverse();
-      //   _overlayEntry.remove();
-      setState(() {
-        _isExtended = false;
-      });
-    } else if (!_isExtended && !close) {
-      // _overlayEntry = _createOverlay();
-      //   Overlay.of(context)?.insert(_overlayEntry);
-      setState(() => _isExtended = true);
+    } else {
       _animationController.forward();
     }
-
-    widget.onToggle(_isExtended);
+    widget.onToggle();
   }
 }

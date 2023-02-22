@@ -134,7 +134,7 @@ flutter:
     - assets/misc/
 
     # Localization
-    - assets/localization/
+    - assets/l10n/
 
   fonts:
     - family: Belwe

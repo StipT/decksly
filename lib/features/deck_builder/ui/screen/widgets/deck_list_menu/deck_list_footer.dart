@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
@@ -64,7 +65,8 @@ class DeckListFooter extends StatelessWidget {
               ),
               textStyle: FontStyles.bold15,
               primary: AppColors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.r)),
             ),
             child: Container(
               alignment: Alignment.center,
@@ -94,7 +96,8 @@ class DeckListFooter extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 2.5.h),
             child: OutlinedButton(
               onPressed: () {
-
+                BlocProvider.of<DeckBuilderBloc>(context).add(
+                    FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(
@@ -102,14 +105,18 @@ class DeckListFooter extends StatelessWidget {
                 ),
                 textStyle: FontStyles.bold15,
                 primary: AppColors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.r)),
               ),
               child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  child: Text(
+                  padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w),
+                  child: AutoSizeText(
                     LocaleKeys.copyDeckCode.tr(),
                     style: FontStyles.bold11,
+                    minFontSize: 8,
+                    maxLines: 1,
                   )),
             ),
           ),

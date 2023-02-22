@@ -14,6 +14,7 @@ import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_deck_selection_background.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
 import 'package:decksly/reusable_ui/button/hs_button.dart';
+import 'package:decksly/reusable_ui/misc/snackbar.dart';
 import 'package:decksly/reusable_ui/text_field/hs_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -128,9 +129,10 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                             width: 100.w,
                             isDisabled: state.deck.code.isEmpty,
                             label: LocaleKeys.import.tr(),
-                            onTap: () =>
-                                BlocProvider.of<DeckSelectionBloc>(context)
-                                    .add(const ImportDeckEvent()),
+                            onTap: () => BlocProvider.of<DeckSelectionBloc>(
+                                    context)
+                                .add(ImportDeckEvent(
+                                    context.locale.toStringWithSeparator())),
                           ),
                         ),
                       ],
@@ -276,49 +278,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
 
   void listenForDeckImport(BuildContext context, DeckSelectionState state) {
     state.whenOrNull(
-        failure: (deck, failure) => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                behavior: SnackBarBehavior.floating,
-                backgroundColor: Colors.transparent,
-                margin: EdgeInsets.symmetric(horizontal: 200.w, vertical: 5.h),
-                content: Container(
-                  height: 30.h,
-                  width: 100.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                    border: Border.all(color: AppColors.gold, width: 1.sp),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        30.r,
-                      ),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Image.asset(
-                        assetPath(SUBFOLDER_MISC, "alert"),
-                        height: 30.h,
-                      ),
-                      Text(
-                        'There was an error reading the deck code',
-                        style: FontStyles.regular15Black,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+        failure: (deck, failure) => HSSnackBar.show(context,
+            HSSnackBarType.alert, LocaleKeys.thereWasAnErrorReadingTheDeckCode.tr()),
         deckImported: (deck) =>
             context.pushRoute(DeckBuilderRoute(deck: deck)));
   }

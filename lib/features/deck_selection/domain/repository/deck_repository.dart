@@ -8,7 +8,9 @@ import 'package:decksly/repository/remote_source/api/api_service.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class DeckRepository {
-  Future<Deck> getDeck(String deckCode);
+  Future<Deck> getDeck(String? deckCode, String locale);
+
+  Future<String> getDeckCode(String? idList, String locale);
 }
 
 @LazySingleton(as: DeckRepository)
@@ -22,17 +24,27 @@ class DeckRepositoryImpl extends DeckRepository {
   final NetworkInfo _networkInfo;
 
   @override
-  Future<Deck> getDeck(String deckCode) async {
+  Future<Deck> getDeck(String? deckCode, String locale) async {
     if (!await _networkInfo.isConnected) {
       throw NoInternetException();
     }
 
-    final deckResponse = await _apiService.apiClient.getDeck("en_US", deckCode);
+    final deckResponse = await _apiService.apiClient.getDeck(deckCode, locale);
     return Deck(
       cards: deckResponse.cards.toDeckCards(),
       heroClass: deckClassFromValue(deckResponse.deckClass?.slug ?? "warrior"),
       type: deckTypeFromValue(deckResponse.deckType),
-      name: "",
     );
+  }
+
+  @override
+  Future<String> getDeckCode(String? idList, String locale) async {
+    if (!await _networkInfo.isConnected) {
+      throw NoInternetException();
+    }
+
+    final deckCodeResponse =
+        await _apiService.apiClient.getDeckCode(idList, locale);
+    return deckCodeResponse.deckCode;
   }
 }

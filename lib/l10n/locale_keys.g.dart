@@ -152,5 +152,9 @@ abstract class  LocaleKeys {
   static const pasteADeckCodeHere = 'pasteADeckCodeHere';
   static const tapCardsToAddThemOrHold = 'tapCardsToAddThemOrHold';
   static const copyDeckCode = 'copyDeckCode';
+  static const deck = 'deck';
+  static const thereWasAnErrorReadingTheDeckCode = 'thereWasAnErrorReadingTheDeckCode';
+  static const thereWasAnErrorGeneratingDeckCode = 'thereWasAnErrorGeneratingDeckCode';
+  static const deckCodeHasBeenCopiedToClipboard = 'deckCodeHasBeenCopiedToClipboard';
 
 }

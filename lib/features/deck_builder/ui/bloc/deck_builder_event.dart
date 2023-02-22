@@ -19,3 +19,8 @@ class DeckChangedEvent extends DeckBuilderEvent {
   final Deck deck;
   const DeckChangedEvent(this.deck);
 }
+
+class FetchDeckCodeEvent extends DeckBuilderEvent {
+  final String locale;
+  const FetchDeckCodeEvent(this.locale);
+}

@@ -14,16 +14,18 @@ import '../features/card_gallery/domain/repository/cards_repository.dart'
     as _i7;
 import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'
     as _i9;
-import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i11;
-import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i12;
+import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i12;
+import '../features/deck_builder/domain/usecase/fetch_deck_code_usecase.dart'
+    as _i10;
+import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i13;
 import '../features/deck_selection/domain/repository/deck_repository.dart'
     as _i8;
 import '../features/deck_selection/domain/usecase/fetch_deck_usecase.dart'
-    as _i10;
-import '../features/deck_selection/ui/bloc/deck_selection_bloc.dart' as _i13;
+    as _i11;
+import '../features/deck_selection/ui/bloc/deck_selection_bloc.dart' as _i14;
 import '../repository/local_source/local_storage.dart' as _i5;
 import '../repository/remote_source/api/api_service.dart' as _i3;
-import 'util_module.dart' as _i14; // ignore_for_file: unnecessary_lambdas
+import 'util_module.dart' as _i15; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -53,19 +55,21 @@ _i1.GetIt $initGetIt(
       ));
   gh.lazySingleton<_i9.FetchCardsUsecase>(
       () => _i9.FetchCardsUsecase(get<_i7.CardsRepository>()));
-  gh.lazySingleton<_i10.FetchDeckUsecase>(
-      () => _i10.FetchDeckUsecase(get<_i8.DeckRepository>()));
-  gh.factory<_i11.CardGalleryBloc>(() => _i11.CardGalleryBloc(
+  gh.lazySingleton<_i10.FetchDeckCodeUsecase>(
+      () => _i10.FetchDeckCodeUsecase(get<_i8.DeckRepository>()));
+  gh.lazySingleton<_i11.FetchDeckUsecase>(
+      () => _i11.FetchDeckUsecase(get<_i8.DeckRepository>()));
+  gh.factory<_i12.CardGalleryBloc>(() => _i12.CardGalleryBloc(
         get<_i6.NetworkInfo>(),
-        fetchCardsUsecase: get<_i9.FetchCardsUsecase>(),
+        get<_i9.FetchCardsUsecase>(),
       ));
-  gh.factory<_i12.DeckBuilderBloc>(() => _i12.DeckBuilderBloc(
+  gh.factory<_i13.DeckBuilderBloc>(() => _i13.DeckBuilderBloc(
         get<_i6.NetworkInfo>(),
-        fetchCardsUsecase: get<_i9.FetchCardsUsecase>(),
+        get<_i10.FetchDeckCodeUsecase>(),
       ));
-  gh.factory<_i13.DeckSelectionBloc>(
-      () => _i13.DeckSelectionBloc(get<_i10.FetchDeckUsecase>()));
+  gh.factory<_i14.DeckSelectionBloc>(
+      () => _i14.DeckSelectionBloc(get<_i11.FetchDeckUsecase>()));
   return get;
 }
 
-class _$UtilModule extends _i14.UtilModule {}
+class _$UtilModule extends _i15.UtilModule {}

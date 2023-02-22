@@ -150,7 +150,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                   );
                 },
                 firstPageProgressIndicatorBuilder: (_) =>
-                    const SpinKitRipple(color: AppColors.spanishGrey),
+                    const SpinKitRipple(color: AppColors.velvet),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
                     padding:

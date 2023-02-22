@@ -22,7 +22,7 @@ part 'card_gallery_state.dart';
 
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
-  CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase})
+  CardGalleryBloc(this._networkInfo, this.fetchCardsUsecase)
       : super(const CardGalleryState.initial(
       cardFilterParams: CardFilterParams(), page: CardsPage())) {
     on<FetchCardsEvent>(

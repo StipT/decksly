@@ -20,7 +20,6 @@ class DeckListHeader extends StatefulWidget {
 
 class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStateMixin {
   bool isExpanded = false;
-  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   void initState() {
@@ -147,7 +146,7 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
               children: [
                 Flexible(
                   child: AutoSizeText(
-                    "${state.deck.type.localized()} ${state.deck.heroClass.localized()} Deck",
+                    "${state.deck.type.localized()} ${state.deck.heroClass.localized()}",
                     style: FontStyles.bold11WithShadow,
                   ),
                 ),

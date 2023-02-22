@@ -151,5 +151,7 @@
   "tapCardsToAddThemOrHold" : "Tippen Sie auf Karten, um sie hinzuzufügen, oder halten Sie sie gedrückt, um weitere Details anzuzeigen",
   "copyDeckCode" : "DECKCODE KOPIEREN",
   "deck": "Deck",
-  "thereWasAnErrorReadingTheDeckCode": "Beim Lesen des Deckcodes ist ein Fehler aufgetreten"
+  "thereWasAnErrorReadingTheDeckCode": "Beim Lesen des Deckcodes ist ein Fehler aufgetreten",
+  "thereWasAnErrorGeneratingDeckCode": "Beim Generieren des Deckcodes ist ein Fehler aufgetreten",
+  "deckCodeHasBeenCopiedToClipboard": "Der Deckcode wurde in die Zwischenablage kopiert"
 }

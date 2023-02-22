@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
+import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
@@ -13,10 +14,14 @@ import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
+import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/misc/no_results_widget.dart';
+import 'package:decksly/reusable_ui/misc/snackbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -87,8 +92,15 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CardGalleryBloc, CardGalleryState>(
-      listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<CardGalleryBloc, CardGalleryState>(
+          listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
+        ),
+        BlocListener<DeckBuilderBloc, DeckBuilderState>(
+          listener: (ctx, state) => listenForDeckCode(ctx, state),
+        ),
+      ],
       child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
           return BlocBuilder<CardGalleryBloc, CardGalleryState>(
@@ -184,7 +196,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                       );
                     },
                     firstPageProgressIndicatorBuilder: (_) =>
-                        const SpinKitRipple(color: AppColors.spanishGrey),
+                        const SpinKitRipple(color: AppColors.velvet),
                     newPageProgressIndicatorBuilder: (_) => Center(
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -284,5 +296,16 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         ),
       );
     });
+  }
+
+  void listenForDeckCode(BuildContext context, DeckBuilderState state) {
+    state.whenOrNull(
+      codeGenerated: (deck) =>
+          Clipboard.setData(ClipboardData(text: deck.code)).then((_) {
+        HSSnackBar.show(context, HSSnackBarType.message, LocaleKeys.deckCodeHasBeenCopiedToClipboard.tr());
+      }),
+      failure: (deck, failure) => HSSnackBar.show(context,
+          HSSnackBarType.alert, LocaleKeys.thereWasAnErrorGeneratingDeckCode.tr()),
+    );
   }
 }

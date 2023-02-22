@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
@@ -68,7 +69,7 @@ class DeckCardItem extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: 5.5.w),
                     width: 16.w,
-                    child: Text(
+                    child: AutoSizeText(
                       card.manaCost.toString(),
                       textAlign: TextAlign.center,
                       style: FontStyles.bold17WithShadow,

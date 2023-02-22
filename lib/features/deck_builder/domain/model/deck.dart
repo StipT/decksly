@@ -9,7 +9,6 @@ part 'deck.freezed.dart';
 @freezed
 class Deck with _$Deck {
   const factory Deck({
-    @Default("") String name,
     @Default("") String code,
     @Default([]) List<DeckCard> cards,
     @Default(DeckType.standard) DeckType type,
@@ -38,3 +37,4 @@ extension CardDTOListParse on List<CardDTO> {
     return deckCardList;
   }
 }
+

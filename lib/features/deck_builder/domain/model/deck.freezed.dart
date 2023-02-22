@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Deck {
-  String get name => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
   List<DeckCard> get cards => throw _privateConstructorUsedError;
   DeckType get type => throw _privateConstructorUsedError;
@@ -32,11 +31,7 @@ abstract class $DeckCopyWith<$Res> {
       _$DeckCopyWithImpl<$Res, Deck>;
   @useResult
   $Res call(
-      {String name,
-      String code,
-      List<DeckCard> cards,
-      DeckType type,
-      DeckClass heroClass});
+      {String code, List<DeckCard> cards, DeckType type, DeckClass heroClass});
 }
 
 /// @nodoc
@@ -52,17 +47,12 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? code = null,
     Object? cards = null,
     Object? type = null,
     Object? heroClass = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -90,11 +80,7 @@ abstract class _$$_DeckCopyWith<$Res> implements $DeckCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
-      String code,
-      List<DeckCard> cards,
-      DeckType type,
-      DeckClass heroClass});
+      {String code, List<DeckCard> cards, DeckType type, DeckClass heroClass});
 }
 
 /// @nodoc
@@ -106,17 +92,12 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? code = null,
     Object? cards = null,
     Object? type = null,
     Object? heroClass = null,
   }) {
     return _then(_$_Deck(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -141,16 +122,12 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
 
 class _$_Deck implements _Deck {
   const _$_Deck(
-      {this.name = "",
-      this.code = "",
+      {this.code = "",
       final List<DeckCard> cards = const [],
       this.type = DeckType.standard,
       this.heroClass = DeckClass.warrior})
       : _cards = cards;
 
-  @override
-  @JsonKey()
-  final String name;
   @override
   @JsonKey()
   final String code;
@@ -172,7 +149,7 @@ class _$_Deck implements _Deck {
 
   @override
   String toString() {
-    return 'Deck(name: $name, code: $code, cards: $cards, type: $type, heroClass: $heroClass)';
+    return 'Deck(code: $code, cards: $cards, type: $type, heroClass: $heroClass)';
   }
 
   @override
@@ -180,7 +157,6 @@ class _$_Deck implements _Deck {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Deck &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._cards, _cards) &&
             (identical(other.type, type) || other.type == type) &&
@@ -189,7 +165,7 @@ class _$_Deck implements _Deck {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, code,
+  int get hashCode => Object.hash(runtimeType, code,
       const DeepCollectionEquality().hash(_cards), type, heroClass);
 
   @JsonKey(ignore: true)
@@ -201,14 +177,11 @@ class _$_Deck implements _Deck {
 
 abstract class _Deck implements Deck {
   const factory _Deck(
-      {final String name,
-      final String code,
+      {final String code,
       final List<DeckCard> cards,
       final DeckType type,
       final DeckClass heroClass}) = _$_Deck;
 
-  @override
-  String get name;
   @override
   String get code;
   @override

@@ -21,6 +21,7 @@ mixin _$DeckBuilderState {
   TResult when<TResult extends Object?>({
     required TResult Function(Deck deck) initial,
     required TResult Function(Deck deck) changed,
+    required TResult Function(Deck deck) codeGenerated,
     required TResult Function(Deck deck, Failure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,6 +29,7 @@ mixin _$DeckBuilderState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Deck deck)? initial,
     TResult? Function(Deck deck)? changed,
+    TResult? Function(Deck deck)? codeGenerated,
     TResult? Function(Deck deck, Failure failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -35,6 +37,7 @@ mixin _$DeckBuilderState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Deck deck)? initial,
     TResult Function(Deck deck)? changed,
+    TResult Function(Deck deck)? codeGenerated,
     TResult Function(Deck deck, Failure failure)? failure,
     required TResult orElse(),
   }) =>
@@ -43,6 +46,7 @@ mixin _$DeckBuilderState {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeckBuilderInitial value) initial,
     required TResult Function(_DeckBuilderChanged value) changed,
+    required TResult Function(_DeckBuilderCodeGenerated value) codeGenerated,
     required TResult Function(_DeckBuilderError value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +54,7 @@ mixin _$DeckBuilderState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeckBuilderInitial value)? initial,
     TResult? Function(_DeckBuilderChanged value)? changed,
+    TResult? Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult? Function(_DeckBuilderError value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +62,7 @@ mixin _$DeckBuilderState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeckBuilderInitial value)? initial,
     TResult Function(_DeckBuilderChanged value)? changed,
+    TResult Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult Function(_DeckBuilderError value)? failure,
     required TResult orElse(),
   }) =>
@@ -182,6 +188,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(Deck deck) initial,
     required TResult Function(Deck deck) changed,
+    required TResult Function(Deck deck) codeGenerated,
     required TResult Function(Deck deck, Failure failure) failure,
   }) {
     return initial(deck);
@@ -192,6 +199,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Deck deck)? initial,
     TResult? Function(Deck deck)? changed,
+    TResult? Function(Deck deck)? codeGenerated,
     TResult? Function(Deck deck, Failure failure)? failure,
   }) {
     return initial?.call(deck);
@@ -202,6 +210,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Deck deck)? initial,
     TResult Function(Deck deck)? changed,
+    TResult Function(Deck deck)? codeGenerated,
     TResult Function(Deck deck, Failure failure)? failure,
     required TResult orElse(),
   }) {
@@ -216,6 +225,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeckBuilderInitial value) initial,
     required TResult Function(_DeckBuilderChanged value) changed,
+    required TResult Function(_DeckBuilderCodeGenerated value) codeGenerated,
     required TResult Function(_DeckBuilderError value) failure,
   }) {
     return initial(this);
@@ -226,6 +236,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeckBuilderInitial value)? initial,
     TResult? Function(_DeckBuilderChanged value)? changed,
+    TResult? Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult? Function(_DeckBuilderError value)? failure,
   }) {
     return initial?.call(this);
@@ -236,6 +247,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeckBuilderInitial value)? initial,
     TResult Function(_DeckBuilderChanged value)? changed,
+    TResult Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult Function(_DeckBuilderError value)? failure,
     required TResult orElse(),
   }) {
@@ -330,6 +342,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   TResult when<TResult extends Object?>({
     required TResult Function(Deck deck) initial,
     required TResult Function(Deck deck) changed,
+    required TResult Function(Deck deck) codeGenerated,
     required TResult Function(Deck deck, Failure failure) failure,
   }) {
     return changed(deck);
@@ -340,6 +353,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Deck deck)? initial,
     TResult? Function(Deck deck)? changed,
+    TResult? Function(Deck deck)? codeGenerated,
     TResult? Function(Deck deck, Failure failure)? failure,
   }) {
     return changed?.call(deck);
@@ -350,6 +364,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Deck deck)? initial,
     TResult Function(Deck deck)? changed,
+    TResult Function(Deck deck)? codeGenerated,
     TResult Function(Deck deck, Failure failure)? failure,
     required TResult orElse(),
   }) {
@@ -364,6 +379,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeckBuilderInitial value) initial,
     required TResult Function(_DeckBuilderChanged value) changed,
+    required TResult Function(_DeckBuilderCodeGenerated value) codeGenerated,
     required TResult Function(_DeckBuilderError value) failure,
   }) {
     return changed(this);
@@ -374,6 +390,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeckBuilderInitial value)? initial,
     TResult? Function(_DeckBuilderChanged value)? changed,
+    TResult? Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult? Function(_DeckBuilderError value)? failure,
   }) {
     return changed?.call(this);
@@ -384,6 +401,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeckBuilderInitial value)? initial,
     TResult Function(_DeckBuilderChanged value)? changed,
+    TResult Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult Function(_DeckBuilderError value)? failure,
     required TResult orElse(),
   }) {
@@ -404,6 +422,161 @@ abstract class _DeckBuilderChanged implements DeckBuilderState {
   @JsonKey(ignore: true)
   _$$_DeckBuilderChangedCopyWith<_$_DeckBuilderChanged> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeckBuilderCodeGeneratedCopyWith<$Res>
+    implements $DeckBuilderStateCopyWith<$Res> {
+  factory _$$_DeckBuilderCodeGeneratedCopyWith(
+          _$_DeckBuilderCodeGenerated value,
+          $Res Function(_$_DeckBuilderCodeGenerated) then) =
+      __$$_DeckBuilderCodeGeneratedCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Deck deck});
+
+  @override
+  $DeckCopyWith<$Res> get deck;
+}
+
+/// @nodoc
+class __$$_DeckBuilderCodeGeneratedCopyWithImpl<$Res>
+    extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderCodeGenerated>
+    implements _$$_DeckBuilderCodeGeneratedCopyWith<$Res> {
+  __$$_DeckBuilderCodeGeneratedCopyWithImpl(_$_DeckBuilderCodeGenerated _value,
+      $Res Function(_$_DeckBuilderCodeGenerated) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? deck = null,
+  }) {
+    return _then(_$_DeckBuilderCodeGenerated(
+      deck: null == deck
+          ? _value.deck
+          : deck // ignore: cast_nullable_to_non_nullable
+              as Deck,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeckBuilderCodeGenerated implements _DeckBuilderCodeGenerated {
+  const _$_DeckBuilderCodeGenerated({required this.deck});
+
+  @override
+  final Deck deck;
+
+  @override
+  String toString() {
+    return 'DeckBuilderState.codeGenerated(deck: $deck)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeckBuilderCodeGenerated &&
+            (identical(other.deck, deck) || other.deck == deck));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, deck);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeckBuilderCodeGeneratedCopyWith<_$_DeckBuilderCodeGenerated>
+      get copyWith => __$$_DeckBuilderCodeGeneratedCopyWithImpl<
+          _$_DeckBuilderCodeGenerated>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Deck deck) initial,
+    required TResult Function(Deck deck) changed,
+    required TResult Function(Deck deck) codeGenerated,
+    required TResult Function(Deck deck, Failure failure) failure,
+  }) {
+    return codeGenerated(deck);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Deck deck)? initial,
+    TResult? Function(Deck deck)? changed,
+    TResult? Function(Deck deck)? codeGenerated,
+    TResult? Function(Deck deck, Failure failure)? failure,
+  }) {
+    return codeGenerated?.call(deck);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Deck deck)? initial,
+    TResult Function(Deck deck)? changed,
+    TResult Function(Deck deck)? codeGenerated,
+    TResult Function(Deck deck, Failure failure)? failure,
+    required TResult orElse(),
+  }) {
+    if (codeGenerated != null) {
+      return codeGenerated(deck);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DeckBuilderInitial value) initial,
+    required TResult Function(_DeckBuilderChanged value) changed,
+    required TResult Function(_DeckBuilderCodeGenerated value) codeGenerated,
+    required TResult Function(_DeckBuilderError value) failure,
+  }) {
+    return codeGenerated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DeckBuilderInitial value)? initial,
+    TResult? Function(_DeckBuilderChanged value)? changed,
+    TResult? Function(_DeckBuilderCodeGenerated value)? codeGenerated,
+    TResult? Function(_DeckBuilderError value)? failure,
+  }) {
+    return codeGenerated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DeckBuilderInitial value)? initial,
+    TResult Function(_DeckBuilderChanged value)? changed,
+    TResult Function(_DeckBuilderCodeGenerated value)? codeGenerated,
+    TResult Function(_DeckBuilderError value)? failure,
+    required TResult orElse(),
+  }) {
+    if (codeGenerated != null) {
+      return codeGenerated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeckBuilderCodeGenerated implements DeckBuilderState {
+  const factory _DeckBuilderCodeGenerated({required final Deck deck}) =
+      _$_DeckBuilderCodeGenerated;
+
+  @override
+  Deck get deck;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DeckBuilderCodeGeneratedCopyWith<_$_DeckBuilderCodeGenerated>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -485,6 +658,7 @@ class _$_DeckBuilderError implements _DeckBuilderError {
   TResult when<TResult extends Object?>({
     required TResult Function(Deck deck) initial,
     required TResult Function(Deck deck) changed,
+    required TResult Function(Deck deck) codeGenerated,
     required TResult Function(Deck deck, Failure failure) failure,
   }) {
     return failure(deck, this.failure);
@@ -495,6 +669,7 @@ class _$_DeckBuilderError implements _DeckBuilderError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Deck deck)? initial,
     TResult? Function(Deck deck)? changed,
+    TResult? Function(Deck deck)? codeGenerated,
     TResult? Function(Deck deck, Failure failure)? failure,
   }) {
     return failure?.call(deck, this.failure);
@@ -505,6 +680,7 @@ class _$_DeckBuilderError implements _DeckBuilderError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Deck deck)? initial,
     TResult Function(Deck deck)? changed,
+    TResult Function(Deck deck)? codeGenerated,
     TResult Function(Deck deck, Failure failure)? failure,
     required TResult orElse(),
   }) {
@@ -519,6 +695,7 @@ class _$_DeckBuilderError implements _DeckBuilderError {
   TResult map<TResult extends Object?>({
     required TResult Function(_DeckBuilderInitial value) initial,
     required TResult Function(_DeckBuilderChanged value) changed,
+    required TResult Function(_DeckBuilderCodeGenerated value) codeGenerated,
     required TResult Function(_DeckBuilderError value) failure,
   }) {
     return failure(this);
@@ -529,6 +706,7 @@ class _$_DeckBuilderError implements _DeckBuilderError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeckBuilderInitial value)? initial,
     TResult? Function(_DeckBuilderChanged value)? changed,
+    TResult? Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult? Function(_DeckBuilderError value)? failure,
   }) {
     return failure?.call(this);
@@ -539,6 +717,7 @@ class _$_DeckBuilderError implements _DeckBuilderError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DeckBuilderInitial value)? initial,
     TResult Function(_DeckBuilderChanged value)? changed,
+    TResult Function(_DeckBuilderCodeGenerated value)? codeGenerated,
     TResult Function(_DeckBuilderError value)? failure,
     required TResult orElse(),
   }) {

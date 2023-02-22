@@ -8,7 +8,8 @@ abstract class DeckSelectionEvent {
 class LoadCreatedDecksEvent extends DeckSelectionEvent {}
 
 class ImportDeckEvent extends DeckSelectionEvent {
-  const ImportDeckEvent();
+  final String locale;
+  const ImportDeckEvent(this.locale);
 }
 
 class ChangeGameModeEvent extends DeckSelectionEvent {

@@ -151,5 +151,7 @@
   "tapCardsToAddThemOrHold" : "カードをタップして追加するか、長押しして詳細を表示します",
   "copyDeckCode" : "デッキコードをコピー",
   "deck": "デッキ",
-  "thereWasAnErrorReadingTheDeckCode": "デッキ コードの読み取り中にエラーが発生しました"
+  "thereWasAnErrorReadingTheDeckCode": "デッキ コードの読み取り中にエラーが発生しました",
+  "thereWasAnErrorGeneratingDeckCode": "デッキ コードの生成中にエラーが発生しました",
+  "deckCodeHasBeenCopiedToClipboard": "デッキコードがクリップボードにコピーされました"
 }

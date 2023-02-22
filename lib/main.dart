@@ -19,7 +19,7 @@ Future<void> main() async {
       Locale('ja', 'JP'),
     ],
       saveLocale: true,
-      path: 'assets/localization',
+      path: 'assets/l10n',
       fallbackLocale: const Locale('de', 'DE'),
       child: DeckslyApp()),);
 }

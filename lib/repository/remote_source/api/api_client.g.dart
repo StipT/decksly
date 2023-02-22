@@ -113,14 +113,15 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DeckResponse> getDeck(
-    locale,
     deckCode,
+    locale,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'locale': locale,
       r'code': deckCode,
+      r'locale': locale,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
@@ -142,16 +143,15 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<DeckResponse> getDeckCode(
-    locale,
     ids,
-    deckClass,
+    locale,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'locale': locale,
       r'ids': ids,
-      r'hero': deckClass,
+      r'locale': locale,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio

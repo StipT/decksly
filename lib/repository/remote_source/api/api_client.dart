@@ -40,14 +40,13 @@ abstract class ApiClient {
 
     @GET('/hearthstone/deck')
   Future<DeckResponse> getDeck(
+    @Query("code") String? deckCode,
     @Query("locale") String locale,
-    @Query("code") String deckCode,
   );
 
   @GET('/hearthstone/deck')
   Future<DeckResponse> getDeckCode(
+    @Query("ids") String? ids,
     @Query("locale") String locale,
-    @Query("ids") String ids,
-    @Query("hero") String deckClass,
   );
 }

@@ -26,7 +26,7 @@ class DeckListBody extends StatelessWidget {
             child: state.deck.cards.isEmpty
                 ? Center(
                     child: Container(
-                      padding: EdgeInsets.only(right: 10.w),
+                      padding: EdgeInsets.only(right: 15.w, left: 5.w),
                       child: AutoSizeText(
                         LocaleKeys.tapCardsToAddThemOrHold.tr(),
                         style: FontStyles.bold11Purple,

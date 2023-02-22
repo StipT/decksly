@@ -10,6 +10,7 @@ import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_ba
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/misc/no_results_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,36 +54,39 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       child: BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
         state.maybeWhen(
           initial: (cardParams, cards) {
-            BlocProvider.of<CardGalleryBloc>(context).add(const ReadLocaleEvent());
+            BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(cardParams.copyWith(locale: context.locale.toStringWithSeparator())));
           },
           orElse: () {},
         );
 
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Stack(
-            children: [
-              _cardList(),
-              SideMenu(
-                forceCollapse: isFilterBarExtended,
-                onToggle: (isOpen) {
-                  setState(() {
-                    isSideMenuExtended = isOpen;
-                    isFilterBarExtended = false;
-                  });
-                },
-                inDeckBuilderMode: false,
-              ),
-              FilterAppBar(
-                forceCollapse: isSideMenuExtended,
-                height: 40.h,
-                onToggle: () {
-                  setState(() {
-                    isFilterBarExtended = !isFilterBarExtended;
-                  });
-                },
-              ),
-            ],
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Stack(
+              children: [
+                _cardList(),
+                SideMenu(
+                  forceCollapse: isFilterBarExtended,
+                  onToggle: (isOpen) {
+                    setState(() {
+                      isSideMenuExtended = isOpen;
+                      isFilterBarExtended = false;
+                    });
+                  },
+                  inDeckBuilderMode: false,
+                ),
+                FilterAppBar(
+                  forceCollapse: isSideMenuExtended,
+                  height: 40.h,
+                  onToggle: () {
+                    setState(() {
+                      isFilterBarExtended = !isFilterBarExtended;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         );
       }),

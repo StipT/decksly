@@ -57,7 +57,6 @@ _i1.GetIt $initGetIt(
       () => _i10.FetchDeckUsecase(get<_i8.DeckRepository>()));
   gh.factory<_i11.CardGalleryBloc>(() => _i11.CardGalleryBloc(
         get<_i6.NetworkInfo>(),
-        get<_i5.LocalStorage>(),
         fetchCardsUsecase: get<_i9.FetchCardsUsecase>(),
       ));
   gh.factory<_i12.DeckBuilderBloc>(() => _i12.DeckBuilderBloc(

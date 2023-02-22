@@ -22,17 +22,11 @@ part 'card_gallery_state.dart';
 
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
-  CardGalleryBloc(this._networkInfo, this._localStorage,
-      {required this.fetchCardsUsecase})
+  CardGalleryBloc(this._networkInfo, {required this.fetchCardsUsecase})
       : super(const CardGalleryState.initial(
       cardFilterParams: CardFilterParams(), page: CardsPage())) {
     on<FetchCardsEvent>(
             (event, emit) => handleFetchCards(emit, event.cardFilterParams));
-
-    on<ReadLocaleEvent>(
-            (event, emit) => handleReadLocale(emit));
-
-    on<ChangeLocaleEvent>((event, emit) => handleChangeLocale(emit, event.locale));
 
     on<CardFilterParamsChangedEvent>((event, emit) async =>
     await handleCardFilterParamsChanged(emit, event.cardFilterParams));
@@ -44,7 +38,6 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   }
 
   final NetworkInfo _networkInfo;
-  final LocalStorage _localStorage;
   late final Stream<bool> internetConnectionState;
 
   final FetchCardsUsecase fetchCardsUsecase;
@@ -111,17 +104,5 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     emit(CardGalleryState.fetching(
         cardFilterParams:
         state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
-  }
-
-  Future<void> handleReadLocale(Emitter<CardGalleryState> emit) async {
-    final locale = await _localStorage.readLocaleSetting();
-    emit(CardGalleryState.fetching(
-        cardFilterParams: state.cardFilterParams.copyWith(locale: locale)));
-  }
-
-  Future<void> handleChangeLocale(Emitter<CardGalleryState> emit, String locale) async {
-    _localStorage.editLocaleSetting(locale);
-    emit(CardGalleryState.fetching(
-        cardFilterParams: state.cardFilterParams.copyWith(locale: locale)));
   }
 }

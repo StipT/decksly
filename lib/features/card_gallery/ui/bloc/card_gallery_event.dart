@@ -10,10 +10,6 @@ class FetchCardsEvent extends CardGalleryEvent {
   final CardFilterParams cardFilterParams;
 }
 
-class ReadLocaleEvent extends CardGalleryEvent {
-  const ReadLocaleEvent();
-}
-
 class ChangeLocaleEvent extends CardGalleryEvent {
   const ChangeLocaleEvent(this.locale);
   final String locale;

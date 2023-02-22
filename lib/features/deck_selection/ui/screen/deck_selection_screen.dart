@@ -55,37 +55,40 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
         listener: (context, state) {
           listenForDeckImport(context, state);
         },
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Stack(
-            children: [
-              const HSDeckSelectionBackground(),
-              Column(
-                children: [
-                  _getAppBar(state),
-                  _getModeSelector(state),
-                  Expanded(child: _getClassSelector(state)),
-                ],
-              ),
-              if (state.deck.type == DeckType.wild)
-                Positioned(
-                  width: 125.w,
-                  top: 36.h,
-                  left: 18.w,
-                  child: Image.asset(
-                    assetPath(SUBFOLDER_MISC, "wild_branch_left"),
-                  ),
+        child: WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Stack(
+              children: [
+                const HSDeckSelectionBackground(),
+                Column(
+                  children: [
+                    _getAppBar(state),
+                    _getModeSelector(state),
+                    Expanded(child: _getClassSelector(state)),
+                  ],
                 ),
-              if (state.deck.type == DeckType.wild)
-                Positioned(
-                  width: 125.w,
-                  top: 36.h,
-                  right: 18.w,
-                  child: Image.asset(
-                    assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+                if (state.deck.type == DeckType.wild)
+                  Positioned(
+                    width: 125.w,
+                    top: 36.h,
+                    left: 18.w,
+                    child: Image.asset(
+                      assetPath(SUBFOLDER_MISC, "wild_branch_left"),
+                    ),
                   ),
-                ),
-            ],
+                if (state.deck.type == DeckType.wild)
+                  Positioned(
+                    width: 125.w,
+                    top: 36.h,
+                    right: 18.w,
+                    child: Image.asset(
+                      assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       );

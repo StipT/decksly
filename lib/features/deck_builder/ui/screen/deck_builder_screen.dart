@@ -15,6 +15,7 @@ import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/misc/no_results_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,32 +47,35 @@ class DeckBuilderScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
-  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
+  final PagingController<int, CardDTO> _pagingController =
+      PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
 
   bool? isSideMenuOpen;
   bool isFilterBarExtended = false;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
     BlocProvider.of<DeckBuilderBloc>(context).add(
       DeckChangedEvent(
         Deck(
           cards: widget.deck.cards,
-          type: widget.deck.type ,
+          type: widget.deck.type,
           heroClass: widget.deck.heroClass,
         ),
       ),
     );
-    BlocProvider.of<CardGalleryBloc>(context).add(const ReadLocaleEvent());
-    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(BlocProvider.of<CardGalleryBloc>(context)
-        .state
-        .cardFilterParams
-        .copyWith(
-            heroClass: [widget.deck.heroClass.name , "neutral"],
-            set: widget.deck.type.name)));
 
-    super.initState();
+    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(
+        BlocProvider.of<CardGalleryBloc>(context)
+            .state
+            .cardFilterParams
+            .copyWith(
+                locale: context.locale.toStringWithSeparator(),
+                heroClass: [widget.deck.heroClass.name, "neutral"],
+                set: widget.deck.type.name)));
   }
 
   @override
@@ -87,41 +91,45 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
       child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
-          return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: SizedBox(
-                height: 1.sh,
-                width: 1.sw,
-                child: Stack(
-                  children: [
-                    Row(
-                      children: [
-                        _cardList(),
-                        _deckList(),
-                      ],
-                    ),
-                    SideMenu(
-                      onToggle: (isOpen) {
-                        setState(() {
-                          isSideMenuOpen = isOpen;
-                          isFilterBarExtended = false;
-                        });
-                      },
-                      inDeckBuilderMode: true,
-                    ),
-                    FilterAppBar(
-                      deckType: widget.deck.type,
-                      deckClass: widget.deck.heroClass,
-                      forceCollapse: isSideMenuOpen ?? false,
-                      height: 40.h,
-                      onToggle: () {
-                        setState(() {
-                          isFilterBarExtended = !isFilterBarExtended;
-                        });
-                      },
-                    ),
-                  ],
+          return BlocBuilder<CardGalleryBloc, CardGalleryState>(
+              builder: (BuildContext context, state) {
+            return WillPopScope(
+              onWillPop: () async => false,
+              child: Scaffold(
+                resizeToAvoidBottomInset: false,
+                body: SizedBox(
+                  height: 1.sh,
+                  width: 1.sw,
+                  child: Stack(
+                    children: [
+                      Row(
+                        children: [
+                          _cardList(),
+                          _deckList(),
+                        ],
+                      ),
+                      SideMenu(
+                        onToggle: (isOpen) {
+                          setState(() {
+                            isSideMenuOpen = isOpen;
+                            isFilterBarExtended = false;
+                          });
+                        },
+                        inDeckBuilderMode: true,
+                      ),
+                      FilterAppBar(
+                        deckType: widget.deck.type,
+                        deckClass: widget.deck.heroClass,
+                        forceCollapse: isSideMenuOpen ?? false,
+                        height: 40.h,
+                        onToggle: () {
+                          setState(() {
+                            isFilterBarExtended = !isFilterBarExtended;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -132,7 +140,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   Widget _cardList() {
-    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(builder: (BuildContext context, state) {
+    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
+        builder: (BuildContext context, state) {
       return Expanded(
         child: Stack(
           children: [
@@ -143,7 +152,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
               ),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
+                  image: AssetImage(
+                      assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -155,7 +165,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                   pagingController: _pagingController,
                   scrollController: _scrollController,
                   physics: const BouncingScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisExtent: 120.h),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, mainAxisExtent: 120.h),
                   builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                     animateTransitions: true,
                     noItemsFoundIndicatorBuilder: (context) {
@@ -166,18 +177,27 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                     itemBuilder: (ctx, card, _) {
                       return CardItem(
                         card: card,
-                        amount: state.deck.cards.firstWhereOrNull((element) => element.card == card)?.amount ?? 0,
-                        onLongPress: (card) => Navigator.push(context, HeroDialogRoute(builder: (context) {
+                        amount: state.deck.cards
+                                .firstWhereOrNull(
+                                    (element) => element.card == card)
+                                ?.amount ??
+                            0,
+                        onLongPress: (card) => Navigator.push(context,
+                            HeroDialogRoute(builder: (context) {
                           return CardDetailsScreen(card);
                         })),
-                        onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
+                        onTap: (card) =>
+                            BlocProvider.of<DeckBuilderBloc>(context)
+                                .add(AddCardEvent(card)),
                         inDeckBuilderMode: true,
                       );
                     },
-                    firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.spanishGrey),
+                    firstPageProgressIndicatorBuilder: (_) =>
+                        const SpinKitRipple(color: AppColors.spanishGrey),
                     newPageProgressIndicatorBuilder: (_) => Center(
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.h, horizontal: 20.w),
                         child: Shimmer.fromColors(
                           baseColor: AppColors.spanishGrey,
                           highlightColor: AppColors.shimmerGrey,
@@ -203,15 +223,18 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     state.when(initial: (cards, cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context)
+          .add(FetchCardsEvent(state.cardFilterParams));
     }, fetching: (cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context)
+          .add(FetchCardsEvent(state.cardFilterParams));
     }, fetched: (cardParams, cards) {
       log(cardParams.toString());
       final nextPageKey = _pagingController.nextPageKey ?? 0;
       if (cards.cardCount == 0 && cards.page == 1) {
         _pagingController.refresh();
-        _scrollController.animateTo(0, curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
+        _scrollController.animateTo(0,
+            curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
         _pagingController.appendLastPage(cards.cards!);
         return;
       }
@@ -222,7 +245,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       }
 
       if (cards.pageCount! > cards.page!) {
-        _pagingController.appendPage(cards.cards!, nextPageKey + cards.cards!.length);
+        _pagingController.appendPage(
+            cards.cards!, nextPageKey + cards.cards!.length);
       } else {
         _pagingController.appendLastPage(cards.cards!);
       }

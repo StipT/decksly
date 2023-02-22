@@ -168,7 +168,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       onTap: () {
                                         context.setLocale(Locale('en', 'US'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(ChangeLocaleEvent(LanguageButtonType.english.value));
+                                        final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
+                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(params));
 
                                       },
                                     ),
@@ -181,7 +182,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       type: LanguageButtonType.german,
                                       onTap: () {
                                         context.setLocale(Locale('de', 'DE'));
-                                        BlocProvider.of<CardGalleryBloc>(context).add(ChangeLocaleEvent(LanguageButtonType.german.value));
+                                        final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
+                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(params));
 
                                       },
                                     ),
@@ -195,7 +197,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       onTap: () {
                                         context.setLocale(Locale('ja', 'JP'));
                                         print(context.locale.toString());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(ChangeLocaleEvent(LanguageButtonType.japanese.value));
+                                        final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
+                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(params));
                                       },
                                     ),
                                   ),

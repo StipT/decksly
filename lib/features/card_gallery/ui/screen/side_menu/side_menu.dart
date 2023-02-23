@@ -72,9 +72,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
               child: GestureDetector(
-                onHorizontalDragEnd: (dragDetails) {
-                  _toggleSideMenu();
-                },
+                onTap: () => _toggleSideMenu(),
                 child: Container(
                   alignment: Alignment.center,
                   width: 234.w,
@@ -166,9 +164,14 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       onTap: () {
                                         context.setLocale(Locale('en', 'US'));
                                         print(context.locale.toString());
-                                        final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(params));
-
+                                        final params = state.cardFilterParams
+                                            .copyWith(
+                                                locale: context.locale
+                                                    .toStringWithSeparator());
+                                        BlocProvider.of<CardGalleryBloc>(
+                                                context)
+                                            .add(CardFilterParamsChangedEvent(
+                                                params));
                                       },
                                     ),
                                   ),
@@ -180,9 +183,14 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       type: LanguageButtonType.german,
                                       onTap: () {
                                         context.setLocale(Locale('de', 'DE'));
-                                        final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(params));
-
+                                        final params = state.cardFilterParams
+                                            .copyWith(
+                                                locale: context.locale
+                                                    .toStringWithSeparator());
+                                        BlocProvider.of<CardGalleryBloc>(
+                                                context)
+                                            .add(CardFilterParamsChangedEvent(
+                                                params));
                                       },
                                     ),
                                   ),
@@ -195,8 +203,14 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                       onTap: () {
                                         context.setLocale(Locale('ja', 'JP'));
                                         print(context.locale.toString());
-                                        final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
-                                        BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(params));
+                                        final params = state.cardFilterParams
+                                            .copyWith(
+                                                locale: context.locale
+                                                    .toStringWithSeparator());
+                                        BlocProvider.of<CardGalleryBloc>(
+                                                context)
+                                            .add(CardFilterParamsChangedEvent(
+                                                params));
                                       },
                                     ),
                                   ),

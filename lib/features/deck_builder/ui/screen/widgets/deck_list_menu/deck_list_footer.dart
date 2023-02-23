@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
-import 'package:decksly/features/deck_builder/ui/screen/widgets/hs_alert_dialog.dart';
+import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
+import 'package:decksly/reusable_ui/misc/hs_alert_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,7 +59,15 @@ class DeckListFooter extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              hsAlertDialog(context, (p0) => {});
+              HSDialog.show(
+                context,
+                HSDialogType.alert,
+                (dialogContext) {
+                  Navigator.pop(dialogContext);
+                  context.pushRoute(const DeckSelectionRoute());
+                },
+                (dialogContext) =>  Navigator.pop(dialogContext),
+              );
             },
             style: OutlinedButton.styleFrom(
               side: const BorderSide(

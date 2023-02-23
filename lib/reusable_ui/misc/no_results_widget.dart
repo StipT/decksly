@@ -44,6 +44,7 @@ class NoResultsWidget extends StatelessWidget {
           Container(
             child: Text(
               LocaleKeys.noCardsFound.tr(),
+              textAlign: TextAlign.center,
               style: FontStyles.bold25VanDykeBrown,
             ),
           ),
@@ -51,6 +52,7 @@ class NoResultsWidget extends StatelessWidget {
             margin: EdgeInsets.only(top: 2.5.h),
             child: Text(
               LocaleKeys.tryRemovingSearchItems.tr(),
+              textAlign: TextAlign.center,
               style: FontStyles.regular17VanDykeBrown,
             ),
           ),

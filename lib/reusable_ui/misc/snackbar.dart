@@ -28,14 +28,12 @@ class HSSnackBar {
     }
   }
 
-  static show(
-      BuildContext context, HSSnackBarType type, String message) {
+  static show(BuildContext context, HSSnackBarType type, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         margin: EdgeInsets.symmetric(horizontal: 200.w, vertical: 5.h),
-
         content: Container(
           height: 30.h,
           width: 100.w,

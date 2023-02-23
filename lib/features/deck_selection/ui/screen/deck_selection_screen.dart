@@ -114,6 +114,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     child: Row(
                       children: [
                         Expanded(
+                          flex: 3,
                           child: Container(
                               child: HSTextField(
                             onChange: (text) =>
@@ -124,9 +125,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                             hint: LocaleKeys.pasteADeckCodeHere.tr(),
                           )),
                         ),
-                        Container(
+                        Expanded(
                           child: HSButton(
-                            width: 100.w,
                             isDisabled: state.deck.code.isEmpty,
                             label: LocaleKeys.import.tr(),
                             onTap: () => BlocProvider.of<DeckSelectionBloc>(
@@ -142,15 +142,14 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
               ),
             ),
           ),
-          Container(
-            width: 140.w,
+          SizedBox(
+            width: 160.w,
             child: Stack(
               children: [
                 const HSWoodHorizontalBorder(),
                 Container(
                     margin: EdgeInsets.only(left: 25.w, right: 25.w),
                     child: HSButton(
-                      width: 100.w,
                       isDisabled: false,
                       label: LocaleKeys.close.tr(),
                       onTap: () {
@@ -229,7 +228,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
   }
 
   Widget _getClassSelector(DeckSelectionState state) {
-    return Container(
+    return SizedBox(
         width: 0.93.sw,
         child: Column(
           children: [

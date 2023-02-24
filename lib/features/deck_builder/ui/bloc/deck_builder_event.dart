@@ -11,8 +11,9 @@ class AddCardEvent extends DeckBuilderEvent {
 }
 
 class RemoveCardEvent extends DeckBuilderEvent {
+  final int index;
   final CardDTO card;
-  const RemoveCardEvent(this.card);
+  const RemoveCardEvent(this.index, this.card);
 }
 
 class DeckChangedEvent extends DeckBuilderEvent {

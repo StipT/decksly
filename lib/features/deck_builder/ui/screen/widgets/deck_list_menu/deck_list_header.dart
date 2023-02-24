@@ -4,13 +4,13 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
-import 'package:decksly/reusable_ui/text_field/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckListHeader extends StatefulWidget {
-  const DeckListHeader({Key? key, required this.onConvertMode}) : super(key: key);
+  const DeckListHeader({Key? key, required this.onConvertMode})
+      : super(key: key);
 
   final VoidCallback onConvertMode;
 
@@ -18,7 +18,8 @@ class DeckListHeader extends StatefulWidget {
   State<DeckListHeader> createState() => _DeckListHeaderState();
 }
 
-class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStateMixin {
+class _DeckListHeaderState extends State<DeckListHeader>
+    with TickerProviderStateMixin {
   bool isExpanded = false;
 
   @override
@@ -43,14 +44,18 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
             child: Stack(
               children: [
                 Image.asset(
-                  assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.heroClass), fileExtension: JPG_EXTENSION),
+                  assetPath(
+                      SUBFOLDER_CLASS, _headerBackground(state.deck.heroClass),
+                      fileExtension: JPG_EXTENSION),
                   fit: BoxFit.fill,
                 ),
                 Image.asset(
                   assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.type)),
                   fit: BoxFit.fill,
                 ),
-                if (isExpanded) Image.asset(assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.type))),
+                if (isExpanded)
+                  Image.asset(assetPath(
+                      SUBFOLDER_MISC, _headerBorderSelected(state.deck.type))),
                 _headerContent(state),
                 Positioned(
                   right: 12.5.w,
@@ -117,6 +122,11 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
   }
 
   _headerContent(DeckBuilderState state) {
+    final cardCount = state.deck.cards.isEmpty
+        ? 0
+        : state.deck.cards
+            .map((e) => e.amount)
+            .reduce((value, element) => value += element);
     return Container(
         child: Row(
       children: [
@@ -152,8 +162,10 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                 ),
                 Flexible(
                     child: AutoSizeText(
-                  "${state.deck.cards.isNotEmpty ? state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element) : "0"}/30",
-                  style: FontStyles.bold11Gold,
+                  "$cardCount/30",
+                  style: cardCount == 30
+                      ? FontStyles.bold13Green
+                      : FontStyles.bold13Gold,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
                   minFontSize: 8,

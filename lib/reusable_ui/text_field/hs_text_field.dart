@@ -4,7 +4,7 @@ import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dar
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
-import 'package:decksly/reusable_ui/text_field/debouncer.dart';
+import 'package:decksly/common/util/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

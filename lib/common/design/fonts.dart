@@ -79,17 +79,24 @@ class FontStyles {
     color: AppColors.purple,
   );
 
-  static TextStyle bold11Gold = TextStyle(
+  static TextStyle bold13Gold = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.bold,
-    fontSize: 11.sp,
+    fontSize: 13.sp,
     color: AppColors.gold,
   );
 
-  static TextStyle bold12VanDykeBrown = TextStyle(
+  static TextStyle bold13Green = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.bold,
+    fontSize: 13.sp,
+    color: Colors.green,
+  );
+
+  static TextStyle bold13VanDykeBrown = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w700,
-    fontSize: 12.sp,
+    fontSize: 13.sp,
     color: AppColors.vanDykeBrown,
   );
 

@@ -302,10 +302,11 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     state.whenOrNull(
       codeGenerated: (deck) =>
           Clipboard.setData(ClipboardData(text: deck.code)).then((_) {
-        HSSnackBar.show(context, HSSnackBarType.message, LocaleKeys.deckCodeHasBeenCopiedToClipboard.tr());
+        HSSnackBar.show(context, HSSnackBarType.message,
+            LocaleKeys.deckCodeHasBeenCopiedToClipboard.tr());
       }),
-      failure: (deck, failure) => HSSnackBar.show(context,
-          HSSnackBarType.alert, LocaleKeys.thereWasAnErrorGeneratingDeckCode.tr()),
+      failure: (deck, failure) => HSSnackBar.show(context, HSSnackBarType.alert,
+          LocaleKeys.thereWasAnErrorGeneratingDeckCode.tr()),
     );
   }
 }

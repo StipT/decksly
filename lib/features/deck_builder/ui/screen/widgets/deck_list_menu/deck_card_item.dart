@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_card.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_deck_card_item_background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,23 +10,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckCardItem extends StatelessWidget {
   const DeckCardItem({
-    required this.card,
-    required this.amount,
+    super.key,
+    required this.index,
+    required this.deckCard,
     required this.onTap,
     required this.onLongPress,
-  });
+  }) : super();
 
-  final CardDTO card;
-  final int amount;
+  final int index;
+  final DeckCard deckCard;
 
-  final Function(CardDTO) onTap;
-  final Function(CardDTO) onLongPress;
+  final Function(int, DeckCard) onTap;
+  final Function(DeckCard) onLongPress;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap(card),
-      onLongPress: () => onLongPress(card),
+      onTap: () => onTap(index, deckCard),
+      onLongPress: () => onLongPress(deckCard),
       child: Container(
         height: 16.h,
         child: Stack(
@@ -44,10 +45,11 @@ class DeckCardItem extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 6.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 1.h, horizontal: 6.w),
                         width: double.infinity,
                         child: Image.network(
-                          card.cropImage ?? "",
+                          deckCard.card.cropImage ?? "",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -70,32 +72,32 @@ class DeckCardItem extends StatelessWidget {
                     margin: EdgeInsets.only(left: 5.5.w),
                     width: 16.w,
                     child: AutoSizeText(
-                      card.manaCost.toString(),
+                      deckCard.card.manaCost.toString(),
                       textAlign: TextAlign.center,
                       style: FontStyles.bold17WithShadow,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 7.5.w, right: 6.w),
+                    margin: EdgeInsets.only(left: 7.5.w, right: 4.5.w),
                     width: 150.w,
                     child: Text(
-                      card.name,
+                      deckCard.card.name,
                       style: FontStyles.bold11WithShadow,
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  if (card.rarityId == 5 && amount == 1)
+                  if (deckCard.card.rarityId == 5 && deckCard.amount == 1)
                     Expanded(
                       child: Image.asset(
                         assetPath(SUBFOLDER_MISC, "legendary_star"),
                         width: 12.5.w,
                       ),
                     ),
-                  if (card.rarityId != 5 && amount == 2)
+                  if (deckCard.card.rarityId != 5 && deckCard.amount == 2)
                     Expanded(
                       child: Text(
-                        amount.toString(),
-                        style: FontStyles.bold11Gold,
+                        deckCard.amount.toString(),
+                        style: FontStyles.bold13Gold,
                         textAlign: TextAlign.center,
                       ),
                     ),

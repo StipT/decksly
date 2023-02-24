@@ -27,7 +27,8 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       : super(const DeckBuilderState.initial(deck: Deck())) {
     on<DeckChangedEvent>((event, emit) => handleDeckChanged(emit, event.deck));
     on<AddCardEvent>((event, emit) => handleAddCard(emit, event.card));
-    on<RemoveCardEvent>((event, emit) => handleRemoveCard(emit, event.card));
+    on<RemoveCardEvent>(
+        (event, emit) => handleRemoveCard(emit, event.index, event.card));
     on<FetchDeckCodeEvent>(
         (event, emit) => handleFetchDeckCode(emit, event.locale));
 
@@ -89,10 +90,17 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       }
     });
 
-    emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
+    var index = cards.indexWhere((element) => element.card == card);
+
+    cards[index].amount == 2
+        ? emit(
+            DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)))
+        : emit(DeckBuilderState.cardAdded(
+            index: index, deck: state.deck.copyWith(cards: cards)));
   }
 
-  void handleRemoveCard(Emitter<DeckBuilderState> emit, CardDTO card) {
+  void handleRemoveCard(
+      Emitter<DeckBuilderState> emit, int index, CardDTO card) {
     List<DeckCard> cards = [];
     cards.addAll(state.deck.cards);
 
@@ -103,12 +111,15 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       return;
     }
 
+    bool cardRemoved = false;
+
     if (cards
         .where((element) => (element.card == card) && (element.amount == 2))
         .isNotEmpty) {
       cards.removeWhere((element) => element.card == card);
       cards.add(DeckCard(card: card, amount: 1));
     } else {
+      cardRemoved = true;
       cards.removeWhere((element) => element.card == card);
     }
 
@@ -120,7 +131,11 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       }
     });
 
-    emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
+    cardRemoved
+        ? emit(DeckBuilderState.cardRemoved(
+            index: index, deck: state.deck.copyWith(cards: cards)))
+        : emit(
+            DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
   }
 
   Future<void> handleFetchDeckCode(

@@ -7,9 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CardItem extends StatelessWidget {
-  const CardItem(
-      {super.key,
+class CardItem extends StatefulWidget {
+  const CardItem({
+      super.key,
       required this.inDeckBuilderMode,
       required this.card,
       required this.onTap,
@@ -23,10 +23,15 @@ class CardItem extends StatelessWidget {
   final Function(CardDTO) onLongPress;
 
   @override
+  State<CardItem> createState() => _CardItemState();
+}
+
+class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap(card),
-      onLongPress: () => onLongPress(card),
+      onTap: () => widget.onTap(widget.card),
+      onLongPress: () => widget.onLongPress(widget.card),
       child: Container(
         alignment: Alignment.topCenter,
         margin: EdgeInsets.all(1.w),
@@ -42,12 +47,14 @@ class CardItem extends StatelessWidget {
                 ),
                 child: Image.network(
                   // TODO deck-28 Add image not found asset
-                  card.image,
+                  widget.card.image,
                   loadingBuilder: (context, widget, chunk) {
-                    return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
+                    return chunk?.cumulativeBytesLoaded ==
+                            chunk?.expectedTotalBytes
                         ? widget
                         : Container(
-                            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.h, horizontal: 20.w),
                             child: Shimmer.fromColors(
                               baseColor: AppColors.spanishGrey,
                               highlightColor: AppColors.shimmerGrey,
@@ -60,7 +67,7 @@ class CardItem extends StatelessWidget {
                 ),
               ),
             ),
-            if (card.rarityId == 5 && amount == 1)
+            if (widget.card.rarityId == 5 && widget.amount == 1)
               Positioned(
                 bottom: 0.h,
                 right: 40.w,
@@ -82,7 +89,7 @@ class CardItem extends StatelessWidget {
                   ],
                 ),
               ),
-            if (card.rarityId != 5 && amount > 0)
+            if (widget.card.rarityId != 5 && widget.amount > 0)
               Positioned(
                 bottom: 0.h,
                 right: 42.5.w,
@@ -90,14 +97,16 @@ class CardItem extends StatelessWidget {
                 child: Stack(
                   children: [
                     Image.asset(
-                      assetPath(SUBFOLDER_MISC, amount == 2 ? "card_counter_locked" : "card_counter"),
+                      assetPath(SUBFOLDER_MISC,
+                          widget.amount == 2 ? "card_counter_locked" : "card_counter"),
                       fit: BoxFit.fitWidth,
                     ),
                     Container(
                         alignment: Alignment.center,
-                        padding: EdgeInsets.only(top: 1.5.h, left: amount == 2 ? 10.w : 0.w),
+                        padding: EdgeInsets.only(
+                            top: 1.5.h, left: widget.amount == 2 ? 10.w : 0.w),
                         child: Text(
-                          "$amount/2",
+                          "${widget.amount}/2",
                           style: FontStyles.bold17WithShadow,
                           textAlign: TextAlign.center,
                         )),
@@ -111,10 +120,10 @@ class CardItem extends StatelessWidget {
   }
 
   bool isDisabled() {
-    if (card.rarityId == 5 && amount == 1) {
+    if (widget.card.rarityId == 5 && widget.amount == 1) {
       return true;
     }
-    if (card.rarityId != 5 && amount > 1) {
+    if (widget.card.rarityId != 5 && widget.amount > 1) {
       return true;
     }
     return false;

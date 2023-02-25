@@ -55,6 +55,7 @@ class DeckCardItem extends StatelessWidget {
                               )
                             : Image.asset(
                                 assetPath(SUBFOLDER_MISC, "crop_not_found"),
+                                fit: BoxFit.cover,
                               ),
                       ),
                       Image.asset(

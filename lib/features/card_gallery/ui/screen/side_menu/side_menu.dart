@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/util/throttler.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/feature_item.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/language_button.dart';
@@ -33,6 +34,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
 
+  final _throttler = Throttler(milliseconds: 1000);
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +66,6 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     child: Container(
                       height: 0.9.sh,
                       width: 1.sw,
-                      color: Colors.transparent,
                     )),
               ),
             AnimatedPositioned(
@@ -72,7 +74,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
               child: GestureDetector(
-                onTap: () => _toggleSideMenu(),
+                onTap: () => widget.isExtended ? null : _toggleSideMenu(),
                 child: Container(
                   alignment: Alignment.center,
                   width: 234.w,
@@ -161,18 +163,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                           state.cardFilterParams.locale ==
                                               LanguageButtonType.english.value,
                                       type: LanguageButtonType.english,
-                                      onTap: () {
-                                        context.setLocale(Locale('en', 'US'));
-                                        print(context.locale.toString());
-                                        final params = state.cardFilterParams
-                                            .copyWith(
-                                                locale: context.locale
-                                                    .toStringWithSeparator());
-                                        BlocProvider.of<CardGalleryBloc>(
-                                                context)
-                                            .add(CardFilterParamsChangedEvent(
-                                                params));
-                                      },
+                                      onTap: () => _changeLocale(
+                                          state, const Locale('en', 'US')),
                                     ),
                                   ),
                                   Expanded(
@@ -181,17 +173,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                           state.cardFilterParams.locale ==
                                               LanguageButtonType.german.value,
                                       type: LanguageButtonType.german,
-                                      onTap: () {
-                                        context.setLocale(Locale('de', 'DE'));
-                                        final params = state.cardFilterParams
-                                            .copyWith(
-                                                locale: context.locale
-                                                    .toStringWithSeparator());
-                                        BlocProvider.of<CardGalleryBloc>(
-                                                context)
-                                            .add(CardFilterParamsChangedEvent(
-                                                params));
-                                      },
+                                      onTap: () => _changeLocale(
+                                          state, const Locale('de', 'DE')),
                                     ),
                                   ),
                                   Expanded(
@@ -200,18 +183,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                           state.cardFilterParams.locale ==
                                               LanguageButtonType.japanese.value,
                                       type: LanguageButtonType.japanese,
-                                      onTap: () {
-                                        context.setLocale(Locale('ja', 'JP'));
-                                        print(context.locale.toString());
-                                        final params = state.cardFilterParams
-                                            .copyWith(
-                                                locale: context.locale
-                                                    .toStringWithSeparator());
-                                        BlocProvider.of<CardGalleryBloc>(
-                                                context)
-                                            .add(CardFilterParamsChangedEvent(
-                                                params));
-                                      },
+                                      onTap: () => _changeLocale(
+                                          state, const Locale('ja', 'JP')),
                                     ),
                                   ),
                                 ],
@@ -259,6 +232,16 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
           ],
         ),
       );
+    });
+  }
+
+  void _changeLocale(CardGalleryState state, Locale locale) {
+    _throttler.run(() {
+      context.setLocale(locale);
+      final params = state.cardFilterParams
+          .copyWith(locale: context.locale.toStringWithSeparator());
+      BlocProvider.of<CardGalleryBloc>(context)
+          .add(CardFilterParamsChangedEvent(params));
     });
   }
 

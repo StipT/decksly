@@ -5,6 +5,11 @@ abstract class DeckBuilderEvent {
    const DeckBuilderEvent();
 }
 
+class InitialDeckPopulationEvent extends DeckBuilderEvent {
+  final Deck deck;
+  const InitialDeckPopulationEvent(this.deck);
+}
+
 class AddCardEvent extends DeckBuilderEvent {
   final CardDTO card;
   const AddCardEvent(this.card);

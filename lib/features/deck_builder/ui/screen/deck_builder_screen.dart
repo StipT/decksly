@@ -81,6 +81,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                 locale: context.locale.toStringWithSeparator(),
                 heroClass: [widget.deck.heroClass.name, "neutral"],
                 set: widget.deck.type.name)));
+
+    print("didChangeDependencies");
   }
 
   @override
@@ -114,10 +116,18 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                   width: 1.sw,
                   child: Stack(
                     children: [
-                      Row(
+                      Stack(
                         children: [
-                          _cardList(),
-                          _deckList(),
+                          Row(
+                            children: [
+                              _cardList(),
+                              _deckList(),
+                            ],
+                          ),
+                          if (isSideMenuExtended)
+                            Container(
+                              color: Colors.black54,
+                            ),
                         ],
                       ),
                       SideMenu(
@@ -146,79 +156,69 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
       return Expanded(
-        child: Stack(
-          children: [
-            Container(
-              margin: EdgeInsets.only(
-                left: 32.w,
-                top: 40.h,
-              ),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                      assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
-                  fit: BoxFit.fill,
-                ),
-              ),
-              child: AnimatedPadding(
-                padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
-                curve: Curves.bounceOut,
-                duration: const Duration(milliseconds: 500),
-                child: PagedGridView<int, CardDTO>(
-                  pagingController: _pagingController,
-                  scrollController: _scrollController,
-                  physics: const BouncingScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, mainAxisExtent: 120.h),
-                  builderDelegate: PagedChildBuilderDelegate<CardDTO>(
-                    animateTransitions: true,
-                    noItemsFoundIndicatorBuilder: (context) {
-                      return NoResultsWidget(
-                        onTap: () {},
-                      );
-                    },
-                    itemBuilder: (ctx, card, _) {
-                      return CardItem(
-                        card: card,
-                        amount: state.deck.cards
-                                .firstWhereOrNull(
-                                    (element) => element.card == card)
-                                ?.amount ??
-                            0,
-                        onLongPress: (card) => Navigator.push(context,
-                            HeroDialogRoute(builder: (context) {
-                          return CardDetailsScreen(card);
-                        })),
-                        onTap: (card) =>
-                            BlocProvider.of<DeckBuilderBloc>(context)
-                                .add(AddCardEvent(card)),
-                        inDeckBuilderMode: true,
-                      );
-                    },
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        const SpinKitRipple(color: AppColors.velvet),
-                    newPageProgressIndicatorBuilder: (_) => Center(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5.h, horizontal: 20.w),
-                        child: Shimmer.fromColors(
-                          baseColor: AppColors.spanishGrey,
-                          highlightColor: AppColors.shimmerGrey,
-                          child: Image.asset(
-                            assetPath(SUBFOLDER_MISC, "card_template_grey"),
-                          ),
-                        ),
+        child: Container(
+          margin: EdgeInsets.only(
+            left: 32.w,
+            top: 40.h,
+          ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                  assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
+              fit: BoxFit.fill,
+            ),
+          ),
+          child: AnimatedPadding(
+            padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
+            curve: Curves.bounceOut,
+            duration: const Duration(milliseconds: 500),
+            child: PagedGridView<int, CardDTO>(
+              pagingController: _pagingController,
+              scrollController: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, mainAxisExtent: 120.h),
+              builderDelegate: PagedChildBuilderDelegate<CardDTO>(
+                animateTransitions: true,
+                noItemsFoundIndicatorBuilder: (context) {
+                  return NoResultsWidget(
+                    onTap: () {},
+                  );
+                },
+                itemBuilder: (ctx, card, _) {
+                  return CardItem(
+                    card: card,
+                    amount: state.deck.cards
+                            .firstWhereOrNull((element) => element.card == card)
+                            ?.amount ??
+                        0,
+                    onLongPress: (card) => Navigator.push(context,
+                        HeroDialogRoute(builder: (context) {
+                      return CardDetailsScreen(card);
+                    })),
+                    onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context)
+                        .add(AddCardEvent(card)),
+                    inDeckBuilderMode: true,
+                  );
+                },
+                firstPageProgressIndicatorBuilder: (_) =>
+                    const SpinKitRipple(color: AppColors.velvet),
+                newPageProgressIndicatorBuilder: (_) => Center(
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                    child: Shimmer.fromColors(
+                      baseColor: AppColors.spanishGrey,
+                      highlightColor: AppColors.shimmerGrey,
+                      child: Image.asset(
+                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            if (isSideMenuExtended)
-              Container(
-                color: Colors.black54,
-              ),
-          ],
+          ),
         ),
       );
     });

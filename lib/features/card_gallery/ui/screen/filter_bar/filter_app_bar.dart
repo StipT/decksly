@@ -42,7 +42,6 @@ class FilterAppBar extends StatefulWidget {
 
 class _FilterAppBarState extends State<FilterAppBar>
     with TickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
@@ -102,6 +101,7 @@ class _FilterAppBarState extends State<FilterAppBar>
                             child: HSTextField(
                               hint: LocaleKeys.search.tr(),
                               suffix: TextFieldSuffix.search,
+                              onSubmitted: (_) {},
                               onChange: (text) =>
                                   BlocProvider.of<CardGalleryBloc>(context).add(
                                       CardFilterParamsChangedEvent(state
@@ -178,7 +178,7 @@ class _FilterAppBarState extends State<FilterAppBar>
   }
 
   void _toggleBarExtension() async {
-      widget.onToggle();
+    widget.onToggle();
   }
 
   Widget _classFilter(DeckClass? deckClass, CardGalleryState state) {

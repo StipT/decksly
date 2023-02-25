@@ -25,6 +25,7 @@ class DeckListBody extends StatefulWidget {
 class _DeckListBodyState extends State<DeckListBody> {
   final _key = GlobalKey<AnimatedListState>();
   final _throttler = Throttler(milliseconds: 250);
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +54,13 @@ class _DeckListBodyState extends State<DeckListBody> {
                         ),
                       ),
                     RawScrollbar(
+                      controller: _scrollController,
                       thumbVisibility: true,
                       thumbColor: AppColors.bistreBrown,
                       radius: Radius.circular(20.r),
                       child: AnimatedList(
                           key: _key,
+                          controller: _scrollController,
                           padding: EdgeInsets.only(right: 10.w),
                           physics: const BouncingScrollPhysics(),
                           initialItemCount: state.deck.cards.length,
@@ -121,12 +124,30 @@ class _DeckListBodyState extends State<DeckListBody> {
   }
 
   void insertItem(int index, DeckCard deckCard) {
+    _scrollController.animateTo(
+      index * 10.h,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 200),
+    );
     _key.currentState
         ?.insertItem(index, duration: const Duration(milliseconds: 200));
   }
 
+  void _loadItems(List<DeckCard> itemList) {
+    var future = Future(() {});
+    for (var i = 0; i < itemList.length; i++) {
+      future = future.then((_) {
+        return Future.delayed(const Duration(milliseconds: 100), () {
+          _key.currentState
+              ?.insertItem(i, duration: const Duration(milliseconds: 200));
+        });
+      });
+    }
+  }
+
   void listenForCardChanges(BuildContext context, DeckBuilderState state) {
     state.whenOrNull(
+      initial: (deck) => _loadItems(deck.cards),
       cardAdded: (index, deck) => insertItem(index, deck.cards[index]),
     );
   }

@@ -49,7 +49,10 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
   void handleDeckChanged(Emitter<DeckBuilderState> emit, Deck deck) {
     final Deck changedDeck = state.deck.copyWith(
         heroClass: deck.heroClass, type: deck.type, cards: deck.cards);
-    emit(DeckBuilderState.changed(deck: changedDeck));
+
+    state.deck.cards.isEmpty
+        ? emit(DeckBuilderState.initial(deck: changedDeck))
+        : emit(DeckBuilderState.changed(deck: changedDeck));
   }
 
   void handleAddCard(Emitter<DeckBuilderState> emit, CardDTO card) {

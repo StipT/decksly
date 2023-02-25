@@ -39,16 +39,6 @@ class DeckSelectionScreen extends StatefulWidget implements AutoRouteWrapper {
 
 class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<DeckSelectionBloc, DeckSelectionState>(
         builder: (BuildContext context, state) {
@@ -70,24 +60,30 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     Expanded(child: _getClassSelector(state)),
                   ],
                 ),
-                if (state.deck.type == DeckType.wild)
-                  Positioned(
-                    width: 125.w,
-                    top: 36.h,
-                    left: 18.w,
+                Positioned(
+                  width: 125.w,
+                  top: 36.h,
+                  left: 18.w,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 300),
+                    opacity: state.deck.type == DeckType.wild ? 1 : 0,
                     child: Image.asset(
                       assetPath(SUBFOLDER_MISC, "wild_branch_left"),
                     ),
                   ),
-                if (state.deck.type == DeckType.wild)
-                  Positioned(
-                    width: 125.w,
-                    top: 36.h,
-                    right: 18.w,
+                ),
+                Positioned(
+                  width: 125.w,
+                  top: 36.h,
+                  right: 18.w,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 300),
+                    opacity: state.deck.type == DeckType.wild ? 1 : 0,
                     child: Image.asset(
                       assetPath(SUBFOLDER_MISC, "wild_branch_right"),
                     ),
                   ),
+                ),
               ],
             ),
           ),
@@ -115,15 +111,18 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       children: [
                         Expanded(
                           flex: 3,
-                          child: Container(
-                              child: HSTextField(
+                          child: HSTextField(
                             onChange: (text) =>
                                 BlocProvider.of<DeckSelectionBloc>(context)
                                     .add(ChangeDeckCodeEvent(text)),
+                            onSubmitted: (_) =>
+                                BlocProvider.of<DeckSelectionBloc>(context).add(
+                                    ImportDeckEvent(context.locale
+                                        .toStringWithSeparator())),
                             suffix: TextFieldSuffix.paste,
                             theme: TextFieldTheme.none,
                             hint: LocaleKeys.pasteADeckCodeHere.tr(),
-                          )),
+                          ),
                         ),
                         Expanded(
                           child: HSButton(
@@ -277,9 +276,9 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
 
   void listenForDeckImport(BuildContext context, DeckSelectionState state) {
     state.whenOrNull(
-        failure: (deck, failure) => HSSnackBar.show(context,
-            HSSnackBarType.alert, LocaleKeys.thereWasAnErrorReadingTheDeckCode.tr()),
-        deckImported: (deck) =>
-            context.pushRoute(DeckBuilderRoute(deck: deck)));
+      deckImported: (deck) => context.pushRoute(DeckBuilderRoute(deck: deck)),
+      failure: (deck, failure) => HSSnackBar.show(context, HSSnackBarType.alert,
+          LocaleKeys.thereWasAnErrorReadingTheDeckCode.tr()),
+    );
   }
 }

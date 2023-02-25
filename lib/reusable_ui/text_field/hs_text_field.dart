@@ -28,10 +28,12 @@ class HSTextField extends StatefulWidget {
     required this.theme,
     required this.suffix,
     required this.onChange,
+    required this.onSubmitted,
     this.hint,
   }) : super(key: key);
 
   final void Function(String) onChange;
+  final void Function(String) onSubmitted;
   final TextFieldTheme theme;
   final TextFieldSuffix suffix;
   final String? hint;
@@ -81,6 +83,8 @@ class _HSTextFieldState extends State<HSTextField> {
                     right: 4.w,
                   ),
                   child: TextField(
+                    textInputAction: _getInputAction(widget.suffix),
+                    onSubmitted: (value) => widget.onSubmitted(value),
                     focusNode: _focus,
                     controller: _textEditingController,
                     onChanged: (searchString) {
@@ -120,7 +124,7 @@ class _HSTextFieldState extends State<HSTextField> {
               setState(() {
                 _textEditingController.clear();
                 isEmpty = _textEditingController.text.isEmpty;
-                widget.onChange!(_textEditingController.text);
+                widget.onChange(_textEditingController.text);
               });
             }
           },
@@ -154,6 +158,17 @@ class _HSTextFieldState extends State<HSTextField> {
         return const HSVelvetBorder();
       case TextFieldTheme.wood:
         return const HSWoodHorizontalBorder();
+    }
+  }
+
+  TextInputAction _getInputAction(TextFieldSuffix suffix) {
+    switch (suffix) {
+      case TextFieldSuffix.none:
+        return TextInputAction.none;
+      case TextFieldSuffix.paste:
+        return TextInputAction.go;
+      case TextFieldSuffix.search:
+        return  TextInputAction.search;
     }
   }
 

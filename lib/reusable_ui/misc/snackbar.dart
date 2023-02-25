@@ -33,16 +33,13 @@ class HSSnackBar {
       SnackBar(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
-        margin: EdgeInsets.symmetric(horizontal: 200.w, vertical: 5.h),
+        width: 450.w,
         content: Container(
-          height: 30.h,
-          width: 100.w,
-          padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 10.w),
           decoration: BoxDecoration(
             color: AppColors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: const Offset(0, 3),

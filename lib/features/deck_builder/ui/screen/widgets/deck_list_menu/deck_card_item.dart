@@ -48,10 +48,14 @@ class DeckCardItem extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: 1.h, horizontal: 6.w),
                         width: double.infinity,
-                        child: Image.network(
-                          deckCard.card.cropImage ?? "",
-                          fit: BoxFit.cover,
-                        ),
+                        child: deckCard.card.cropImage != null
+                            ? Image.network(
+                                deckCard.card.cropImage ?? "",
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                assetPath(SUBFOLDER_MISC, "crop_not_found"),
+                              ),
                       ),
                       Image.asset(
                         assetPath(SUBFOLDER_MISC, "deck_card_item_fill"),

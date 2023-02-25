@@ -60,10 +60,9 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
               GestureDetector(
                 onTap: () => _toggleSideMenu(),
                 behavior: HitTestBehavior.opaque,
-                // full screen container to register taps anywhere and close drop down
                 child: Container(
                     margin: EdgeInsets.only(top: 0.1.sh),
-                    child: Container(
+                    child: SizedBox(
                       height: 0.9.sh,
                       width: 1.sw,
                     )),
@@ -110,8 +109,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                 type: FeatureItemType.cardLibrary,
                                 isSelected: !widget.inDeckBuilderMode,
                                 onTap: () => widget.inDeckBuilderMode
-                                    ? context
-                                        .pushRoute(const CardGalleryRoute())
+                                    ? _navigate(
+                                        context, const CardGalleryRoute())
                                     : null),
                             Container(
                               child: Image.asset(
@@ -128,8 +127,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                 isSelected: widget.inDeckBuilderMode,
                                 onTap: () => widget.inDeckBuilderMode
                                     ? null
-                                    : context
-                                        .pushRoute(const DeckSelectionRoute()),
+                                    : _navigate(
+                                        context, const DeckSelectionRoute()),
                               ),
                             ),
                             Container(
@@ -233,6 +232,11 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         ),
       );
     });
+  }
+
+  void _navigate(BuildContext context, PageRouteInfo route) {
+    _toggleSideMenu();
+    context.pushRoute(route);
   }
 
   void _changeLocale(CardGalleryState state, Locale locale) {

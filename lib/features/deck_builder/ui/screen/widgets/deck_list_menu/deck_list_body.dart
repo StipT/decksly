@@ -53,21 +53,25 @@ class _DeckListBodyState extends State<DeckListBody> {
                           ),
                         ),
                       ),
-                    RawScrollbar(
-                      controller: _scrollController,
-                      thumbVisibility: true,
-                      thumbColor: AppColors.bistreBrown,
-                      radius: Radius.circular(20.r),
-                      child: AnimatedList(
-                          key: _key,
-                          controller: _scrollController,
-                          padding: EdgeInsets.only(right: 10.w),
-                          physics: const BouncingScrollPhysics(),
-                          initialItemCount: state.deck.cards.length,
-                          itemBuilder: (context, index, animation) {
-                            return _buildItem(index, state.deck.cards[index],
-                                context, animation);
-                          }),
+                    ScrollConfiguration(
+                      behavior: const MaterialScrollBehavior()
+                          .copyWith(overscroll: false),
+                      child: RawScrollbar(
+                        controller: _scrollController,
+                        thumbVisibility: true,
+                        thumbColor: AppColors.bistreBrown,
+                        radius: Radius.circular(20.r),
+                        child: AnimatedList(
+                            key: _key,
+                            controller: _scrollController,
+                            padding: EdgeInsets.only(right: 10.w),
+                            physics: const ClampingScrollPhysics(),
+                            initialItemCount: state.deck.cards.length,
+                            itemBuilder: (context, index, animation) {
+                              return _buildItem(index, state.deck.cards[index],
+                                  context, animation);
+                            }),
+                      ),
                     ),
                   ],
                 )),
@@ -123,9 +127,9 @@ class _DeckListBodyState extends State<DeckListBody> {
     }
   }
 
-  void insertItem(int index, DeckCard deckCard) {
+  void insertItem(int index, List<DeckCard> deckCards) {
     _scrollController.animateTo(
-      index * 10.h,
+      deckCards.length > 6 ? index * 12.h : 0,
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 200),
     );
@@ -148,7 +152,7 @@ class _DeckListBodyState extends State<DeckListBody> {
   void listenForCardChanges(BuildContext context, DeckBuilderState state) {
     state.whenOrNull(
       initial: (deck) => _loadItems(deck.cards),
-      cardAdded: (index, deck) => insertItem(index, deck.cards[index]),
+      cardAdded: (index, deck) => insertItem(index, deck.cards),
     );
   }
 }

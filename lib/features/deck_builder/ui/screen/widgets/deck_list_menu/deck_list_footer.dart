@@ -47,46 +47,41 @@ class DeckListFooter extends StatelessWidget {
   }
 
   Widget startNewButton(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 5.w, top: 2.h, bottom: 3.h),
-      child: Stack(
-        children: [
-          Image.asset(
-            assetPath(SUBFOLDER_MISC, "new_deck_button"),
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.fill,
-          ),
-          OutlinedButton(
-            onPressed: () {
-              HSDialog.show(
-                context,
-                HSDialogType.alert,
-                (dialogContext) {
-                  Navigator.pop(dialogContext);
-                  context.pushRoute(const DeckSelectionRoute());
-                },
-                (dialogContext) =>  Navigator.pop(dialogContext),
-              );
-            },
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(
-                color: Colors.transparent,
-              ),
-              textStyle: FontStyles.bold15,
-              primary: AppColors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r)),
-            ),
-            child: Container(
-              alignment: Alignment.center,
+    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
+        builder: (BuildContext context, state) {
+      return Container(
+        margin: EdgeInsets.only(right: 5.w, top: 2.h, bottom: 3.h),
+        child: Stack(
+          children: [
+            Image.asset(
+              assetPath(SUBFOLDER_MISC, "new_deck_button"),
               width: double.infinity,
               height: double.infinity,
+              fit: BoxFit.fill,
             ),
-          ),
-        ],
-      ),
-    );
+            OutlinedButton(
+              onPressed: () {
+                _showAlert(context, state);
+              },
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.white,
+                side: const BorderSide(
+                  color: Colors.transparent,
+                ),
+                textStyle: FontStyles.bold15,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.r)),
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget createDeckButton(BuildContext context) {
@@ -110,11 +105,11 @@ class DeckListFooter extends StatelessWidget {
                     FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
               },
               style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.white,
                 side: const BorderSide(
                   color: Colors.transparent,
                 ),
                 textStyle: FontStyles.bold15,
-                primary: AppColors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.r)),
               ),
@@ -133,5 +128,21 @@ class DeckListFooter extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showAlert(BuildContext context, DeckBuilderState state) {
+    if (state.deck.cards.isNotEmpty) {
+      HSDialog.show(
+        context,
+        HSDialogType.alert,
+        (dialogContext) {
+          Navigator.pop(dialogContext);
+          context.pushRoute(const DeckSelectionRoute());
+        },
+        (dialogContext) => Navigator.pop(dialogContext),
+      );
+    } else {
+      context.pushRoute(const DeckSelectionRoute());
+    }
   }
 }

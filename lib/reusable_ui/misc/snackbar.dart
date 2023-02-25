@@ -32,40 +32,31 @@ class HSSnackBar {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        width: 450.w,
-        content: Container(
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
-              ),
-            ],
-            border: Border.all(color: AppColors.gold, width: 1.sp),
-            borderRadius: BorderRadius.all(
-              Radius.circular(
-                30.r,
+        backgroundColor: Colors.white,
+        width: 400.w,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(30.r),
+          ),
+          side: BorderSide(
+            width: 1.sp,
+            color: AppColors.gold,
+          ),
+        ),
+        elevation: 10.sp,
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _snackBarImage(type),
+            Expanded(
+              child: AutoSizeText(
+                message,
+                textAlign: TextAlign.center,
+                style: FontStyles.regular15Black,
               ),
             ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _snackBarImage(type),
-              Expanded(
-                child: AutoSizeText(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: FontStyles.regular15Black,
-                ),
-              ),
-            ],
-          ),
+          ],
         ),
       ),
     );

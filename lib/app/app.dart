@@ -7,36 +7,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckslyApp extends StatelessWidget {
+  DeckslyApp({super.key});
+
   final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(787, 375),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (BuildContext context, Widget? child) {
-        return MaterialApp.router(
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          title: APP_NAME,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: FontStyles.FONT_FAMILY,
-            primaryColor: AppColors.vanDykeBrown,
-            splashColor: AppColors.bistreBrown,
-            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.gold),
-            textSelectionTheme: const TextSelectionThemeData(
-              cursorColor: AppColors.gold,
+        designSize: const Size(787, 375),
+        splitScreenMode: true,
+        builder: (BuildContext context, Widget? child) {
+          return MaterialApp.router(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+            title: APP_NAME,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              fontFamily: FontStyles.FONT_FAMILY,
+              primaryColor: AppColors.vanDykeBrown,
+              splashColor: AppColors.bistreBrown,
+              colorScheme: ColorScheme.fromSwatch()
+                  .copyWith(secondary: AppColors.gold),
+              textSelectionTheme: const TextSelectionThemeData(
+                cursorColor: AppColors.gold,
+              ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
-
-  DeckslyApp({super.key});
 }

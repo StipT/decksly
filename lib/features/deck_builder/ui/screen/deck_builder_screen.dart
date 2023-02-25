@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
@@ -15,7 +14,6 @@ import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/misc/no_results_widget.dart';
 import 'package:decksly/reusable_ui/misc/snackbar.dart';
@@ -81,8 +79,6 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                 locale: context.locale.toStringWithSeparator(),
                 heroClass: [widget.deck.heroClass.name, "neutral"],
                 set: widget.deck.type.name)));
-
-    print("didChangeDependencies");
   }
 
   @override

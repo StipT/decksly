@@ -27,7 +27,7 @@ class DeckListFooter extends StatelessWidget {
     return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
       builder: (BuildContext context, state) {
         return Container(
-          height: 20.h,
+          height: 43.h,
           margin: EdgeInsets.only(bottom: 5.h, left: 15.w, right: 15.w),
           child: Row(
             children: [
@@ -35,7 +35,11 @@ class DeckListFooter extends StatelessWidget {
                 flex: 3,
                 child: createDeckButton(context),
               ),
-              Image.asset(assetPath(SUBFOLDER_MISC, "wood_divider")),
+              Image.asset(
+                assetPath(SUBFOLDER_MISC, "wood_divider"),
+                fit: BoxFit.fill,
+                height: 33.h,
+              ),
               Expanded(
                 child: startNewButton(context),
               ),
@@ -50,7 +54,8 @@ class DeckListFooter extends StatelessWidget {
     return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
       return Container(
-        margin: EdgeInsets.only(right: 5.w, top: 2.h, bottom: 3.h),
+        height: 45.h,
+        padding: EdgeInsets.only(bottom: 8.h, right: 5.w, top: 8.h),
         child: Stack(
           children: [
             Image.asset(
@@ -86,44 +91,41 @@ class DeckListFooter extends StatelessWidget {
 
   Widget createDeckButton(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-        left: 7.5.w,
-        bottom: 2.5.w,
-      ),
+      height: 25.h,
+      padding: EdgeInsets.only(left: 7.5.w, bottom: 1.h),
       child: Stack(
         alignment: Alignment.center,
+        fit: StackFit.expand,
         children: [
           Image.asset(
             assetPath(SUBFOLDER_MISC, "copy_deck_button"),
             fit: BoxFit.fill,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 2.5.h),
-            child: OutlinedButton(
-              onPressed: () {
-                BlocProvider.of<DeckBuilderBloc>(context).add(
-                    FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
-              },
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.white,
-                side: const BorderSide(
-                  color: Colors.transparent,
-                ),
-                textStyle: FontStyles.bold15,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.r)),
+          OutlinedButton(
+            onPressed: () {
+              BlocProvider.of<DeckBuilderBloc>(context).add(
+                  FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
+            },
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.white,
+              side: const BorderSide(
+                color: Colors.transparent,
               ),
-              child: Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 1.w),
-                  child: AutoSizeText(
-                    LocaleKeys.copyDeckCode.tr(),
-                    style: FontStyles.bold11,
-                    minFontSize: 8,
-                    maxLines: 1,
-                  )),
+              textStyle: FontStyles.bold15,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.r)),
             ),
+            child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                padding:
+                    EdgeInsets.symmetric(vertical: 6.125.h, horizontal: 1.w),
+                child: AutoSizeText(
+                  LocaleKeys.copyDeckCode.tr(),
+                  style: FontStyles.bold11,
+                  minFontSize: 8,
+                  maxLines: 1,
+                )),
           ),
         ],
       ),

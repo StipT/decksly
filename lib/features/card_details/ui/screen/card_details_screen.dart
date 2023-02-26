@@ -52,7 +52,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
         child: Stack(
           children: [
             Positioned(
-                top: 25.h,
+                top: 43.75.h,
                 right: 60.w,
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
@@ -100,7 +100,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                              vertical: 10.h,
+                              vertical: 17.5.h,
                             ),
                             child: Text(
                               widget.card.flavorText ?? "",
@@ -109,7 +109,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                              vertical: 5.h,
+                              vertical: 8.75.h,
                             ),
                             child: RichText(
                               text: TextSpan(
@@ -117,7 +117,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                                   // TODO Add localization
                                   TextSpan(
                                     text: LocaleKeys.artist.tr(),
-                                    style: const TextStyle(color: AppColors.navajoWhite),
+                                    style: FontStyles.regular17NavajoWhite,
                                   ),
                                   TextSpan(text: widget.card.artistName, style: FontStyles.regular17),
                                 ],

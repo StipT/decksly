@@ -34,17 +34,19 @@ class _ClassFilterState extends State<ClassFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
+        builder: (BuildContext context, state) {
       return Container(
+        color: Colors.green,
         height: widget.height,
         width: widget.width,
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Stack(
           alignment: Alignment.center,
           children: [
             Image.asset(
               assetPath(SUBFOLDER_MISC, "class_filter"),
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.fill,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -59,17 +61,20 @@ class _ClassFilterState extends State<ClassFilter> {
                           Container(
                             padding: EdgeInsets.only(
                               left: 5.w,
-                              top: 5.h,
-                              bottom: 5.h,
+                              top: 8.75.h,
+                              bottom: 8.75.h,
                             ),
                             child: Image.asset(
-                              assetPath(SUBFOLDER_CLASS, _getClassIcon(widget.deckClass)),
+                              assetPath(SUBFOLDER_CLASS,
+                                  _getClassIcon(widget.deckClass)),
                               fit: BoxFit.fitHeight,
                             ),
                           ),
-                          if (state.cardFilterParams.heroClass.contains(widget.deckClass.name))
+                          if (state.cardFilterParams.heroClass
+                              .contains(widget.deckClass.name))
                             Image.asset(
-                              assetPath(SUBFOLDER_MISC, "class_filter_selected"),
+                              assetPath(
+                                  SUBFOLDER_MISC, "class_filter_selected"),
                             ),
                         ],
                       ),
@@ -84,15 +89,16 @@ class _ClassFilterState extends State<ClassFilter> {
                         Container(
                           padding: EdgeInsets.only(
                             left: 5.w,
-                            top: 5.h,
-                            bottom: 5.h,
+                            top: 8.75.h,
+                            bottom: 8.75.h,
                           ),
                           child: Image.asset(
                             assetPath(SUBFOLDER_CLASS, "neutral_icon"),
                             fit: BoxFit.fitHeight,
                           ),
                         ),
-                        if (state.cardFilterParams.heroClass.contains("neutral"))
+                        if (state.cardFilterParams.heroClass
+                            .contains("neutral"))
                           Image.asset(
                             assetPath(SUBFOLDER_MISC, "class_filter_selected"),
                           ),

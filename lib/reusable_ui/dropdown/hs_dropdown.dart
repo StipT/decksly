@@ -152,7 +152,7 @@ class HSDropdown extends StatelessWidget {
                 height: height,
                 width: width,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
-                padding: EdgeInsets.only(left: 6.w),
+                padding: EdgeInsets.only(left: 8.w),
                 textStyle: FontStyles.bold13VanDykeBrown,
                 elevation: 1.sp,
                 backgroundColor: Colors.transparent,

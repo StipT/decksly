@@ -13,7 +13,8 @@ enum FeatureItemType {
 }
 
 class FeatureItem extends StatelessWidget {
-  const FeatureItem({required this.type, required this.isSelected, required this.onTap});
+  const FeatureItem(
+      {required this.type, required this.isSelected, required this.onTap});
 
   final FeatureItemType type;
   final bool isSelected;
@@ -23,7 +24,7 @@ class FeatureItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        top: 5.h,
+        top: 10.h,
         left: 10.w,
         right: 10.w,
       ),
@@ -48,9 +49,19 @@ class FeatureItem extends StatelessWidget {
   Widget _getImage(FeatureItemType type, bool isSelected) {
     switch (type) {
       case FeatureItemType.cardLibrary:
-        return Image.asset(assetPath(SUBFOLDER_MISC, isSelected ? "card_library_selected" : "card_library"));
+        return Image.asset(
+          assetPath(SUBFOLDER_MISC,
+              isSelected ? "card_library_selected" : "card_library"),
+          width: 75.w,
+          fit: BoxFit.fill,
+        );
       case FeatureItemType.deckBuilder:
-        return Image.asset(assetPath(SUBFOLDER_MISC, isSelected ? "deck_builder_selected" : "deck_builder"));
+        return Image.asset(
+          assetPath(SUBFOLDER_MISC,
+              isSelected ? "deck_builder_selected" : "deck_builder"),
+          width: 75.w,
+          fit: BoxFit.fill,
+        );
     }
   }
 

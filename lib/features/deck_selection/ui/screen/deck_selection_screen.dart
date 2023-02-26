@@ -62,7 +62,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 ),
                 Positioned(
                   width: 125.w,
-                  top: 36.h,
+                  top: 63.h,
                   left: 18.w,
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
@@ -74,7 +74,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 ),
                 Positioned(
                   width: 125.w,
-                  top: 36.h,
+                  top: 63.h,
                   right: 18.w,
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 300),
@@ -94,8 +94,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
 
   Widget _getAppBar(DeckSelectionState state) {
     return Container(
-      height: 35.h,
-      padding: EdgeInsets.only(top: 7.5.h, bottom: 2.5.h, right: 10.w),
+      height: 60.h,
+      padding: EdgeInsets.only(top: 13.125.h, bottom: 4.375.h, right: 10.w),
       width: 1.sw,
       child: Row(
         children: [
@@ -104,9 +104,11 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
               margin: EdgeInsets.only(right: 5.w),
               child: Stack(
                 children: [
-                  const HSWoodHorizontalBorder(),
                   Container(
-                    margin: EdgeInsets.only(left: 25.w, right: 25.w),
+                      margin: EdgeInsets.symmetric(vertical: 2.h),
+                      child: const HSWoodHorizontalBorder()),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 24.w),
                     child: Row(
                       children: [
                         Expanded(
@@ -145,9 +147,11 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
             width: 160.w,
             child: Stack(
               children: [
-                const HSWoodHorizontalBorder(),
                 Container(
-                    margin: EdgeInsets.only(left: 25.w, right: 25.w),
+                    margin: EdgeInsets.symmetric(vertical: 2.h),
+                    child: const HSWoodHorizontalBorder()),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 24.w),
                     child: HSButton(
                       isDisabled: false,
                       label: LocaleKeys.close.tr(),
@@ -167,8 +171,9 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
   Widget _getModeSelector(DeckSelectionState state) {
     return Container(
       width: 1.sw,
-      height: 42.5.h,
-      margin: EdgeInsets.only(top: 5.h, left: 50.w, right: 50.w, bottom: 5.h),
+      height: 74.375.h,
+      margin:
+          EdgeInsets.only(top: 8.75.h, left: 50.w, right: 50.w, bottom: 8.75.h),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -211,13 +216,13 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 5.h),
-            height: 1.h,
+            margin: EdgeInsets.only(top: 8.75.h),
+            height: 1.75.h,
             width: 600.w,
             child: Image.asset(
               assetPath(SUBFOLDER_MISC, "velvet_divider"),
               fit: BoxFit.fill,
-              height: 1.h,
+              height: 1.75.h,
               width: 160.w,
             ),
           ),

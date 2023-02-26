@@ -25,7 +25,7 @@ class SetDropdownHeader extends StatelessWidget implements SetListItem {
         style: FontStyles.bold17Grey,
       ),
       padding: EdgeInsets.symmetric(
-        vertical: 0.5.h,
+        vertical: 0.875.h,
         horizontal: 2.w,
       ),
     );
@@ -50,7 +50,7 @@ class SetDropdownItem extends StatelessWidget implements SetListItem {
         left: 6.w,
         right: 6.w,
       ),
-      padding: EdgeInsets.symmetric(vertical: 0.5.h),
+      padding: EdgeInsets.symmetric(vertical: 0.875.h),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [

@@ -93,7 +93,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
         Container(
           margin: EdgeInsets.only(
             left: 32.w,
-            top: 40.h,
+            top: 70.h,
           ),
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
@@ -103,7 +103,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
             ),
           ),
           child: AnimatedPadding(
-            padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
+            padding: EdgeInsets.only(top: isFilterBarExtended ? 52.5.h : 0),
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
@@ -135,7 +135,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                             ? widget
                             : Container(
                                 padding: EdgeInsets.symmetric(
-                                    vertical: 5.h, horizontal: 20.w),
+                                    vertical: 8.75.h, horizontal: 20.w),
                                 child: Shimmer.fromColors(
                                   baseColor: AppColors.spanishGrey,
                                   highlightColor: AppColors.shimmerGrey,
@@ -154,7 +154,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
                     padding:
-                        EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                        EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
                     child: Shimmer.fromColors(
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,

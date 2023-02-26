@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/util/throttler.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
@@ -64,7 +65,6 @@ class _DeckListBodyState extends State<DeckListBody> {
                         child: AnimatedList(
                             key: _key,
                             controller: _scrollController,
-                            padding: EdgeInsets.only(right: 10.w),
                             physics: const ClampingScrollPhysics(),
                             initialItemCount: state.deck.cards.length,
                             itemBuilder: (context, index, animation) {
@@ -129,7 +129,7 @@ class _DeckListBodyState extends State<DeckListBody> {
 
   void insertItem(int index, List<DeckCard> deckCards) {
     _scrollController.animateTo(
-      deckCards.length > 6 ? index * 12.h : 0,
+      deckCards.length > 6 ? index * 21.h : 0,
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 200),
     );

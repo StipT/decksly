@@ -37,6 +37,13 @@ class FontStyles {
     color: AppColors.spanishGrey,
   );
 
+  static TextStyle regular17NavajoWhite = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.w400,
+    fontSize: 17.sp,
+    color: AppColors.navajoWhite,
+  );
+
   static TextStyle regular17VanDykeBrown = TextStyle(
     fontFamily: FONT_FAMILY,
     fontWeight: FontWeight.w400,
@@ -112,6 +119,13 @@ class FontStyles {
     fontWeight: FontWeight.w700,
     fontSize: 15.sp,
     color: AppColors.vanDykeBrown,
+  );
+
+  static TextStyle bold15DarkChestnutBrown = TextStyle(
+    fontFamily: FONT_FAMILY,
+    fontWeight: FontWeight.w700,
+    fontSize: 15.sp,
+    color: AppColors.darkChestnutBrown,
   );
 
   static TextStyle bold15Gold = TextStyle(

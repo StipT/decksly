@@ -61,7 +61,7 @@ class HSDialog {
             alignment: Alignment.center,
             child: Container(
               width: 450.w,
-              height: 100.h,
+              height: 175.h,
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.vanDykeBrown, width: 2.sp),
                 borderRadius: BorderRadius.all(
@@ -76,9 +76,10 @@ class HSDialog {
                 ),
               ),
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 25.w),
+                padding:
+                    EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 25.w),
                 width: 450.w,
-                height: 100.h,
+                height: 175.h,
                 child: Row(
                   children: [
                     Expanded(child: _dialogImage(type)),
@@ -90,7 +91,7 @@ class HSDialog {
                             flex: 2,
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  vertical: 5.h, horizontal: 5.w),
+                                  vertical: 8.75.h, horizontal: 5.w),
                               child: _dialogMessage(type),
                             ),
                           ),
@@ -133,8 +134,9 @@ class HSDialog {
                                                   label:
                                                       _dialogSecondaryButtonTitle(
                                                           type),
-                                                  onTap: () => onSecondaryButtonTap(
-                                                      dialogContext),
+                                                  onTap: () =>
+                                                      onSecondaryButtonTap(
+                                                          dialogContext),
                                                 )),
                                           ],
                                         ),

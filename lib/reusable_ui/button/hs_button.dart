@@ -22,45 +22,50 @@ class HSButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 1.h),
+      margin: EdgeInsets.symmetric(vertical: 1.75.h),
       child: Stack(
         alignment: Alignment.center,
         children: [
           const HSButtonOverlay(),
-          //   if (isToggled) const HSActiveButtonOverlay(),
           OutlinedButton(
             onPressed: isDisabled ? null : onTap,
             style: OutlinedButton.styleFrom(
-              foregroundColor: AppColors.vanDykeBrown, side: const BorderSide(
+              foregroundColor: AppColors.vanDykeBrown,
+              side: const BorderSide(
                 color: Colors.transparent,
               ),
               textStyle: FontStyles.bold15VanDykeBrown,
               padding: EdgeInsets.only(
-                right: 10.w,
-                top: 5.h,
-                bottom: 5.h,
+                top: 8.75.h,
+                bottom: 8.75.h,
               ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.r)),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 1.h, bottom: 1.h, right: 3.w, left: 10.w),
-                  child: icon ?? const SizedBox(),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: AutoSizeText(
-                      label ?? "",
-                      maxLines: 1,
-                      minFontSize: 6,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 9.w),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (icon != null)
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: 1.75.h, bottom: 1.75.h, left: 5.w),
+                      child: icon,
+                    ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: AutoSizeText(
+                        label ?? "",
+                        maxLines: 1,
+                        minFontSize: 6,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

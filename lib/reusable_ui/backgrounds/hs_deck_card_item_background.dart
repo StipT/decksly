@@ -2,9 +2,11 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/material.dart';
 
 class HSDeckCardItemBackground extends StatelessWidget {
-  const HSDeckCardItemBackground({Key? key, this.isDropdownButton = false}) : super(key: key);
+   const HSDeckCardItemBackground({Key? key, required this.startWidth, required this.endWidth}) : super(key: key);
 
-  final bool isDropdownButton;
+  final double startWidth;
+  final double endWidth;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,6 +16,7 @@ class HSDeckCardItemBackground extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
+              width: startWidth,
               height: double.infinity,
               child: Image.asset(
                 assetPath(SUBFOLDER_MISC, "deck_card_item_start"),
@@ -31,6 +34,7 @@ class HSDeckCardItemBackground extends StatelessWidget {
               ),
             ),
             SizedBox(
+              width: endWidth,
               height: double.infinity,
               child: Image.asset(
                 assetPath(SUBFOLDER_MISC, "deck_card_item_end"),

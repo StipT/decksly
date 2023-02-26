@@ -155,7 +155,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         child: Container(
           margin: EdgeInsets.only(
             left: 32.w,
-            top: 40.h,
+            top: 70.h,
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -165,7 +165,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             ),
           ),
           child: AnimatedPadding(
-            padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
+            padding: EdgeInsets.only(top: isFilterBarExtended ? 52.5.h : 0, left: 10.w, right: 10.w),
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
@@ -173,7 +173,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
               scrollController: _scrollController,
               physics: const BouncingScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, mainAxisExtent: 120.h),
+                  crossAxisCount: 3, mainAxisExtent: 210.h),
               builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                 animateTransitions: true,
                 noItemsFoundIndicatorBuilder: (context) {
@@ -201,8 +201,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                     const SpinKitRipple(color: AppColors.velvet),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 8.75.h, horizontal: 20.w),
                     child: Shimmer.fromColors(
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,
@@ -224,7 +224,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     return SizedBox(
       width: 234.w,
       child: AnimatedPadding(
-        padding: EdgeInsets.only(top: isFilterBarExtended ? 30.h : 0),
+        padding: EdgeInsets.only(top: isFilterBarExtended ? 52.5.h : 0),
         curve: Curves.bounceOut,
         duration: const Duration(milliseconds: 500),
         child: DeckListMenu(

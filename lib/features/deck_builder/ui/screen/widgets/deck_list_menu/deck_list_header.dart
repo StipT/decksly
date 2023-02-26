@@ -38,28 +38,37 @@ class _DeckListHeaderState extends State<DeckListHeader>
             });
           },
           child: Container(
-            width: 232.w,
-            height: 34.h,
+            color: Colors.green,
+            width: double.infinity,
+            height: 55.h,
             margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 6.h),
             child: Stack(
+              fit: StackFit.expand,
               children: [
-                Image.asset(
-                  assetPath(
-                      SUBFOLDER_CLASS, _headerBackground(state.deck.heroClass),
-                      fileExtension: JPG_EXTENSION),
-                  fit: BoxFit.fill,
+                Container(
+                  margin: EdgeInsets.only(
+                      left: 8.w, right: 8.w, top: 5.h, bottom: 5.h),
+                  child: Image.asset(
+                    assetPath(SUBFOLDER_CLASS,
+                        _headerBackground(state.deck.heroClass),
+                        fileExtension: JPG_EXTENSION),
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 Image.asset(
                   assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.type)),
                   fit: BoxFit.fill,
                 ),
                 if (isExpanded)
-                  Image.asset(assetPath(
-                      SUBFOLDER_MISC, _headerBorderSelected(state.deck.type))),
+                  Image.asset(
+                    assetPath(
+                        SUBFOLDER_MISC, _headerBorderSelected(state.deck.type)),
+                    fit: BoxFit.fill,
+                  ),
                 _headerContent(state),
                 Positioned(
                   right: 12.5.w,
-                  top: 12.5.h,
+                  top: 20.h,
                   child: Image.asset(
                     assetPath(SUBFOLDER_MISC, "arrow"),
                     fit: BoxFit.fill,
@@ -132,21 +141,21 @@ class _DeckListHeaderState extends State<DeckListHeader>
       children: [
         Container(
           margin: EdgeInsets.only(
-            top: 8.h,
-            bottom: 8.h,
+            top: 14.h,
+            bottom: 14.h,
             left: 15.w,
             right: 5.w,
           ),
           child: Image.asset(
             assetPath(SUBFOLDER_MISC, "standard_badge_borderless"),
-            height: 22.h,
+            height: 38.5.h,
           ),
         ),
         Expanded(
           child: Container(
             margin: EdgeInsets.only(
-              top: 7.5.h,
-              bottom: 7.5.h,
+              top: 13.h,
+              bottom: 13.h,
               left: 5.w,
               right: 30.w,
             ),

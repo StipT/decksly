@@ -15,7 +15,6 @@ class DeckslyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(787, 375),
-        splitScreenMode: true,
         builder: (BuildContext context, Widget? child) {
           return MaterialApp.router(
             localizationsDelegates: context.localizationDelegates,

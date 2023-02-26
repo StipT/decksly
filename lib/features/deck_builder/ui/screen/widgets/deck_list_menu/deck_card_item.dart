@@ -30,7 +30,7 @@ class DeckCardItem extends StatelessWidget {
       onLongPress: () => onLongPress(deckCard),
       child: Container(
         margin: EdgeInsets.only(right: 12.5.w),
-        height: 25.h,
+        height: 30.h,
         child: Stack(
           fit: StackFit.expand,
           children: [

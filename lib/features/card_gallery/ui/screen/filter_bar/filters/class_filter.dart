@@ -37,11 +37,11 @@ class _ClassFilterState extends State<ClassFilter> {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
         builder: (BuildContext context, state) {
       return Container(
-        color: Colors.green,
         height: widget.height,
         width: widget.width,
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        padding: EdgeInsets.symmetric(horizontal: 2.w),
         child: Stack(
+          fit: StackFit.expand,
           alignment: Alignment.center,
           children: [
             Image.asset(
@@ -57,10 +57,11 @@ class _ClassFilterState extends State<ClassFilter> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 3.w),
                       child: Stack(
+                        fit: StackFit.expand,
+                        alignment: Alignment.center,
                         children: [
                           Container(
                             padding: EdgeInsets.only(
-                              left: 5.w,
                               top: 8.75.h,
                               bottom: 8.75.h,
                             ),
@@ -75,6 +76,7 @@ class _ClassFilterState extends State<ClassFilter> {
                             Image.asset(
                               assetPath(
                                   SUBFOLDER_MISC, "class_filter_selected"),
+                              fit: BoxFit.fitHeight,
                             ),
                         ],
                       ),
@@ -84,25 +86,30 @@ class _ClassFilterState extends State<ClassFilter> {
                 Expanded(
                   child: GestureDetector(
                     onTap: widget.onToggleNeutralFilter,
-                    child: Stack(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 5.w,
-                            top: 8.75.h,
-                            bottom: 8.75.h,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 3.w),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                              top: 8.75.h,
+                              bottom: 8.75.h,
+                            ),
+                            child: Image.asset(
+                              assetPath(SUBFOLDER_CLASS, "neutral_icon"),
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
-                          child: Image.asset(
-                            assetPath(SUBFOLDER_CLASS, "neutral_icon"),
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                        if (state.cardFilterParams.heroClass
-                            .contains("neutral"))
-                          Image.asset(
-                            assetPath(SUBFOLDER_MISC, "class_filter_selected"),
-                          ),
-                      ],
+                          if (state.cardFilterParams.heroClass
+                              .contains("neutral"))
+                            Image.asset(
+                              assetPath(SUBFOLDER_MISC, "class_filter_selected"),
+                              fit: BoxFit.fitHeight,
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

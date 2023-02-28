@@ -51,105 +51,105 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
         builder: (BuildContext context, state) {
-          return SizedBox(
-            width: 1.sw,
-            height: 1.sh,
-            child: Stack(
-              children: [
-                if (widget.isExtended)
-                  GestureDetector(
-                    onTap: () => _toggleSideMenu(),
-                    behavior: HitTestBehavior.opaque,
-                    child: Container(
-                        margin: EdgeInsets.only(top: 0.1.sh),
-                        child: SizedBox(
-                          height: 0.9.sh,
-                          width: 1.sw,
-                        )),
-                  ),
-                AnimatedPositioned(
-                  left: widget.isExtended ? 0.w : -200.w,
-                  top: 70.h,
-                  curve: Curves.bounceOut,
-                  duration: const Duration(milliseconds: 500),
-                  child: GestureDetector(
-                    onTap: () => widget.isExtended ? null : _toggleSideMenu(),
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 234.w,
-                      height: 305.h,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Image.asset(
-                            assetPath(
-                              SUBFOLDER_BACKGROUND,
-                              "velvet_background_center",
-                              fileExtension: JPG_EXTENSION,
-                            ),
-                            width: 234.w,
-                            height: 319.375.h,
-                            fit: BoxFit.fill,
-                          ),
-                          Image.asset(
-                            assetPath(SUBFOLDER_MISC, "side_bar_border"),
-                            fit: BoxFit.fill,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: 20.h,
-                              bottom: 20.h,
-                              left: 20.w,
-                              right: 30.w,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: _featureMenu()),
-                                Expanded(child: _languageMenu(state)),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            left: 206.w,
-                            top: 105.h,
-                            child: Container(
-                              width: 28.w,
-                              height: 75.h,
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal: 2.w),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  const HSWoodBorder(),
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                      top: 1.75.h,
-                                      bottom: 1.75.h,
-                                      left: 2.w,
-                                    ),
-                                    child: RotationTransition(
-                                      turns: _rotateAnimation,
-                                      child: Image.asset(
-                                        assetPath(SUBFOLDER_MISC, "arrow"),
-                                        fit: BoxFit.fill,
-                                        width: 15.w,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+      return SizedBox(
+        width: 1.sw,
+        height: 1.sh,
+        child: Stack(
+          children: [
+            if (widget.isExtended)
+              GestureDetector(
+                onTap: () => _toggleSideMenu(),
+                behavior: HitTestBehavior.opaque,
+                child: Container(
+                    margin: EdgeInsets.only(top: 0.1.sh),
+                    child: SizedBox(
+                      height: 0.9.sh,
+                      width: 1.sw,
+                    )),
+              ),
+            AnimatedPositioned(
+              left: widget.isExtended ? 0.w : -200.w,
+              top: 70.h,
+              curve: Curves.bounceOut,
+              duration: const Duration(milliseconds: 500),
+              child: GestureDetector(
+                onTap: () => widget.isExtended ? null : _toggleSideMenu(),
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 234.w,
+                  height: 305.h,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(
+                        assetPath(
+                          SUBFOLDER_BACKGROUND,
+                          "velvet_background_center",
+                          fileExtension: JPG_EXTENSION,
+                        ),
+                        width: 234.w,
+                        height: 319.375.h,
+                        fit: BoxFit.fill,
                       ),
-                    ),
+                      Image.asset(
+                        assetPath(SUBFOLDER_MISC, "side_bar_border"),
+                        fit: BoxFit.fill,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 20.h,
+                          bottom: 20.h,
+                          left: 20.w,
+                          right: 30.w,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: _featureMenu()),
+                            Expanded(child: _languageMenu(state)),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 206.w,
+                        top: 105.h,
+                        child: Container(
+                          width: 28.w,
+                          height: 75.h,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 2.w),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              const HSWoodBorder(),
+                              Container(
+                                padding: EdgeInsets.only(
+                                  top: 1.75.h,
+                                  bottom: 1.75.h,
+                                  left: 2.w,
+                                ),
+                                child: RotationTransition(
+                                  turns: _rotateAnimation,
+                                  child: Image.asset(
+                                    assetPath(SUBFOLDER_MISC, "arrow"),
+                                    fit: BoxFit.fill,
+                                    width: 15.w,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          );
-        });
+          ],
+        ),
+      );
+    });
   }
 
   Widget _featureMenu() {
@@ -159,10 +159,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
           child: FeatureItem(
               type: FeatureItemType.cardLibrary,
               isSelected: !widget.inDeckBuilderMode,
-              onTap: () =>
-              widget.inDeckBuilderMode
-                  ? _navigate(
-                  context, const CardGalleryRoute())
+              onTap: () => widget.inDeckBuilderMode
+                  ? _navigate(context, const CardGalleryRoute())
                   : null),
         ),
         Image.asset(
@@ -175,11 +173,9 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
           child: FeatureItem(
             type: FeatureItemType.deckBuilder,
             isSelected: widget.inDeckBuilderMode,
-            onTap: () =>
-            widget.inDeckBuilderMode
+            onTap: () => widget.inDeckBuilderMode
                 ? null
-                : _navigate(
-                context, const DeckSelectionRoute()),
+                : _navigate(context, const DeckSelectionRoute()),
           ),
         ),
         Container(
@@ -210,47 +206,36 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: 10.w, vertical: 8.75.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.75.h),
           child: Row(
             children: [
               Expanded(
                 child: LanguageButton(
-                  isSelected:
-                  state.cardFilterParams.locale ==
+                  isSelected: state.cardFilterParams.locale ==
                       LanguageButtonType.english.value,
                   type: LanguageButtonType.english,
-                  onTap: () =>
-                      _changeLocale(
-                          state, const Locale('en', 'US')),
+                  onTap: () => _changeLocale(state, const Locale('en', 'US')),
                 ),
               ),
               Expanded(
                 child: LanguageButton(
-                  isSelected:
-                  state.cardFilterParams.locale ==
+                  isSelected: state.cardFilterParams.locale ==
                       LanguageButtonType.german.value,
                   type: LanguageButtonType.german,
-                  onTap: () =>
-                      _changeLocale(
-                          state, const Locale('de', 'DE')),
+                  onTap: () => _changeLocale(state, const Locale('de', 'DE')),
                 ),
               ),
               Expanded(
                 child: LanguageButton(
-                  isSelected:
-                  state.cardFilterParams.locale ==
+                  isSelected: state.cardFilterParams.locale ==
                       LanguageButtonType.japanese.value,
                   type: LanguageButtonType.japanese,
-                  onTap: () =>
-                      _changeLocale(
-                          state, const Locale('ja', 'JP')),
+                  onTap: () => _changeLocale(state, const Locale('ja', 'JP')),
                 ),
               ),
             ],
           ),
         ),
-
       ],
     );
   }
@@ -266,7 +251,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
       final params = state.cardFilterParams
           .copyWith(locale: context.locale.toStringWithSeparator());
       BlocProvider.of<CardGalleryBloc>(context)
-          .add(CardFilterParamsChangedEvent(params));
+          .add(LocaleChangedEvent(params));
     });
   }
 

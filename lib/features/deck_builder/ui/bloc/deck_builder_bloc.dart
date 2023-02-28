@@ -4,6 +4,7 @@ import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/common/util/failures.dart';
 import 'package:decksly/common/util/network_info.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
+import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_card.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_params.dart';

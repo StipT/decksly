@@ -20,6 +20,7 @@ mixin _$Deck {
   List<DeckCard> get cards => throw _privateConstructorUsedError;
   DeckType get type => throw _privateConstructorUsedError;
   DeckClass get heroClass => throw _privateConstructorUsedError;
+  String get locale => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeckCopyWith<Deck> get copyWith => throw _privateConstructorUsedError;
@@ -31,7 +32,11 @@ abstract class $DeckCopyWith<$Res> {
       _$DeckCopyWithImpl<$Res, Deck>;
   @useResult
   $Res call(
-      {String code, List<DeckCard> cards, DeckType type, DeckClass heroClass});
+      {String code,
+      List<DeckCard> cards,
+      DeckType type,
+      DeckClass heroClass,
+      String locale});
 }
 
 /// @nodoc
@@ -51,6 +56,7 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck>
     Object? cards = null,
     Object? type = null,
     Object? heroClass = null,
+    Object? locale = null,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -69,6 +75,10 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck>
           ? _value.heroClass
           : heroClass // ignore: cast_nullable_to_non_nullable
               as DeckClass,
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -80,7 +90,11 @@ abstract class _$$_DeckCopyWith<$Res> implements $DeckCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String code, List<DeckCard> cards, DeckType type, DeckClass heroClass});
+      {String code,
+      List<DeckCard> cards,
+      DeckType type,
+      DeckClass heroClass,
+      String locale});
 }
 
 /// @nodoc
@@ -96,6 +110,7 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
     Object? cards = null,
     Object? type = null,
     Object? heroClass = null,
+    Object? locale = null,
   }) {
     return _then(_$_Deck(
       code: null == code
@@ -114,6 +129,10 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
           ? _value.heroClass
           : heroClass // ignore: cast_nullable_to_non_nullable
               as DeckClass,
+      locale: null == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -125,7 +144,8 @@ class _$_Deck implements _Deck {
       {this.code = "",
       final List<DeckCard> cards = const [],
       this.type = DeckType.standard,
-      this.heroClass = DeckClass.warrior})
+      this.heroClass = DeckClass.warrior,
+      this.locale = "en_US"})
       : _cards = cards;
 
   @override
@@ -146,10 +166,13 @@ class _$_Deck implements _Deck {
   @override
   @JsonKey()
   final DeckClass heroClass;
+  @override
+  @JsonKey()
+  final String locale;
 
   @override
   String toString() {
-    return 'Deck(code: $code, cards: $cards, type: $type, heroClass: $heroClass)';
+    return 'Deck(code: $code, cards: $cards, type: $type, heroClass: $heroClass, locale: $locale)';
   }
 
   @override
@@ -161,12 +184,13 @@ class _$_Deck implements _Deck {
             const DeepCollectionEquality().equals(other._cards, _cards) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.heroClass, heroClass) ||
-                other.heroClass == heroClass));
+                other.heroClass == heroClass) &&
+            (identical(other.locale, locale) || other.locale == locale));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, code,
-      const DeepCollectionEquality().hash(_cards), type, heroClass);
+      const DeepCollectionEquality().hash(_cards), type, heroClass, locale);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +204,8 @@ abstract class _Deck implements Deck {
       {final String code,
       final List<DeckCard> cards,
       final DeckType type,
-      final DeckClass heroClass}) = _$_Deck;
+      final DeckClass heroClass,
+      final String locale}) = _$_Deck;
 
   @override
   String get code;
@@ -190,6 +215,8 @@ abstract class _Deck implements Deck {
   DeckType get type;
   @override
   DeckClass get heroClass;
+  @override
+  String get locale;
   @override
   @JsonKey(ignore: true)
   _$$_DeckCopyWith<_$_Deck> get copyWith => throw _privateConstructorUsedError;

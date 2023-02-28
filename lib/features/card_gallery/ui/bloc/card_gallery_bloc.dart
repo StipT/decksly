@@ -24,16 +24,18 @@ part 'card_gallery_state.dart';
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, this.fetchCardsUsecase)
       : super(const CardGalleryState.initial(
-      cardFilterParams: CardFilterParams(), page: CardsPage())) {
+            cardFilterParams: CardFilterParams(), page: CardsPage())) {
     on<FetchCardsEvent>(
-            (event, emit) => handleFetchCards(emit, event.cardFilterParams));
+        (event, emit) => handleFetchCards(emit, event.cardFilterParams));
 
-    on<CardFilterParamsChangedEvent>((event, emit) async =>
-    await handleCardFilterParamsChanged(emit, event.cardFilterParams));
+    on<CardFilterParamsChangedEvent>((event, emit) =>
+        handleCardFilterParamsChanged(emit, event.cardFilterParams));
+    on<LocaleChangedEvent>(
+        (event, emit) => handleLocaleChanged(emit, event.cardFilterParams));
     on<ToggleClassCardsEvent>(
-            (event, emit) => handleToggleClassCards(emit, event.deckCLass));
+        (event, emit) => handleToggleClassCards(emit, event.deckCLass));
     on<ToggleNeutralCardsEvent>(
-            (event, emit) => handleToggleNeutralCards(emit, event.deckCLass));
+        (event, emit) => handleToggleNeutralCards(emit, event.deckCLass));
     _streamInternetConnectionState();
   }
 
@@ -48,32 +50,40 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-  Future<void> handleFetchCards(Emitter<CardGalleryState> emit,
-      CardFilterParams cardFilterParams,) async {
+  Future<void> handleFetchCards(
+    Emitter<CardGalleryState> emit,
+    CardFilterParams cardFilterParams,
+  ) async {
     final updatedParams =
-    cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
+        cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
     resultOrFailure.fold(
-          (failure) {
+      (failure) {
         log(failure.message, level: Level.error);
         emit(CardGalleryState.failure(
             failure: failure, cardFilterParams: updatedParams));
       },
-          (cards) {
+      (cards) {
         emit(CardGalleryState.fetched(
             cardFilterParams: updatedParams, page: cards));
       },
     );
   }
 
-  Future<void> handleCardFilterParamsChanged(Emitter<CardGalleryState> emit,
-      CardFilterParams cardFilterParams) async {
+  Future<void> handleCardFilterParamsChanged(
+      Emitter<CardGalleryState> emit, CardFilterParams cardFilterParams) async {
     emit(CardGalleryState.fetching(
         cardFilterParams: cardFilterParams.copyWith(page: 0)));
   }
 
-  Future<void> handleToggleClassCards(Emitter<CardGalleryState> emit,
-      DeckClass deckClass) async {
+  Future<void> handleLocaleChanged(
+      Emitter<CardGalleryState> emit, CardFilterParams cardFilterParams) async {
+    emit(CardGalleryState.localeChanged(
+        cardFilterParams: cardFilterParams.copyWith(page: 0)));
+  }
+
+  Future<void> handleToggleClassCards(
+      Emitter<CardGalleryState> emit, DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains(deckClass.name) && classes.length == 1) {
@@ -86,11 +96,11 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     }
     emit(CardGalleryState.fetching(
         cardFilterParams:
-        state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
+            state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
   }
 
-  Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit,
-      DeckClass deckClass) async {
+  Future<void> handleToggleNeutralCards(
+      Emitter<CardGalleryState> emit, DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains("neutral") && classes.length == 1) {
@@ -103,6 +113,6 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     }
     emit(CardGalleryState.fetching(
         cardFilterParams:
-        state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
+            state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
   }
 }

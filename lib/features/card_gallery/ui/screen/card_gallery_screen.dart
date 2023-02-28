@@ -153,8 +153,8 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     const SpinKitRipple(color: AppColors.velvet),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 8.75.h, horizontal: 20.w),
                     child: Shimmer.fromColors(
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,
@@ -197,10 +197,13 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
-    state.when(initial: (cards, cardParams) {
+    state.whenOrNull(initial: (cards, cardParams) {
       BlocProvider.of<CardGalleryBloc>(context)
           .add(FetchCardsEvent(state.cardFilterParams));
     }, fetching: (cardParams) {
+      BlocProvider.of<CardGalleryBloc>(context)
+          .add(FetchCardsEvent(state.cardFilterParams));
+    }, localeChanged: (cardParams) {
       BlocProvider.of<CardGalleryBloc>(context)
           .add(FetchCardsEvent(state.cardFilterParams));
     }, fetched: (cardParams, cards) {

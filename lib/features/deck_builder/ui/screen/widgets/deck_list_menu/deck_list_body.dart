@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/util/throttler.dart';
 import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
 import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
+import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_card.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_card_item.dart';
@@ -24,16 +24,21 @@ class DeckListBody extends StatefulWidget {
 }
 
 class _DeckListBodyState extends State<DeckListBody> {
-  final _key = GlobalKey<AnimatedListState>();
+  var _key = GlobalKey<AnimatedListState>();
   final _throttler = Throttler(milliseconds: 250);
   final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DeckBuilderBloc, DeckBuilderState>(
-      listener: (context, state) {
-        listenForCardChanges(context, state);
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<CardGalleryBloc, CardGalleryState>(
+          listener: (ctx, state) => listenForCardChanges(ctx, state),
+        ),
+        BlocListener<DeckBuilderBloc, DeckBuilderState>(
+          listener: (ctx, state) => listenForDeckChanges(ctx, state),
+        ),
+      ],
       child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
           return Expanded(
@@ -137,7 +142,7 @@ class _DeckListBodyState extends State<DeckListBody> {
         ?.insertItem(index, duration: const Duration(milliseconds: 200));
   }
 
-  void _loadItems(List<DeckCard> itemList) {
+  void _loadAnimatedList(List<DeckCard> itemList) {
     var future = Future(() {});
     for (var i = 0; i < itemList.length; i++) {
       future = future.then((_) {
@@ -149,10 +154,18 @@ class _DeckListBodyState extends State<DeckListBody> {
     }
   }
 
-  void listenForCardChanges(BuildContext context, DeckBuilderState state) {
+  void _clearAnimatedList() {
+    setState(() => _key = GlobalKey<AnimatedListState>());
+  }
+
+  void listenForDeckChanges(BuildContext context, DeckBuilderState state) {
     state.whenOrNull(
-      initial: (deck) => _loadItems(deck.cards),
+      initial: (deck) => _loadAnimatedList(deck.cards),
       cardAdded: (index, deck) => insertItem(index, deck.cards),
     );
+  }
+
+  void listenForCardChanges(BuildContext context, CardGalleryState state) {
+    state.whenOrNull(localeChanged: (_) => _clearAnimatedList());
   }
 }

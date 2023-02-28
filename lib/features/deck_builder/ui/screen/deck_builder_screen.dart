@@ -61,24 +61,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    BlocProvider.of<DeckBuilderBloc>(context).add(
-      DeckChangedEvent(
-        Deck(
-          cards: widget.deck.cards,
-          type: widget.deck.type,
-          heroClass: widget.deck.heroClass,
-        ),
-      ),
-    );
-
-    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(
-        BlocProvider.of<CardGalleryBloc>(context)
-            .state
-            .cardFilterParams
-            .copyWith(
-                locale: context.locale.toStringWithSeparator(),
-                heroClass: [widget.deck.heroClass.name, "neutral"],
-                set: widget.deck.type.name)));
+    _initialState();
   }
 
   @override
@@ -165,7 +148,8 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
             ),
           ),
           child: AnimatedPadding(
-            padding: EdgeInsets.only(top: isFilterBarExtended ? 52.5.h : 0, left: 10.w, right: 10.w),
+            padding: EdgeInsets.only(
+                top: isFilterBarExtended ? 52.5.h : 0, left: 10.w, right: 10.w),
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
@@ -256,10 +240,16 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
-    state.when(initial: (cards, cardParams) {
+    state.whenOrNull(initial: (cards, cardParams) {
       BlocProvider.of<CardGalleryBloc>(context)
           .add(FetchCardsEvent(state.cardFilterParams));
     }, fetching: (cardParams) {
+      BlocProvider.of<CardGalleryBloc>(context)
+          .add(FetchCardsEvent(state.cardFilterParams));
+    }, localeChanged: (cardParams) {
+      BlocProvider.of<DeckBuilderBloc>(context)
+          .add(DeckChangedEvent(widget.deck.copyWith(cards: [], code: "")));
+
       BlocProvider.of<CardGalleryBloc>(context)
           .add(FetchCardsEvent(state.cardFilterParams));
     }, fetched: (cardParams, cards) {
@@ -294,8 +284,30 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
     });
   }
 
+  void _initialState() {
+    BlocProvider.of<DeckBuilderBloc>(context).add(
+      DeckChangedEvent(
+        Deck(
+          cards: widget.deck.cards,
+          type: widget.deck.type,
+          heroClass: widget.deck.heroClass,
+        ),
+      ),
+    );
+
+    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(
+        BlocProvider.of<CardGalleryBloc>(context)
+            .state
+            .cardFilterParams
+            .copyWith(
+                locale: context.locale.toStringWithSeparator(),
+                heroClass: [widget.deck.heroClass.name, "neutral"],
+                set: widget.deck.type.name)));
+  }
+
   void listenForDeckCode(BuildContext context, DeckBuilderState state) {
     state.whenOrNull(
+      initial: (_) => _initialState(),
       codeGenerated: (deck) =>
           Clipboard.setData(ClipboardData(text: deck.code)).then((_) {
         HSSnackBar.show(context, HSSnackBarType.message,

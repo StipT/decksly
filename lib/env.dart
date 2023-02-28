@@ -1,2 +1,0 @@
-const String BATTLENET_CLIENT_ID = "799f6624d3424acdbeb4c741a9cc1e3f";
-const String BATTLENET_CLIENT_SECRET = "UnXdkgpCC59N7v530I4sJyqaD3ymlacu";

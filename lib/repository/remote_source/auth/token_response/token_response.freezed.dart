@@ -22,27 +22,24 @@ TokenResponse _$TokenResponseFromJson(Map<String, dynamic> json) {
 mixin _$TokenResponse {
   @JsonKey(name: "access_token")
   String get accessToken => throw _privateConstructorUsedError;
-
   @JsonKey(name: "token_type")
   String get tokenType => throw _privateConstructorUsedError;
-
   @JsonKey(name: "expires_in")
   int get expiresIn => throw _privateConstructorUsedError;
-
   @JsonKey(name: "sub")
   String get sub => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
-  $TokenResponseCopyWith<TokenResponse> get copyWith => throw _privateConstructorUsedError;
+  $TokenResponseCopyWith<TokenResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TokenResponseCopyWith<$Res> {
-  factory $TokenResponseCopyWith(TokenResponse value, $Res Function(TokenResponse) then) =
+  factory $TokenResponseCopyWith(
+          TokenResponse value, $Res Function(TokenResponse) then) =
       _$TokenResponseCopyWithImpl<$Res, TokenResponse>;
-
   @useResult
   $Res call(
       {@JsonKey(name: "access_token") String accessToken,
@@ -52,12 +49,12 @@ abstract class $TokenResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TokenResponseCopyWithImpl<$Res, $Val extends TokenResponse> implements $TokenResponseCopyWith<$Res> {
+class _$TokenResponseCopyWithImpl<$Res, $Val extends TokenResponse>
+    implements $TokenResponseCopyWith<$Res> {
   _$TokenResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -91,10 +88,11 @@ class _$TokenResponseCopyWithImpl<$Res, $Val extends TokenResponse> implements $
 }
 
 /// @nodoc
-abstract class _$$_TokenResponseCopyWith<$Res> implements $TokenResponseCopyWith<$Res> {
-  factory _$$_TokenResponseCopyWith(_$_TokenResponse value, $Res Function(_$_TokenResponse) then) =
+abstract class _$$_TokenResponseCopyWith<$Res>
+    implements $TokenResponseCopyWith<$Res> {
+  factory _$$_TokenResponseCopyWith(
+          _$_TokenResponse value, $Res Function(_$_TokenResponse) then) =
       __$$_TokenResponseCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -105,9 +103,12 @@ abstract class _$$_TokenResponseCopyWith<$Res> implements $TokenResponseCopyWith
 }
 
 /// @nodoc
-class __$$_TokenResponseCopyWithImpl<$Res> extends _$TokenResponseCopyWithImpl<$Res, _$_TokenResponse>
+class __$$_TokenResponseCopyWithImpl<$Res>
+    extends _$TokenResponseCopyWithImpl<$Res, _$_TokenResponse>
     implements _$$_TokenResponseCopyWith<$Res> {
-  __$$_TokenResponseCopyWithImpl(_$_TokenResponse _value, $Res Function(_$_TokenResponse) _then) : super(_value, _then);
+  __$$_TokenResponseCopyWithImpl(
+      _$_TokenResponse _value, $Res Function(_$_TokenResponse) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -147,7 +148,8 @@ class _$_TokenResponse implements _TokenResponse {
       @JsonKey(name: "expires_in") required this.expiresIn,
       @JsonKey(name: "sub") required this.sub});
 
-  factory _$_TokenResponse.fromJson(Map<String, dynamic> json) => _$$_TokenResponseFromJson(json);
+  factory _$_TokenResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_TokenResponseFromJson(json);
 
   @override
   @JsonKey(name: "access_token")
@@ -172,15 +174,19 @@ class _$_TokenResponse implements _TokenResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TokenResponse &&
-            (identical(other.accessToken, accessToken) || other.accessToken == accessToken) &&
-            (identical(other.tokenType, tokenType) || other.tokenType == tokenType) &&
-            (identical(other.expiresIn, expiresIn) || other.expiresIn == expiresIn) &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.tokenType, tokenType) ||
+                other.tokenType == tokenType) &&
+            (identical(other.expiresIn, expiresIn) ||
+                other.expiresIn == expiresIn) &&
             (identical(other.sub, sub) || other.sub == sub));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, tokenType, expiresIn, sub);
+  int get hashCode =>
+      Object.hash(runtimeType, accessToken, tokenType, expiresIn, sub);
 
   @JsonKey(ignore: true)
   @override
@@ -203,25 +209,23 @@ abstract class _TokenResponse implements TokenResponse {
       @JsonKey(name: "expires_in") required final int expiresIn,
       @JsonKey(name: "sub") required final String sub}) = _$_TokenResponse;
 
-  factory _TokenResponse.fromJson(Map<String, dynamic> json) = _$_TokenResponse.fromJson;
+  factory _TokenResponse.fromJson(Map<String, dynamic> json) =
+      _$_TokenResponse.fromJson;
 
   @override
   @JsonKey(name: "access_token")
   String get accessToken;
-
   @override
   @JsonKey(name: "token_type")
   String get tokenType;
-
   @override
   @JsonKey(name: "expires_in")
   int get expiresIn;
-
   @override
   @JsonKey(name: "sub")
   String get sub;
-
   @override
   @JsonKey(ignore: true)
-  _$$_TokenResponseCopyWith<_$_TokenResponse> get copyWith => throw _privateConstructorUsedError;
+  _$$_TokenResponseCopyWith<_$_TokenResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }

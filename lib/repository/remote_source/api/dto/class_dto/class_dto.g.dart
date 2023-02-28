@@ -12,7 +12,8 @@ _$_ClassDTO _$$_ClassDTOFromJson(Map<String, dynamic> json) => _$_ClassDTO(
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$$_ClassDTOToJson(_$_ClassDTO instance) => <String, dynamic>{
+Map<String, dynamic> _$$_ClassDTOToJson(_$_ClassDTO instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'slug': instance.slug,
       'name': instance.name,

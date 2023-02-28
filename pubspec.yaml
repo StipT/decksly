@@ -46,7 +46,7 @@ dependencies:
   auto_route: ^5.0.4
 
   # Testing
-  #mocktail: ^0.3.0
+  mocktail: ^0.3.0
 
   # Code Generation
   build_runner: ^2.1.8
@@ -127,6 +127,9 @@ flutter:
 
     # Localization
     - assets/l10n/
+
+    # Font
+    - assets/font/
 
   fonts:
     - family: Belwe

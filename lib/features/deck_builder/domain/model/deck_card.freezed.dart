@@ -17,17 +17,17 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DeckCard {
   CardDTO get card => throw _privateConstructorUsedError;
-
   int get amount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DeckCardCopyWith<DeckCard> get copyWith => throw _privateConstructorUsedError;
+  $DeckCardCopyWith<DeckCard> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DeckCardCopyWith<$Res> {
-  factory $DeckCardCopyWith(DeckCard value, $Res Function(DeckCard) then) = _$DeckCardCopyWithImpl<$Res, DeckCard>;
-
+  factory $DeckCardCopyWith(DeckCard value, $Res Function(DeckCard) then) =
+      _$DeckCardCopyWithImpl<$Res, DeckCard>;
   @useResult
   $Res call({CardDTO card, int amount});
 
@@ -35,12 +35,12 @@ abstract class $DeckCardCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DeckCardCopyWithImpl<$Res, $Val extends DeckCard> implements $DeckCardCopyWith<$Res> {
+class _$DeckCardCopyWithImpl<$Res, $Val extends DeckCard>
+    implements $DeckCardCopyWith<$Res> {
   _$DeckCardCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -73,8 +73,9 @@ class _$DeckCardCopyWithImpl<$Res, $Val extends DeckCard> implements $DeckCardCo
 
 /// @nodoc
 abstract class _$$_DeckCardCopyWith<$Res> implements $DeckCardCopyWith<$Res> {
-  factory _$$_DeckCardCopyWith(_$_DeckCard value, $Res Function(_$_DeckCard) then) = __$$_DeckCardCopyWithImpl<$Res>;
-
+  factory _$$_DeckCardCopyWith(
+          _$_DeckCard value, $Res Function(_$_DeckCard) then) =
+      __$$_DeckCardCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({CardDTO card, int amount});
@@ -84,9 +85,12 @@ abstract class _$$_DeckCardCopyWith<$Res> implements $DeckCardCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeckCardCopyWithImpl<$Res> extends _$DeckCardCopyWithImpl<$Res, _$_DeckCard>
+class __$$_DeckCardCopyWithImpl<$Res>
+    extends _$DeckCardCopyWithImpl<$Res, _$_DeckCard>
     implements _$$_DeckCardCopyWith<$Res> {
-  __$$_DeckCardCopyWithImpl(_$_DeckCard _value, $Res Function(_$_DeckCard) _then) : super(_value, _then);
+  __$$_DeckCardCopyWithImpl(
+      _$_DeckCard _value, $Res Function(_$_DeckCard) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -138,19 +142,20 @@ class _$_DeckCard implements _DeckCard {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeckCardCopyWith<_$_DeckCard> get copyWith => __$$_DeckCardCopyWithImpl<_$_DeckCard>(this, _$identity);
+  _$$_DeckCardCopyWith<_$_DeckCard> get copyWith =>
+      __$$_DeckCardCopyWithImpl<_$_DeckCard>(this, _$identity);
 }
 
 abstract class _DeckCard implements DeckCard {
-  const factory _DeckCard({required final CardDTO card, final int amount}) = _$_DeckCard;
+  const factory _DeckCard({required final CardDTO card, final int amount}) =
+      _$_DeckCard;
 
   @override
   CardDTO get card;
-
   @override
   int get amount;
-
   @override
   @JsonKey(ignore: true)
-  _$$_DeckCardCopyWith<_$_DeckCard> get copyWith => throw _privateConstructorUsedError;
+  _$$_DeckCardCopyWith<_$_DeckCard> get copyWith =>
+      throw _privateConstructorUsedError;
 }

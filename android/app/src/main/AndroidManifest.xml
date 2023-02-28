@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.stipanic.tomislav.decksly">
-   <application
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- THIS LINE WAS ADDED -->
+    <application
         android:label="Decksly"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

@@ -24,27 +24,27 @@ mixin _$TokenRequest {
   String get grantType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
-  $TokenRequestCopyWith<TokenRequest> get copyWith => throw _privateConstructorUsedError;
+  $TokenRequestCopyWith<TokenRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $TokenRequestCopyWith<$Res> {
-  factory $TokenRequestCopyWith(TokenRequest value, $Res Function(TokenRequest) then) =
+  factory $TokenRequestCopyWith(
+          TokenRequest value, $Res Function(TokenRequest) then) =
       _$TokenRequestCopyWithImpl<$Res, TokenRequest>;
-
   @useResult
   $Res call({@JsonKey(name: "grant_type") String grantType});
 }
 
 /// @nodoc
-class _$TokenRequestCopyWithImpl<$Res, $Val extends TokenRequest> implements $TokenRequestCopyWith<$Res> {
+class _$TokenRequestCopyWithImpl<$Res, $Val extends TokenRequest>
+    implements $TokenRequestCopyWith<$Res> {
   _$TokenRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -63,19 +63,23 @@ class _$TokenRequestCopyWithImpl<$Res, $Val extends TokenRequest> implements $To
 }
 
 /// @nodoc
-abstract class _$$_TokenRequestCopyWith<$Res> implements $TokenRequestCopyWith<$Res> {
-  factory _$$_TokenRequestCopyWith(_$_TokenRequest value, $Res Function(_$_TokenRequest) then) =
+abstract class _$$_TokenRequestCopyWith<$Res>
+    implements $TokenRequestCopyWith<$Res> {
+  factory _$$_TokenRequestCopyWith(
+          _$_TokenRequest value, $Res Function(_$_TokenRequest) then) =
       __$$_TokenRequestCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({@JsonKey(name: "grant_type") String grantType});
 }
 
 /// @nodoc
-class __$$_TokenRequestCopyWithImpl<$Res> extends _$TokenRequestCopyWithImpl<$Res, _$_TokenRequest>
+class __$$_TokenRequestCopyWithImpl<$Res>
+    extends _$TokenRequestCopyWithImpl<$Res, _$_TokenRequest>
     implements _$$_TokenRequestCopyWith<$Res> {
-  __$$_TokenRequestCopyWithImpl(_$_TokenRequest _value, $Res Function(_$_TokenRequest) _then) : super(_value, _then);
+  __$$_TokenRequestCopyWithImpl(
+      _$_TokenRequest _value, $Res Function(_$_TokenRequest) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -96,7 +100,8 @@ class __$$_TokenRequestCopyWithImpl<$Res> extends _$TokenRequestCopyWithImpl<$Re
 class _$_TokenRequest implements _TokenRequest {
   const _$_TokenRequest({@JsonKey(name: "grant_type") required this.grantType});
 
-  factory _$_TokenRequest.fromJson(Map<String, dynamic> json) => _$$_TokenRequestFromJson(json);
+  factory _$_TokenRequest.fromJson(Map<String, dynamic> json) =>
+      _$$_TokenRequestFromJson(json);
 
   @override
   @JsonKey(name: "grant_type")
@@ -112,7 +117,8 @@ class _$_TokenRequest implements _TokenRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TokenRequest &&
-            (identical(other.grantType, grantType) || other.grantType == grantType));
+            (identical(other.grantType, grantType) ||
+                other.grantType == grantType));
   }
 
   @JsonKey(ignore: true)
@@ -134,15 +140,18 @@ class _$_TokenRequest implements _TokenRequest {
 }
 
 abstract class _TokenRequest implements TokenRequest {
-  const factory _TokenRequest({@JsonKey(name: "grant_type") required final String grantType}) = _$_TokenRequest;
+  const factory _TokenRequest(
+          {@JsonKey(name: "grant_type") required final String grantType}) =
+      _$_TokenRequest;
 
-  factory _TokenRequest.fromJson(Map<String, dynamic> json) = _$_TokenRequest.fromJson;
+  factory _TokenRequest.fromJson(Map<String, dynamic> json) =
+      _$_TokenRequest.fromJson;
 
   @override
   @JsonKey(name: "grant_type")
   String get grantType;
-
   @override
   @JsonKey(ignore: true)
-  _$$_TokenRequestCopyWith<_$_TokenRequest> get copyWith => throw _privateConstructorUsedError;
+  _$$_TokenRequestCopyWith<_$_TokenRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }

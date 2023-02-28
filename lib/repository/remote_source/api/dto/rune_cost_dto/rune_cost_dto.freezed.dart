@@ -21,33 +21,31 @@ RuneCostDTO _$RuneCostDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RuneCostDTO {
   int? get blood => throw _privateConstructorUsedError;
-
   int? get frost => throw _privateConstructorUsedError;
-
   int? get unholy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
-  $RuneCostDTOCopyWith<RuneCostDTO> get copyWith => throw _privateConstructorUsedError;
+  $RuneCostDTOCopyWith<RuneCostDTO> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RuneCostDTOCopyWith<$Res> {
-  factory $RuneCostDTOCopyWith(RuneCostDTO value, $Res Function(RuneCostDTO) then) =
+  factory $RuneCostDTOCopyWith(
+          RuneCostDTO value, $Res Function(RuneCostDTO) then) =
       _$RuneCostDTOCopyWithImpl<$Res, RuneCostDTO>;
-
   @useResult
   $Res call({int? blood, int? frost, int? unholy});
 }
 
 /// @nodoc
-class _$RuneCostDTOCopyWithImpl<$Res, $Val extends RuneCostDTO> implements $RuneCostDTOCopyWith<$Res> {
+class _$RuneCostDTOCopyWithImpl<$Res, $Val extends RuneCostDTO>
+    implements $RuneCostDTOCopyWith<$Res> {
   _$RuneCostDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -76,19 +74,23 @@ class _$RuneCostDTOCopyWithImpl<$Res, $Val extends RuneCostDTO> implements $Rune
 }
 
 /// @nodoc
-abstract class _$$_RuneCostDTOCopyWith<$Res> implements $RuneCostDTOCopyWith<$Res> {
-  factory _$$_RuneCostDTOCopyWith(_$_RuneCostDTO value, $Res Function(_$_RuneCostDTO) then) =
+abstract class _$$_RuneCostDTOCopyWith<$Res>
+    implements $RuneCostDTOCopyWith<$Res> {
+  factory _$$_RuneCostDTOCopyWith(
+          _$_RuneCostDTO value, $Res Function(_$_RuneCostDTO) then) =
       __$$_RuneCostDTOCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({int? blood, int? frost, int? unholy});
 }
 
 /// @nodoc
-class __$$_RuneCostDTOCopyWithImpl<$Res> extends _$RuneCostDTOCopyWithImpl<$Res, _$_RuneCostDTO>
+class __$$_RuneCostDTOCopyWithImpl<$Res>
+    extends _$RuneCostDTOCopyWithImpl<$Res, _$_RuneCostDTO>
     implements _$$_RuneCostDTOCopyWith<$Res> {
-  __$$_RuneCostDTOCopyWithImpl(_$_RuneCostDTO _value, $Res Function(_$_RuneCostDTO) _then) : super(_value, _then);
+  __$$_RuneCostDTOCopyWithImpl(
+      _$_RuneCostDTO _value, $Res Function(_$_RuneCostDTO) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -117,9 +119,11 @@ class __$$_RuneCostDTOCopyWithImpl<$Res> extends _$RuneCostDTOCopyWithImpl<$Res,
 /// @nodoc
 @JsonSerializable()
 class _$_RuneCostDTO implements _RuneCostDTO {
-  const _$_RuneCostDTO({required this.blood, required this.frost, required this.unholy});
+  const _$_RuneCostDTO(
+      {required this.blood, required this.frost, required this.unholy});
 
-  factory _$_RuneCostDTO.fromJson(Map<String, dynamic> json) => _$$_RuneCostDTOFromJson(json);
+  factory _$_RuneCostDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_RuneCostDTOFromJson(json);
 
   @override
   final int? blood;
@@ -162,21 +166,22 @@ class _$_RuneCostDTO implements _RuneCostDTO {
 }
 
 abstract class _RuneCostDTO implements RuneCostDTO {
-  const factory _RuneCostDTO({required final int? blood, required final int? frost, required final int? unholy}) =
-      _$_RuneCostDTO;
+  const factory _RuneCostDTO(
+      {required final int? blood,
+      required final int? frost,
+      required final int? unholy}) = _$_RuneCostDTO;
 
-  factory _RuneCostDTO.fromJson(Map<String, dynamic> json) = _$_RuneCostDTO.fromJson;
+  factory _RuneCostDTO.fromJson(Map<String, dynamic> json) =
+      _$_RuneCostDTO.fromJson;
 
   @override
   int? get blood;
-
   @override
   int? get frost;
-
   @override
   int? get unholy;
-
   @override
   @JsonKey(ignore: true)
-  _$$_RuneCostDTOCopyWith<_$_RuneCostDTO> get copyWith => throw _privateConstructorUsedError;
+  _$$_RuneCostDTOCopyWith<_$_RuneCostDTO> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -23,13 +23,23 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       flavorText: json['flavorText'] as String?,
       cropImage: json['cropImage'] as String?,
       manaCost: json['manaCost'] as int,
-      duels: json['duels'] == null ? null : DuelsDTO.fromJson(json['duels'] as Map<String, dynamic>),
-      runeCost: json['runeCost'] == null ? null : RuneCostDTO.fromJson(json['runeCost'] as Map<String, dynamic>),
-      keywordIds: (json['keywordIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      childIds: (json['childIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      duels: json['duels'] == null
+          ? null
+          : DuelsDTO.fromJson(json['duels'] as Map<String, dynamic>),
+      runeCost: json['runeCost'] == null
+          ? null
+          : RuneCostDTO.fromJson(json['runeCost'] as Map<String, dynamic>),
+      keywordIds:
+          (json['keywordIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      childIds:
+          (json['childIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
       spellSchoolId: json['spellSchoolId'] as int?,
-      multiClassIds: (json['multiClassIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      multiTypeIds: (json['multiTypeIds'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      multiClassIds: (json['multiClassIds'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
+      multiTypeIds: (json['multiTypeIds'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
       copyOfCardId: json['copyOfCardId'] as int?,
       minionTypeId: json['minionTypeId'] as int?,
       health: json['health'] as int?,
@@ -38,7 +48,8 @@ _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       durability: json['durability'] as int?,
     );
 
-Map<String, dynamic> _$$_CardDTOToJson(_$_CardDTO instance) => <String, dynamic>{
+Map<String, dynamic> _$$_CardDTOToJson(_$_CardDTO instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'cardSetId': instance.cardSetId,
       'classId': instance.classId,

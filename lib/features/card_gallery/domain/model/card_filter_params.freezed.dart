@@ -17,48 +17,33 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CardFilterParams {
   int? get pageSize => throw _privateConstructorUsedError;
-
   num? get page => throw _privateConstructorUsedError;
-
   String get locale => throw _privateConstructorUsedError;
-
   String get set => throw _privateConstructorUsedError;
-
   List<String> get heroClass => throw _privateConstructorUsedError;
-
   String get manaCost => throw _privateConstructorUsedError;
-
   String get attack => throw _privateConstructorUsedError;
-
   String get health => throw _privateConstructorUsedError;
-
   String get collectible => throw _privateConstructorUsedError;
-
   String get rarity => throw _privateConstructorUsedError;
-
   String get type => throw _privateConstructorUsedError;
-
   String get minionType => throw _privateConstructorUsedError;
-
   String get keyword => throw _privateConstructorUsedError;
-
   String get textFilter => throw _privateConstructorUsedError;
-
   String get gameMode => throw _privateConstructorUsedError;
-
   String get spellSchool => throw _privateConstructorUsedError;
-
   String get sort => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CardFilterParamsCopyWith<CardFilterParams> get copyWith => throw _privateConstructorUsedError;
+  $CardFilterParamsCopyWith<CardFilterParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CardFilterParamsCopyWith<$Res> {
-  factory $CardFilterParamsCopyWith(CardFilterParams value, $Res Function(CardFilterParams) then) =
+  factory $CardFilterParamsCopyWith(
+          CardFilterParams value, $Res Function(CardFilterParams) then) =
       _$CardFilterParamsCopyWithImpl<$Res, CardFilterParams>;
-
   @useResult
   $Res call(
       {int? pageSize,
@@ -81,12 +66,12 @@ abstract class $CardFilterParamsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams> implements $CardFilterParamsCopyWith<$Res> {
+class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams>
+    implements $CardFilterParamsCopyWith<$Res> {
   _$CardFilterParamsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -185,10 +170,11 @@ class _$CardFilterParamsCopyWithImpl<$Res, $Val extends CardFilterParams> implem
 }
 
 /// @nodoc
-abstract class _$$_CardFilterParamsCopyWith<$Res> implements $CardFilterParamsCopyWith<$Res> {
-  factory _$$_CardFilterParamsCopyWith(_$_CardFilterParams value, $Res Function(_$_CardFilterParams) then) =
+abstract class _$$_CardFilterParamsCopyWith<$Res>
+    implements $CardFilterParamsCopyWith<$Res> {
+  factory _$$_CardFilterParamsCopyWith(
+          _$_CardFilterParams value, $Res Function(_$_CardFilterParams) then) =
       __$$_CardFilterParamsCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -212,9 +198,11 @@ abstract class _$$_CardFilterParamsCopyWith<$Res> implements $CardFilterParamsCo
 }
 
 /// @nodoc
-class __$$_CardFilterParamsCopyWithImpl<$Res> extends _$CardFilterParamsCopyWithImpl<$Res, _$_CardFilterParams>
+class __$$_CardFilterParamsCopyWithImpl<$Res>
+    extends _$CardFilterParamsCopyWithImpl<$Res, _$_CardFilterParams>
     implements _$$_CardFilterParamsCopyWith<$Res> {
-  __$$_CardFilterParamsCopyWithImpl(_$_CardFilterParams _value, $Res Function(_$_CardFilterParams) _then)
+  __$$_CardFilterParamsCopyWithImpl(
+      _$_CardFilterParams _value, $Res Function(_$_CardFilterParams) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -347,7 +335,6 @@ class _$_CardFilterParams implements _CardFilterParams {
   @JsonKey()
   final String set;
   final List<String> _heroClass;
-
   @override
   @JsonKey()
   List<String> get heroClass {
@@ -403,22 +390,30 @@ class _$_CardFilterParams implements _CardFilterParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CardFilterParams &&
-            (identical(other.pageSize, pageSize) || other.pageSize == pageSize) &&
+            (identical(other.pageSize, pageSize) ||
+                other.pageSize == pageSize) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.set, set) || other.set == set) &&
-            const DeepCollectionEquality().equals(other._heroClass, _heroClass) &&
-            (identical(other.manaCost, manaCost) || other.manaCost == manaCost) &&
+            const DeepCollectionEquality()
+                .equals(other._heroClass, _heroClass) &&
+            (identical(other.manaCost, manaCost) ||
+                other.manaCost == manaCost) &&
             (identical(other.attack, attack) || other.attack == attack) &&
             (identical(other.health, health) || other.health == health) &&
-            (identical(other.collectible, collectible) || other.collectible == collectible) &&
+            (identical(other.collectible, collectible) ||
+                other.collectible == collectible) &&
             (identical(other.rarity, rarity) || other.rarity == rarity) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.minionType, minionType) || other.minionType == minionType) &&
+            (identical(other.minionType, minionType) ||
+                other.minionType == minionType) &&
             (identical(other.keyword, keyword) || other.keyword == keyword) &&
-            (identical(other.textFilter, textFilter) || other.textFilter == textFilter) &&
-            (identical(other.gameMode, gameMode) || other.gameMode == gameMode) &&
-            (identical(other.spellSchool, spellSchool) || other.spellSchool == spellSchool) &&
+            (identical(other.textFilter, textFilter) ||
+                other.textFilter == textFilter) &&
+            (identical(other.gameMode, gameMode) ||
+                other.gameMode == gameMode) &&
+            (identical(other.spellSchool, spellSchool) ||
+                other.spellSchool == spellSchool) &&
             (identical(other.sort, sort) || other.sort == sort));
   }
 
@@ -472,56 +467,40 @@ abstract class _CardFilterParams implements CardFilterParams {
 
   @override
   int? get pageSize;
-
   @override
   num? get page;
-
   @override
   String get locale;
-
   @override
   String get set;
-
   @override
   List<String> get heroClass;
-
   @override
   String get manaCost;
-
   @override
   String get attack;
-
   @override
   String get health;
-
   @override
   String get collectible;
-
   @override
   String get rarity;
-
   @override
   String get type;
-
   @override
   String get minionType;
-
   @override
   String get keyword;
-
   @override
   String get textFilter;
-
   @override
   String get gameMode;
-
   @override
   String get spellSchool;
-
   @override
   String get sort;
-
   @override
   @JsonKey(ignore: true)
-  _$$_CardFilterParamsCopyWith<_$_CardFilterParams> get copyWith => throw _privateConstructorUsedError;
+  _$$_CardFilterParamsCopyWith<_$_CardFilterParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }

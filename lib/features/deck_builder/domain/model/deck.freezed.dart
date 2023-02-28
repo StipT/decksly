@@ -17,14 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Deck {
   String get code => throw _privateConstructorUsedError;
-
   List<DeckCard> get cards => throw _privateConstructorUsedError;
-
   DeckType get type => throw _privateConstructorUsedError;
-
   DeckClass get heroClass => throw _privateConstructorUsedError;
-
-  String get locale => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DeckCopyWith<Deck> get copyWith => throw _privateConstructorUsedError;
@@ -32,19 +27,20 @@ mixin _$Deck {
 
 /// @nodoc
 abstract class $DeckCopyWith<$Res> {
-  factory $DeckCopyWith(Deck value, $Res Function(Deck) then) = _$DeckCopyWithImpl<$Res, Deck>;
-
+  factory $DeckCopyWith(Deck value, $Res Function(Deck) then) =
+      _$DeckCopyWithImpl<$Res, Deck>;
   @useResult
-  $Res call({String code, List<DeckCard> cards, DeckType type, DeckClass heroClass, String locale});
+  $Res call(
+      {String code, List<DeckCard> cards, DeckType type, DeckClass heroClass});
 }
 
 /// @nodoc
-class _$DeckCopyWithImpl<$Res, $Val extends Deck> implements $DeckCopyWith<$Res> {
+class _$DeckCopyWithImpl<$Res, $Val extends Deck>
+    implements $DeckCopyWith<$Res> {
   _$DeckCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -55,7 +51,6 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck> implements $DeckCopyWith<$Res>
     Object? cards = null,
     Object? type = null,
     Object? heroClass = null,
-    Object? locale = null,
   }) {
     return _then(_value.copyWith(
       code: null == code
@@ -74,26 +69,25 @@ class _$DeckCopyWithImpl<$Res, $Val extends Deck> implements $DeckCopyWith<$Res>
           ? _value.heroClass
           : heroClass // ignore: cast_nullable_to_non_nullable
               as DeckClass,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$_DeckCopyWith<$Res> implements $DeckCopyWith<$Res> {
-  factory _$$_DeckCopyWith(_$_Deck value, $Res Function(_$_Deck) then) = __$$_DeckCopyWithImpl<$Res>;
-
+  factory _$$_DeckCopyWith(_$_Deck value, $Res Function(_$_Deck) then) =
+      __$$_DeckCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String code, List<DeckCard> cards, DeckType type, DeckClass heroClass, String locale});
+  $Res call(
+      {String code, List<DeckCard> cards, DeckType type, DeckClass heroClass});
 }
 
 /// @nodoc
-class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck> implements _$$_DeckCopyWith<$Res> {
-  __$$_DeckCopyWithImpl(_$_Deck _value, $Res Function(_$_Deck) _then) : super(_value, _then);
+class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck>
+    implements _$$_DeckCopyWith<$Res> {
+  __$$_DeckCopyWithImpl(_$_Deck _value, $Res Function(_$_Deck) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -102,7 +96,6 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck> impl
     Object? cards = null,
     Object? type = null,
     Object? heroClass = null,
-    Object? locale = null,
   }) {
     return _then(_$_Deck(
       code: null == code
@@ -121,10 +114,6 @@ class __$$_DeckCopyWithImpl<$Res> extends _$DeckCopyWithImpl<$Res, _$_Deck> impl
           ? _value.heroClass
           : heroClass // ignore: cast_nullable_to_non_nullable
               as DeckClass,
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -136,15 +125,13 @@ class _$_Deck implements _Deck {
       {this.code = "",
       final List<DeckCard> cards = const [],
       this.type = DeckType.standard,
-      this.heroClass = DeckClass.warrior,
-      this.locale = "en_US"})
+      this.heroClass = DeckClass.warrior})
       : _cards = cards;
 
   @override
   @JsonKey()
   final String code;
   final List<DeckCard> _cards;
-
   @override
   @JsonKey()
   List<DeckCard> get cards {
@@ -159,13 +146,10 @@ class _$_Deck implements _Deck {
   @override
   @JsonKey()
   final DeckClass heroClass;
-  @override
-  @JsonKey()
-  final String locale;
 
   @override
   String toString() {
-    return 'Deck(code: $code, cards: $cards, type: $type, heroClass: $heroClass, locale: $locale)';
+    return 'Deck(code: $code, cards: $cards, type: $type, heroClass: $heroClass)';
   }
 
   @override
@@ -176,18 +160,19 @@ class _$_Deck implements _Deck {
             (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._cards, _cards) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.heroClass, heroClass) || other.heroClass == heroClass) &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.heroClass, heroClass) ||
+                other.heroClass == heroClass));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, code, const DeepCollectionEquality().hash(_cards), type, heroClass, locale);
+  int get hashCode => Object.hash(runtimeType, code,
+      const DeepCollectionEquality().hash(_cards), type, heroClass);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeckCopyWith<_$_Deck> get copyWith => __$$_DeckCopyWithImpl<_$_Deck>(this, _$identity);
+  _$$_DeckCopyWith<_$_Deck> get copyWith =>
+      __$$_DeckCopyWithImpl<_$_Deck>(this, _$identity);
 }
 
 abstract class _Deck implements Deck {
@@ -195,24 +180,16 @@ abstract class _Deck implements Deck {
       {final String code,
       final List<DeckCard> cards,
       final DeckType type,
-      final DeckClass heroClass,
-      final String locale}) = _$_Deck;
+      final DeckClass heroClass}) = _$_Deck;
 
   @override
   String get code;
-
   @override
   List<DeckCard> get cards;
-
   @override
   DeckType get type;
-
   @override
   DeckClass get heroClass;
-
-  @override
-  String get locale;
-
   @override
   @JsonKey(ignore: true)
   _$$_DeckCopyWith<_$_Deck> get copyWith => throw _privateConstructorUsedError;

@@ -17,32 +17,30 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CardsPage {
   List<CardDTO>? get cards => throw _privateConstructorUsedError;
-
   int? get cardCount => throw _privateConstructorUsedError;
-
   int? get pageCount => throw _privateConstructorUsedError;
-
   int? get page => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CardsPageCopyWith<CardsPage> get copyWith => throw _privateConstructorUsedError;
+  $CardsPageCopyWith<CardsPage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CardsPageCopyWith<$Res> {
-  factory $CardsPageCopyWith(CardsPage value, $Res Function(CardsPage) then) = _$CardsPageCopyWithImpl<$Res, CardsPage>;
-
+  factory $CardsPageCopyWith(CardsPage value, $Res Function(CardsPage) then) =
+      _$CardsPageCopyWithImpl<$Res, CardsPage>;
   @useResult
   $Res call({List<CardDTO>? cards, int? cardCount, int? pageCount, int? page});
 }
 
 /// @nodoc
-class _$CardsPageCopyWithImpl<$Res, $Val extends CardsPage> implements $CardsPageCopyWith<$Res> {
+class _$CardsPageCopyWithImpl<$Res, $Val extends CardsPage>
+    implements $CardsPageCopyWith<$Res> {
   _$CardsPageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -77,18 +75,21 @@ class _$CardsPageCopyWithImpl<$Res, $Val extends CardsPage> implements $CardsPag
 
 /// @nodoc
 abstract class _$$_CardsPageCopyWith<$Res> implements $CardsPageCopyWith<$Res> {
-  factory _$$_CardsPageCopyWith(_$_CardsPage value, $Res Function(_$_CardsPage) then) =
+  factory _$$_CardsPageCopyWith(
+          _$_CardsPage value, $Res Function(_$_CardsPage) then) =
       __$$_CardsPageCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call({List<CardDTO>? cards, int? cardCount, int? pageCount, int? page});
 }
 
 /// @nodoc
-class __$$_CardsPageCopyWithImpl<$Res> extends _$CardsPageCopyWithImpl<$Res, _$_CardsPage>
+class __$$_CardsPageCopyWithImpl<$Res>
+    extends _$CardsPageCopyWithImpl<$Res, _$_CardsPage>
     implements _$$_CardsPageCopyWith<$Res> {
-  __$$_CardsPageCopyWithImpl(_$_CardsPage _value, $Res Function(_$_CardsPage) _then) : super(_value, _then);
+  __$$_CardsPageCopyWithImpl(
+      _$_CardsPage _value, $Res Function(_$_CardsPage) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -122,11 +123,14 @@ class __$$_CardsPageCopyWithImpl<$Res> extends _$CardsPageCopyWithImpl<$Res, _$_
 /// @nodoc
 
 class _$_CardsPage implements _CardsPage {
-  const _$_CardsPage({final List<CardDTO>? cards = const [], this.cardCount = 0, this.pageCount = 0, this.page = 0})
+  const _$_CardsPage(
+      {final List<CardDTO>? cards = const [],
+      this.cardCount = 0,
+      this.pageCount = 0,
+      this.page = 0})
       : _cards = cards;
 
   final List<CardDTO>? _cards;
-
   @override
   @JsonKey()
   List<CardDTO>? get cards {
@@ -158,37 +162,41 @@ class _$_CardsPage implements _CardsPage {
         (other.runtimeType == runtimeType &&
             other is _$_CardsPage &&
             const DeepCollectionEquality().equals(other._cards, _cards) &&
-            (identical(other.cardCount, cardCount) || other.cardCount == cardCount) &&
-            (identical(other.pageCount, pageCount) || other.pageCount == pageCount) &&
+            (identical(other.cardCount, cardCount) ||
+                other.cardCount == cardCount) &&
+            (identical(other.pageCount, pageCount) ||
+                other.pageCount == pageCount) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_cards), cardCount, pageCount, page);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_cards), cardCount, pageCount, page);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CardsPageCopyWith<_$_CardsPage> get copyWith => __$$_CardsPageCopyWithImpl<_$_CardsPage>(this, _$identity);
+  _$$_CardsPageCopyWith<_$_CardsPage> get copyWith =>
+      __$$_CardsPageCopyWithImpl<_$_CardsPage>(this, _$identity);
 }
 
 abstract class _CardsPage implements CardsPage {
-  const factory _CardsPage({final List<CardDTO>? cards, final int? cardCount, final int? pageCount, final int? page}) =
-      _$_CardsPage;
+  const factory _CardsPage(
+      {final List<CardDTO>? cards,
+      final int? cardCount,
+      final int? pageCount,
+      final int? page}) = _$_CardsPage;
 
   @override
   List<CardDTO>? get cards;
-
   @override
   int? get cardCount;
-
   @override
   int? get pageCount;
-
   @override
   int? get page;
-
   @override
   @JsonKey(ignore: true)
-  _$$_CardsPageCopyWith<_$_CardsPage> get copyWith => throw _privateConstructorUsedError;
+  _$$_CardsPageCopyWith<_$_CardsPage> get copyWith =>
+      throw _privateConstructorUsedError;
 }

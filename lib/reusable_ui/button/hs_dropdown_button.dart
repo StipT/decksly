@@ -37,7 +37,7 @@ class HSDropdownButton extends StatelessWidget {
                   minFontSize: 10,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: FontStyles.bold15VanDykeBrown,
+                  style: FontStyles.bold13VanDykeBrown,
                 ),
               ),
             ),
@@ -51,21 +51,25 @@ class HSDropdownButton extends StatelessWidget {
       return const SizedBox();
     }
 
-    final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(SVG_EXTENSION);
-    return Container(
-      padding: EdgeInsets.only(left: 4.w),
-      child: isSvg
-          ? SvgPicture.asset(
+    final isSvg = assetImagePath
+        .substring(assetImagePath.length - 3)
+        .contains(SVG_EXTENSION);
+    return isSvg
+        ? Container(
+            margin: EdgeInsets.only(left: 2.w),
+            child: SvgPicture.asset(
               assetImagePath,
-              height: height - 27.5.h,
-              fit: BoxFit.fitHeight,
+              height: height - 45.h,
               color: AppColors.gold,
-            )
-          : Image.asset(
-              height: height - 25.h,
-              assetImagePath,
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.fitWidth,
             ),
-    );
+          )
+        : Container(
+            child: Image.asset(
+              height: height - 40.h,
+              assetImagePath,
+              fit: BoxFit.fitWidth,
+            ),
+          );
   }
 }

@@ -29,45 +29,45 @@ class _ManaPickerState extends State<ManaPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: [
-          const HSVelvetBorder(),
-          const HSRectangularGoldenBorder(),
-          if (activeItems.contains(true)) const HSActiveTextFieldOverlay(),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 6.w,
-              vertical: 2.5.h,
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 11,
-              itemBuilder: (BuildContext context, int index) {
-                return ManaItem(
-                  index: index,
-                  isActive: activeItems[index],
-                  onTap: () {
-                    setState(() {
-                      activeItems[index] = !activeItems[index];
-                    });
-
-                    String manaFilter = "";
-                    for (int i = 0; i < activeItems.length; i++) {
-                      if (activeItems[i] == true) {
-                        manaFilter.isEmpty ? manaFilter += i.toString() : manaFilter += ",${i.toString()}";
-                      }
-                    }
-                    widget.onChange(manaFilter);
-                  },
-                );
-              },
-            ),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        const HSVelvetBorder(),
+        const HSRectangularGoldenBorder(),
+        if (activeItems.contains(true)) const HSActiveTextFieldOverlay(),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 5.w,
           ),
-        ],
-      ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: 11,
+            itemBuilder: (BuildContext context, int index) {
+              return ManaItem(
+                index: index,
+                isActive: activeItems[index],
+                onTap: () {
+                  setState(() {
+                    activeItems[index] = !activeItems[index];
+                  });
+
+                  String manaFilter = "";
+                  for (int i = 0; i < activeItems.length; i++) {
+                    if (activeItems[i] == true) {
+                      manaFilter.isEmpty
+                          ? manaFilter += i.toString()
+                          : manaFilter += ",${i.toString()}";
+                    }
+                  }
+                  widget.onChange(manaFilter);
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -91,26 +91,19 @@ class ManaItem extends StatelessWidget {
         onTap();
       },
       child: Container(
-        width: 28.8.w,
+        width: 29.w,
         alignment: Alignment.center,
         child: Stack(
+          fit: StackFit.expand,
           children: [
-            Container(
-              alignment: Alignment.center,
-              child: Image.asset(
-                assetPath(SUBFOLDER_MISC, "mana_inactive"),
-                width: 28.8.w,
-                fit: BoxFit.fill,
-              ),
+            Image.asset(
+              assetPath(SUBFOLDER_MISC, "mana_inactive"),
+              fit: BoxFit.contain,
             ),
             if (isActive)
-              Container(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  assetPath(SUBFOLDER_MISC, "mana_active"),
-                  width: 28.8.w,
-                  fit: BoxFit.fill,
-                ),
+              Image.asset(
+                assetPath(SUBFOLDER_MISC, "mana_active"),
+                fit: BoxFit.fill,
               ),
             Center(
               child: Text(

@@ -63,49 +63,41 @@ class _HSTextFieldState extends State<HSTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
+      margin: _getMargin(widget.theme),
       child: Stack(
-        alignment: Alignment.center,
+        fit: StackFit.expand,
         children: [
           _getBorder(widget.theme),
+          const HSRectangularGoldenBorder(),
+          if (!isEmpty) const HSActiveTextFieldOverlay(),
           Container(
-            margin: _getMargin(widget.theme),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                const HSRectangularGoldenBorder(),
-                if (!isEmpty) const HSActiveTextFieldOverlay(),
-                Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(
-                    top: 0.5.h,
-                    left: 20.w,
-                    right: 4.w,
-                  ),
-                  child: TextField(
-                    textInputAction: _getInputAction(widget.suffix),
-                    onSubmitted: (value) => widget.onSubmitted(value),
-                    focusNode: _focus,
-                    controller: _textEditingController,
-                    onChanged: (searchString) {
-                      setState(() {
-                        isEmpty = _textEditingController.text.trim().isEmpty;
-                      });
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(
+              left: 15.w,
+              right: 7.5.w,
+            ),
+            child: TextField(
+              textInputAction: _getInputAction(widget.suffix),
+              onSubmitted: (value) => widget.onSubmitted(value),
+              focusNode: _focus,
+              controller: _textEditingController,
+              onChanged: (searchString) {
+                setState(() {
+                  isEmpty = _textEditingController.text.trim().isEmpty;
+                });
 
-                      _debouncer.run(() {
-                        widget.onChange(searchString);
-                      });
-                    },
-                    style: FontStyles.bold17,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      suffixIcon: _suffixIcon(widget.suffix),
-                      hintText: widget.hint,
-                      hintStyle: FontStyles.bold17DarkChestnutBrown,
-                    ),
-                  ),
-                ),
-              ],
+                _debouncer.run(() {
+                  widget.onChange(searchString);
+                });
+              },
+              textAlignVertical: TextAlignVertical.center,
+              style: FontStyles.bold15,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                suffixIcon: _suffixIcon(widget.suffix),
+                hintText: widget.hint,
+                hintStyle: FontStyles.bold15DarkChestnutBrown,
+              ),
             ),
           ),
         ],
@@ -119,6 +111,7 @@ class _HSTextFieldState extends State<HSTextField> {
         return const SizedBox();
       case TextFieldSuffix.search:
         return IconButton(
+          iconSize: 22.5.w,
           onPressed: () {
             if (!isEmpty) {
               setState(() {
@@ -135,15 +128,20 @@ class _HSTextFieldState extends State<HSTextField> {
         );
       case TextFieldSuffix.paste:
         return IconButton(
+          iconSize: 22.5.w,
           onPressed: () {
-            Clipboard.getData(Clipboard.kTextPlain).then((value){
+            Clipboard.getData(Clipboard.kTextPlain).then((value) {
               setState(() {
                 _textEditingController.text = value?.text ?? "";
                 isEmpty = _textEditingController.text.trim().isEmpty;
                 widget.onChange(_textEditingController.text);
               });
             });
-          }, icon: const Icon(Icons.paste, color: AppColors.gold,),
+          },
+          icon: const Icon(
+            Icons.paste,
+            color: AppColors.gold,
+          ),
         );
     }
   }
@@ -168,7 +166,7 @@ class _HSTextFieldState extends State<HSTextField> {
       case TextFieldSuffix.paste:
         return TextInputAction.go;
       case TextFieldSuffix.search:
-        return  TextInputAction.search;
+        return TextInputAction.search;
     }
   }
 
@@ -182,10 +180,10 @@ class _HSTextFieldState extends State<HSTextField> {
         return EdgeInsets.only(
           left: 16.w,
           right: 4.w,
-          top: 0.5.h,
+          top: 0.875.h,
         );
       case TextFieldTheme.wood:
-        return EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 24.w);
+        return EdgeInsets.symmetric(vertical: 0.875.h, horizontal: 24.w);
     }
   }
 }

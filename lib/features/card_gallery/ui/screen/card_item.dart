@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CardItem extends StatefulWidget {
-  const CardItem({
-      super.key,
+  const CardItem(
+      {super.key,
       required this.inDeckBuilderMode,
       required this.card,
       required this.onTap,
@@ -36,6 +36,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
         alignment: Alignment.topCenter,
         margin: EdgeInsets.all(1.w),
         child: Stack(
+          fit: StackFit.expand,
           alignment: Alignment.center,
           children: [
             Container(
@@ -54,7 +55,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                         ? widget
                         : Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 20.w),
+                                vertical: 8.75.h, horizontal: 20.w),
                             child: Shimmer.fromColors(
                               baseColor: AppColors.spanishGrey,
                               highlightColor: AppColors.shimmerGrey,
@@ -70,17 +71,19 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
             if (widget.card.rarityId == 5 && widget.amount == 1)
               Positioned(
                 bottom: 0.h,
-                right: 40.w,
-                width: 60.w,
+                width: 100.w,
                 child: Stack(
+                  alignment: Alignment.center,
                   children: [
                     Image.asset(
                       assetPath(SUBFOLDER_MISC, "card_counter_locked"),
+                      width: 60.w,
+                      alignment: Alignment.center,
                       fit: BoxFit.fitWidth,
                     ),
                     Container(
                         alignment: Alignment.center,
-                        padding: EdgeInsets.only(top: 1.5.h, left: 10.w),
+                        padding: EdgeInsets.only(left: 10.w),
                         child: Text(
                           "1/1",
                           style: FontStyles.bold17WithShadow,
@@ -92,19 +95,24 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
             if (widget.card.rarityId != 5 && widget.amount > 0)
               Positioned(
                 bottom: 0.h,
-                right: 42.5.w,
-                width: 60.w,
+                width: 100.w,
                 child: Stack(
+                  alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      assetPath(SUBFOLDER_MISC,
-                          widget.amount == 2 ? "card_counter_locked" : "card_counter"),
+                      assetPath(
+                          SUBFOLDER_MISC,
+                          widget.amount == 2
+                              ? "card_counter_locked"
+                              : "card_counter"),
+                      width: 60.w,
+                      alignment: Alignment.center,
                       fit: BoxFit.fitWidth,
                     ),
                     Container(
                         alignment: Alignment.center,
                         padding: EdgeInsets.only(
-                            top: 1.5.h, left: widget.amount == 2 ? 10.w : 0.w),
+                            left: widget.amount == 2 ? 10.w : 0.w),
                         child: Text(
                           "${widget.amount}/2",
                           style: FontStyles.bold17WithShadow,

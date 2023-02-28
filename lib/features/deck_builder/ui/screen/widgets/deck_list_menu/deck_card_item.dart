@@ -29,8 +29,10 @@ class DeckCardItem extends StatelessWidget {
       onTap: () => onTap(index, deckCard),
       onLongPress: () => onLongPress(deckCard),
       child: Container(
-        height: 16.h,
+        margin: EdgeInsets.only(right: 12.5.w),
+        height: 30.h,
         child: Stack(
+          fit: StackFit.expand,
           children: [
             Row(
               children: [
@@ -46,7 +48,7 @@ class DeckCardItem extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
-                            vertical: 1.h, horizontal: 6.w),
+                            vertical: 1.75.h, horizontal: 6.w),
                         width: double.infinity,
                         child: deckCard.card.cropImage != null
                             ? Image.network(
@@ -68,14 +70,17 @@ class DeckCardItem extends StatelessWidget {
                 )
               ],
             ),
-            const HSDeckCardItemBackground(),
+            HSDeckCardItemBackground(
+              startWidth: 30.w,
+              endWidth: 25.w,
+            ),
             Container(
               alignment: Alignment.center,
               child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 5.5.w),
-                    width: 16.w,
+                    width: 20.w,
+                    margin: EdgeInsets.only(left: 5.w),
                     child: AutoSizeText(
                       deckCard.card.manaCost.toString(),
                       textAlign: TextAlign.center,
@@ -83,7 +88,7 @@ class DeckCardItem extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 7.5.w, right: 4.5.w),
+                    margin: EdgeInsets.only(left: 7.5.w),
                     width: 150.w,
                     child: Text(
                       deckCard.card.name,
@@ -95,7 +100,7 @@ class DeckCardItem extends StatelessWidget {
                     Expanded(
                       child: Image.asset(
                         assetPath(SUBFOLDER_MISC, "legendary_star"),
-                        width: 12.5.w,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   if (deckCard.card.rarityId != 5 && deckCard.amount == 2)
@@ -112,7 +117,7 @@ class DeckCardItem extends StatelessWidget {
           ],
         ),
         padding: EdgeInsets.symmetric(
-          vertical: 1.h,
+          vertical: 1.75.h,
           horizontal: 2.w,
         ),
       ),

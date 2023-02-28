@@ -41,8 +41,8 @@ class HSClassBadge extends StatelessWidget {
             ),
             Positioned(
               left: 37.5.w,
-              bottom: 7.5.h,
-              height: 10.h,
+              bottom: 11.h,
+              height: 17.5.h,
               width: 66.w,
               child: Container(
                 alignment: Alignment.centerLeft,

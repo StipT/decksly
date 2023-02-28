@@ -6,13 +6,13 @@ import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HSBarToggleButton extends StatelessWidget {
   const HSBarToggleButton(
-      {Key? key, this.icon, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
+      {Key? key, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
       : super(key: key);
   final double width;
-  final Widget? icon;
   final bool isToggled;
   final int activeFilters;
   final VoidCallback onTap;
@@ -22,30 +22,32 @@ class HSBarToggleButton extends StatelessWidget {
     return Container(
       width: width,
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 0.5.h),
+      margin: EdgeInsets.symmetric(vertical: 0.875.h),
       child: Stack(
         alignment: Alignment.center,
         children: [
           const HSVelvetBorder(),
           const HSButtonOverlay(),
           if (isToggled) const HSActiveButtonOverlay(),
-          OutlinedButton(
-            onPressed: onTap,
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(
-                color: Colors.transparent,
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 7.w),
+            child: OutlinedButton(
+              onPressed: onTap,
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.vanDykeBrown, side: const BorderSide(
+                  color: Colors.transparent,
+                ),
+                textStyle: FontStyles.bold15VanDykeBrown,
+
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
               ),
-              textStyle: FontStyles.bold15VanDykeBrown,
-              padding: EdgeInsets.symmetric(
-                vertical: 10.w,
-                horizontal: 8.h,
+              child: SvgPicture.asset(
+                assetPath(SUBFOLDER_MISC, "filter",
+                    fileExtension: SVG_EXTENSION),
+                fit: BoxFit.fill,
+                color: AppColors.bistreBrown,
+                width: 30.w,
               ),
-              primary: AppColors.vanDykeBrown,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
-            ),
-            child: Container(
-              alignment: Alignment.center,
-              child: icon ?? const SizedBox(),
             ),
           ),
           _showFilterBubble(activeFilters),
@@ -57,7 +59,7 @@ class HSBarToggleButton extends StatelessWidget {
   Widget _showFilterBubble(int activeFilters) {
     if (activeFilters > 0) {
       return Positioned(
-        bottom: 1.h,
+        bottom: 1.75.h,
         right: 4.w,
         child: Stack(
           alignment: Alignment.center,

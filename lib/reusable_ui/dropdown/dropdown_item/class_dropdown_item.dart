@@ -19,9 +19,9 @@ class HSDropdownItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 25.h,
+      height: 43.75.h,
       margin: EdgeInsets.only(
-        bottom: 0.5.h,
+        bottom: 0.875.h,
         left: 2.w,
       ),
       child: Row(
@@ -38,7 +38,7 @@ class HSDropdownItem extends StatelessWidget {
               ),
               Center(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 2.w),
+                  padding: EdgeInsets.symmetric(vertical: 0.875.h, horizontal: 2.w),
                     child: assetImagePath.isNotEmpty
                         ? Image.asset(
                             assetImagePath,

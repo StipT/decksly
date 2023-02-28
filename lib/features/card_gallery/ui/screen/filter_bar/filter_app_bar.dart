@@ -49,28 +49,33 @@ class _FilterAppBarState extends State<FilterAppBar>
         return AnimatedContainer(
           curve: Curves.bounceOut,
           duration: const Duration(milliseconds: 500),
-          height: widget.isExtended ? 70.h : 40.h,
+          height: widget.isExtended ? 122.5.h : 70.h,
           width: 1.sw,
           child: Stack(
+            fit: StackFit.expand,
             children: [
               const HSAppBarOverlay(),
               Column(
                 children: [
-                  SizedBox(
-                    height: 40.h,
+                  Container(
+                    height: 70.h,
                     width: double.infinity,
                     child: Container(
                       padding: EdgeInsets.only(
-                          left: 4.w, right: 4.w, top: 7.5.h, bottom: 2.5.h),
+                          left: 4.w,
+                          right: 4.w,
+                          top: 13.125.h,
+                          bottom: 4.375.h),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           _classFilter(widget.deckClass, state),
                           Container(
-                            padding: EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
+                            padding:
+                                EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSDropdown(
-                              height: 40.h,
-                              width: 80.w,
+                              height: 70.h,
+                              width: 95.w,
                               dropdownWidth: 250.w,
                               selectedValue: state.cardFilterParams.set,
                               dropdownType: DropdownType.cardSet,
@@ -86,8 +91,7 @@ class _FilterAppBarState extends State<FilterAppBar>
                           ),
                           Container(
                               width: 330.w,
-                              padding:
-                                  EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
+                              height: 40.h,
                               child: ManaPicker(
                                 onChange: (mana) =>
                                     BlocProvider.of<CardGalleryBloc>(context)
@@ -97,7 +101,8 @@ class _FilterAppBarState extends State<FilterAppBar>
                               )),
                           Expanded(
                               child: Container(
-                            padding: EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
+                            padding:
+                                EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSTextField(
                               hint: LocaleKeys.search.tr(),
                               suffix: TextFieldSuffix.search,
@@ -111,15 +116,10 @@ class _FilterAppBarState extends State<FilterAppBar>
                             ),
                           )),
                           Container(
-                            padding: EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
+                            padding:
+                                EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSBarToggleButton(
-                              width: 60.w,
-                              icon: SvgPicture.asset(
-                                assetPath(SUBFOLDER_MISC, "filter",
-                                    fileExtension: SVG_EXTENSION),
-                                fit: BoxFit.fill,
-                                color: AppColors.bistreBrown,
-                              ),
+                              width: 70.w,
                               isToggled: widget.isExtended,
                               activeFilters:
                                   extraFiltersActive(state.cardFilterParams),
@@ -134,7 +134,7 @@ class _FilterAppBarState extends State<FilterAppBar>
                   ),
                   Flexible(
                     child: FilterAppBarExtension(
-                      height: widget.isExtended ? 25.h : 0,
+                      height: widget.isExtended ? 43.75.h : 0,
                       cardFilterParams: state.cardFilterParams,
                     ),
                   ),
@@ -193,13 +193,13 @@ class _FilterAppBarState extends State<FilterAppBar>
                   .add(ToggleNeutralCardsEvent(deckClass));
             },
             deckClass: deckClass,
-            height: 60.h,
+            height: 105.h,
             width: 120.w,
           )
         : Container(
-            padding: EdgeInsets.only(top: 2.5.h, bottom: 1.5.h),
+            padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
             child: HSDropdown(
-              height: 40.h,
+              height: 70.h,
               width: 150.w,
               selectedValue: state.cardFilterParams.heroClass.toString(),
               dropdownType: DropdownType.cardClass,

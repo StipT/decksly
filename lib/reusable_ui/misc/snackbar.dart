@@ -18,12 +18,12 @@ class HSSnackBar {
       case HSSnackBarType.alert:
         return Image.asset(
           assetPath(SUBFOLDER_MISC, "alert"),
-          height: 30.h,
+          height: 52.5.h,
         );
       case HSSnackBarType.message:
         return Image.asset(
           assetPath(SUBFOLDER_MISC, "beer"),
-          height: 30.h,
+          height: 52.5.h,
         );
     }
   }

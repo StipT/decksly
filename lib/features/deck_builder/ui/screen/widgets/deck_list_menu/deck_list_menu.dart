@@ -30,7 +30,7 @@ class _DeckListMenuState extends State<DeckListMenu>
 
   @override
   void initState() {
-    _width = widget.width ?? 234.h;
+    _width = widget.width ?? 409.5.h;
     _isFilterBarExtended = widget.isFilterBarExtended;
     super.initState();
   }
@@ -44,17 +44,18 @@ class _DeckListMenuState extends State<DeckListMenu>
           height: 0.82.sh,
           margin: EdgeInsets.only(top: 0.18.sh),
           child: AnimatedPadding(
-              padding: EdgeInsets.only(top: _isFilterBarExtended ? 30.h : 0),
+              padding: EdgeInsets.only(top: _isFilterBarExtended ? 52.5.h : 0),
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
               child: Stack(
+                fit: StackFit.expand,
                 children: [
                   Image.asset(
                     assetPath(SUBFOLDER_BACKGROUND, "purple_velvet_background"),
                     width: _width,
                     fit: BoxFit.fill,
                   ),
-                  const HSDeckListBackground(),
+                  HSDeckListBackground(headerHeight: 70.h, footerHeight: 60.h),
                   Column(
                     children: [
                       DeckListHeader(

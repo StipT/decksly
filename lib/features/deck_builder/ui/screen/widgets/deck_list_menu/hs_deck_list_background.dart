@@ -2,7 +2,14 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/widgets.dart';
 
 class HSDeckListBackground extends StatelessWidget {
-  const HSDeckListBackground({Key? key}) : super(key: key);
+  const HSDeckListBackground({
+    Key? key,
+    required this.headerHeight,
+    required this.footerHeight,
+  }) : super(key: key);
+
+  final double headerHeight;
+  final double footerHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +17,8 @@ class HSDeckListBackground extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          //  height: double.infinity,
+          height: headerHeight,
+          width: double.infinity,
           child: Image.asset(
             assetPath(SUBFOLDER_BACKGROUND, "deck_list_top"),
             fit: BoxFit.fill,
@@ -18,8 +26,6 @@ class HSDeckListBackground extends StatelessWidget {
         ),
         Expanded(
           child: SizedBox(
-            //    height: double.infinity,
-            //    width: double.infinity,
             child: Image.asset(
               assetPath(SUBFOLDER_BACKGROUND, "deck_list_center"),
               fit: BoxFit.fill,
@@ -27,7 +33,8 @@ class HSDeckListBackground extends StatelessWidget {
           ),
         ),
         SizedBox(
-          //   height: double.infinity,
+          height: footerHeight,
+          width: double.infinity,
           child: Image.asset(
             assetPath(SUBFOLDER_BACKGROUND, "deck_list_bottom"),
             fit: BoxFit.fill,
@@ -37,4 +44,3 @@ class HSDeckListBackground extends StatelessWidget {
     );
   }
 }
-

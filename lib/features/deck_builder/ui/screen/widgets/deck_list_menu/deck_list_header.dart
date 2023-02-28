@@ -79,9 +79,9 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
 
   String _headerBackground(DeckClass classType) {
     switch (classType) {
-      case DeckClass.deathKnight:
+      case DeckClass.deathknight:
         return "death_knight_header";
-      case DeckClass.demonHunter:
+      case DeckClass.demonhunter:
         return "demon_hunter_header";
       case DeckClass.druid:
         return "druid_header";

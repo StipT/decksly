@@ -7,6 +7,21 @@ enum DeckType {
   wild,
 }
 
+extension DeckTypeExtensions on DeckType {
+
+  String get value {
+    switch (this) {
+      case DeckType.standard:
+        return "standard";
+      case DeckType.classic:
+        return "classic-cards";
+      case DeckType.wild:
+        return "wild";
+
+    }
+  }
+}
+
 extension DeckTypeLocalized on DeckType {
   String localized() {
     switch (this) {
@@ -24,7 +39,7 @@ DeckType deckTypeFromValue(String deckType) {
   switch (deckType) {
     case "standard":
       return DeckType.standard;
-    case "classic":
+    case "classic-cards":
       return DeckType.classic;
     case "wild":
       return DeckType.wild;

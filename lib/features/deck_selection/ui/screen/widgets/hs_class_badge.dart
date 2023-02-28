@@ -69,9 +69,9 @@ class HSClassBadge extends StatelessWidget {
 
   String _getImageAsset(DeckClass type) {
     switch (type) {
-      case DeckClass.deathKnight:
+      case DeckClass.deathknight:
         return "death_knight_badge";
-      case DeckClass.demonHunter:
+      case DeckClass.demonhunter:
         return "demon_hunter_badge";
       case DeckClass.druid:
         return "druid_badge";
@@ -96,10 +96,10 @@ class HSClassBadge extends StatelessWidget {
 
   String _getTitle(DeckClass type) {
     switch (type) {
-      case DeckClass.deathKnight:
+      case DeckClass.deathknight:
         return CardClass.deathKnight.localized();
 
-      case DeckClass.demonHunter:
+      case DeckClass.demonhunter:
         return CardClass.demonHunter.localized();
 
       case DeckClass.druid:
@@ -134,8 +134,8 @@ class HSClassBadge extends StatelessWidget {
   bool _isClassDisabled(DeckType modeType, DeckClass classType) {
     if (modeType == DeckType.classic) {
       switch (classType) {
-        case DeckClass.deathKnight:
-        case DeckClass.demonHunter:
+        case DeckClass.deathknight:
+        case DeckClass.demonhunter:
           return true;
 
         case DeckClass.druid:

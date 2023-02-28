@@ -11,6 +11,7 @@ import 'package:decksly/features/card_gallery/ui/screen/card_item.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
+import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
@@ -282,7 +283,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         .copyWith(
             locale: context.locale.toStringWithSeparator(),
             heroClass: [widget.deck.heroClass.name, "neutral"],
-            set: widget.deck.type.name)));
+            set: widget.deck.type.value)));
   }
 
   void listenForDeckCode(BuildContext context, DeckBuilderState state) {

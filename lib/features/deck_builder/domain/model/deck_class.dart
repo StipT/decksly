@@ -2,8 +2,8 @@ import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 enum DeckClass {
-  deathKnight,
-  demonHunter,
+  deathknight,
+  demonhunter,
   druid,
   hunter,
   mage,
@@ -18,9 +18,9 @@ enum DeckClass {
 extension DeckClassLocalized on DeckClass {
   String localized() {
     switch (this) {
-      case DeckClass.deathKnight:
+      case DeckClass.deathknight:
         return LocaleKeys.deathKnight.tr();
-      case DeckClass.demonHunter:
+      case DeckClass.demonhunter:
         return LocaleKeys.demonHunter.tr();
       case DeckClass.druid:
         return LocaleKeys.druid.tr();
@@ -46,10 +46,10 @@ extension DeckClassLocalized on DeckClass {
 
 DeckClass deckClassFromValue(String deckClass) {
   switch (deckClass) {
-    case "deathKnight":
-      return DeckClass.deathKnight;
-    case "demonHunter":
-      return DeckClass.demonHunter;
+    case "deathknight":
+      return DeckClass.deathknight;
+    case "demonhunter":
+      return DeckClass.demonhunter;
     case "druid":
       return DeckClass.druid;
     case "hunter":

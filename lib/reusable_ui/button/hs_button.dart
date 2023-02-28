@@ -39,8 +39,7 @@ class HSButton extends StatelessWidget {
                 top: 8.75.h,
                 bottom: 8.75.h,
               ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
             ),
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 9.w),
@@ -50,8 +49,7 @@ class HSButton extends StatelessWidget {
                 children: [
                   if (icon != null)
                     Container(
-                      margin: EdgeInsets.only(
-                          top: 1.75.h, bottom: 1.75.h, left: 5.w),
+                      margin: EdgeInsets.only(top: 1.75.h, bottom: 1.75.h, left: 5.w),
                       child: icon,
                     ),
                   Expanded(

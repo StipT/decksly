@@ -10,15 +10,19 @@ part 'app_router.gr.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: CardGalleryScreen, initial: true, maintainState: true, ),
+    AutoRoute(
+      page: CardGalleryScreen,
+      initial: true,
+      maintainState: true,
+    ),
     CustomRoute(page: DeckSelectionScreen, transitionsBuilder: bounceInTransition),
     CustomRoute(page: DeckBuilderScreen, transitionsBuilder: bounceOutTransition),
   ],
 )
+class AppRouter extends _$AppRouter {}
 
-class AppRouter extends _$AppRouter{}
-
-Widget bounceInTransition(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+Widget bounceInTransition(
+    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
   const begin = Offset(0.0, -1.0);
   const end = Offset.zero;
 
@@ -31,7 +35,8 @@ Widget bounceInTransition(BuildContext context, Animation<double> animation, Ani
   return SlideTransition(position: tween.animate(curvedAnimation), child: child);
 }
 
-Widget bounceOutTransition(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+Widget bounceOutTransition(
+    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
   const begin = Offset(0.0, -1.0);
   const end = Offset.zero;
 

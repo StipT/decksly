@@ -34,7 +34,6 @@ class FetchCardsUsecase extends UseCase<CardsPage, CardFilterParams> {
         spellSchool: params.spellSchool,
         rarity: params.rarity,
         keyword: params.keyword,
-
       );
       return Right(cards);
     } catch (exception) {

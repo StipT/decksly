@@ -4,7 +4,6 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,7 +35,7 @@ class HSClassBadge extends StatelessWidget {
             Stack(
               children: [
                 _getImage(classType, isSelected, isDisabled),
-            //    if (isSelected) Image.asset(assetPath(SUBFOLDER_MISC, "class_badge_selected")),
+                //    if (isSelected) Image.asset(assetPath(SUBFOLDER_MISC, "class_badge_selected")),
               ],
             ),
             Positioned(

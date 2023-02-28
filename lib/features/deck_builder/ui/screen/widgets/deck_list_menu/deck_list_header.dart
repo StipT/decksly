@@ -9,8 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeckListHeader extends StatefulWidget {
-  const DeckListHeader({Key? key, required this.onConvertMode})
-      : super(key: key);
+  const DeckListHeader({Key? key, required this.onConvertMode}) : super(key: key);
 
   final VoidCallback onConvertMode;
 
@@ -18,8 +17,7 @@ class DeckListHeader extends StatefulWidget {
   State<DeckListHeader> createState() => _DeckListHeaderState();
 }
 
-class _DeckListHeaderState extends State<DeckListHeader>
-    with TickerProviderStateMixin {
+class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStateMixin {
   bool isExpanded = false;
 
   @override
@@ -46,12 +44,9 @@ class _DeckListHeaderState extends State<DeckListHeader>
               fit: StackFit.expand,
               children: [
                 Container(
-                  margin: EdgeInsets.only(
-                      left: 8.w, right: 8.w, top: 5.h, bottom: 5.h),
+                  margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 5.h, bottom: 5.h),
                   child: Image.asset(
-                    assetPath(SUBFOLDER_CLASS,
-                        _headerBackground(state.deck.heroClass),
-                        fileExtension: JPG_EXTENSION),
+                    assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.heroClass), fileExtension: JPG_EXTENSION),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -61,8 +56,7 @@ class _DeckListHeaderState extends State<DeckListHeader>
                 ),
                 if (isExpanded)
                   Image.asset(
-                    assetPath(
-                        SUBFOLDER_MISC, _headerBorderSelected(state.deck.type)),
+                    assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.type)),
                     fit: BoxFit.fill,
                   ),
                 _headerContent(state),
@@ -133,9 +127,7 @@ class _DeckListHeaderState extends State<DeckListHeader>
   _headerContent(DeckBuilderState state) {
     final cardCount = state.deck.cards.isEmpty
         ? 0
-        : state.deck.cards
-            .map((e) => e.amount)
-            .reduce((value, element) => value += element);
+        : state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element);
     return Container(
         child: Row(
       children: [
@@ -172,9 +164,7 @@ class _DeckListHeaderState extends State<DeckListHeader>
                 Flexible(
                     child: AutoSizeText(
                   "$cardCount/30",
-                  style: cardCount == 30
-                      ? FontStyles.bold13Green
-                      : FontStyles.bold13Gold,
+                  style: cardCount == 30 ? FontStyles.bold13Green : FontStyles.bold13Gold,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
                   minFontSize: 8,

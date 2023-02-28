@@ -5,38 +5,29 @@ import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_params.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_selection/domain/usecase/fetch_deck_usecase.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
 part 'deck_selection_bloc.freezed.dart';
-
 part 'deck_selection_event.dart';
-
 part 'deck_selection_state.dart';
 
 @injectable
 class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
-  DeckSelectionBloc(this.fetchDeckUsecase)
-      : super(const DeckSelectionState.initial(deck: Deck())) {
+  DeckSelectionBloc(this.fetchDeckUsecase) : super(const DeckSelectionState.initial(deck: Deck())) {
     on<ImportDeckEvent>((event, emit) => handleImportDeck(emit, event.locale));
 
-    on<LoadCreatedDecksEvent>(
-        (event, emit) async => handleLoadCreatedDecks(emit));
+    on<LoadCreatedDecksEvent>((event, emit) async => handleLoadCreatedDecks(emit));
 
-    on<ChangeDeckCodeEvent>(
-        (event, emit) async => handleChangeDeckCodeEvent(emit, event.deckCode));
+    on<ChangeDeckCodeEvent>((event, emit) async => handleChangeDeckCodeEvent(emit, event.deckCode));
 
-    on<ChangeGameModeEvent>(
-        (event, emit) async => handleChangeGameModeEvent(emit, event.gameMode));
+    on<ChangeGameModeEvent>((event, emit) async => handleChangeGameModeEvent(emit, event.gameMode));
 
-    on<SelectLoadedDeckEvent>(
-        (event, emit) async => handleSelectLoadedDeckEvent(emit, event.deckId));
+    on<SelectLoadedDeckEvent>((event, emit) async => handleSelectLoadedDeckEvent(emit, event.deckId));
 
-    on<SelectClassEvent>(
-        (event, emit) async => handleSelectClassEvent(emit, event.heroClass));
+    on<SelectClassEvent>((event, emit) async => handleSelectClassEvent(emit, event.heroClass));
 
     on<CloseEvent>((event, emit) async => handleClose(emit));
   }
@@ -65,11 +56,9 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
 
   void handleClose(Emitter<DeckSelectionState> emit) {}
 
-  void handleSelectLoadedDeckEvent(
-      Emitter<DeckSelectionState> emit, String deckId) {}
+  void handleSelectLoadedDeckEvent(Emitter<DeckSelectionState> emit, String deckId) {}
 
-  void handleChangeGameModeEvent(
-      Emitter<DeckSelectionState> emit, DeckType type) {
+  void handleChangeGameModeEvent(Emitter<DeckSelectionState> emit, DeckType type) {
     final deck = state.deck.copyWith(type: type);
     emit(DeckSelectionState.changed(
       deck: deck,

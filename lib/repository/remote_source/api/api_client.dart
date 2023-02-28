@@ -38,7 +38,7 @@ abstract class ApiClient {
     @Query("gameMode") String? gameMode,
   });
 
-    @GET('/hearthstone/deck')
+  @GET('/hearthstone/deck')
   Future<DeckResponse> getDeck(
     @Query("code") String? deckCode,
     @Query("locale") String locale,

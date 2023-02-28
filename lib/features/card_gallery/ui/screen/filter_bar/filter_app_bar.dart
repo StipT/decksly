@@ -1,6 +1,5 @@
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
+import 'package:decksly/common/util/debouncer.dart';
 import 'package:decksly/data/card_class.dart';
 import 'package:decksly/data/card_set.dart';
 import 'package:decksly/data/sort_by.dart';
@@ -20,7 +19,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterAppBar extends StatefulWidget {
   FilterAppBar({
@@ -40,8 +38,9 @@ class FilterAppBar extends StatefulWidget {
   State<FilterAppBar> createState() => _FilterAppBarState();
 }
 
-class _FilterAppBarState extends State<FilterAppBar>
-    with TickerProviderStateMixin {
+class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMixin {
+  final _debouncer = Debouncer(milliseconds: 500);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
@@ -61,68 +60,52 @@ class _FilterAppBarState extends State<FilterAppBar>
                     height: 70.h,
                     width: double.infinity,
                     child: Container(
-                      padding: EdgeInsets.only(
-                          left: 4.w,
-                          right: 4.w,
-                          top: 13.125.h,
-                          bottom: 4.375.h),
+                      padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 13.125.h, bottom: 4.375.h),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           _classFilter(widget.deckClass, state),
                           Container(
-                            padding:
-                                EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
+                            padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSDropdown(
                               height: 70.h,
                               width: 95.w,
                               dropdownWidth: 250.w,
                               selectedValue: state.cardFilterParams.set,
                               dropdownType: DropdownType.cardSet,
-                              dropdownValues:
-                                  getCardSets(subCollection: SubCollection.all),
-                              onChange: (value) =>
-                                  BlocProvider.of<CardGalleryBloc>(context).add(
-                                      CardFilterParamsChangedEvent(
-                                          state.cardFilterParams.copyWith(
-                                              set: cardSetFromIndex(value)
-                                                  .value))),
+                              dropdownValues: getCardSets(subCollection: SubCollection.all),
+                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
+                                  CardFilterParamsChangedEvent(
+                                      state.cardFilterParams.copyWith(set: cardSetFromIndex(value).value))),
                             ),
                           ),
                           Container(
                               width: 330.w,
                               height: 40.h,
                               child: ManaPicker(
-                                onChange: (mana) =>
-                                    BlocProvider.of<CardGalleryBloc>(context)
-                                        .add(CardFilterParamsChangedEvent(state
-                                            .cardFilterParams
-                                            .copyWith(manaCost: mana))),
+                                onChange: (mana) => BlocProvider.of<CardGalleryBloc>(context)
+                                    .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(manaCost: mana))),
                               )),
                           Expanded(
                               child: Container(
-                            padding:
-                                EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
+                            padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSTextField(
                               hint: LocaleKeys.search.tr(),
                               suffix: TextFieldSuffix.search,
                               onSubmitted: (_) {},
-                              onChange: (text) =>
-                                  BlocProvider.of<CardGalleryBloc>(context).add(
-                                      CardFilterParamsChangedEvent(state
-                                          .cardFilterParams
-                                          .copyWith(textFilter: text))),
+                              onChange: (text) => _debouncer.run(() {
+                                BlocProvider.of<CardGalleryBloc>(context).add(
+                                    CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(textFilter: text)));
+                              }),
                               theme: TextFieldTheme.velvet,
                             ),
                           )),
                           Container(
-                            padding:
-                                EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
+                            padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSBarToggleButton(
                               width: 70.w,
                               isToggled: widget.isExtended,
-                              activeFilters:
-                                  extraFiltersActive(state.cardFilterParams),
+                              activeFilters: extraFiltersActive(state.cardFilterParams),
                               onTap: () {
                                 _toggleBarExtension();
                               },
@@ -149,8 +132,7 @@ class _FilterAppBarState extends State<FilterAppBar>
 
   int extraFiltersActive(CardFilterParams cardFilterParams) {
     int activeFilters = 0;
-    if (cardFilterParams.sort.isNotEmpty &&
-        cardFilterParams.sort != SortBy.manaAsc.value) {
+    if (cardFilterParams.sort.isNotEmpty && cardFilterParams.sort != SortBy.manaAsc.value) {
       activeFilters++;
     }
     if (cardFilterParams.attack.isNotEmpty) {
@@ -185,16 +167,14 @@ class _FilterAppBarState extends State<FilterAppBar>
     return deckClass != null
         ? ClassFilter(
             onToggleClassFilter: () {
-              BlocProvider.of<CardGalleryBloc>(context)
-                  .add(ToggleClassCardsEvent(deckClass));
+              BlocProvider.of<CardGalleryBloc>(context).add(ToggleClassCardsEvent(deckClass));
             },
             onToggleNeutralFilter: () {
-              BlocProvider.of<CardGalleryBloc>(context)
-                  .add(ToggleNeutralCardsEvent(deckClass));
+              BlocProvider.of<CardGalleryBloc>(context).add(ToggleNeutralCardsEvent(deckClass));
             },
             deckClass: deckClass,
             height: 105.h,
-            width: 120.w,
+            width: 110.w,
           )
         : Container(
             padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
@@ -204,11 +184,9 @@ class _FilterAppBarState extends State<FilterAppBar>
               selectedValue: state.cardFilterParams.heroClass.toString(),
               dropdownType: DropdownType.cardClass,
               dropdownValues: CardClass.values.map((e) => e.value).toList(),
-              onChange: (value) =>
-                  BlocProvider.of<CardGalleryBloc>(context).add(
+              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
                 CardFilterParamsChangedEvent(
-                  state.cardFilterParams
-                      .copyWith(heroClass: [cardClassFromIndex(value).value]),
+                  state.cardFilterParams.copyWith(heroClass: [cardClassFromIndex(value).value]),
                 ),
               ),
             ),

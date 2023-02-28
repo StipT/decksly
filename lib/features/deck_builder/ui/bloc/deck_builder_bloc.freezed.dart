@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DeckBuilderState {
   Deck get deck => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Deck deck) initial,
@@ -27,6 +28,7 @@ mixin _$DeckBuilderState {
     required TResult Function(Deck deck, Failure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Deck deck)? initial,
@@ -48,6 +50,7 @@ mixin _$DeckBuilderState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_DeckBuilderInitial value) initial,
@@ -58,6 +61,7 @@ mixin _$DeckBuilderState {
     required TResult Function(_DeckBuilderError value) failure,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeckBuilderInitial value)? initial,
@@ -81,15 +85,14 @@ mixin _$DeckBuilderState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DeckBuilderStateCopyWith<DeckBuilderState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DeckBuilderStateCopyWith<DeckBuilderState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DeckBuilderStateCopyWith<$Res> {
-  factory $DeckBuilderStateCopyWith(
-          DeckBuilderState value, $Res Function(DeckBuilderState) then) =
+  factory $DeckBuilderStateCopyWith(DeckBuilderState value, $Res Function(DeckBuilderState) then) =
       _$DeckBuilderStateCopyWithImpl<$Res, DeckBuilderState>;
+
   @useResult
   $Res call({Deck deck});
 
@@ -97,12 +100,12 @@ abstract class $DeckBuilderStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DeckBuilderStateCopyWithImpl<$Res, $Val extends DeckBuilderState>
-    implements $DeckBuilderStateCopyWith<$Res> {
+class _$DeckBuilderStateCopyWithImpl<$Res, $Val extends DeckBuilderState> implements $DeckBuilderStateCopyWith<$Res> {
   _$DeckBuilderStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -129,11 +132,10 @@ class _$DeckBuilderStateCopyWithImpl<$Res, $Val extends DeckBuilderState>
 }
 
 /// @nodoc
-abstract class _$$_DeckBuilderInitialCopyWith<$Res>
-    implements $DeckBuilderStateCopyWith<$Res> {
-  factory _$$_DeckBuilderInitialCopyWith(_$_DeckBuilderInitial value,
-          $Res Function(_$_DeckBuilderInitial) then) =
+abstract class _$$_DeckBuilderInitialCopyWith<$Res> implements $DeckBuilderStateCopyWith<$Res> {
+  factory _$$_DeckBuilderInitialCopyWith(_$_DeckBuilderInitial value, $Res Function(_$_DeckBuilderInitial) then) =
       __$$_DeckBuilderInitialCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck});
@@ -143,11 +145,9 @@ abstract class _$$_DeckBuilderInitialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeckBuilderInitialCopyWithImpl<$Res>
-    extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderInitial>
+class __$$_DeckBuilderInitialCopyWithImpl<$Res> extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderInitial>
     implements _$$_DeckBuilderInitialCopyWith<$Res> {
-  __$$_DeckBuilderInitialCopyWithImpl(
-      _$_DeckBuilderInitial _value, $Res Function(_$_DeckBuilderInitial) _then)
+  __$$_DeckBuilderInitialCopyWithImpl(_$_DeckBuilderInitial _value, $Res Function(_$_DeckBuilderInitial) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -192,8 +192,7 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckBuilderInitialCopyWith<_$_DeckBuilderInitial> get copyWith =>
-      __$$_DeckBuilderInitialCopyWithImpl<_$_DeckBuilderInitial>(
-          this, _$identity);
+      __$$_DeckBuilderInitialCopyWithImpl<_$_DeckBuilderInitial>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -283,23 +282,21 @@ class _$_DeckBuilderInitial implements _DeckBuilderInitial {
 }
 
 abstract class _DeckBuilderInitial implements DeckBuilderState {
-  const factory _DeckBuilderInitial({required final Deck deck}) =
-      _$_DeckBuilderInitial;
+  const factory _DeckBuilderInitial({required final Deck deck}) = _$_DeckBuilderInitial;
 
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckBuilderInitialCopyWith<_$_DeckBuilderInitial> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckBuilderInitialCopyWith<_$_DeckBuilderInitial> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckBuilderChangedCopyWith<$Res>
-    implements $DeckBuilderStateCopyWith<$Res> {
-  factory _$$_DeckBuilderChangedCopyWith(_$_DeckBuilderChanged value,
-          $Res Function(_$_DeckBuilderChanged) then) =
+abstract class _$$_DeckBuilderChangedCopyWith<$Res> implements $DeckBuilderStateCopyWith<$Res> {
+  factory _$$_DeckBuilderChangedCopyWith(_$_DeckBuilderChanged value, $Res Function(_$_DeckBuilderChanged) then) =
       __$$_DeckBuilderChangedCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck});
@@ -309,11 +306,9 @@ abstract class _$$_DeckBuilderChangedCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeckBuilderChangedCopyWithImpl<$Res>
-    extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderChanged>
+class __$$_DeckBuilderChangedCopyWithImpl<$Res> extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderChanged>
     implements _$$_DeckBuilderChangedCopyWith<$Res> {
-  __$$_DeckBuilderChangedCopyWithImpl(
-      _$_DeckBuilderChanged _value, $Res Function(_$_DeckBuilderChanged) _then)
+  __$$_DeckBuilderChangedCopyWithImpl(_$_DeckBuilderChanged _value, $Res Function(_$_DeckBuilderChanged) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -358,8 +353,7 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckBuilderChangedCopyWith<_$_DeckBuilderChanged> get copyWith =>
-      __$$_DeckBuilderChangedCopyWithImpl<_$_DeckBuilderChanged>(
-          this, _$identity);
+      __$$_DeckBuilderChangedCopyWithImpl<_$_DeckBuilderChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -449,24 +443,22 @@ class _$_DeckBuilderChanged implements _DeckBuilderChanged {
 }
 
 abstract class _DeckBuilderChanged implements DeckBuilderState {
-  const factory _DeckBuilderChanged({required final Deck deck}) =
-      _$_DeckBuilderChanged;
+  const factory _DeckBuilderChanged({required final Deck deck}) = _$_DeckBuilderChanged;
 
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckBuilderChangedCopyWith<_$_DeckBuilderChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckBuilderChangedCopyWith<_$_DeckBuilderChanged> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckBuilderCodeGeneratedCopyWith<$Res>
-    implements $DeckBuilderStateCopyWith<$Res> {
+abstract class _$$_DeckBuilderCodeGeneratedCopyWith<$Res> implements $DeckBuilderStateCopyWith<$Res> {
   factory _$$_DeckBuilderCodeGeneratedCopyWith(
-          _$_DeckBuilderCodeGenerated value,
-          $Res Function(_$_DeckBuilderCodeGenerated) then) =
+          _$_DeckBuilderCodeGenerated value, $Res Function(_$_DeckBuilderCodeGenerated) then) =
       __$$_DeckBuilderCodeGeneratedCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck});
@@ -479,8 +471,8 @@ abstract class _$$_DeckBuilderCodeGeneratedCopyWith<$Res>
 class __$$_DeckBuilderCodeGeneratedCopyWithImpl<$Res>
     extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderCodeGenerated>
     implements _$$_DeckBuilderCodeGeneratedCopyWith<$Res> {
-  __$$_DeckBuilderCodeGeneratedCopyWithImpl(_$_DeckBuilderCodeGenerated _value,
-      $Res Function(_$_DeckBuilderCodeGenerated) _then)
+  __$$_DeckBuilderCodeGeneratedCopyWithImpl(
+      _$_DeckBuilderCodeGenerated _value, $Res Function(_$_DeckBuilderCodeGenerated) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -524,9 +516,8 @@ class _$_DeckBuilderCodeGenerated implements _DeckBuilderCodeGenerated {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeckBuilderCodeGeneratedCopyWith<_$_DeckBuilderCodeGenerated>
-      get copyWith => __$$_DeckBuilderCodeGeneratedCopyWithImpl<
-          _$_DeckBuilderCodeGenerated>(this, _$identity);
+  _$$_DeckBuilderCodeGeneratedCopyWith<_$_DeckBuilderCodeGenerated> get copyWith =>
+      __$$_DeckBuilderCodeGeneratedCopyWithImpl<_$_DeckBuilderCodeGenerated>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -616,23 +607,21 @@ class _$_DeckBuilderCodeGenerated implements _DeckBuilderCodeGenerated {
 }
 
 abstract class _DeckBuilderCodeGenerated implements DeckBuilderState {
-  const factory _DeckBuilderCodeGenerated({required final Deck deck}) =
-      _$_DeckBuilderCodeGenerated;
+  const factory _DeckBuilderCodeGenerated({required final Deck deck}) = _$_DeckBuilderCodeGenerated;
 
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckBuilderCodeGeneratedCopyWith<_$_DeckBuilderCodeGenerated>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_DeckBuilderCodeGeneratedCopyWith<_$_DeckBuilderCodeGenerated> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckBuilderCardAddedCopyWith<$Res>
-    implements $DeckBuilderStateCopyWith<$Res> {
-  factory _$$_DeckBuilderCardAddedCopyWith(_$_DeckBuilderCardAdded value,
-          $Res Function(_$_DeckBuilderCardAdded) then) =
+abstract class _$$_DeckBuilderCardAddedCopyWith<$Res> implements $DeckBuilderStateCopyWith<$Res> {
+  factory _$$_DeckBuilderCardAddedCopyWith(_$_DeckBuilderCardAdded value, $Res Function(_$_DeckBuilderCardAdded) then) =
       __$$_DeckBuilderCardAddedCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({int index, Deck deck});
@@ -642,11 +631,9 @@ abstract class _$$_DeckBuilderCardAddedCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeckBuilderCardAddedCopyWithImpl<$Res>
-    extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderCardAdded>
+class __$$_DeckBuilderCardAddedCopyWithImpl<$Res> extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderCardAdded>
     implements _$$_DeckBuilderCardAddedCopyWith<$Res> {
-  __$$_DeckBuilderCardAddedCopyWithImpl(_$_DeckBuilderCardAdded _value,
-      $Res Function(_$_DeckBuilderCardAdded) _then)
+  __$$_DeckBuilderCardAddedCopyWithImpl(_$_DeckBuilderCardAdded _value, $Res Function(_$_DeckBuilderCardAdded) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -699,8 +686,7 @@ class _$_DeckBuilderCardAdded implements _DeckBuilderCardAdded {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckBuilderCardAddedCopyWith<_$_DeckBuilderCardAdded> get copyWith =>
-      __$$_DeckBuilderCardAddedCopyWithImpl<_$_DeckBuilderCardAdded>(
-          this, _$identity);
+      __$$_DeckBuilderCardAddedCopyWithImpl<_$_DeckBuilderCardAdded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -790,25 +776,24 @@ class _$_DeckBuilderCardAdded implements _DeckBuilderCardAdded {
 }
 
 abstract class _DeckBuilderCardAdded implements DeckBuilderState {
-  const factory _DeckBuilderCardAdded(
-      {required final int index,
-      required final Deck deck}) = _$_DeckBuilderCardAdded;
+  const factory _DeckBuilderCardAdded({required final int index, required final Deck deck}) = _$_DeckBuilderCardAdded;
 
   int get index;
+
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckBuilderCardAddedCopyWith<_$_DeckBuilderCardAdded> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckBuilderCardAddedCopyWith<_$_DeckBuilderCardAdded> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckBuilderCardRemovedCopyWith<$Res>
-    implements $DeckBuilderStateCopyWith<$Res> {
-  factory _$$_DeckBuilderCardRemovedCopyWith(_$_DeckBuilderCardRemoved value,
-          $Res Function(_$_DeckBuilderCardRemoved) then) =
+abstract class _$$_DeckBuilderCardRemovedCopyWith<$Res> implements $DeckBuilderStateCopyWith<$Res> {
+  factory _$$_DeckBuilderCardRemovedCopyWith(
+          _$_DeckBuilderCardRemoved value, $Res Function(_$_DeckBuilderCardRemoved) then) =
       __$$_DeckBuilderCardRemovedCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({int index, Deck deck});
@@ -821,8 +806,8 @@ abstract class _$$_DeckBuilderCardRemovedCopyWith<$Res>
 class __$$_DeckBuilderCardRemovedCopyWithImpl<$Res>
     extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderCardRemoved>
     implements _$$_DeckBuilderCardRemovedCopyWith<$Res> {
-  __$$_DeckBuilderCardRemovedCopyWithImpl(_$_DeckBuilderCardRemoved _value,
-      $Res Function(_$_DeckBuilderCardRemoved) _then)
+  __$$_DeckBuilderCardRemovedCopyWithImpl(
+      _$_DeckBuilderCardRemoved _value, $Res Function(_$_DeckBuilderCardRemoved) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -875,8 +860,7 @@ class _$_DeckBuilderCardRemoved implements _DeckBuilderCardRemoved {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckBuilderCardRemovedCopyWith<_$_DeckBuilderCardRemoved> get copyWith =>
-      __$$_DeckBuilderCardRemovedCopyWithImpl<_$_DeckBuilderCardRemoved>(
-          this, _$identity);
+      __$$_DeckBuilderCardRemovedCopyWithImpl<_$_DeckBuilderCardRemoved>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -966,25 +950,24 @@ class _$_DeckBuilderCardRemoved implements _DeckBuilderCardRemoved {
 }
 
 abstract class _DeckBuilderCardRemoved implements DeckBuilderState {
-  const factory _DeckBuilderCardRemoved(
-      {required final int index,
-      required final Deck deck}) = _$_DeckBuilderCardRemoved;
+  const factory _DeckBuilderCardRemoved({required final int index, required final Deck deck}) =
+      _$_DeckBuilderCardRemoved;
 
   int get index;
+
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckBuilderCardRemovedCopyWith<_$_DeckBuilderCardRemoved> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckBuilderCardRemovedCopyWith<_$_DeckBuilderCardRemoved> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckBuilderErrorCopyWith<$Res>
-    implements $DeckBuilderStateCopyWith<$Res> {
-  factory _$$_DeckBuilderErrorCopyWith(
-          _$_DeckBuilderError value, $Res Function(_$_DeckBuilderError) then) =
+abstract class _$$_DeckBuilderErrorCopyWith<$Res> implements $DeckBuilderStateCopyWith<$Res> {
+  factory _$$_DeckBuilderErrorCopyWith(_$_DeckBuilderError value, $Res Function(_$_DeckBuilderError) then) =
       __$$_DeckBuilderErrorCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck, Failure failure});
@@ -994,11 +977,9 @@ abstract class _$$_DeckBuilderErrorCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeckBuilderErrorCopyWithImpl<$Res>
-    extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderError>
+class __$$_DeckBuilderErrorCopyWithImpl<$Res> extends _$DeckBuilderStateCopyWithImpl<$Res, _$_DeckBuilderError>
     implements _$$_DeckBuilderErrorCopyWith<$Res> {
-  __$$_DeckBuilderErrorCopyWithImpl(
-      _$_DeckBuilderError _value, $Res Function(_$_DeckBuilderError) _then)
+  __$$_DeckBuilderErrorCopyWithImpl(_$_DeckBuilderError _value, $Res Function(_$_DeckBuilderError) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1141,15 +1122,14 @@ class _$_DeckBuilderError implements _DeckBuilderError {
 }
 
 abstract class _DeckBuilderError implements DeckBuilderState {
-  const factory _DeckBuilderError(
-      {required final Deck deck,
-      required final Failure failure}) = _$_DeckBuilderError;
+  const factory _DeckBuilderError({required final Deck deck, required final Failure failure}) = _$_DeckBuilderError;
 
   @override
   Deck get deck;
+
   Failure get failure;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckBuilderErrorCopyWith<_$_DeckBuilderError> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckBuilderErrorCopyWith<_$_DeckBuilderError> get copyWith => throw _privateConstructorUsedError;
 }

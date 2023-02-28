@@ -62,7 +62,7 @@ extension CardClassValues on CardClass {
         CardClass.shaman,
         CardClass.warlock,
         CardClass.warrior,
-    CardClass.neutral,
+        CardClass.neutral,
       ];
 }
 

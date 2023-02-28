@@ -21,27 +21,34 @@ DeckResponse _$DeckResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DeckResponse {
   String get deckCode => throw _privateConstructorUsedError;
+
   int get version => throw _privateConstructorUsedError;
+
   CardDTO? get hero => throw _privateConstructorUsedError;
+
   CardDTO? get heroPower => throw _privateConstructorUsedError;
+
   List<CardDTO> get cards => throw _privateConstructorUsedError;
+
   int get cardCount => throw _privateConstructorUsedError;
+
   @JsonKey(name: 'class')
   ClassDTO? get deckClass => throw _privateConstructorUsedError;
+
   @JsonKey(name: 'format')
   String get deckType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $DeckResponseCopyWith<DeckResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DeckResponseCopyWith<DeckResponse> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DeckResponseCopyWith<$Res> {
-  factory $DeckResponseCopyWith(
-          DeckResponse value, $Res Function(DeckResponse) then) =
+  factory $DeckResponseCopyWith(DeckResponse value, $Res Function(DeckResponse) then) =
       _$DeckResponseCopyWithImpl<$Res, DeckResponse>;
+
   @useResult
   $Res call(
       {String deckCode,
@@ -54,17 +61,19 @@ abstract class $DeckResponseCopyWith<$Res> {
       @JsonKey(name: 'format') String deckType});
 
   $CardDTOCopyWith<$Res>? get hero;
+
   $CardDTOCopyWith<$Res>? get heroPower;
+
   $ClassDTOCopyWith<$Res>? get deckClass;
 }
 
 /// @nodoc
-class _$DeckResponseCopyWithImpl<$Res, $Val extends DeckResponse>
-    implements $DeckResponseCopyWith<$Res> {
+class _$DeckResponseCopyWithImpl<$Res, $Val extends DeckResponse> implements $DeckResponseCopyWith<$Res> {
   _$DeckResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -154,11 +163,10 @@ class _$DeckResponseCopyWithImpl<$Res, $Val extends DeckResponse>
 }
 
 /// @nodoc
-abstract class _$$_DeckResponseCopyWith<$Res>
-    implements $DeckResponseCopyWith<$Res> {
-  factory _$$_DeckResponseCopyWith(
-          _$_DeckResponse value, $Res Function(_$_DeckResponse) then) =
+abstract class _$$_DeckResponseCopyWith<$Res> implements $DeckResponseCopyWith<$Res> {
+  factory _$$_DeckResponseCopyWith(_$_DeckResponse value, $Res Function(_$_DeckResponse) then) =
       __$$_DeckResponseCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call(
@@ -173,19 +181,18 @@ abstract class _$$_DeckResponseCopyWith<$Res>
 
   @override
   $CardDTOCopyWith<$Res>? get hero;
+
   @override
   $CardDTOCopyWith<$Res>? get heroPower;
+
   @override
   $ClassDTOCopyWith<$Res>? get deckClass;
 }
 
 /// @nodoc
-class __$$_DeckResponseCopyWithImpl<$Res>
-    extends _$DeckResponseCopyWithImpl<$Res, _$_DeckResponse>
+class __$$_DeckResponseCopyWithImpl<$Res> extends _$DeckResponseCopyWithImpl<$Res, _$_DeckResponse>
     implements _$$_DeckResponseCopyWith<$Res> {
-  __$$_DeckResponseCopyWithImpl(
-      _$_DeckResponse _value, $Res Function(_$_DeckResponse) _then)
-      : super(_value, _then);
+  __$$_DeckResponseCopyWithImpl(_$_DeckResponse _value, $Res Function(_$_DeckResponse) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -250,8 +257,7 @@ class _$_DeckResponse implements _DeckResponse {
       @JsonKey(name: 'format') required this.deckType})
       : _cards = cards;
 
-  factory _$_DeckResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_DeckResponseFromJson(json);
+  factory _$_DeckResponse.fromJson(Map<String, dynamic> json) => _$$_DeckResponseFromJson(json);
 
   @override
   final String deckCode;
@@ -262,6 +268,7 @@ class _$_DeckResponse implements _DeckResponse {
   @override
   final CardDTO? heroPower;
   final List<CardDTO> _cards;
+
   @override
   List<CardDTO> get cards {
     if (_cards is EqualUnmodifiableListView) return _cards;
@@ -288,33 +295,20 @@ class _$_DeckResponse implements _DeckResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeckResponse &&
-            (identical(other.deckCode, deckCode) ||
-                other.deckCode == deckCode) &&
+            (identical(other.deckCode, deckCode) || other.deckCode == deckCode) &&
             (identical(other.version, version) || other.version == version) &&
             (identical(other.hero, hero) || other.hero == hero) &&
-            (identical(other.heroPower, heroPower) ||
-                other.heroPower == heroPower) &&
+            (identical(other.heroPower, heroPower) || other.heroPower == heroPower) &&
             const DeepCollectionEquality().equals(other._cards, _cards) &&
-            (identical(other.cardCount, cardCount) ||
-                other.cardCount == cardCount) &&
-            (identical(other.deckClass, deckClass) ||
-                other.deckClass == deckClass) &&
-            (identical(other.deckType, deckType) ||
-                other.deckType == deckType));
+            (identical(other.cardCount, cardCount) || other.cardCount == cardCount) &&
+            (identical(other.deckClass, deckClass) || other.deckClass == deckClass) &&
+            (identical(other.deckType, deckType) || other.deckType == deckType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      deckCode,
-      version,
-      hero,
-      heroPower,
-      const DeepCollectionEquality().hash(_cards),
-      cardCount,
-      deckClass,
-      deckType);
+  int get hashCode => Object.hash(runtimeType, deckCode, version, hero, heroPower,
+      const DeepCollectionEquality().hash(_cards), cardCount, deckClass, deckType);
 
   @JsonKey(ignore: true)
   @override
@@ -332,39 +326,44 @@ class _$_DeckResponse implements _DeckResponse {
 
 abstract class _DeckResponse implements DeckResponse {
   const factory _DeckResponse(
-          {required final String deckCode,
-          required final int version,
-          required final CardDTO? hero,
-          required final CardDTO? heroPower,
-          required final List<CardDTO> cards,
-          required final int cardCount,
-          @JsonKey(name: 'class') required final ClassDTO? deckClass,
-          @JsonKey(name: 'format') required final String deckType}) =
-      _$_DeckResponse;
+      {required final String deckCode,
+      required final int version,
+      required final CardDTO? hero,
+      required final CardDTO? heroPower,
+      required final List<CardDTO> cards,
+      required final int cardCount,
+      @JsonKey(name: 'class') required final ClassDTO? deckClass,
+      @JsonKey(name: 'format') required final String deckType}) = _$_DeckResponse;
 
-  factory _DeckResponse.fromJson(Map<String, dynamic> json) =
-      _$_DeckResponse.fromJson;
+  factory _DeckResponse.fromJson(Map<String, dynamic> json) = _$_DeckResponse.fromJson;
 
   @override
   String get deckCode;
+
   @override
   int get version;
+
   @override
   CardDTO? get hero;
+
   @override
   CardDTO? get heroPower;
+
   @override
   List<CardDTO> get cards;
+
   @override
   int get cardCount;
+
   @override
   @JsonKey(name: 'class')
   ClassDTO? get deckClass;
+
   @override
   @JsonKey(name: 'format')
   String get deckType;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckResponseCopyWith<_$_DeckResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckResponseCopyWith<_$_DeckResponse> get copyWith => throw _privateConstructorUsedError;
 }

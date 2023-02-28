@@ -61,7 +61,7 @@ class HSDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height ,
+      height: height,
       width: width,
       alignment: Alignment.center,
       child: Stack(
@@ -71,121 +71,121 @@ class HSDropdown extends StatelessWidget {
             isDropdownButton: _showIcon(dropdownType),
           ),
           CustomDropdown<String>(
-              icon: Icon(Icons.keyboard_arrow_down, size: 20.sp),
-              selectedDropdownButtonOverlay: HSSelectedDropdownButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
-              activeDropdownButtonOverlay: HSActiveButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
-              dropdownButton: (value) {
-                switch (dropdownType) {
-                  case DropdownType.cardClass:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: assetPath(SUBFOLDER_CLASS, "${cardClassFromIndex(int.parse(value)).name}_icon"),
-                      text: cardClassFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.cardSet:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: assetPath(SUBFOLDER_SET, cardSetFromIndex(int.parse(value)).name,
-                          fileExtension: SVG_EXTENSION),
-                      text: cardSetFromIndex(int.parse(value)).localized(),
-                      hideText: true,
-                    );
-                  case DropdownType.mana:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: assetPath(SUBFOLDER_CLASS, value),
-                      text: value,
-                    );
-                  case DropdownType.sortBy:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: NO_ASSET,
-                      text: sortByFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.attack:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: assetPath(SUBFOLDER_MISC, "attack"),
-                      text: attackFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.health:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: assetPath(SUBFOLDER_MISC, "health"),
-                      text: healthFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.cardType:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: NO_ASSET,
-                      text: cardTypeFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.minionType:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: NO_ASSET,
-                      text: minionTypeFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.spellSchool:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: NO_ASSET,
-                      text: spellSchoolFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.rarity:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: NO_ASSET,
-                      text: rarityFromIndex(int.parse(value)).localized(),
-                    );
-                  case DropdownType.keywords:
-                    return HSDropdownButton(
-                      height: height,
-                      assetImagePath: NO_ASSET,
-                      text: keywordFromIndex(int.parse(value)).localized(),
-                    );
-                }
-              },
-              onChange: (int index) => onChange(index),
-              dropdownButtonStyle: DropdownButtonStyle(
-                mainAxisAlignment: MainAxisAlignment.start,
-                height: height,
-                width: width,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
-                padding: EdgeInsets.only(left: 8.w),
-                textStyle: FontStyles.bold13VanDykeBrown,
-                elevation: 1.sp,
-                backgroundColor: Colors.transparent,
-                primaryColor: AppColors.vanDykeBrown,
+            icon: Icon(Icons.keyboard_arrow_down, size: 20.sp),
+            selectedDropdownButtonOverlay: HSSelectedDropdownButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
+            activeDropdownButtonOverlay: HSActiveButtonOverlay(isDropdownButton: _showIcon(dropdownType)),
+            dropdownButton: (value) {
+              switch (dropdownType) {
+                case DropdownType.cardClass:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: assetPath(SUBFOLDER_CLASS, "${cardClassFromIndex(int.parse(value)).name}_icon"),
+                    text: cardClassFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.cardSet:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath:
+                        assetPath(SUBFOLDER_SET, cardSetFromIndex(int.parse(value)).name, fileExtension: SVG_EXTENSION),
+                    text: cardSetFromIndex(int.parse(value)).localized(),
+                    hideText: true,
+                  );
+                case DropdownType.mana:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: assetPath(SUBFOLDER_CLASS, value),
+                    text: value,
+                  );
+                case DropdownType.sortBy:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: NO_ASSET,
+                    text: sortByFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.attack:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: assetPath(SUBFOLDER_MISC, "attack"),
+                    text: attackFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.health:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: assetPath(SUBFOLDER_MISC, "health"),
+                    text: healthFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.cardType:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: NO_ASSET,
+                    text: cardTypeFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.minionType:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: NO_ASSET,
+                    text: minionTypeFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.spellSchool:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: NO_ASSET,
+                    text: spellSchoolFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.rarity:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: NO_ASSET,
+                    text: rarityFromIndex(int.parse(value)).localized(),
+                  );
+                case DropdownType.keywords:
+                  return HSDropdownButton(
+                    height: height,
+                    assetImagePath: NO_ASSET,
+                    text: keywordFromIndex(int.parse(value)).localized(),
+                  );
+              }
+            },
+            onChange: (int index) => onChange(index),
+            dropdownButtonStyle: DropdownButtonStyle(
+              mainAxisAlignment: MainAxisAlignment.start,
+              height: height,
+              width: width,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
+              padding: EdgeInsets.only(left: 8.w),
+              textStyle: FontStyles.bold13VanDykeBrown,
+              elevation: 1.sp,
+              backgroundColor: Colors.transparent,
+              primaryColor: AppColors.vanDykeBrown,
+            ),
+            dropdownStyle: DropdownStyle(
+              width: dropdownWidth,
+              textStyle: FontStyles.bold11,
+              dropdownBackgroundAssetPath: assetPath(
+                SUBFOLDER_DROPDOWN,
+                "dropdown_background",
               ),
-              dropdownStyle: DropdownStyle(
-                width: dropdownWidth,
-                textStyle: FontStyles.bold11,
-                dropdownBackgroundAssetPath: assetPath(
-                  SUBFOLDER_DROPDOWN,
-                  "dropdown_background",
-                ),
-                borderRadius: BorderRadius.circular(8.r),
-                elevation: 6.sp,
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-              ),
-              items: dropdownValues
-                  .asMap()
-                  .entries
-                  .map(
-                    (item) => DropdownItem<String>(
-                      value: item.value.toString(),
-                      child: _getDropdownItem(item.key, dropdownType),
-                    ),
-                  )
-                  .toList(),
-              selectedItem: (index) {
-                return DropdownItem<String>(
-                  value: selectedValue,
-                  child: _getDropdownItem(index, dropdownType, isSelected: true),
-                );
-
-              },),
+              borderRadius: BorderRadius.circular(8.r),
+              elevation: 6.sp,
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
+            ),
+            items: dropdownValues
+                .asMap()
+                .entries
+                .map(
+                  (item) => DropdownItem<String>(
+                    value: item.value.toString(),
+                    child: _getDropdownItem(item.key, dropdownType),
+                  ),
+                )
+                .toList(),
+            selectedItem: (index) {
+              return DropdownItem<String>(
+                value: selectedValue,
+                child: _getDropdownItem(index, dropdownType, isSelected: true),
+              );
+            },
+          ),
         ],
       ),
     );

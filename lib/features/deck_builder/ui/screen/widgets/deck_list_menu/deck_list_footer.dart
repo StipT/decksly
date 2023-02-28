@@ -4,8 +4,8 @@ import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
-import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
+import 'package:decksly/navigation/app_router.dart';
 import 'package:decksly/reusable_ui/misc/hs_alert_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +51,7 @@ class DeckListFooter extends StatelessWidget {
   }
 
   Widget startNewButton(BuildContext context) {
-    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
-        builder: (BuildContext context, state) {
+    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(builder: (BuildContext context, state) {
       return Container(
         height: 45.h,
         padding: EdgeInsets.only(bottom: 8.h, right: 5.w, top: 8.h),
@@ -74,8 +73,7 @@ class DeckListFooter extends StatelessWidget {
                   color: Colors.transparent,
                 ),
                 textStyle: FontStyles.bold15,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.r)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
               ),
               child: Container(
                 alignment: Alignment.center,
@@ -103,8 +101,7 @@ class DeckListFooter extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              BlocProvider.of<DeckBuilderBloc>(context).add(
-                  FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
+              BlocProvider.of<DeckBuilderBloc>(context).add(FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.white,
@@ -112,14 +109,12 @@ class DeckListFooter extends StatelessWidget {
                 color: Colors.transparent,
               ),
               textStyle: FontStyles.bold15,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
             ),
             child: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                padding:
-                    EdgeInsets.symmetric(vertical: 6.125.h, horizontal: 1.w),
+                padding: EdgeInsets.symmetric(vertical: 6.125.h, horizontal: 1.w),
                 child: AutoSizeText(
                   LocaleKeys.copyDeckCode.tr(),
                   style: FontStyles.bold11,

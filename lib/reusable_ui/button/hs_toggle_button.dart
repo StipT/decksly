@@ -34,16 +34,15 @@ class HSBarToggleButton extends StatelessWidget {
             child: OutlinedButton(
               onPressed: onTap,
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.vanDykeBrown, side: const BorderSide(
+                foregroundColor: AppColors.vanDykeBrown,
+                side: const BorderSide(
                   color: Colors.transparent,
                 ),
                 textStyle: FontStyles.bold15VanDykeBrown,
-
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
               ),
               child: SvgPicture.asset(
-                assetPath(SUBFOLDER_MISC, "filter",
-                    fileExtension: SVG_EXTENSION),
+                assetPath(SUBFOLDER_MISC, "filter", fileExtension: SVG_EXTENSION),
                 fit: BoxFit.fill,
                 color: AppColors.bistreBrown,
                 width: 30.w,

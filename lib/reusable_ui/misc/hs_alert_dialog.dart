@@ -70,14 +70,12 @@ class HSDialog {
                   ),
                 ),
                 image: DecorationImage(
-                  image: AssetImage(
-                      assetPath("background", "alert_dialog_background")),
+                  image: AssetImage(assetPath("background", "alert_dialog_background")),
                   fit: BoxFit.cover,
                 ),
               ),
               child: Container(
-                padding:
-                    EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 25.w),
+                padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 25.w),
                 width: 450.w,
                 height: 175.h,
                 child: Row(
@@ -90,8 +88,7 @@ class HSDialog {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8.75.h, horizontal: 5.w),
+                              padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 5.w),
                               child: _dialogMessage(type),
                             ),
                           ),
@@ -106,15 +103,11 @@ class HSDialog {
                                         children: [
                                           const HSWoodHorizontalBorder(),
                                           Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 30.w, right: 30.w),
+                                              margin: EdgeInsets.only(left: 30.w, right: 30.w),
                                               child: HSButton(
                                                 isDisabled: false,
-                                                label:
-                                                    _dialogPrimaryButtonTitle(
-                                                        type),
-                                                onTap: () => onPrimaryButtonTap(
-                                                    dialogContext),
+                                                label: _dialogPrimaryButtonTitle(type),
+                                                onTap: () => onPrimaryButtonTap(dialogContext),
                                               )),
                                         ],
                                       ),
@@ -127,16 +120,11 @@ class HSDialog {
                                           children: [
                                             const HSWoodHorizontalBorder(),
                                             Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 30.w, right: 30.w),
+                                                margin: EdgeInsets.only(left: 30.w, right: 30.w),
                                                 child: HSButton(
                                                   isDisabled: false,
-                                                  label:
-                                                      _dialogSecondaryButtonTitle(
-                                                          type),
-                                                  onTap: () =>
-                                                      onSecondaryButtonTap(
-                                                          dialogContext),
+                                                  label: _dialogSecondaryButtonTitle(type),
+                                                  onTap: () => onSecondaryButtonTap(dialogContext),
                                                 )),
                                           ],
                                         ),

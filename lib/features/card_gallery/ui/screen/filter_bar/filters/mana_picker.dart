@@ -3,7 +3,6 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -56,9 +55,7 @@ class _ManaPickerState extends State<ManaPicker> {
                   String manaFilter = "";
                   for (int i = 0; i < activeItems.length; i++) {
                     if (activeItems[i] == true) {
-                      manaFilter.isEmpty
-                          ? manaFilter += i.toString()
-                          : manaFilter += ",${i.toString()}";
+                      manaFilter.isEmpty ? manaFilter += i.toString() : manaFilter += ",${i.toString()}";
                     }
                   }
                   widget.onChange(manaFilter);

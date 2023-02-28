@@ -3,7 +3,6 @@ import 'package:decksly/repository/remote_source/api/dto/class_dto/class_dto.dar
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'deck_response.freezed.dart';
-
 part 'deck_response.g.dart';
 
 @freezed

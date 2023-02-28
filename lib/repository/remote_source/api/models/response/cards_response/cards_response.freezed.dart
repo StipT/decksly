@@ -21,32 +21,35 @@ CardsResponse _$CardsResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CardsResponse {
   List<CardDTO> get cards => throw _privateConstructorUsedError;
+
   int get cardCount => throw _privateConstructorUsedError;
+
   int get pageCount => throw _privateConstructorUsedError;
+
   int get page => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $CardsResponseCopyWith<CardsResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CardsResponseCopyWith<CardsResponse> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CardsResponseCopyWith<$Res> {
-  factory $CardsResponseCopyWith(
-          CardsResponse value, $Res Function(CardsResponse) then) =
+  factory $CardsResponseCopyWith(CardsResponse value, $Res Function(CardsResponse) then) =
       _$CardsResponseCopyWithImpl<$Res, CardsResponse>;
+
   @useResult
   $Res call({List<CardDTO> cards, int cardCount, int pageCount, int page});
 }
 
 /// @nodoc
-class _$CardsResponseCopyWithImpl<$Res, $Val extends CardsResponse>
-    implements $CardsResponseCopyWith<$Res> {
+class _$CardsResponseCopyWithImpl<$Res, $Val extends CardsResponse> implements $CardsResponseCopyWith<$Res> {
   _$CardsResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -80,23 +83,19 @@ class _$CardsResponseCopyWithImpl<$Res, $Val extends CardsResponse>
 }
 
 /// @nodoc
-abstract class _$$_CardsResponseCopyWith<$Res>
-    implements $CardsResponseCopyWith<$Res> {
-  factory _$$_CardsResponseCopyWith(
-          _$_CardsResponse value, $Res Function(_$_CardsResponse) then) =
+abstract class _$$_CardsResponseCopyWith<$Res> implements $CardsResponseCopyWith<$Res> {
+  factory _$$_CardsResponseCopyWith(_$_CardsResponse value, $Res Function(_$_CardsResponse) then) =
       __$$_CardsResponseCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({List<CardDTO> cards, int cardCount, int pageCount, int page});
 }
 
 /// @nodoc
-class __$$_CardsResponseCopyWithImpl<$Res>
-    extends _$CardsResponseCopyWithImpl<$Res, _$_CardsResponse>
+class __$$_CardsResponseCopyWithImpl<$Res> extends _$CardsResponseCopyWithImpl<$Res, _$_CardsResponse>
     implements _$$_CardsResponseCopyWith<$Res> {
-  __$$_CardsResponseCopyWithImpl(
-      _$_CardsResponse _value, $Res Function(_$_CardsResponse) _then)
-      : super(_value, _then);
+  __$$_CardsResponseCopyWithImpl(_$_CardsResponse _value, $Res Function(_$_CardsResponse) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -131,16 +130,13 @@ class __$$_CardsResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CardsResponse implements _CardsResponse {
   const _$_CardsResponse(
-      {required final List<CardDTO> cards,
-      required this.cardCount,
-      required this.pageCount,
-      required this.page})
+      {required final List<CardDTO> cards, required this.cardCount, required this.pageCount, required this.page})
       : _cards = cards;
 
-  factory _$_CardsResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_CardsResponseFromJson(json);
+  factory _$_CardsResponse.fromJson(Map<String, dynamic> json) => _$$_CardsResponseFromJson(json);
 
   final List<CardDTO> _cards;
+
   @override
   List<CardDTO> get cards {
     if (_cards is EqualUnmodifiableListView) return _cards;
@@ -166,17 +162,14 @@ class _$_CardsResponse implements _CardsResponse {
         (other.runtimeType == runtimeType &&
             other is _$_CardsResponse &&
             const DeepCollectionEquality().equals(other._cards, _cards) &&
-            (identical(other.cardCount, cardCount) ||
-                other.cardCount == cardCount) &&
-            (identical(other.pageCount, pageCount) ||
-                other.pageCount == pageCount) &&
+            (identical(other.cardCount, cardCount) || other.cardCount == cardCount) &&
+            (identical(other.pageCount, pageCount) || other.pageCount == pageCount) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_cards), cardCount, pageCount, page);
+  int get hashCode => Object.hash(runtimeType, const DeepCollectionEquality().hash(_cards), cardCount, pageCount, page);
 
   @JsonKey(ignore: true)
   @override
@@ -199,19 +192,21 @@ abstract class _CardsResponse implements CardsResponse {
       required final int pageCount,
       required final int page}) = _$_CardsResponse;
 
-  factory _CardsResponse.fromJson(Map<String, dynamic> json) =
-      _$_CardsResponse.fromJson;
+  factory _CardsResponse.fromJson(Map<String, dynamic> json) = _$_CardsResponse.fromJson;
 
   @override
   List<CardDTO> get cards;
+
   @override
   int get cardCount;
+
   @override
   int get pageCount;
+
   @override
   int get page;
+
   @override
   @JsonKey(ignore: true)
-  _$$_CardsResponseCopyWith<_$_CardsResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_CardsResponseCopyWith<_$_CardsResponse> get copyWith => throw _privateConstructorUsedError;
 }

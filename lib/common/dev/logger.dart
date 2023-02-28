@@ -12,7 +12,6 @@ class DebugLogger {
   DebugLogger._internal() {
     logger = Logger();
   }
-
 }
 
 void log(String message, {Level level = Level.debug}) {

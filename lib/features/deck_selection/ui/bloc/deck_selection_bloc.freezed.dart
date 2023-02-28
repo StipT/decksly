@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DeckSelectionState {
   Deck get deck => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Deck deck) initial,
@@ -25,6 +26,7 @@ mixin _$DeckSelectionState {
     required TResult Function(Deck deck, Failure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Deck deck)? initial,
@@ -42,6 +44,7 @@ mixin _$DeckSelectionState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_DeckSelectionInitial value) initial,
@@ -50,6 +53,7 @@ mixin _$DeckSelectionState {
     required TResult Function(_DeckSelectionFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DeckSelectionInitial value)? initial,
@@ -69,15 +73,14 @@ mixin _$DeckSelectionState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DeckSelectionStateCopyWith<DeckSelectionState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DeckSelectionStateCopyWith<DeckSelectionState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DeckSelectionStateCopyWith<$Res> {
-  factory $DeckSelectionStateCopyWith(
-          DeckSelectionState value, $Res Function(DeckSelectionState) then) =
+  factory $DeckSelectionStateCopyWith(DeckSelectionState value, $Res Function(DeckSelectionState) then) =
       _$DeckSelectionStateCopyWithImpl<$Res, DeckSelectionState>;
+
   @useResult
   $Res call({Deck deck});
 
@@ -91,6 +94,7 @@ class _$DeckSelectionStateCopyWithImpl<$Res, $Val extends DeckSelectionState>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -117,11 +121,10 @@ class _$DeckSelectionStateCopyWithImpl<$Res, $Val extends DeckSelectionState>
 }
 
 /// @nodoc
-abstract class _$$_DeckSelectionInitialCopyWith<$Res>
-    implements $DeckSelectionStateCopyWith<$Res> {
-  factory _$$_DeckSelectionInitialCopyWith(_$_DeckSelectionInitial value,
-          $Res Function(_$_DeckSelectionInitial) then) =
+abstract class _$$_DeckSelectionInitialCopyWith<$Res> implements $DeckSelectionStateCopyWith<$Res> {
+  factory _$$_DeckSelectionInitialCopyWith(_$_DeckSelectionInitial value, $Res Function(_$_DeckSelectionInitial) then) =
       __$$_DeckSelectionInitialCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck});
@@ -134,8 +137,7 @@ abstract class _$$_DeckSelectionInitialCopyWith<$Res>
 class __$$_DeckSelectionInitialCopyWithImpl<$Res>
     extends _$DeckSelectionStateCopyWithImpl<$Res, _$_DeckSelectionInitial>
     implements _$$_DeckSelectionInitialCopyWith<$Res> {
-  __$$_DeckSelectionInitialCopyWithImpl(_$_DeckSelectionInitial _value,
-      $Res Function(_$_DeckSelectionInitial) _then)
+  __$$_DeckSelectionInitialCopyWithImpl(_$_DeckSelectionInitial _value, $Res Function(_$_DeckSelectionInitial) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -180,8 +182,7 @@ class _$_DeckSelectionInitial implements _DeckSelectionInitial {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckSelectionInitialCopyWith<_$_DeckSelectionInitial> get copyWith =>
-      __$$_DeckSelectionInitialCopyWithImpl<_$_DeckSelectionInitial>(
-          this, _$identity);
+      __$$_DeckSelectionInitialCopyWithImpl<_$_DeckSelectionInitial>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -259,23 +260,21 @@ class _$_DeckSelectionInitial implements _DeckSelectionInitial {
 }
 
 abstract class _DeckSelectionInitial implements DeckSelectionState {
-  const factory _DeckSelectionInitial({required final Deck deck}) =
-      _$_DeckSelectionInitial;
+  const factory _DeckSelectionInitial({required final Deck deck}) = _$_DeckSelectionInitial;
 
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckSelectionInitialCopyWith<_$_DeckSelectionInitial> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckSelectionInitialCopyWith<_$_DeckSelectionInitial> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckSelectionChangedCopyWith<$Res>
-    implements $DeckSelectionStateCopyWith<$Res> {
-  factory _$$_DeckSelectionChangedCopyWith(_$_DeckSelectionChanged value,
-          $Res Function(_$_DeckSelectionChanged) then) =
+abstract class _$$_DeckSelectionChangedCopyWith<$Res> implements $DeckSelectionStateCopyWith<$Res> {
+  factory _$$_DeckSelectionChangedCopyWith(_$_DeckSelectionChanged value, $Res Function(_$_DeckSelectionChanged) then) =
       __$$_DeckSelectionChangedCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck});
@@ -288,8 +287,7 @@ abstract class _$$_DeckSelectionChangedCopyWith<$Res>
 class __$$_DeckSelectionChangedCopyWithImpl<$Res>
     extends _$DeckSelectionStateCopyWithImpl<$Res, _$_DeckSelectionChanged>
     implements _$$_DeckSelectionChangedCopyWith<$Res> {
-  __$$_DeckSelectionChangedCopyWithImpl(_$_DeckSelectionChanged _value,
-      $Res Function(_$_DeckSelectionChanged) _then)
+  __$$_DeckSelectionChangedCopyWithImpl(_$_DeckSelectionChanged _value, $Res Function(_$_DeckSelectionChanged) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -334,8 +332,7 @@ class _$_DeckSelectionChanged implements _DeckSelectionChanged {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckSelectionChangedCopyWith<_$_DeckSelectionChanged> get copyWith =>
-      __$$_DeckSelectionChangedCopyWithImpl<_$_DeckSelectionChanged>(
-          this, _$identity);
+      __$$_DeckSelectionChangedCopyWithImpl<_$_DeckSelectionChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -413,23 +410,22 @@ class _$_DeckSelectionChanged implements _DeckSelectionChanged {
 }
 
 abstract class _DeckSelectionChanged implements DeckSelectionState {
-  const factory _DeckSelectionChanged({required final Deck deck}) =
-      _$_DeckSelectionChanged;
+  const factory _DeckSelectionChanged({required final Deck deck}) = _$_DeckSelectionChanged;
 
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckSelectionChangedCopyWith<_$_DeckSelectionChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckSelectionChangedCopyWith<_$_DeckSelectionChanged> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckSelectionImportedCopyWith<$Res>
-    implements $DeckSelectionStateCopyWith<$Res> {
-  factory _$$_DeckSelectionImportedCopyWith(_$_DeckSelectionImported value,
-          $Res Function(_$_DeckSelectionImported) then) =
+abstract class _$$_DeckSelectionImportedCopyWith<$Res> implements $DeckSelectionStateCopyWith<$Res> {
+  factory _$$_DeckSelectionImportedCopyWith(
+          _$_DeckSelectionImported value, $Res Function(_$_DeckSelectionImported) then) =
       __$$_DeckSelectionImportedCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck});
@@ -442,8 +438,7 @@ abstract class _$$_DeckSelectionImportedCopyWith<$Res>
 class __$$_DeckSelectionImportedCopyWithImpl<$Res>
     extends _$DeckSelectionStateCopyWithImpl<$Res, _$_DeckSelectionImported>
     implements _$$_DeckSelectionImportedCopyWith<$Res> {
-  __$$_DeckSelectionImportedCopyWithImpl(_$_DeckSelectionImported _value,
-      $Res Function(_$_DeckSelectionImported) _then)
+  __$$_DeckSelectionImportedCopyWithImpl(_$_DeckSelectionImported _value, $Res Function(_$_DeckSelectionImported) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -488,8 +483,7 @@ class _$_DeckSelectionImported implements _DeckSelectionImported {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckSelectionImportedCopyWith<_$_DeckSelectionImported> get copyWith =>
-      __$$_DeckSelectionImportedCopyWithImpl<_$_DeckSelectionImported>(
-          this, _$identity);
+      __$$_DeckSelectionImportedCopyWithImpl<_$_DeckSelectionImported>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -567,23 +561,21 @@ class _$_DeckSelectionImported implements _DeckSelectionImported {
 }
 
 abstract class _DeckSelectionImported implements DeckSelectionState {
-  const factory _DeckSelectionImported({required final Deck deck}) =
-      _$_DeckSelectionImported;
+  const factory _DeckSelectionImported({required final Deck deck}) = _$_DeckSelectionImported;
 
   @override
   Deck get deck;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckSelectionImportedCopyWith<_$_DeckSelectionImported> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckSelectionImportedCopyWith<_$_DeckSelectionImported> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeckSelectionFailureCopyWith<$Res>
-    implements $DeckSelectionStateCopyWith<$Res> {
-  factory _$$_DeckSelectionFailureCopyWith(_$_DeckSelectionFailure value,
-          $Res Function(_$_DeckSelectionFailure) then) =
+abstract class _$$_DeckSelectionFailureCopyWith<$Res> implements $DeckSelectionStateCopyWith<$Res> {
+  factory _$$_DeckSelectionFailureCopyWith(_$_DeckSelectionFailure value, $Res Function(_$_DeckSelectionFailure) then) =
       __$$_DeckSelectionFailureCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({Deck deck, Failure failure});
@@ -596,8 +588,7 @@ abstract class _$$_DeckSelectionFailureCopyWith<$Res>
 class __$$_DeckSelectionFailureCopyWithImpl<$Res>
     extends _$DeckSelectionStateCopyWithImpl<$Res, _$_DeckSelectionFailure>
     implements _$$_DeckSelectionFailureCopyWith<$Res> {
-  __$$_DeckSelectionFailureCopyWithImpl(_$_DeckSelectionFailure _value,
-      $Res Function(_$_DeckSelectionFailure) _then)
+  __$$_DeckSelectionFailureCopyWithImpl(_$_DeckSelectionFailure _value, $Res Function(_$_DeckSelectionFailure) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -650,8 +641,7 @@ class _$_DeckSelectionFailure implements _DeckSelectionFailure {
   @override
   @pragma('vm:prefer-inline')
   _$$_DeckSelectionFailureCopyWith<_$_DeckSelectionFailure> get copyWith =>
-      __$$_DeckSelectionFailureCopyWithImpl<_$_DeckSelectionFailure>(
-          this, _$identity);
+      __$$_DeckSelectionFailureCopyWithImpl<_$_DeckSelectionFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -729,15 +719,15 @@ class _$_DeckSelectionFailure implements _DeckSelectionFailure {
 }
 
 abstract class _DeckSelectionFailure implements DeckSelectionState {
-  const factory _DeckSelectionFailure(
-      {required final Deck deck,
-      required final Failure failure}) = _$_DeckSelectionFailure;
+  const factory _DeckSelectionFailure({required final Deck deck, required final Failure failure}) =
+      _$_DeckSelectionFailure;
 
   @override
   Deck get deck;
+
   Failure get failure;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckSelectionFailureCopyWith<_$_DeckSelectionFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckSelectionFailureCopyWith<_$_DeckSelectionFailure> get copyWith => throw _privateConstructorUsedError;
 }

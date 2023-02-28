@@ -34,8 +34,7 @@ class CardGalleryScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _CardGalleryScreenState extends State<CardGalleryScreen> {
-  final PagingController<int, CardDTO> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
 
   bool isSideMenuExtended = false;
@@ -52,13 +51,11 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
   Widget build(BuildContext context) {
     return BlocListener<CardGalleryBloc, CardGalleryState>(
       listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
-      child: BlocBuilder<CardGalleryBloc, CardGalleryState>(
-          builder: (BuildContext context, state) {
+      child: BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
         state.maybeWhen(
           initial: (cardParams, cards) {
-            BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(
-                cardParams.copyWith(
-                    locale: context.locale.toStringWithSeparator())));
+            BlocProvider.of<CardGalleryBloc>(context)
+                .add(FetchCardsEvent(cardParams.copyWith(locale: context.locale.toStringWithSeparator())));
           },
           orElse: () {},
         );
@@ -110,8 +107,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
               pagingController: _pagingController,
               scrollController: _scrollController,
               physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
               padding: EdgeInsets.zero,
               builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                 animateTransitions: true,
@@ -122,26 +118,22 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 },
                 itemBuilder: (ctx, card, _) {
                   return GestureDetector(
-                    onTap: () => Navigator.push(context,
-                        HeroDialogRoute(builder: (context) {
+                    onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                       return CardDetailsScreen(card);
                     })),
                     child: Image.network(
                       // TODO deck-28 Add image not found asset
                       card.image,
                       loadingBuilder: (context, widget, chunk) {
-                        return chunk?.cumulativeBytesLoaded ==
-                                chunk?.expectedTotalBytes
+                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
                             ? widget
                             : Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 8.75.h, horizontal: 20.w),
+                                padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
                                 child: Shimmer.fromColors(
                                   baseColor: AppColors.spanishGrey,
                                   highlightColor: AppColors.shimmerGrey,
                                   child: Image.asset(
-                                    assetPath(
-                                        SUBFOLDER_MISC, "card_template_grey"),
+                                    assetPath(SUBFOLDER_MISC, "card_template_grey"),
                                   ),
                                 ),
                               );
@@ -149,12 +141,10 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     ),
                   );
                 },
-                firstPageProgressIndicatorBuilder: (_) =>
-                    const SpinKitRipple(color: AppColors.velvet),
+                firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.velvet),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 8.75.h, horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
                     child: Shimmer.fromColors(
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,
@@ -198,21 +188,17 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     state.whenOrNull(initial: (cards, cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, fetching: (cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, localeChanged: (cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, fetched: (cardParams, cards) {
       log(cardParams.toString());
       final nextPageKey = _pagingController.nextPageKey ?? 0;
       if (cards.cardCount == 0 && cards.page == 1) {
         _pagingController.refresh();
-        _scrollController.animateTo(0,
-            curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
+        _scrollController.animateTo(0, curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
         _pagingController.appendLastPage(cards.cards!);
         return;
       }
@@ -223,8 +209,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       }
 
       if (cards.pageCount! > cards.page!) {
-        _pagingController.appendPage(
-            cards.cards!, nextPageKey + cards.cards!.length);
+        _pagingController.appendPage(cards.cards!, nextPageKey + cards.cards!.length);
       } else {
         _pagingController.appendLastPage(cards.cards!);
       }

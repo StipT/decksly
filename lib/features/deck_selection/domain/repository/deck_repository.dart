@@ -1,6 +1,5 @@
 import 'package:decksly/common/util/exceptions.dart';
 import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
@@ -43,8 +42,7 @@ class DeckRepositoryImpl extends DeckRepository {
       throw NoInternetException();
     }
 
-    final deckCodeResponse =
-        await _apiService.apiClient.getDeckCode(idList, locale);
+    final deckCodeResponse = await _apiService.apiClient.getDeckCode(idList, locale);
     return deckCodeResponse.deckCode;
   }
 }

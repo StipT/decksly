@@ -11,6 +11,5 @@ class ClassDTO with _$ClassDTO {
     required String? name,
   }) = _ClassDTO;
 
-  factory ClassDTO.fromJson(Map<String, dynamic> json) =>
-      _$ClassDTOFromJson(json);
+  factory ClassDTO.fromJson(Map<String, dynamic> json) => _$ClassDTOFromJson(json);
 }

@@ -23,16 +23,16 @@ mixin _$CardResponse {
   CardDTO get card => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
-  $CardResponseCopyWith<CardResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  $CardResponseCopyWith<CardResponse> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CardResponseCopyWith<$Res> {
-  factory $CardResponseCopyWith(
-          CardResponse value, $Res Function(CardResponse) then) =
+  factory $CardResponseCopyWith(CardResponse value, $Res Function(CardResponse) then) =
       _$CardResponseCopyWithImpl<$Res, CardResponse>;
+
   @useResult
   $Res call({CardDTO card});
 
@@ -40,12 +40,12 @@ abstract class $CardResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CardResponseCopyWithImpl<$Res, $Val extends CardResponse>
-    implements $CardResponseCopyWith<$Res> {
+class _$CardResponseCopyWithImpl<$Res, $Val extends CardResponse> implements $CardResponseCopyWith<$Res> {
   _$CardResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -72,11 +72,10 @@ class _$CardResponseCopyWithImpl<$Res, $Val extends CardResponse>
 }
 
 /// @nodoc
-abstract class _$$_CardResponseCopyWith<$Res>
-    implements $CardResponseCopyWith<$Res> {
-  factory _$$_CardResponseCopyWith(
-          _$_CardResponse value, $Res Function(_$_CardResponse) then) =
+abstract class _$$_CardResponseCopyWith<$Res> implements $CardResponseCopyWith<$Res> {
+  factory _$$_CardResponseCopyWith(_$_CardResponse value, $Res Function(_$_CardResponse) then) =
       __$$_CardResponseCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({CardDTO card});
@@ -86,12 +85,9 @@ abstract class _$$_CardResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CardResponseCopyWithImpl<$Res>
-    extends _$CardResponseCopyWithImpl<$Res, _$_CardResponse>
+class __$$_CardResponseCopyWithImpl<$Res> extends _$CardResponseCopyWithImpl<$Res, _$_CardResponse>
     implements _$$_CardResponseCopyWith<$Res> {
-  __$$_CardResponseCopyWithImpl(
-      _$_CardResponse _value, $Res Function(_$_CardResponse) _then)
-      : super(_value, _then);
+  __$$_CardResponseCopyWithImpl(_$_CardResponse _value, $Res Function(_$_CardResponse) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -112,8 +108,7 @@ class __$$_CardResponseCopyWithImpl<$Res>
 class _$_CardResponse implements _CardResponse {
   const _$_CardResponse({required this.card});
 
-  factory _$_CardResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_CardResponseFromJson(json);
+  factory _$_CardResponse.fromJson(Map<String, dynamic> json) => _$$_CardResponseFromJson(json);
 
   @override
   final CardDTO card;
@@ -152,13 +147,12 @@ class _$_CardResponse implements _CardResponse {
 abstract class _CardResponse implements CardResponse {
   const factory _CardResponse({required final CardDTO card}) = _$_CardResponse;
 
-  factory _CardResponse.fromJson(Map<String, dynamic> json) =
-      _$_CardResponse.fromJson;
+  factory _CardResponse.fromJson(Map<String, dynamic> json) = _$_CardResponse.fromJson;
 
   @override
   CardDTO get card;
+
   @override
   @JsonKey(ignore: true)
-  _$$_CardResponseCopyWith<_$_CardResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_CardResponseCopyWith<_$_CardResponse> get copyWith => throw _privateConstructorUsedError;
 }

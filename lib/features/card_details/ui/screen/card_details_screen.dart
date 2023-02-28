@@ -1,4 +1,3 @@
-import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
@@ -6,7 +5,6 @@ import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart'
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foil/foil.dart';
 import 'package:xl/xl.dart';
@@ -92,11 +90,9 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            child: Text(
-                              widget.card.name,
-                              style: FontStyles.bold28,
-                            ),
+                          Text(
+                            widget.card.name,
+                            style: FontStyles.bold28,
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(

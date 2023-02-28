@@ -47,8 +47,7 @@ class DeckCardItem extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 1.75.h, horizontal: 6.w),
+                        padding: EdgeInsets.symmetric(vertical: 1.75.h, horizontal: 6.w),
                         width: double.infinity,
                         child: deckCard.card.cropImage != null
                             ? Image.network(

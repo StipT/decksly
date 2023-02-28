@@ -28,8 +28,7 @@ class DeckslyApp extends StatelessWidget {
               fontFamily: FontStyles.FONT_FAMILY,
               primaryColor: AppColors.vanDykeBrown,
               splashColor: AppColors.bistreBrown,
-              colorScheme: ColorScheme.fromSwatch()
-                  .copyWith(secondary: AppColors.gold),
+              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.gold),
               textSelectionTheme: const TextSelectionThemeData(
                 cursorColor: AppColors.gold,
               ),

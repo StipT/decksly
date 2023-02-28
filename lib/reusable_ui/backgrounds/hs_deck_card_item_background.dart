@@ -2,7 +2,7 @@ import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:flutter/material.dart';
 
 class HSDeckCardItemBackground extends StatelessWidget {
-   const HSDeckCardItemBackground({Key? key, required this.startWidth, required this.endWidth}) : super(key: key);
+  const HSDeckCardItemBackground({Key? key, required this.startWidth, required this.endWidth}) : super(key: key);
 
   final double startWidth;
   final double endWidth;
@@ -11,7 +11,6 @@ class HSDeckCardItemBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -41,7 +40,6 @@ class HSDeckCardItemBackground extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-
           ],
         ),
       ],

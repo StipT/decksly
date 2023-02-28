@@ -43,8 +43,7 @@ class _DeckListBodyState extends State<DeckListBody> {
         builder: (BuildContext context, state) {
           return Expanded(
             child: Container(
-                margin: EdgeInsets.only(
-                    left: 15.w, right: 5.w, top: 4.h, bottom: 4.h),
+                margin: EdgeInsets.only(left: 15.w, right: 5.w, top: 4.h, bottom: 4.h),
                 child: Stack(
                   children: [
                     if (state.deck.cards.isEmpty)
@@ -60,8 +59,7 @@ class _DeckListBodyState extends State<DeckListBody> {
                         ),
                       ),
                     ScrollConfiguration(
-                      behavior: const MaterialScrollBehavior()
-                          .copyWith(overscroll: false),
+                      behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
                       child: RawScrollbar(
                         controller: _scrollController,
                         thumbVisibility: true,
@@ -73,8 +71,7 @@ class _DeckListBodyState extends State<DeckListBody> {
                             physics: const ClampingScrollPhysics(),
                             initialItemCount: state.deck.cards.length,
                             itemBuilder: (context, index, animation) {
-                              return _buildItem(index, state.deck.cards[index],
-                                  context, animation);
+                              return _buildItem(index, state.deck.cards[index], context, animation);
                             }),
                       ),
                     ),
@@ -86,8 +83,7 @@ class _DeckListBodyState extends State<DeckListBody> {
     );
   }
 
-  Widget _buildItem(int index, DeckCard deckCard, BuildContext context,
-      Animation<double> animation) {
+  Widget _buildItem(int index, DeckCard deckCard, BuildContext context, Animation<double> animation) {
     final slideTween = Tween<Offset>(
       begin: const Offset(-0.5, 0.0),
       end: Offset.zero,
@@ -121,13 +117,9 @@ class _DeckListBodyState extends State<DeckListBody> {
   }
 
   Future<void> removeItem(int index, DeckCard deckCard) async {
-    BlocProvider.of<DeckBuilderBloc>(context)
-        .add(RemoveCardEvent(index, deckCard.card));
+    BlocProvider.of<DeckBuilderBloc>(context).add(RemoveCardEvent(index, deckCard.card));
     if (deckCard.amount == 1) {
-      _key.currentState?.removeItem(
-          index,
-          (context, animation) =>
-              _buildItem(index, deckCard, context, animation),
+      _key.currentState?.removeItem(index, (context, animation) => _buildItem(index, deckCard, context, animation),
           duration: const Duration(milliseconds: 200));
     }
   }
@@ -138,8 +130,7 @@ class _DeckListBodyState extends State<DeckListBody> {
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 200),
     );
-    _key.currentState
-        ?.insertItem(index, duration: const Duration(milliseconds: 200));
+    _key.currentState?.insertItem(index, duration: const Duration(milliseconds: 200));
   }
 
   void _loadAnimatedList(List<DeckCard> itemList) {
@@ -147,8 +138,7 @@ class _DeckListBodyState extends State<DeckListBody> {
     for (var i = 0; i < itemList.length; i++) {
       future = future.then((_) {
         return Future.delayed(const Duration(milliseconds: 100), () {
-          _key.currentState
-              ?.insertItem(i, duration: const Duration(milliseconds: 200));
+          _key.currentState?.insertItem(i, duration: const Duration(milliseconds: 200));
         });
       });
     }

@@ -11,6 +11,5 @@ class RuneCostDTO with _$RuneCostDTO {
     required int? unholy,
   }) = _RuneCostDTO;
 
-  factory RuneCostDTO.fromJson(Map<String, dynamic> json) =>
-      _$RuneCostDTOFromJson(json);
+  factory RuneCostDTO.fromJson(Map<String, dynamic> json) => _$RuneCostDTOFromJson(json);
 }

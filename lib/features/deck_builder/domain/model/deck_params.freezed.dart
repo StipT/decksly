@@ -17,31 +17,33 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DeckParams {
   String? get ids => throw _privateConstructorUsedError;
+
   String? get code => throw _privateConstructorUsedError;
+
   String? get hero => throw _privateConstructorUsedError;
+
   String get locale => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DeckParamsCopyWith<DeckParams> get copyWith =>
-      throw _privateConstructorUsedError;
+  $DeckParamsCopyWith<DeckParams> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $DeckParamsCopyWith<$Res> {
-  factory $DeckParamsCopyWith(
-          DeckParams value, $Res Function(DeckParams) then) =
+  factory $DeckParamsCopyWith(DeckParams value, $Res Function(DeckParams) then) =
       _$DeckParamsCopyWithImpl<$Res, DeckParams>;
+
   @useResult
   $Res call({String? ids, String? code, String? hero, String locale});
 }
 
 /// @nodoc
-class _$DeckParamsCopyWithImpl<$Res, $Val extends DeckParams>
-    implements $DeckParamsCopyWith<$Res> {
+class _$DeckParamsCopyWithImpl<$Res, $Val extends DeckParams> implements $DeckParamsCopyWith<$Res> {
   _$DeckParamsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -75,23 +77,19 @@ class _$DeckParamsCopyWithImpl<$Res, $Val extends DeckParams>
 }
 
 /// @nodoc
-abstract class _$$_DeckParamsCopyWith<$Res>
-    implements $DeckParamsCopyWith<$Res> {
-  factory _$$_DeckParamsCopyWith(
-          _$_DeckParams value, $Res Function(_$_DeckParams) then) =
+abstract class _$$_DeckParamsCopyWith<$Res> implements $DeckParamsCopyWith<$Res> {
+  factory _$$_DeckParamsCopyWith(_$_DeckParams value, $Res Function(_$_DeckParams) then) =
       __$$_DeckParamsCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({String? ids, String? code, String? hero, String locale});
 }
 
 /// @nodoc
-class __$$_DeckParamsCopyWithImpl<$Res>
-    extends _$DeckParamsCopyWithImpl<$Res, _$_DeckParams>
+class __$$_DeckParamsCopyWithImpl<$Res> extends _$DeckParamsCopyWithImpl<$Res, _$_DeckParams>
     implements _$$_DeckParamsCopyWith<$Res> {
-  __$$_DeckParamsCopyWithImpl(
-      _$_DeckParams _value, $Res Function(_$_DeckParams) _then)
-      : super(_value, _then);
+  __$$_DeckParamsCopyWithImpl(_$_DeckParams _value, $Res Function(_$_DeckParams) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -125,8 +123,7 @@ class __$$_DeckParamsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DeckParams implements _DeckParams {
-  const _$_DeckParams(
-      {this.ids = "", this.code = "", this.hero = "", this.locale = "en_US"});
+  const _$_DeckParams({this.ids = "", this.code = "", this.hero = "", this.locale = "en_US"});
 
   @override
   @JsonKey()
@@ -163,27 +160,26 @@ class _$_DeckParams implements _DeckParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeckParamsCopyWith<_$_DeckParams> get copyWith =>
-      __$$_DeckParamsCopyWithImpl<_$_DeckParams>(this, _$identity);
+  _$$_DeckParamsCopyWith<_$_DeckParams> get copyWith => __$$_DeckParamsCopyWithImpl<_$_DeckParams>(this, _$identity);
 }
 
 abstract class _DeckParams implements DeckParams {
-  const factory _DeckParams(
-      {final String? ids,
-      final String? code,
-      final String? hero,
-      final String locale}) = _$_DeckParams;
+  const factory _DeckParams({final String? ids, final String? code, final String? hero, final String locale}) =
+      _$_DeckParams;
 
   @override
   String? get ids;
+
   @override
   String? get code;
+
   @override
   String? get hero;
+
   @override
   String get locale;
+
   @override
   @JsonKey(ignore: true)
-  _$$_DeckParamsCopyWith<_$_DeckParams> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_DeckParamsCopyWith<_$_DeckParams> get copyWith => throw _privateConstructorUsedError;
 }

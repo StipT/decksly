@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @injectable
 class LocalStorage {
-  Future<String> readLocaleSetting()  async {
-    final sharedPrefsInstance =  await SharedPreferences.getInstance();
+  Future<String> readLocaleSetting() async {
+    final sharedPrefsInstance = await SharedPreferences.getInstance();
     return sharedPrefsInstance.getString(LOCALE_KEY) ?? "en_US";
   }
 

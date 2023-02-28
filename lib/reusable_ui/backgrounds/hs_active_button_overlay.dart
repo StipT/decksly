@@ -13,7 +13,9 @@ class HSActiveButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            isDropdownButton ? assetPath(SUBFOLDER_DROPDOWN,  "focused_dropdown_button_left" ) : assetPath(SUBFOLDER_BUTTON, "focused_button_left"),
+            isDropdownButton
+                ? assetPath(SUBFOLDER_DROPDOWN, "focused_dropdown_button_left")
+                : assetPath(SUBFOLDER_BUTTON, "focused_button_left"),
             fit: BoxFit.fill,
           ),
         ),

@@ -50,8 +50,7 @@ class DeckBuilderScreen extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
-  final PagingController<int, CardDTO> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
 
   bool isSideMenuExtended = false;
@@ -84,8 +83,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       ],
       child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
         builder: (BuildContext context, state) {
-          return BlocBuilder<CardGalleryBloc, CardGalleryState>(
-              builder: (BuildContext context, state) {
+          return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
             return WillPopScope(
               onWillPop: () async => false,
               child: Scaffold(
@@ -132,8 +130,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
   }
 
   Widget _cardList() {
-    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
-        builder: (BuildContext context, state) {
+    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(builder: (BuildContext context, state) {
       return Expanded(
         child: Container(
           margin: EdgeInsets.only(
@@ -142,22 +139,19 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(
-                  assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
+              image: AssetImage(assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
               fit: BoxFit.fill,
             ),
           ),
           child: AnimatedPadding(
-            padding: EdgeInsets.only(
-                top: isFilterBarExtended ? 52.5.h : 0, left: 10.w, right: 10.w),
+            padding: EdgeInsets.only(top: isFilterBarExtended ? 52.5.h : 0, left: 10.w, right: 10.w),
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
               pagingController: _pagingController,
               scrollController: _scrollController,
               physics: const BouncingScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, mainAxisExtent: 210.h),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisExtent: 210.h),
               builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                 animateTransitions: true,
                 noItemsFoundIndicatorBuilder: (context) {
@@ -168,25 +162,18 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                 itemBuilder: (ctx, card, _) {
                   return CardItem(
                     card: card,
-                    amount: state.deck.cards
-                            .firstWhereOrNull((element) => element.card == card)
-                            ?.amount ??
-                        0,
-                    onLongPress: (card) => Navigator.push(context,
-                        HeroDialogRoute(builder: (context) {
+                    amount: state.deck.cards.firstWhereOrNull((element) => element.card == card)?.amount ?? 0,
+                    onLongPress: (card) => Navigator.push(context, HeroDialogRoute(builder: (context) {
                       return CardDetailsScreen(card);
                     })),
-                    onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context)
-                        .add(AddCardEvent(card)),
+                    onTap: (card) => BlocProvider.of<DeckBuilderBloc>(context).add(AddCardEvent(card)),
                     inDeckBuilderMode: true,
                   );
                 },
-                firstPageProgressIndicatorBuilder: (_) =>
-                    const SpinKitRipple(color: AppColors.velvet),
+                firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.velvet),
                 newPageProgressIndicatorBuilder: (_) => Center(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 8.75.h, horizontal: 20.w),
+                    padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
                     child: Shimmer.fromColors(
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,
@@ -241,24 +228,19 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     state.whenOrNull(initial: (cards, cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, fetching: (cardParams) {
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, localeChanged: (cardParams) {
-      BlocProvider.of<DeckBuilderBloc>(context)
-          .add(DeckChangedEvent(widget.deck.copyWith(cards: [], code: "")));
+      BlocProvider.of<DeckBuilderBloc>(context).add(DeckChangedEvent(widget.deck.copyWith(cards: [], code: "")));
 
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(FetchCardsEvent(state.cardFilterParams));
+      BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
     }, fetched: (cardParams, cards) {
       log(cardParams.toString());
       final nextPageKey = _pagingController.nextPageKey ?? 0;
       if (cards.cardCount == 0 && cards.page == 1) {
         _pagingController.refresh();
-        _scrollController.animateTo(0,
-            curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
+        _scrollController.animateTo(0, curve: Curves.easeIn, duration: const Duration(milliseconds: 500));
         _pagingController.appendLastPage(cards.cards!);
         return;
       }
@@ -269,8 +251,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       }
 
       if (cards.pageCount! > cards.page!) {
-        _pagingController.appendPage(
-            cards.cards!, nextPageKey + cards.cards!.length);
+        _pagingController.appendPage(cards.cards!, nextPageKey + cards.cards!.length);
       } else {
         _pagingController.appendLastPage(cards.cards!);
       }
@@ -295,26 +276,23 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       ),
     );
 
-    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(
-        BlocProvider.of<CardGalleryBloc>(context)
-            .state
-            .cardFilterParams
-            .copyWith(
-                locale: context.locale.toStringWithSeparator(),
-                heroClass: [widget.deck.heroClass.name, "neutral"],
-                set: widget.deck.type.name)));
+    BlocProvider.of<CardGalleryBloc>(context).add(CardFilterParamsChangedEvent(BlocProvider.of<CardGalleryBloc>(context)
+        .state
+        .cardFilterParams
+        .copyWith(
+            locale: context.locale.toStringWithSeparator(),
+            heroClass: [widget.deck.heroClass.name, "neutral"],
+            set: widget.deck.type.name)));
   }
 
   void listenForDeckCode(BuildContext context, DeckBuilderState state) {
     state.whenOrNull(
       initial: (_) => _initialState(),
-      codeGenerated: (deck) =>
-          Clipboard.setData(ClipboardData(text: deck.code)).then((_) {
-        HSSnackBar.show(context, HSSnackBarType.message,
-            LocaleKeys.deckCodeHasBeenCopiedToClipboard.tr());
+      codeGenerated: (deck) => Clipboard.setData(ClipboardData(text: deck.code)).then((_) {
+        HSSnackBar.show(context, HSSnackBarType.message, LocaleKeys.deckCodeHasBeenCopiedToClipboard.tr());
       }),
-      failure: (deck, failure) => HSSnackBar.show(context, HSSnackBarType.alert,
-          LocaleKeys.thereWasAnErrorGeneratingDeckCode.tr()),
+      failure: (deck, failure) =>
+          HSSnackBar.show(context, HSSnackBarType.alert, LocaleKeys.thereWasAnErrorGeneratingDeckCode.tr()),
     );
   }
 }

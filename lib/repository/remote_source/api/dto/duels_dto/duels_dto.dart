@@ -10,6 +10,5 @@ class DuelsDTO with _$DuelsDTO {
     required bool? constructed,
   }) = _DuelsDTO;
 
-  factory DuelsDTO.fromJson(Map<String, dynamic> json) =>
-      _$DuelsDTOFromJson(json);
+  factory DuelsDTO.fromJson(Map<String, dynamic> json) => _$DuelsDTOFromJson(json);
 }

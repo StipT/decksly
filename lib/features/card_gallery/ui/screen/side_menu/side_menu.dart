@@ -39,8 +39,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -49,8 +48,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
-        builder: (BuildContext context, state) {
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
       return SizedBox(
         width: 1.sw,
         height: 1.sh,
@@ -159,9 +157,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
           child: FeatureItem(
               type: FeatureItemType.cardLibrary,
               isSelected: !widget.inDeckBuilderMode,
-              onTap: () => widget.inDeckBuilderMode
-                  ? _navigate(context, const CardGalleryRoute())
-                  : null),
+              onTap: () => widget.inDeckBuilderMode ? _navigate(context, const CardGalleryRoute()) : null),
         ),
         Image.asset(
           assetPath(SUBFOLDER_MISC, "velvet_divider"),
@@ -173,9 +169,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
           child: FeatureItem(
             type: FeatureItemType.deckBuilder,
             isSelected: widget.inDeckBuilderMode,
-            onTap: () => widget.inDeckBuilderMode
-                ? null
-                : _navigate(context, const DeckSelectionRoute()),
+            onTap: () => widget.inDeckBuilderMode ? null : _navigate(context, const DeckSelectionRoute()),
           ),
         ),
         Container(
@@ -211,24 +205,21 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
             children: [
               Expanded(
                 child: LanguageButton(
-                  isSelected: state.cardFilterParams.locale ==
-                      LanguageButtonType.english.value,
+                  isSelected: state.cardFilterParams.locale == LanguageButtonType.english.value,
                   type: LanguageButtonType.english,
                   onTap: () => _changeLocale(state, const Locale('en', 'US')),
                 ),
               ),
               Expanded(
                 child: LanguageButton(
-                  isSelected: state.cardFilterParams.locale ==
-                      LanguageButtonType.german.value,
+                  isSelected: state.cardFilterParams.locale == LanguageButtonType.german.value,
                   type: LanguageButtonType.german,
                   onTap: () => _changeLocale(state, const Locale('de', 'DE')),
                 ),
               ),
               Expanded(
                 child: LanguageButton(
-                  isSelected: state.cardFilterParams.locale ==
-                      LanguageButtonType.japanese.value,
+                  isSelected: state.cardFilterParams.locale == LanguageButtonType.japanese.value,
                   type: LanguageButtonType.japanese,
                   onTap: () => _changeLocale(state, const Locale('ja', 'JP')),
                 ),
@@ -248,10 +239,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   void _changeLocale(CardGalleryState state, Locale locale) {
     _throttler.run(() {
       context.setLocale(locale);
-      final params = state.cardFilterParams
-          .copyWith(locale: context.locale.toStringWithSeparator());
-      BlocProvider.of<CardGalleryBloc>(context)
-          .add(LocaleChangedEvent(params));
+      final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
+      BlocProvider.of<CardGalleryBloc>(context).add(LocaleChangedEvent(params));
     });
   }
 

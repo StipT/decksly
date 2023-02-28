@@ -11,16 +11,11 @@ Future<void> main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   _landscapeModeOnly();
   runApp(
-    EasyLocalization(
-        supportedLocales: const [
-          Locale('en', 'US'),
-          Locale('de', 'DE'),
-          Locale('ja', 'JP'),
-        ],
-        saveLocale: true,
-        path: 'assets/l10n',
-        fallbackLocale: const Locale('en', 'US'),
-        child: DeckslyApp()),
+    EasyLocalization(supportedLocales: const [
+      Locale('en', 'US'),
+      Locale('de', 'DE'),
+      Locale('ja', 'JP'),
+    ], saveLocale: true, path: 'assets/l10n', fallbackLocale: const Locale('en', 'US'), child: DeckslyApp()),
   );
 }
 

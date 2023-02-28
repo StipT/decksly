@@ -44,7 +44,6 @@ extension DeckClassLocalized on DeckClass {
   }
 }
 
-
 DeckClass deckClassFromValue(String deckClass) {
   switch (deckClass) {
     case "deathKnight":

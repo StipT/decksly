@@ -268,5 +268,4 @@ class FontStyles {
     fontSize: 15.sp,
     color: AppColors.white,
   );
-
 }

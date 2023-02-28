@@ -102,7 +102,7 @@ Attack attackFromIndex(int index) {
     case 2:
       return Attack.one;
     case 3:
-      return Attack.two ;
+      return Attack.two;
     case 4:
       return Attack.three;
     case 5:

@@ -1,4 +1,3 @@
-
 import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -36,15 +35,15 @@ extension SpellSchoolValues on SpellSchool {
   }
 
   static List<SpellSchool> get values => [
-    SpellSchool.any,
-    SpellSchool.arcane,
-    SpellSchool.fire,
-    SpellSchool.frost,
-    SpellSchool.nature,
-    SpellSchool.holy,
-    SpellSchool.shadow,
-    SpellSchool.fel,
-  ];
+        SpellSchool.any,
+        SpellSchool.arcane,
+        SpellSchool.fire,
+        SpellSchool.frost,
+        SpellSchool.nature,
+        SpellSchool.holy,
+        SpellSchool.shadow,
+        SpellSchool.fel,
+      ];
 }
 
 extension SpellSchoolLocalized on SpellSchool {

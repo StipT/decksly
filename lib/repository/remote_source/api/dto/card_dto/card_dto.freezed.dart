@@ -21,44 +21,73 @@ CardDTO _$CardDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CardDTO {
   int get id => throw _privateConstructorUsedError;
+
   int get cardSetId => throw _privateConstructorUsedError;
+
   int get classId => throw _privateConstructorUsedError;
+
   int? get parentId => throw _privateConstructorUsedError;
+
   int get cardTypeId => throw _privateConstructorUsedError;
+
   int get rarityId => throw _privateConstructorUsedError;
+
   int get collectible => throw _privateConstructorUsedError;
+
   String? get slug => throw _privateConstructorUsedError;
+
   String get name => throw _privateConstructorUsedError;
+
   String? get artistName => throw _privateConstructorUsedError;
+
   String? get text => throw _privateConstructorUsedError;
+
   String get image => throw _privateConstructorUsedError;
+
   String get imageGold => throw _privateConstructorUsedError;
+
   String? get flavorText => throw _privateConstructorUsedError;
+
   String? get cropImage => throw _privateConstructorUsedError;
+
   int get manaCost => throw _privateConstructorUsedError;
+
   DuelsDTO? get duels => throw _privateConstructorUsedError;
+
   RuneCostDTO? get runeCost => throw _privateConstructorUsedError;
+
   List<int>? get keywordIds => throw _privateConstructorUsedError;
+
   List<int>? get childIds => throw _privateConstructorUsedError;
+
   int? get spellSchoolId => throw _privateConstructorUsedError;
+
   List<int>? get multiClassIds => throw _privateConstructorUsedError;
+
   List<int>? get multiTypeIds => throw _privateConstructorUsedError;
+
   int? get copyOfCardId => throw _privateConstructorUsedError;
+
   int? get minionTypeId => throw _privateConstructorUsedError;
+
   int? get health => throw _privateConstructorUsedError;
+
   int? get attack => throw _privateConstructorUsedError;
+
   int? get armor => throw _privateConstructorUsedError;
+
   int? get durability => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $CardDTOCopyWith<CardDTO> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CardDTOCopyWith<$Res> {
-  factory $CardDTOCopyWith(CardDTO value, $Res Function(CardDTO) then) =
-      _$CardDTOCopyWithImpl<$Res, CardDTO>;
+  factory $CardDTOCopyWith(CardDTO value, $Res Function(CardDTO) then) = _$CardDTOCopyWithImpl<$Res, CardDTO>;
+
   @useResult
   $Res call(
       {int id,
@@ -92,16 +121,17 @@ abstract class $CardDTOCopyWith<$Res> {
       int? durability});
 
   $DuelsDTOCopyWith<$Res>? get duels;
+
   $RuneCostDTOCopyWith<$Res>? get runeCost;
 }
 
 /// @nodoc
-class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
-    implements $CardDTOCopyWith<$Res> {
+class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO> implements $CardDTOCopyWith<$Res> {
   _$CardDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -285,9 +315,8 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
 
 /// @nodoc
 abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
-  factory _$$_CardDTOCopyWith(
-          _$_CardDTO value, $Res Function(_$_CardDTO) then) =
-      __$$_CardDTOCopyWithImpl<$Res>;
+  factory _$$_CardDTOCopyWith(_$_CardDTO value, $Res Function(_$_CardDTO) then) = __$$_CardDTOCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call(
@@ -323,16 +352,15 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
 
   @override
   $DuelsDTOCopyWith<$Res>? get duels;
+
   @override
   $RuneCostDTOCopyWith<$Res>? get runeCost;
 }
 
 /// @nodoc
-class __$$_CardDTOCopyWithImpl<$Res>
-    extends _$CardDTOCopyWithImpl<$Res, _$_CardDTO>
+class __$$_CardDTOCopyWithImpl<$Res> extends _$CardDTOCopyWithImpl<$Res, _$_CardDTO>
     implements _$$_CardDTOCopyWith<$Res> {
-  __$$_CardDTOCopyWithImpl(_$_CardDTO _value, $Res Function(_$_CardDTO) _then)
-      : super(_value, _then);
+  __$$_CardDTOCopyWithImpl(_$_CardDTO _value, $Res Function(_$_CardDTO) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -526,8 +554,7 @@ class _$_CardDTO implements _CardDTO {
         _multiClassIds = multiClassIds,
         _multiTypeIds = multiTypeIds;
 
-  factory _$_CardDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_CardDTOFromJson(json);
+  factory _$_CardDTO.fromJson(Map<String, dynamic> json) => _$$_CardDTOFromJson(json);
 
   @override
   final int id;
@@ -566,6 +593,7 @@ class _$_CardDTO implements _CardDTO {
   @override
   final RuneCostDTO? runeCost;
   final List<int>? _keywordIds;
+
   @override
   List<int>? get keywordIds {
     final value = _keywordIds;
@@ -576,6 +604,7 @@ class _$_CardDTO implements _CardDTO {
   }
 
   final List<int>? _childIds;
+
   @override
   List<int>? get childIds {
     final value = _childIds;
@@ -588,6 +617,7 @@ class _$_CardDTO implements _CardDTO {
   @override
   final int? spellSchoolId;
   final List<int>? _multiClassIds;
+
   @override
   List<int>? get multiClassIds {
     final value = _multiClassIds;
@@ -598,6 +628,7 @@ class _$_CardDTO implements _CardDTO {
   }
 
   final List<int>? _multiTypeIds;
+
   @override
   List<int>? get multiTypeIds {
     final value = _multiTypeIds;
@@ -631,52 +662,34 @@ class _$_CardDTO implements _CardDTO {
         (other.runtimeType == runtimeType &&
             other is _$_CardDTO &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.cardSetId, cardSetId) ||
-                other.cardSetId == cardSetId) &&
+            (identical(other.cardSetId, cardSetId) || other.cardSetId == cardSetId) &&
             (identical(other.classId, classId) || other.classId == classId) &&
-            (identical(other.parentId, parentId) ||
-                other.parentId == parentId) &&
-            (identical(other.cardTypeId, cardTypeId) ||
-                other.cardTypeId == cardTypeId) &&
-            (identical(other.rarityId, rarityId) ||
-                other.rarityId == rarityId) &&
-            (identical(other.collectible, collectible) ||
-                other.collectible == collectible) &&
+            (identical(other.parentId, parentId) || other.parentId == parentId) &&
+            (identical(other.cardTypeId, cardTypeId) || other.cardTypeId == cardTypeId) &&
+            (identical(other.rarityId, rarityId) || other.rarityId == rarityId) &&
+            (identical(other.collectible, collectible) || other.collectible == collectible) &&
             (identical(other.slug, slug) || other.slug == slug) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.artistName, artistName) ||
-                other.artistName == artistName) &&
+            (identical(other.artistName, artistName) || other.artistName == artistName) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.imageGold, imageGold) ||
-                other.imageGold == imageGold) &&
-            (identical(other.flavorText, flavorText) ||
-                other.flavorText == flavorText) &&
-            (identical(other.cropImage, cropImage) ||
-                other.cropImage == cropImage) &&
-            (identical(other.manaCost, manaCost) ||
-                other.manaCost == manaCost) &&
+            (identical(other.imageGold, imageGold) || other.imageGold == imageGold) &&
+            (identical(other.flavorText, flavorText) || other.flavorText == flavorText) &&
+            (identical(other.cropImage, cropImage) || other.cropImage == cropImage) &&
+            (identical(other.manaCost, manaCost) || other.manaCost == manaCost) &&
             (identical(other.duels, duels) || other.duels == duels) &&
-            (identical(other.runeCost, runeCost) ||
-                other.runeCost == runeCost) &&
-            const DeepCollectionEquality()
-                .equals(other._keywordIds, _keywordIds) &&
+            (identical(other.runeCost, runeCost) || other.runeCost == runeCost) &&
+            const DeepCollectionEquality().equals(other._keywordIds, _keywordIds) &&
             const DeepCollectionEquality().equals(other._childIds, _childIds) &&
-            (identical(other.spellSchoolId, spellSchoolId) ||
-                other.spellSchoolId == spellSchoolId) &&
-            const DeepCollectionEquality()
-                .equals(other._multiClassIds, _multiClassIds) &&
-            const DeepCollectionEquality()
-                .equals(other._multiTypeIds, _multiTypeIds) &&
-            (identical(other.copyOfCardId, copyOfCardId) ||
-                other.copyOfCardId == copyOfCardId) &&
-            (identical(other.minionTypeId, minionTypeId) ||
-                other.minionTypeId == minionTypeId) &&
+            (identical(other.spellSchoolId, spellSchoolId) || other.spellSchoolId == spellSchoolId) &&
+            const DeepCollectionEquality().equals(other._multiClassIds, _multiClassIds) &&
+            const DeepCollectionEquality().equals(other._multiTypeIds, _multiTypeIds) &&
+            (identical(other.copyOfCardId, copyOfCardId) || other.copyOfCardId == copyOfCardId) &&
+            (identical(other.minionTypeId, minionTypeId) || other.minionTypeId == minionTypeId) &&
             (identical(other.health, health) || other.health == health) &&
             (identical(other.attack, attack) || other.attack == attack) &&
             (identical(other.armor, armor) || other.armor == armor) &&
-            (identical(other.durability, durability) ||
-                other.durability == durability));
+            (identical(other.durability, durability) || other.durability == durability));
   }
 
   @JsonKey(ignore: true)
@@ -717,8 +730,7 @@ class _$_CardDTO implements _CardDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CardDTOCopyWith<_$_CardDTO> get copyWith =>
-      __$$_CardDTOCopyWithImpl<_$_CardDTO>(this, _$identity);
+  _$$_CardDTOCopyWith<_$_CardDTO> get copyWith => __$$_CardDTOCopyWithImpl<_$_CardDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -764,64 +776,92 @@ abstract class _CardDTO implements CardDTO {
 
   @override
   int get id;
+
   @override
   int get cardSetId;
+
   @override
   int get classId;
+
   @override
   int? get parentId;
+
   @override
   int get cardTypeId;
+
   @override
   int get rarityId;
+
   @override
   int get collectible;
+
   @override
   String? get slug;
+
   @override
   String get name;
+
   @override
   String? get artistName;
+
   @override
   String? get text;
+
   @override
   String get image;
+
   @override
   String get imageGold;
+
   @override
   String? get flavorText;
+
   @override
   String? get cropImage;
+
   @override
   int get manaCost;
+
   @override
   DuelsDTO? get duels;
+
   @override
   RuneCostDTO? get runeCost;
+
   @override
   List<int>? get keywordIds;
+
   @override
   List<int>? get childIds;
+
   @override
   int? get spellSchoolId;
+
   @override
   List<int>? get multiClassIds;
+
   @override
   List<int>? get multiTypeIds;
+
   @override
   int? get copyOfCardId;
+
   @override
   int? get minionTypeId;
+
   @override
   int? get health;
+
   @override
   int? get attack;
+
   @override
   int? get armor;
+
   @override
   int? get durability;
+
   @override
   @JsonKey(ignore: true)
-  _$$_CardDTOCopyWith<_$_CardDTO> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_CardDTOCopyWith<_$_CardDTO> get copyWith => throw _privateConstructorUsedError;
 }

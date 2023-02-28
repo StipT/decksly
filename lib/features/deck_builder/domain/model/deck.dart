@@ -19,12 +19,8 @@ class Deck with _$Deck {
 extension CardDTOListParse on List<CardDTO> {
   List<DeckCard> toDeckCards() {
     final deckCardList = map((value) {
-      return DeckCard(
-          card: value,
-          amount: where((element) => element == value).length);
-    })
-        .toSet()
-        .toList();
+      return DeckCard(card: value, amount: where((element) => element == value).length);
+    }).toSet().toList();
 
     deckCardList.sort((deckCard1, deckCard2) {
       if (deckCard1.card.manaCost == deckCard2.card.manaCost) {
@@ -37,4 +33,3 @@ extension CardDTOListParse on List<CardDTO> {
     return deckCardList;
   }
 }
-

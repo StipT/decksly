@@ -38,7 +38,7 @@ class HSDropdownItem extends StatelessWidget {
               ),
               Center(
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 0.875.h, horizontal: 2.w),
+                    padding: EdgeInsets.symmetric(vertical: 0.875.h, horizontal: 2.w),
                     child: assetImagePath.isNotEmpty
                         ? Image.asset(
                             assetImagePath,

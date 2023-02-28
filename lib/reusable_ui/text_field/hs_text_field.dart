@@ -4,7 +4,6 @@ import 'package:decksly/reusable_ui/backgrounds/hs_active_text_field_overlay.dar
 import 'package:decksly/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
-import 'package:decksly/common/util/debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +43,6 @@ class HSTextField extends StatefulWidget {
 
 class _HSTextFieldState extends State<HSTextField> {
   final _textEditingController = TextEditingController();
-  final _debouncer = Debouncer(milliseconds: 500);
 
   final FocusNode _focus = FocusNode();
   bool isEmpty = true;
@@ -85,10 +83,7 @@ class _HSTextFieldState extends State<HSTextField> {
                 setState(() {
                   isEmpty = _textEditingController.text.trim().isEmpty;
                 });
-
-                _debouncer.run(() {
-                  widget.onChange(searchString);
-                });
+                widget.onChange(searchString);
               },
               textAlignVertical: TextAlignVertical.center,
               style: FontStyles.bold15,

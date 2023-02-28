@@ -285,9 +285,7 @@ List<CardSet> _getStandardSets() => [
       CardSet.core,
     ];
 
-List<CardSet> _getClassicSets() => [
-      CardSet.classic
-    ];
+List<CardSet> _getClassicSets() => [CardSet.classic];
 
 List<CardSet> _getWildSets() => [
       CardSet.madnessAtTheDarkmoonFaire,

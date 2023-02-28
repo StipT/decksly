@@ -26,7 +26,6 @@ class NoResultsWidget extends StatelessWidget {
                   child: Container(
                     child: Image.asset(
                       assetPath(SUBFOLDER_MISC, "divider"),
-
                     ),
                   ),
                 ),
@@ -60,7 +59,6 @@ class NoResultsWidget extends StatelessWidget {
             margin: EdgeInsets.only(top: 4.375.h),
             child: Image.asset(
               assetPath(SUBFOLDER_MISC, "line"),
-
             ),
           ),
         ],

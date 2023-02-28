@@ -47,18 +47,18 @@ extension MinionTypeValues on MinionType {
   }
 
   static List<MinionType> get values => [
-    MinionType.any,
-    MinionType.beast,
-    MinionType.demon,
-    MinionType.dragon,
-    MinionType.elemental,
-    MinionType.mech,
-    MinionType.murloc,
-    MinionType.naga,
-    MinionType.pirate,
-    MinionType.quilboar,
-    MinionType.totem,
-    MinionType.undead,
+        MinionType.any,
+        MinionType.beast,
+        MinionType.demon,
+        MinionType.dragon,
+        MinionType.elemental,
+        MinionType.mech,
+        MinionType.murloc,
+        MinionType.naga,
+        MinionType.pirate,
+        MinionType.quilboar,
+        MinionType.totem,
+        MinionType.undead,
       ];
 }
 

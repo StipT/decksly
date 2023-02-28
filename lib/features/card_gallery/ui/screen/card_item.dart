@@ -3,7 +3,6 @@ import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -50,12 +49,10 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                   // TODO deck-28 Add image not found asset
                   widget.card.image,
                   loadingBuilder: (context, widget, chunk) {
-                    return chunk?.cumulativeBytesLoaded ==
-                            chunk?.expectedTotalBytes
+                    return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
                         ? widget
                         : Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8.75.h, horizontal: 20.w),
+                            padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
                             child: Shimmer.fromColors(
                               baseColor: AppColors.spanishGrey,
                               highlightColor: AppColors.shimmerGrey,
@@ -100,19 +97,14 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      assetPath(
-                          SUBFOLDER_MISC,
-                          widget.amount == 2
-                              ? "card_counter_locked"
-                              : "card_counter"),
+                      assetPath(SUBFOLDER_MISC, widget.amount == 2 ? "card_counter_locked" : "card_counter"),
                       width: 60.w,
                       alignment: Alignment.center,
                       fit: BoxFit.fitWidth,
                     ),
                     Container(
                         alignment: Alignment.center,
-                        padding: EdgeInsets.only(
-                            left: widget.amount == 2 ? 10.w : 0.w),
+                        padding: EdgeInsets.only(left: widget.amount == 2 ? 10.w : 0.w),
                         child: Text(
                           "${widget.amount}/2",
                           style: FontStyles.bold17WithShadow,

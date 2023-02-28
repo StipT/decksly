@@ -23,8 +23,6 @@ class HSDeckSelectionBackground extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-
-
       ],
     );
   }

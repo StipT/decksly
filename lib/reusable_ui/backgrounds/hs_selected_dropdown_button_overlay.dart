@@ -5,6 +5,7 @@ class HSSelectedDropdownButtonOverlay extends StatelessWidget {
   const HSSelectedDropdownButtonOverlay({Key? key, this.isDropdownButton = false}) : super(key: key);
 
   final bool isDropdownButton;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -13,7 +14,8 @@ class HSSelectedDropdownButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_DROPDOWN, isDropdownButton ? "selected_dropdown_button_left" : "selected_dropdown_button_left_iconless"),
+            assetPath(SUBFOLDER_DROPDOWN,
+                isDropdownButton ? "selected_dropdown_button_left" : "selected_dropdown_button_left_iconless"),
             fit: BoxFit.fill,
           ),
         ),

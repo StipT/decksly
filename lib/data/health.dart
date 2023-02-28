@@ -47,19 +47,19 @@ extension HealthValues on Health {
   }
 
   static List<Health> get values => [
-    Health.any,
-    Health.zero,
-    Health.one,
-    Health.two,
-    Health.three,
-    Health.four,
-    Health.five,
-    Health.six,
-    Health.seven,
-    Health.eight,
-    Health.nine,
-    Health.ten,
-  ];
+        Health.any,
+        Health.zero,
+        Health.one,
+        Health.two,
+        Health.three,
+        Health.four,
+        Health.five,
+        Health.six,
+        Health.seven,
+        Health.eight,
+        Health.nine,
+        Health.ten,
+      ];
 }
 
 extension HealthLocalized on Health {
@@ -102,7 +102,7 @@ Health healthFromIndex(int index) {
     case 2:
       return Health.one;
     case 3:
-      return Health.two ;
+      return Health.two;
     case 4:
       return Health.three;
     case 5:

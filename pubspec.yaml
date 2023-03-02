@@ -58,6 +58,9 @@ dependencies:
   flutter_secure_storage: ^7.0.0
   connectivity_plus: ^2.3.4
 
+  # Persistence
+  shared_preferences: ^2.0.18
+
   #Localization
   easy_localization: ^3.0.1
 

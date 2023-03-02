@@ -3,6 +3,8 @@ import 'package:decksly/app/di.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   configureInjection();
@@ -10,6 +12,8 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   _landscapeModeOnly();
+  clearStorage();
+
   runApp(
     EasyLocalization(supportedLocales: const [
       Locale('en', 'US'),
@@ -24,4 +28,14 @@ void _landscapeModeOnly() {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
+}
+
+/// Fix for FlutterSecureStorage known issue https://github.com/mogol/flutter_secure_storage/issues/210#issuecomment-811939470
+Future<void> clearStorage() async {
+  final prefs = await SharedPreferences.getInstance();
+  if (prefs.getBool('first_run') ?? true) {
+    FlutterSecureStorage storage = const FlutterSecureStorage();
+    await storage.deleteAll();
+    prefs.setBool('first_run', false);
+  }
 }

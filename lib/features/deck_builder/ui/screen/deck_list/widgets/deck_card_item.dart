@@ -55,12 +55,12 @@ class DeckCardItem extends StatelessWidget {
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(
-                                assetPath(SUBFOLDER_MISC, "crop_not_found"),
+                                assetPath(kSubfolderMisc, "crop_not_found"),
                                 fit: BoxFit.cover,
                               ),
                       ),
                       Image.asset(
-                        assetPath(SUBFOLDER_MISC, "deck_card_item_fill"),
+                        assetPath(kSubfolderMisc, "deck_card_item_fill"),
                         width: double.infinity,
                         fit: BoxFit.fill,
                       ),
@@ -98,7 +98,7 @@ class DeckCardItem extends StatelessWidget {
                   if (deckCard.card.rarityId == 5 && deckCard.amount == 1)
                     Expanded(
                       child: Image.asset(
-                        assetPath(SUBFOLDER_MISC, "legendary_star"),
+                        assetPath(kSubfolderMisc, "legendary_star"),
                         fit: BoxFit.fill,
                       ),
                     ),

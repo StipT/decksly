@@ -15,14 +15,14 @@ class HSButtonOverlay extends StatelessWidget {
             ? SizedBox(
                 height: double.infinity,
                 child: Image.asset(
-                  assetPath(SUBFOLDER_DROPDOWN, "dropdown_button_border_left"),
+                  assetPath(kSubfolderDropdown, "dropdown_button_border_left"),
                   fit: BoxFit.fill,
                 ),
               )
             : SizedBox(
                 height: double.infinity,
                 child: Image.asset(
-                  assetPath(SUBFOLDER_BUTTON, "button_border_left"),
+                  assetPath(kSubfolderButton, "button_border_left"),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -31,7 +31,7 @@ class HSButtonOverlay extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              assetPath(SUBFOLDER_BUTTON, "button_border_center"),
+              assetPath(kSubfolderButton, "button_border_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -39,7 +39,7 @@ class HSButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_BUTTON, "button_border_right"),
+            assetPath(kSubfolderButton, "button_border_right"),
             fit: BoxFit.fill,
           ),
         ),

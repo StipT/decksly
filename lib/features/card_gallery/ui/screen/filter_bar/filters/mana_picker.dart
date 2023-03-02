@@ -94,12 +94,12 @@ class ManaItem extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image.asset(
-              assetPath(SUBFOLDER_MISC, "mana_inactive"),
+              assetPath(kSubfolderMisc, "mana_inactive"),
               fit: BoxFit.contain,
             ),
             if (isActive)
               Image.asset(
-                assetPath(SUBFOLDER_MISC, "mana_active"),
+                assetPath(kSubfolderMisc, "mana_active"),
                 fit: BoxFit.fill,
               ),
             Center(

@@ -42,7 +42,7 @@ class HSBarToggleButton extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
               ),
               child: SvgPicture.asset(
-                assetPath(SUBFOLDER_MISC, "filter", fileExtension: SVG_EXTENSION),
+                assetPath(kSubfolderMisc, "filter", fileExtension: kSVGExtension),
                 fit: BoxFit.fill,
                 color: AppColors.bistreBrown,
                 width: 30.w,
@@ -60,7 +60,10 @@ class HSBarToggleButton extends StatelessWidget {
       return Positioned(
         bottom: 1.75.h,
         right: 4.w,
+        width: 20.w,
+        height: 20.h,
         child: Stack(
+          fit: StackFit.expand,
           alignment: Alignment.center,
           children: [
             Image.asset(assetPath("misc", "filter_number_bubble"), width: 20.w),

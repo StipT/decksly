@@ -11,7 +11,7 @@ class HSDeckSelectionBackground extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_BACKGROUND, "velvet_background_center", fileExtension: JPG_EXTENSION),
+            assetPath(kSubfolderBackground, "velvet_background_center", fileExtension: kJPGExtension),
             fit: BoxFit.fill,
           ),
         ),
@@ -19,7 +19,7 @@ class HSDeckSelectionBackground extends StatelessWidget {
           height: double.infinity,
           width: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_BACKGROUND, "deck_creator_background"),
+            assetPath(kSubfolderBackground, "deck_creator_background"),
             fit: BoxFit.fill,
           ),
         ),

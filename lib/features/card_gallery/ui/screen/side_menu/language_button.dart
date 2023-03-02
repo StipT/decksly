@@ -70,7 +70,7 @@ class LanguageButton extends StatelessWidget {
         BlendMode.saturation,
       ),
       child: Image.asset(
-        assetPath(SUBFOLDER_MISC, imageAssetName),
+        assetPath(kSubfolderMisc, imageAssetName),
         fit: BoxFit.fitWidth,
         width: 60.w,
       ),

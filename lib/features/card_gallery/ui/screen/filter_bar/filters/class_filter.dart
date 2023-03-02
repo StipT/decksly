@@ -1,4 +1,5 @@
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _ClassFilterState extends State<ClassFilter> {
           alignment: Alignment.center,
           children: [
             Image.asset(
-              assetPath(SUBFOLDER_MISC, "class_filter"),
+              assetPath(kSubfolderMisc, "class_filter"),
               fit: BoxFit.fill,
             ),
             Row(
@@ -64,13 +65,13 @@ class _ClassFilterState extends State<ClassFilter> {
                               bottom: 8.75.h,
                             ),
                             child: Image.asset(
-                              assetPath(SUBFOLDER_CLASS, _getClassIcon(widget.deckClass)),
+                              assetPath(kSubfolderClass, _getClassIcon(widget.deckClass)),
                               fit: BoxFit.fitHeight,
                             ),
                           ),
                           if (state.cardFilterParams.heroClass.contains(widget.deckClass.name))
                             Image.asset(
-                              assetPath(SUBFOLDER_MISC, "class_filter_selected"),
+                              assetPath(kSubfolderMisc, "class_filter_selected"),
                               fit: BoxFit.fitHeight,
                             ),
                         ],
@@ -93,13 +94,13 @@ class _ClassFilterState extends State<ClassFilter> {
                               bottom: 8.75.h,
                             ),
                             child: Image.asset(
-                              assetPath(SUBFOLDER_CLASS, "neutral_icon"),
+                              assetPath(kSubfolderClass, "neutral_icon"),
                               fit: BoxFit.fitHeight,
                             ),
                           ),
-                          if (state.cardFilterParams.heroClass.contains("neutral"))
+                          if (state.cardFilterParams.heroClass.contains(CardClass.neutral.value))
                             Image.asset(
-                              assetPath(SUBFOLDER_MISC, "class_filter_selected"),
+                              assetPath(kSubfolderMisc, "class_filter_selected"),
                               fit: BoxFit.fitHeight,
                             ),
                         ],

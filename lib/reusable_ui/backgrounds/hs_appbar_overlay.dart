@@ -16,9 +16,9 @@ class HSAppBarOverlay extends StatelessWidget {
             width: double.infinity,
             child: Image.asset(
               assetPath(
-                SUBFOLDER_BACKGROUND,
+                kSubfolderBackground,
                 "velvet_background_center",
-                fileExtension: JPG_EXTENSION,
+                fileExtension: kJPGExtension,
               ),
               fit: BoxFit.fill,
             ),
@@ -29,14 +29,14 @@ class HSAppBarOverlay extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
-                  assetPath(SUBFOLDER_BACKGROUND, "velvet_background_top"),
+                  assetPath(kSubfolderBackground, "velvet_background_top"),
                   width: double.infinity,
                   height: 17.5.h,
                   fit: BoxFit.fill,
                 ),
                 const Expanded(child: SizedBox()),
                 Image.asset(
-                  assetPath(SUBFOLDER_BACKGROUND, "velvet_background_bottom"),
+                  assetPath(kSubfolderBackground, "velvet_background_bottom"),
                   width: double.infinity,
                   height: 17.5.h,
                   fit: BoxFit.fill,

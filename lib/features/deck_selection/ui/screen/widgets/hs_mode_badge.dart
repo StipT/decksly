@@ -31,7 +31,7 @@ class HSModeBadge extends StatelessWidget {
               child: Stack(
                 children: [
                   _getImage(type),
-                  if (isSelected) Image.asset(assetPath(SUBFOLDER_MISC, "deckbuilder_tab_selected")),
+                  if (isSelected) Image.asset(assetPath(kSubfolderMisc, "deckbuilder_tab_selected")),
                 ],
               ),
             ),
@@ -49,13 +49,13 @@ class HSModeBadge extends StatelessWidget {
       case DeckType.standard:
         return Stack(
           children: [
-            Image.asset(assetPath(SUBFOLDER_MISC, "deckbuilder_tab_standard")),
+            Image.asset(assetPath(kSubfolderMisc, "deckbuilder_tab_standard")),
           ],
         );
       case DeckType.classic:
-        return Image.asset(assetPath(SUBFOLDER_MISC, "deckbuilder_tab_classic"));
+        return Image.asset(assetPath(kSubfolderMisc, "deckbuilder_tab_classic"));
       case DeckType.wild:
-        return Image.asset(assetPath(SUBFOLDER_MISC, "deckbuilder_tab_wild"));
+        return Image.asset(assetPath(kSubfolderMisc, "deckbuilder_tab_wild"));
     }
   }
 

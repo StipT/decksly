@@ -12,7 +12,7 @@ class HSWoodHorizontalBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_SHARED, "wood_border_horizontal_left_outline"),
+            assetPath(kSubfolderShared, "wood_border_horizontal_left_outline"),
             fit: BoxFit.fill,
           ),
         ),
@@ -21,7 +21,7 @@ class HSWoodHorizontalBorder extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              assetPath(SUBFOLDER_SHARED, "wood_border_horizontal_center_outline"),
+              assetPath(kSubfolderShared, "wood_border_horizontal_center_outline"),
               fit: BoxFit.fill,
             ),
           ),
@@ -29,7 +29,7 @@ class HSWoodHorizontalBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_SHARED, "wood_border_horizontal_right_outline"),
+            assetPath(kSubfolderShared, "wood_border_horizontal_right_outline"),
             fit: BoxFit.fill,
           ),
         ),

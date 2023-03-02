@@ -51,7 +51,7 @@ class HSDropdownButton extends StatelessWidget {
       return const SizedBox();
     }
 
-    final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(SVG_EXTENSION);
+    final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(kSVGExtension);
     return isSvg
         ? Container(
             margin: EdgeInsets.only(left: 2.w),

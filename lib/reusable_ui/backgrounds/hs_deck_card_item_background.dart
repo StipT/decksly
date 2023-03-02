@@ -18,7 +18,7 @@ class HSDeckCardItemBackground extends StatelessWidget {
               width: startWidth,
               height: double.infinity,
               child: Image.asset(
-                assetPath(SUBFOLDER_MISC, "deck_card_item_start"),
+                assetPath(kSubfolderMisc, "deck_card_item_start"),
                 fit: BoxFit.fill,
               ),
             ),
@@ -27,7 +27,7 @@ class HSDeckCardItemBackground extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 child: Image.asset(
-                  assetPath(SUBFOLDER_MISC, "deck_card_item_center"),
+                  assetPath(kSubfolderMisc, "deck_card_item_center"),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -36,7 +36,7 @@ class HSDeckCardItemBackground extends StatelessWidget {
               width: endWidth,
               height: double.infinity,
               child: Image.asset(
-                assetPath(SUBFOLDER_MISC, "deck_card_item_end"),
+                assetPath(kSubfolderMisc, "deck_card_item_end"),
                 fit: BoxFit.fill,
               ),
             ),

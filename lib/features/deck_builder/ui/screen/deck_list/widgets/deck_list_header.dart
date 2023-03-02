@@ -46,17 +46,17 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                 Container(
                   margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 5.h, bottom: 5.h),
                   child: Image.asset(
-                    assetPath(SUBFOLDER_CLASS, _headerBackground(state.deck.heroClass), fileExtension: JPG_EXTENSION),
+                    assetPath(kSubfolderClass, _headerBackground(state.deck.heroClass), fileExtension: kJPGExtension),
                     fit: BoxFit.fill,
                   ),
                 ),
                 Image.asset(
-                  assetPath(SUBFOLDER_MISC, _headerBorder(state.deck.type)),
+                  assetPath(kSubfolderMisc, _headerBorder(state.deck.type)),
                   fit: BoxFit.fill,
                 ),
                 if (isExpanded)
                   Image.asset(
-                    assetPath(SUBFOLDER_MISC, _headerBorderSelected(state.deck.type)),
+                    assetPath(kSubfolderMisc, _headerBorderSelected(state.deck.type)),
                     fit: BoxFit.fill,
                   ),
                 _headerContent(state),
@@ -64,7 +64,7 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                   right: 12.5.w,
                   top: 20.h,
                   child: Image.asset(
-                    assetPath(SUBFOLDER_MISC, "arrow"),
+                    assetPath(kSubfolderMisc, "arrow"),
                     fit: BoxFit.fill,
                     width: 10.w,
                   ),
@@ -139,7 +139,7 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
             right: 5.w,
           ),
           child: Image.asset(
-            assetPath(SUBFOLDER_MISC, "standard_badge_borderless"),
+            assetPath(kSubfolderMisc, "standard_badge_borderless"),
             height: 38.5.h,
           ),
         ),

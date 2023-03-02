@@ -36,7 +36,7 @@ class DeckListFooter extends StatelessWidget {
                 child: createDeckButton(context),
               ),
               Image.asset(
-                assetPath(SUBFOLDER_MISC, "wood_divider"),
+                assetPath(kSubfolderMisc, "wood_divider"),
                 fit: BoxFit.fill,
                 height: 33.h,
               ),
@@ -58,7 +58,7 @@ class DeckListFooter extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              assetPath(SUBFOLDER_MISC, "new_deck_button"),
+              assetPath(kSubfolderMisc, "new_deck_button"),
               width: double.infinity,
               height: double.infinity,
               fit: BoxFit.fill,
@@ -96,7 +96,7 @@ class DeckListFooter extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            assetPath(SUBFOLDER_MISC, "copy_deck_button"),
+            assetPath(kSubfolderMisc, "copy_deck_button"),
             fit: BoxFit.fill,
           ),
           OutlinedButton(

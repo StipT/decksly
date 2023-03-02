@@ -11,21 +11,21 @@ class HSWoodBorder extends StatelessWidget {
       children: [
         SizedBox(
           child: Image.asset(
-            assetPath(SUBFOLDER_SHARED, "wood_border_left_outline"),
+            assetPath(kSubfolderShared, "wood_border_left_outline"),
             fit: BoxFit.fill,
           ),
         ),
         Expanded(
           child: SizedBox(
             child: Image.asset(
-              assetPath(SUBFOLDER_SHARED, "wood_border_center_outline"),
+              assetPath(kSubfolderShared, "wood_border_center_outline"),
               fit: BoxFit.fill,
             ),
           ),
         ),
         SizedBox(
           child: Image.asset(
-            assetPath(SUBFOLDER_SHARED, "wood_border_right_outline"),
+            assetPath(kSubfolderShared, "wood_border_right_outline"),
             fit: BoxFit.fill,
           ),
         ),

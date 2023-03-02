@@ -2,8 +2,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/common/util/failures.dart';
 import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
+import 'package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart';
 import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,9 @@ import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'card_gallery_bloc.freezed.dart';
+
 part 'card_gallery_event.dart';
+
 part 'card_gallery_state.dart';
 
 @injectable
@@ -70,7 +73,7 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains(deckClass.name) && classes.length == 1) {
       classes.remove(deckClass.name);
-      classes.add("neutral");
+      classes.add(CardClass.neutral.value);
     } else if (classes.contains(deckClass.name) && classes.length > 1) {
       classes.remove(deckClass.name);
     } else {
@@ -82,13 +85,13 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
     List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
-    if (classes.contains("neutral") && classes.length == 1) {
-      classes.remove("neutral");
+    if (classes.contains(CardClass.neutral.value) && classes.length == 1) {
+      classes.remove(CardClass.neutral.value);
       classes.add(deckClass.name);
-    } else if (classes.contains("neutral") && classes.length > 1) {
-      classes.remove("neutral");
+    } else if (classes.contains(CardClass.neutral.value) && classes.length > 1) {
+      classes.remove(CardClass.neutral.value);
     } else {
-      classes.add("neutral");
+      classes.add(CardClass.neutral.value);
     }
     emit(CardGalleryState.fetching(cardFilterParams: state.cardFilterParams.copyWith(heroClass: classes, page: 0)));
   }

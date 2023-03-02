@@ -20,14 +20,14 @@ class HSDeckListBackground extends StatelessWidget {
           height: headerHeight,
           width: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_BACKGROUND, "deck_list_top"),
+            assetPath(kSubfolderBackground, "deck_list_top"),
             fit: BoxFit.fill,
           ),
         ),
         Expanded(
           child: SizedBox(
             child: Image.asset(
-              assetPath(SUBFOLDER_BACKGROUND, "deck_list_center"),
+              assetPath(kSubfolderBackground, "deck_list_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -36,7 +36,7 @@ class HSDeckListBackground extends StatelessWidget {
           height: footerHeight,
           width: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_BACKGROUND, "deck_list_bottom"),
+            assetPath(kSubfolderBackground, "deck_list_bottom"),
             fit: BoxFit.fill,
           ),
         ),

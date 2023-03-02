@@ -64,7 +64,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     duration: const Duration(milliseconds: 300),
                     opacity: state.deck.type == DeckType.wild ? 1 : 0,
                     child: Image.asset(
-                      assetPath(SUBFOLDER_MISC, "wild_branch_left"),
+                      assetPath(kSubfolderMisc, "wild_branch_left"),
                     ),
                   ),
                 ),
@@ -76,7 +76,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     duration: const Duration(milliseconds: 300),
                     opacity: state.deck.type == DeckType.wild ? 1 : 0,
                     child: Image.asset(
-                      assetPath(SUBFOLDER_MISC, "wild_branch_right"),
+                      assetPath(kSubfolderMisc, "wild_branch_right"),
                     ),
                   ),
                 ),
@@ -145,7 +145,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       onTap: () {
                         context.navigateBack();
                       },
-                      icon: Image.asset(assetPath(SUBFOLDER_MISC, "close")),
+                      icon: Image.asset(assetPath(kSubfolderMisc, "close")),
                     )),
               ],
             ),
@@ -170,7 +170,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(right: 20.w),
-                      child: Image.asset(assetPath(SUBFOLDER_MISC, "velvet_ornament_left"))),
+                      child: Image.asset(assetPath(kSubfolderMisc, "velvet_ornament_left"))),
                   HSModeBadge(
                       type: DeckType.standard,
                       isSelected: DeckType.standard == state.deck.type,
@@ -191,7 +191,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       }),
                   Container(
                       padding: EdgeInsets.only(left: 20.w),
-                      child: Image.asset(assetPath(SUBFOLDER_MISC, "velvet_ornament_right"))),
+                      child: Image.asset(assetPath(kSubfolderMisc, "velvet_ornament_right"))),
                 ],
               ),
             ),
@@ -201,7 +201,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
             height: 1.75.h,
             width: 600.w,
             child: Image.asset(
-              assetPath(SUBFOLDER_MISC, "velvet_divider"),
+              assetPath(kSubfolderMisc, "velvet_divider"),
               fit: BoxFit.fill,
               height: 1.75.h,
               width: 160.w,

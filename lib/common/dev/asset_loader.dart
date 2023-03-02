@@ -1,20 +1,20 @@
 // Asset subfolders
-const String SUBFOLDER_BACKGROUND = 'background';
-const String SUBFOLDER_BUTTON = 'button';
-const String SUBFOLDER_CLASS = 'class';
-const String SUBFOLDER_DROPDOWN = 'dropdown';
-const String SUBFOLDER_FONT = 'font';
-const String SUBFOLDER_LOCALIZATION = 'localization';
-const String SUBFOLDER_MISC = 'misc';
-const String SUBFOLDER_SET = 'set';
-const String SUBFOLDER_TEXT_FIELD = 'text_field';
-const String SUBFOLDER_SHARED = 'shared';
-const String NO_ASSET = '';
+const String kSubfolderBackground = 'background';
+const String kSubfolderButton = 'button';
+const String kSubfolderClass = 'class';
+const String kSubfolderDropdown = 'dropdown';
+const String kSubfolderFont = 'font';
+const String kSubfolderLocalization = 'localization';
+const String kSubfolderMisc = 'misc';
+const String kSubfolderSet = 'set';
+const String kSubfolderTextField = 'text_field';
+const String kSubfolderShared = 'shared';
+const String kNoAsset = '';
 
 // Extensions
-const String PNG_EXTENSION = 'png';
-const String SVG_EXTENSION = 'svg';
-const String JPG_EXTENSION = 'jpg';
+const String kPNGExtension = 'png';
+const String kSVGExtension = 'svg';
+const String kJPGExtension = 'jpg';
 
-String assetPath(String subFolder, String assetName, {String fileExtension = PNG_EXTENSION}) =>
+String assetPath(String subFolder, String assetName, {String fileExtension = kPNGExtension}) =>
     'assets/$subFolder/$assetName.$fileExtension';

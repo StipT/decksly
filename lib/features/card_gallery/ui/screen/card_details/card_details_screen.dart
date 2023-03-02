@@ -55,7 +55,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                 child: GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Image.asset(
-                    assetPath(SUBFOLDER_MISC, "close"),
+                    assetPath(kSubfolderMisc, "close"),
                     fit: BoxFit.fill,
                     width: 40.w,
                   ),

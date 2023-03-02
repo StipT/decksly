@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/data/card_class.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class HSClassBadge extends StatelessWidget {
 
   Widget _getImage(DeckClass type, bool isSelected, bool isDisabled) {
     return Image.asset(
-      assetPath(SUBFOLDER_CLASS, _getImageAsset(type)),
+      assetPath(kSubfolderClass, _getImageAsset(type)),
       color: isDisabled ? const Color.fromRGBO(255, 255, 255, 0.4) : null,
       colorBlendMode: isDisabled ? BlendMode.modulate : BlendMode.srcIn,
     );

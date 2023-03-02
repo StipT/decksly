@@ -34,7 +34,7 @@ class ApiServiceImpl implements ApiService {
 
   QueuedInterceptorsWrapper get queuedInterceptor {
     return QueuedInterceptorsWrapper(onRequest: (options, handler) async {
-      String? accessToken = await secureStorage.read(key: ACCESS_TOKEN_KEY);
+      String? accessToken = await secureStorage.read(key: kAccessTokenKey);
 
       if (isTokenInvalid(accessToken)) {
         accessToken = await refreshAccessToken();
@@ -62,7 +62,7 @@ class ApiServiceImpl implements ApiService {
     secureStorage = const FlutterSecureStorage();
 
     final _authDio = Dio(
-      BaseOptions(baseUrl: AUTH_BASE_URL, headers: {
+      BaseOptions(baseUrl: kAuthBaseUrl, headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       }),
     );
@@ -70,7 +70,7 @@ class ApiServiceImpl implements ApiService {
     _authClient = AuthClient(_authDio);
 
     _restDio = Dio(
-      BaseOptions(baseUrl: API_BASE_URL, headers: {
+      BaseOptions(baseUrl: kApiBaseUrl, headers: {
         'Content-Type': 'application/json',
       }),
     );
@@ -110,12 +110,12 @@ class ApiServiceImpl implements ApiService {
 
     final tokenResponse = await _authClient.getAccessToken(
       basicAuth,
-      const TokenRequest(grantType: CLIENT_CREDENTIALS_GRANT_TYPE),
+      const TokenRequest(grantType: kClientCredentialsGrantType),
     );
 
     final accessToken = tokenResponse.accessToken;
     await secureStorage.write(
-      key: ACCESS_TOKEN_KEY,
+      key: kAccessTokenKey,
       value: accessToken,
     );
     return accessToken;

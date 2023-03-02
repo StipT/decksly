@@ -1,9 +1,9 @@
 import 'package:decksly/common/dev/logger.dart';
 import 'package:decksly/common/util/debouncer.dart';
-import 'package:decksly/data/card_class.dart';
-import 'package:decksly/data/card_set.dart';
-import 'package:decksly/data/sort_by.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_set.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/sort_by.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar_extension.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/class_filter.dart';

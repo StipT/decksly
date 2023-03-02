@@ -12,7 +12,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_TEXT_FIELD, "text_field_border_left"),
+            assetPath(kSubfolderTextField, "text_field_border_left"),
             fit: BoxFit.fill,
           ),
         ),
@@ -21,7 +21,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              assetPath(SUBFOLDER_TEXT_FIELD, "text_field_border_center"),
+              assetPath(kSubfolderTextField, "text_field_border_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -29,7 +29,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_TEXT_FIELD, "text_field_border_right"),
+            assetPath(kSubfolderTextField, "text_field_border_right"),
             fit: BoxFit.fill,
           ),
         ),

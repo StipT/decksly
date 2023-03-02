@@ -38,7 +38,7 @@ dependencies:
   equatable: ^2.0.3
   rxdart: ^0.27.4
 
-  # DI
+  # Service locator
   get_it: ^7.2.0
   injectable: ^1.5.3
 
@@ -81,6 +81,7 @@ dependencies:
   collection: ^1.16.0
 
   # Dev
+  device_preview: ^1.1.0
   package_info_plus: ^1.4.0
   logger: ^1.1.0
 

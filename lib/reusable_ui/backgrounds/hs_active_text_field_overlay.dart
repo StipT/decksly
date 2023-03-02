@@ -12,7 +12,7 @@ class HSActiveTextFieldOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_TEXT_FIELD, "focused_text_field_left"),
+            assetPath(kSubfolderTextField, "focused_text_field_left"),
             fit: BoxFit.fill,
           ),
         ),
@@ -21,7 +21,7 @@ class HSActiveTextFieldOverlay extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              assetPath(SUBFOLDER_TEXT_FIELD, "focused_text_field_center"),
+              assetPath(kSubfolderTextField, "focused_text_field_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -29,7 +29,7 @@ class HSActiveTextFieldOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_TEXT_FIELD, "focused_text_field_right"),
+            assetPath(kSubfolderTextField, "focused_text_field_right"),
             fit: BoxFit.fill,
           ),
         ),

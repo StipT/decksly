@@ -1,6 +1,6 @@
 import 'package:decksly/common/util/exceptions.dart';
 import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page.dart';
+import 'package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart';
 import 'package:decksly/repository/remote_source/api/api_service.dart';
 import 'package:injectable/injectable.dart';
 

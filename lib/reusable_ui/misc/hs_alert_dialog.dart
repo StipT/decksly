@@ -17,7 +17,7 @@ class HSDialog {
     switch (type) {
       case HSDialogType.alert:
         return Image.asset(
-          assetPath(SUBFOLDER_MISC, "alert"),
+          assetPath(kSubfolderMisc, "alert"),
           fit: BoxFit.fill,
         );
     }

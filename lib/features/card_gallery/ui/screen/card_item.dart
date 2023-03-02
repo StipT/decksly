@@ -57,7 +57,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                               baseColor: AppColors.spanishGrey,
                               highlightColor: AppColors.shimmerGrey,
                               child: Image.asset(
-                                assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                                assetPath(kSubfolderMisc, "card_template_grey"),
                               ),
                             ),
                           );
@@ -73,7 +73,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      assetPath(SUBFOLDER_MISC, "card_counter_locked"),
+                      assetPath(kSubfolderMisc, "card_counter_locked"),
                       width: 60.w,
                       alignment: Alignment.center,
                       fit: BoxFit.fitWidth,
@@ -97,7 +97,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                   alignment: Alignment.center,
                   children: [
                     Image.asset(
-                      assetPath(SUBFOLDER_MISC, widget.amount == 2 ? "card_counter_locked" : "card_counter"),
+                      assetPath(kSubfolderMisc, widget.amount == 2 ? "card_counter_locked" : "card_counter"),
                       width: 60.w,
                       alignment: Alignment.center,
                       fit: BoxFit.fitWidth,

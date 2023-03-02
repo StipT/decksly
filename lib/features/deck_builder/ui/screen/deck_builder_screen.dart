@@ -4,16 +4,17 @@ import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
-import 'package:decksly/features/card_details/ui/screen/card_details_screen.dart';
-import 'package:decksly/features/card_details/ui/widgets/hero_dialog_route.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
+import 'package:decksly/features/card_gallery/ui/screen/card_details/card_details_screen.dart';
+import 'package:decksly/features/card_gallery/ui/screen/card_details/hero_dialog_route.dart';
 import 'package:decksly/features/card_gallery/ui/screen/card_item.dart';
 import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar.dart';
 import 'package:decksly/features/card_gallery/ui/screen/side_menu/side_menu.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
-import 'package:decksly/features/deck_builder/ui/screen/widgets/deck_list_menu/deck_list_menu.dart';
+import 'package:decksly/features/deck_builder/ui/screen/deck_list/deck_list_menu.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:decksly/reusable_ui/misc/no_results_widget.dart';
@@ -140,7 +141,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(assetPath(SUBFOLDER_BACKGROUND, "scroll_background")),
+              image: AssetImage(assetPath(kSubfolderBackground, "scroll_background")),
               fit: BoxFit.fill,
             ),
           ),
@@ -179,7 +180,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                       baseColor: AppColors.spanishGrey,
                       highlightColor: AppColors.shimmerGrey,
                       child: Image.asset(
-                        assetPath(SUBFOLDER_MISC, "card_template_grey"),
+                        assetPath(kSubfolderMisc, "card_template_grey"),
                       ),
                     ),
                   ),
@@ -282,7 +283,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
         .cardFilterParams
         .copyWith(
             locale: context.locale.toStringWithSeparator(),
-            heroClass: [widget.deck.heroClass.name, "neutral"],
+            heroClass: [widget.deck.heroClass.name, CardClass.neutral.value],
             set: widget.deck.type.value)));
   }
 

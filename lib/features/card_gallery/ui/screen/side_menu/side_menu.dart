@@ -81,16 +81,16 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                     children: [
                       Image.asset(
                         assetPath(
-                          SUBFOLDER_BACKGROUND,
+                          kSubfolderBackground,
                           "velvet_background_center",
-                          fileExtension: JPG_EXTENSION,
+                          fileExtension: kJPGExtension,
                         ),
                         width: 234.w,
                         height: 319.375.h,
                         fit: BoxFit.fill,
                       ),
                       Image.asset(
-                        assetPath(SUBFOLDER_MISC, "side_bar_border"),
+                        assetPath(kSubfolderMisc, "side_bar_border"),
                         fit: BoxFit.fill,
                       ),
                       Container(
@@ -129,7 +129,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                                 child: RotationTransition(
                                   turns: _rotateAnimation,
                                   child: Image.asset(
-                                    assetPath(SUBFOLDER_MISC, "arrow"),
+                                    assetPath(kSubfolderMisc, "arrow"),
                                     fit: BoxFit.fill,
                                     width: 15.w,
                                   ),
@@ -160,7 +160,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
               onTap: () => widget.inDeckBuilderMode ? _navigate(context, const CardGalleryRoute()) : null),
         ),
         Image.asset(
-          assetPath(SUBFOLDER_MISC, "velvet_divider"),
+          assetPath(kSubfolderMisc, "velvet_divider"),
           fit: BoxFit.fill,
           height: 2.h,
           width: 160.w,
@@ -174,7 +174,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         ),
         Container(
           child: Image.asset(
-            assetPath(SUBFOLDER_MISC, "velvet_divider"),
+            assetPath(kSubfolderMisc, "velvet_divider"),
             fit: BoxFit.fill,
             height: 2.h,
             width: 160.w,

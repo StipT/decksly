@@ -6,11 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorage {
   Future<String> readLocaleSetting() async {
     final sharedPrefsInstance = await SharedPreferences.getInstance();
-    return sharedPrefsInstance.getString(LOCALE_KEY) ?? "en_US";
+    return sharedPrefsInstance.getString(kLocaleKey) ?? "en_US";
   }
 
   Future<bool> editLocaleSetting(String languageCode) async {
     final sharedPrefsInstance = await SharedPreferences.getInstance();
-    return sharedPrefsInstance.setString(LOCALE_KEY, languageCode);
+    return sharedPrefsInstance.setString(kLocaleKey, languageCode);
   }
 }

@@ -48,13 +48,13 @@ class FeatureItem extends StatelessWidget {
     switch (type) {
       case FeatureItemType.cardLibrary:
         return Image.asset(
-          assetPath(SUBFOLDER_MISC, isSelected ? "card_library_selected" : "card_library"),
+          assetPath(kSubfolderMisc, isSelected ? "card_library_selected" : "card_library"),
           width: 75.w,
           fit: BoxFit.fill,
         );
       case FeatureItemType.deckBuilder:
         return Image.asset(
-          assetPath(SUBFOLDER_MISC, isSelected ? "deck_builder_selected" : "deck_builder"),
+          assetPath(kSubfolderMisc, isSelected ? "deck_builder_selected" : "deck_builder"),
           width: 75.w,
           fit: BoxFit.fill,
         );

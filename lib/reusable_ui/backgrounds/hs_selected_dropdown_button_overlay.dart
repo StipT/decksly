@@ -14,7 +14,7 @@ class HSSelectedDropdownButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_DROPDOWN,
+            assetPath(kSubfolderDropdown,
                 isDropdownButton ? "selected_dropdown_button_left" : "selected_dropdown_button_left_iconless"),
             fit: BoxFit.fill,
           ),
@@ -24,7 +24,7 @@ class HSSelectedDropdownButtonOverlay extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              assetPath(SUBFOLDER_DROPDOWN, "selected_dropdown_button_center"),
+              assetPath(kSubfolderDropdown, "selected_dropdown_button_center"),
               fit: BoxFit.fill,
             ),
           ),
@@ -32,7 +32,7 @@ class HSSelectedDropdownButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_DROPDOWN, "selected_dropdown_button_right"),
+            assetPath(kSubfolderDropdown, "selected_dropdown_button_right"),
             fit: BoxFit.fill,
           ),
         ),

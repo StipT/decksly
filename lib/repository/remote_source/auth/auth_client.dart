@@ -6,7 +6,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'auth_client.g.dart';
 
-@RestApi(baseUrl: AUTH_BASE_URL)
+@RestApi(baseUrl: kAuthBaseUrl)
 abstract class AuthClient {
   factory AuthClient(Dio dio, {String baseUrl}) = _AuthClient;
 

@@ -12,7 +12,7 @@ class HSVelvetBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_SHARED, "border_left_outline"),
+            assetPath(kSubfolderShared, "border_left_outline"),
             fit: BoxFit.fill,
           ),
         ),
@@ -21,7 +21,7 @@ class HSVelvetBorder extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Image.asset(
-              assetPath(SUBFOLDER_SHARED, "border_center_outline"),
+              assetPath(kSubfolderShared, "border_center_outline"),
               fit: BoxFit.fill,
             ),
           ),
@@ -29,7 +29,7 @@ class HSVelvetBorder extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(SUBFOLDER_SHARED, "border_right_outline"),
+            assetPath(kSubfolderShared, "border_right_outline"),
             fit: BoxFit.fill,
           ),
         ),

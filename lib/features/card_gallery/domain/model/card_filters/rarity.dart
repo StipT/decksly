@@ -1,44 +1,21 @@
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-enum Rarity {
-  any,
-  free,
-  common,
-  rare,
-  epic,
-  legendary,
-}
+enum Rarity implements CardFilter {
+  any(""),
+  free("free"),
+  common("common"),
+  rare("rare"),
+  epic("epic"),
+  legendary("legendary");
 
-extension RarityValues on Rarity {
-  String get value {
-    switch (this) {
-      case Rarity.any:
-        return "";
-      case Rarity.free:
-        return "free";
-      case Rarity.common:
-        return "common";
-      case Rarity.rare:
-        return "rare";
-      case Rarity.epic:
-        return "epic";
-      case Rarity.legendary:
-        return "legendary";
-    }
-  }
+  const Rarity(this.value);
 
-  static List<Rarity> get values => [
-        Rarity.any,
-        Rarity.free,
-        Rarity.common,
-        Rarity.rare,
-        Rarity.epic,
-        Rarity.legendary,
-      ];
-}
+  @override
+  final String value;
 
-extension RarityLocalized on Rarity {
+  @override
   String localized() {
     switch (this) {
       case Rarity.any:
@@ -54,24 +31,5 @@ extension RarityLocalized on Rarity {
       case Rarity.legendary:
         return LocaleKeys.legendary.tr();
     }
-  }
-}
-
-Rarity rarityFromIndex(int index) {
-  switch (index) {
-    case 0:
-      return Rarity.any;
-    case 1:
-      return Rarity.free;
-    case 2:
-      return Rarity.common;
-    case 3:
-      return Rarity.rare;
-    case 4:
-      return Rarity.epic;
-    case 5:
-      return Rarity.legendary;
-    default:
-      return Rarity.any;
   }
 }

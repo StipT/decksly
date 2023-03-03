@@ -1,52 +1,23 @@
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-enum SortBy {
-  manaAsc,
-  manaDesc,
-  nameAsc,
-  nameDesc,
-  attackAsc,
-  attackDesc,
-  healthAsc,
-  healthDesc,
-}
+enum SortBy implements CardFilter {
+  manaAsc("manaCost:asc"),
+  manaDesc("manaCost:desc"),
+  nameAsc("name:asc"),
+  nameDesc("name:desc"),
+  attackAsc("attack:asc"),
+  attackDesc("attack:desc"),
+  healthAsc("health:asc"),
+  healthDesc("health:desc");
 
-extension SortByValues on SortBy {
-  String get value {
-    switch (this) {
-      case SortBy.manaAsc:
-        return "manaCost:asc";
-      case SortBy.manaDesc:
-        return "manaCost:desc";
-      case SortBy.nameAsc:
-        return "name:asc";
-      case SortBy.nameDesc:
-        return "name:desc";
-      case SortBy.attackAsc:
-        return "attack:asc";
-      case SortBy.attackDesc:
-        return "attack:desc";
-      case SortBy.healthAsc:
-        return "health:asc";
-      case SortBy.healthDesc:
-        return "health:desc";
-    }
-  }
+  const SortBy(this.value);
 
-  static List<SortBy> get values => [
-        SortBy.manaAsc,
-        SortBy.manaDesc,
-        SortBy.nameAsc,
-        SortBy.nameDesc,
-        SortBy.attackAsc,
-        SortBy.attackDesc,
-        SortBy.healthAsc,
-        SortBy.healthDesc,
-      ];
-}
+  @override
+  final String value;
 
-extension SortByLocalized on SortBy {
+  @override
   String localized() {
     switch (this) {
       case SortBy.manaAsc:
@@ -66,28 +37,5 @@ extension SortByLocalized on SortBy {
       case SortBy.healthDesc:
         return LocaleKeys.healthDesc.tr();
     }
-  }
-}
-
-SortBy sortByFromIndex(int index) {
-  switch (index) {
-    case 0:
-      return SortBy.manaAsc;
-    case 1:
-      return SortBy.manaDesc;
-    case 2:
-      return SortBy.nameAsc;
-    case 3:
-      return SortBy.nameDesc;
-    case 4:
-      return SortBy.attackAsc;
-    case 5:
-      return SortBy.attackDesc;
-    case 6:
-      return SortBy.healthAsc;
-    case 7:
-      return SortBy.healthDesc;
-    default:
-      return SortBy.manaAsc;
   }
 }

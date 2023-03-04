@@ -93,6 +93,13 @@ class FontStyles {
     color: AppColors.gold,
   );
 
+  static TextStyle bold13Grey = TextStyle(
+    fontFamily: kFontFamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 13.sp,
+    color: AppColors.spanishGrey,
+  );
+
   static TextStyle bold13Green = TextStyle(
     fontFamily: kFontFamily,
     fontWeight: FontWeight.bold,

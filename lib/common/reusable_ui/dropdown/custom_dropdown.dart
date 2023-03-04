@@ -1,6 +1,28 @@
+import 'package:collection/collection.dart';
+import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class DropdownSectionHeadline extends StatelessWidget {
+  const DropdownSectionHeadline(this.index, this.headline, {super.key});
+
+  final int index;
+  final String headline;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 10.h,
+          horizontal: 7.5.w,
+        ),
+        child: Text(
+          headline.toUpperCase(),
+          style: FontStyles.bold13Grey,
+        ));
+  }
+}
 
 class CustomDropdown<T> extends StatefulWidget {
   final void Function(CardFilter) onChange;
@@ -9,6 +31,7 @@ class CustomDropdown<T> extends StatefulWidget {
   final DropdownItem<CardFilter> Function(CardFilter) selectedItem;
 
   final List<DropdownItem<CardFilter>> items;
+  final List<DropdownSectionHeadline>? headlines;
   final DropdownStyle dropdownStyle;
 
   final Widget? activeDropdownButtonOverlay;
@@ -31,6 +54,7 @@ class CustomDropdown<T> extends StatefulWidget {
     required this.onChange,
     this.activeDropdownButtonOverlay,
     this.selectedDropdownButtonOverlay,
+    this.headlines,
   }) : super(key: key);
 
   @override
@@ -114,19 +138,15 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   }
 
   OverlayEntry _createOverlayEntry() {
-    // find the size and position of the current widget
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     var size = renderBox.size;
 
     var offset = renderBox.localToGlobal(Offset.zero);
     var topOffset = offset.dy + size.height + 5;
     return OverlayEntry(
-      // full screen GestureDetector to register when ał
-      // user has clicked away from the dropdown
       builder: (context) => GestureDetector(
         onTap: () => _toggleDropdown(close: true),
         behavior: HitTestBehavior.opaque,
-        // full screen container to register taps anywhere and close drop down
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -176,10 +196,15 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                                 shrinkWrap: true,
                                 itemCount: widget.items.length,
                                 itemBuilder: (context, index) {
-                                  final item = widget.items.asMap().entries.toList()[index];
+                                  final headlines = widget.headlines ?? [];
+                                  final indexWithoutHeadlines =
+                                      index - headlines.where((element) => element.index < index).length;
+                                  final item = widget.items.asMap().entries.toList()[indexWithoutHeadlines];
                                   final DropdownItem<CardFilter> selectedItem = widget.selectedItem(item.value.value);
-
-                                  if (_currentValue?.value == selectedItem.value.value) {
+                                  final headline = headlines.firstWhereOrNull((element) => element.index == index);
+                                  if (headline != null) {
+                                    return headline;
+                                  } else if (_currentValue?.value == selectedItem.value.value) {
                                     return InkWell(
                                         onTap: () {
                                           setState(() => _currentValue = item.value.value);

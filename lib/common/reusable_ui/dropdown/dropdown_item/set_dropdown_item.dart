@@ -48,7 +48,7 @@ class SetDropdownItem extends StatelessWidget {
         left: 6.w,
         right: 6.w,
       ),
-      padding: EdgeInsets.symmetric(vertical: 0.875.h),
+      padding: EdgeInsets.symmetric(vertical: 2.5.h),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [

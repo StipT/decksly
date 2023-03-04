@@ -71,7 +71,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               width: 95.w,
                               dropdownWidth: 250.w,
                               selectedValue: state.cardFilterParams.set,
-                              dropdownType: DropdownType.cardSet,
+                              dropdownType: _setDropDownType(widget.deckType),
                               dropdownValues: _setDropDownValues(widget.deckType),
                               onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
                                   .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(set: value))),
@@ -202,6 +202,19 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
         return getCardSets(subCollection: SubCollection.wildSets);
       default:
         return getCardSets(subCollection: SubCollection.all);
+    }
+  }
+
+  DropdownType _setDropDownType(DeckType? deckType) {
+    switch (deckType) {
+      case DeckType.standard:
+        return DropdownType.cardSetStandard;
+      case DeckType.classic:
+        return DropdownType.cardSetClassic;
+      case DeckType.wild:
+        return DropdownType.cardSetWild;
+      default:
+        return DropdownType.cardSet;
     }
   }
 }

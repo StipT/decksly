@@ -10,12 +10,17 @@ import 'package:decksly/common/reusable_ui/dropdown/custom_dropdown.dart';
 import 'package:decksly/common/reusable_ui/dropdown/dropdown_item/hs_dropdown_item.dart';
 import 'package:decksly/common/reusable_ui/dropdown/dropdown_item/set_dropdown_item.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum DropdownType {
   cardClass,
   cardSet,
+  cardSetStandard,
+  cardSetClassic,
+  cardSetWild,
   mana,
   sortBy,
   attack,
@@ -73,9 +78,13 @@ class HSDropdown extends StatelessWidget {
                     text: filter.localized(),
                   );
                 case DropdownType.cardSet:
+                case DropdownType.cardSetStandard:
+                case DropdownType.cardSetClassic:
+                case DropdownType.cardSetWild:
                   return HSDropdownButton(
                     height: height,
-                    assetImagePath: assetPath(kSubfolderSet, filter.toString().split(".")[1], fileExtension: kSVGExtension),
+                    assetImagePath:
+                        assetPath(kSubfolderSet, filter.toString().split(".")[1], fileExtension: kSVGExtension),
                     text: filter.localized(),
                     hideText: true,
                   );
@@ -97,9 +106,9 @@ class HSDropdown extends StatelessWidget {
                     assetImagePath: kNoAsset,
                     text: filter.localized(),
                   );
-
               }
             },
+            headlines: _headlines(),
             onChange: (CardFilter filter) => onChange(filter.value),
             dropdownButtonStyle: DropdownButtonStyle(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -134,7 +143,6 @@ class HSDropdown extends StatelessWidget {
                 )
                 .toList(),
             selectedItem: (cardFilter) {
-              print("SELECTED ITEM ${cardFilter.value}");
               return DropdownItem<CardFilter>(
                 value: cardFilter,
                 child: _getDropdownItem(cardFilter, dropdownType, isSelected: true),
@@ -149,6 +157,9 @@ class HSDropdown extends StatelessWidget {
   bool _showIcon(DropdownType type) {
     switch (type) {
       case DropdownType.cardSet:
+      case DropdownType.cardSetStandard:
+      case DropdownType.cardSetClassic:
+      case DropdownType.cardSetWild:
       case DropdownType.cardClass:
       case DropdownType.mana:
       case DropdownType.attack:
@@ -159,6 +170,23 @@ class HSDropdown extends StatelessWidget {
     }
   }
 
+  List<DropdownSectionHeadline> _headlines() {
+    switch (dropdownType) {
+      case DropdownType.cardSet:
+        return [
+          DropdownSectionHeadline(3, LocaleKeys.standardSets.tr()),
+          DropdownSectionHeadline(12, LocaleKeys.wildSets.tr())
+        ];
+      case DropdownType.cardSetStandard:
+        return [DropdownSectionHeadline(1, LocaleKeys.standardSets.tr())];
+      case DropdownType.cardSetWild:
+        return [DropdownSectionHeadline(1, LocaleKeys.wildSets.tr())];
+
+      default:
+        return [];
+    }
+  }
+
   Widget _getDropdownItem(
     CardFilter filter,
     DropdownType dropdownType, {
@@ -166,6 +194,9 @@ class HSDropdown extends StatelessWidget {
   }) {
     switch (dropdownType) {
       case DropdownType.cardSet:
+      case DropdownType.cardSetStandard:
+      case DropdownType.cardSetClassic:
+      case DropdownType.cardSetWild:
         return SetDropdownItem(
           cardFilter: filter,
           isSelected: isSelected,

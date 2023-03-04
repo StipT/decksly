@@ -1,7 +1,7 @@
 {
   "allClasses": "Alle Klassen",
-  "deathKnight": "Todesritter",
-  "demonHunter": "Geisterjäger",
+  "deathknight": "Todesritter",
+  "demonhunter": "Geisterjäger",
   "druid": "Druide",
   "hunter": "Jäger",
   "mage": "Magier",
@@ -153,5 +153,8 @@
   "deck": "Deck",
   "thereWasAnErrorReadingTheDeckCode": "Beim Lesen des Deckcodes ist ein Fehler aufgetreten",
   "thereWasAnErrorGeneratingDeckCode": "Beim Generieren des Deckcodes ist ein Fehler aufgetreten",
-  "deckCodeHasBeenCopiedToClipboard": "Der Deckcode wurde in die Zwischenablage kopiert"
+  "deckCodeHasBeenCopiedToClipboard": "Der Deckcode wurde in die Zwischenablage kopiert",
+  "yes": "Ja",
+  "no": "Nein",
+  "youWillLoseYourExistingDeckAreYouSure": "Sie verlieren Ihr vorhandenes Deck. Bist du dir sicher?"
 }

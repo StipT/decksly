@@ -1,8 +1,10 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
-import 'package:decksly/reusable_ui/button/hs_button.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
+import 'package:decksly/common/reusable_ui/button/hs_button.dart';
+import 'package:decksly/l10n/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,7 +29,7 @@ class HSDialog {
     switch (type) {
       case HSDialogType.alert:
         return Text(
-          "You will lose your existing deck. Are you sure?",
+          LocaleKeys.youWillLoseYourExistingDeckAreYouSure.tr(),
           textAlign: TextAlign.center,
           style: FontStyles.bold22,
         );
@@ -37,14 +39,14 @@ class HSDialog {
   static String _dialogPrimaryButtonTitle(HSDialogType type) {
     switch (type) {
       case HSDialogType.alert:
-        return "Yes";
+        return LocaleKeys.yes.tr();
     }
   }
 
   static String? _dialogSecondaryButtonTitle(HSDialogType type) {
     switch (type) {
       case HSDialogType.alert:
-        return "No";
+        return LocaleKeys.no.tr();
     }
   }
 
@@ -70,7 +72,7 @@ class HSDialog {
                   ),
                 ),
                 image: DecorationImage(
-                  image: AssetImage(assetPath("background", "alert_dialog_background")),
+                  image: AssetImage(assetPath(kSubfolderBackground, "alert_dialog_background")),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -93,45 +95,39 @@ class HSDialog {
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Stack(
+                                    children: [
+                                      const HSWoodHorizontalBorder(),
+                                      Container(
+                                          margin: EdgeInsets.only(left: 30.w, right: 30.w),
+                                          child: HSButton(
+                                            isDisabled: false,
+                                            label: _dialogPrimaryButtonTitle(type),
+                                            onTap: () => onPrimaryButtonTap(dialogContext),
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                if (_dialogSecondaryButtonTitle(type) != null)
                                   Expanded(
-                                    child: Container(
-                                      child: Stack(
-                                        children: [
-                                          const HSWoodHorizontalBorder(),
-                                          Container(
-                                              margin: EdgeInsets.only(left: 30.w, right: 30.w),
-                                              child: HSButton(
-                                                isDisabled: false,
-                                                label: _dialogPrimaryButtonTitle(type),
-                                                onTap: () => onPrimaryButtonTap(dialogContext),
-                                              )),
-                                        ],
-                                      ),
+                                    child: Stack(
+                                      children: [
+                                        const HSWoodHorizontalBorder(),
+                                        Container(
+                                            margin: EdgeInsets.only(left: 30.w, right: 30.w),
+                                            child: HSButton(
+                                              isDisabled: false,
+                                              label: _dialogSecondaryButtonTitle(type),
+                                              onTap: () => onSecondaryButtonTap(dialogContext),
+                                            )),
+                                      ],
                                     ),
                                   ),
-                                  if (_dialogSecondaryButtonTitle(type) != null)
-                                    Expanded(
-                                      child: Container(
-                                        child: Stack(
-                                          children: [
-                                            const HSWoodHorizontalBorder(),
-                                            Container(
-                                                margin: EdgeInsets.only(left: 30.w, right: 30.w),
-                                                child: HSButton(
-                                                  isDisabled: false,
-                                                  label: _dialogSecondaryButtonTitle(type),
-                                                  onTap: () => onSecondaryButtonTap(dialogContext),
-                                                )),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
+                              ],
                             ),
                           ),
                         ],

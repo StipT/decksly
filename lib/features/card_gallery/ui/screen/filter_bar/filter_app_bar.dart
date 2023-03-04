@@ -1,4 +1,7 @@
-import 'package:decksly/common/dev/logger.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_appbar_overlay.dart';
+import 'package:decksly/common/reusable_ui/button/hs_toggle_button.dart';
+import 'package:decksly/common/reusable_ui/dropdown/hs_dropdown.dart';
+import 'package:decksly/common/reusable_ui/text_field/hs_text_field.dart';
 import 'package:decksly/common/util/debouncer.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
@@ -11,10 +14,6 @@ import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_
 import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
 import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_appbar_overlay.dart';
-import 'package:decksly/reusable_ui/button/hs_toggle_button.dart';
-import 'package:decksly/reusable_ui/dropdown/hs_dropdown.dart';
-import 'package:decksly/reusable_ui/text_field/hs_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,10 +72,9 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                               dropdownWidth: 250.w,
                               selectedValue: state.cardFilterParams.set,
                               dropdownType: DropdownType.cardSet,
-                              dropdownValues: getCardSets(subCollection: SubCollection.all),
-                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
-                                  CardFilterParamsChangedEvent(
-                                      state.cardFilterParams.copyWith(set: cardSetFromIndex(value).value))),
+                              dropdownValues: _setDropDownValues(widget.deckType),
+                              onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
+                                  .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(set: value))),
                             ),
                           ),
                           Container(
@@ -181,20 +179,20 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
             child: HSDropdown(
               height: 70.h,
               width: 150.w,
+              dropdownWidth: 175.w,
               selectedValue: state.cardFilterParams.heroClass.toString(),
               dropdownType: DropdownType.cardClass,
-              dropdownValues: CardClass.values.map((e) => e.value).toList(),
+              dropdownValues: CardClass.values,
               onChange: (value) => BlocProvider.of<CardGalleryBloc>(context).add(
                 CardFilterParamsChangedEvent(
-                  state.cardFilterParams.copyWith(heroClass: [cardClassFromIndex(value).value]),
+                  state.cardFilterParams.copyWith(heroClass: [value]),
                 ),
               ),
             ),
           );
   }
 
-  List<Object> _setDropDownValues(DeckType? deckType) {
-    log(deckType.toString());
+  List<CardSet> _setDropDownValues(DeckType? deckType) {
     switch (deckType) {
       case DeckType.standard:
         return getCardSets(subCollection: SubCollection.standardSets);

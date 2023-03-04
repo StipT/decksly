@@ -28,9 +28,9 @@ enum CardClass implements CardFilter {
       case CardClass.allClasses:
         return LocaleKeys.allClasses.tr();
       case CardClass.deathKnight:
-        return LocaleKeys.deathKnight.tr();
+        return LocaleKeys.deathknight.tr();
       case CardClass.demonHunter:
-        return LocaleKeys.demonHunter.tr();
+        return LocaleKeys.demonhunter.tr();
       case CardClass.druid:
         return LocaleKeys.druid.tr();
       case CardClass.hunter:

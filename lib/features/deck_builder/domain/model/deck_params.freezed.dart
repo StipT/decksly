@@ -19,6 +19,7 @@ mixin _$DeckParams {
   String? get ids => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   String? get hero => throw _privateConstructorUsedError;
+  String get deckType => throw _privateConstructorUsedError;
   String get locale => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +33,12 @@ abstract class $DeckParamsCopyWith<$Res> {
           DeckParams value, $Res Function(DeckParams) then) =
       _$DeckParamsCopyWithImpl<$Res, DeckParams>;
   @useResult
-  $Res call({String? ids, String? code, String? hero, String locale});
+  $Res call(
+      {String? ids,
+      String? code,
+      String? hero,
+      String deckType,
+      String locale});
 }
 
 /// @nodoc
@@ -51,6 +57,7 @@ class _$DeckParamsCopyWithImpl<$Res, $Val extends DeckParams>
     Object? ids = freezed,
     Object? code = freezed,
     Object? hero = freezed,
+    Object? deckType = null,
     Object? locale = null,
   }) {
     return _then(_value.copyWith(
@@ -66,6 +73,10 @@ class _$DeckParamsCopyWithImpl<$Res, $Val extends DeckParams>
           ? _value.hero
           : hero // ignore: cast_nullable_to_non_nullable
               as String?,
+      deckType: null == deckType
+          ? _value.deckType
+          : deckType // ignore: cast_nullable_to_non_nullable
+              as String,
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -82,7 +93,12 @@ abstract class _$$_DeckParamsCopyWith<$Res>
       __$$_DeckParamsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? ids, String? code, String? hero, String locale});
+  $Res call(
+      {String? ids,
+      String? code,
+      String? hero,
+      String deckType,
+      String locale});
 }
 
 /// @nodoc
@@ -99,6 +115,7 @@ class __$$_DeckParamsCopyWithImpl<$Res>
     Object? ids = freezed,
     Object? code = freezed,
     Object? hero = freezed,
+    Object? deckType = null,
     Object? locale = null,
   }) {
     return _then(_$_DeckParams(
@@ -114,6 +131,10 @@ class __$$_DeckParamsCopyWithImpl<$Res>
           ? _value.hero
           : hero // ignore: cast_nullable_to_non_nullable
               as String?,
+      deckType: null == deckType
+          ? _value.deckType
+          : deckType // ignore: cast_nullable_to_non_nullable
+              as String,
       locale: null == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -126,7 +147,11 @@ class __$$_DeckParamsCopyWithImpl<$Res>
 
 class _$_DeckParams implements _DeckParams {
   const _$_DeckParams(
-      {this.ids = "", this.code = "", this.hero = "", this.locale = "en_US"});
+      {this.ids = "",
+      this.code = "",
+      this.hero = "",
+      this.deckType = "standard",
+      this.locale = "en_US"});
 
   @override
   @JsonKey()
@@ -139,11 +164,14 @@ class _$_DeckParams implements _DeckParams {
   final String? hero;
   @override
   @JsonKey()
+  final String deckType;
+  @override
+  @JsonKey()
   final String locale;
 
   @override
   String toString() {
-    return 'DeckParams(ids: $ids, code: $code, hero: $hero, locale: $locale)';
+    return 'DeckParams(ids: $ids, code: $code, hero: $hero, deckType: $deckType, locale: $locale)';
   }
 
   @override
@@ -154,11 +182,14 @@ class _$_DeckParams implements _DeckParams {
             (identical(other.ids, ids) || other.ids == ids) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.hero, hero) || other.hero == hero) &&
+            (identical(other.deckType, deckType) ||
+                other.deckType == deckType) &&
             (identical(other.locale, locale) || other.locale == locale));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, ids, code, hero, locale);
+  int get hashCode =>
+      Object.hash(runtimeType, ids, code, hero, deckType, locale);
 
   @JsonKey(ignore: true)
   @override
@@ -172,6 +203,7 @@ abstract class _DeckParams implements DeckParams {
       {final String? ids,
       final String? code,
       final String? hero,
+      final String deckType,
       final String locale}) = _$_DeckParams;
 
   @override
@@ -180,6 +212,8 @@ abstract class _DeckParams implements DeckParams {
   String? get code;
   @override
   String? get hero;
+  @override
+  String get deckType;
   @override
   String get locale;
   @override

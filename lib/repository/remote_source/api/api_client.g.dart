@@ -145,11 +145,13 @@ class _ApiClient implements ApiClient {
   Future<DeckResponse> getDeckCode(
     ids,
     locale,
+    gameMode,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'ids': ids,
       r'locale': locale,
+      r'gameMode': gameMode,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

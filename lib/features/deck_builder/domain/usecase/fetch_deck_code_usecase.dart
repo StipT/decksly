@@ -15,7 +15,7 @@ class FetchDeckCodeUsecase extends UseCase<String, DeckParams> {
   @override
   Future<Either<Failure, String>> call(DeckParams params) async {
     try {
-      final deck = await _deckRepository.getDeckCode(params.ids, params.locale);
+      final deck = await _deckRepository.getDeckCode(params.ids, params.locale, params.deckType);
       return Right(deck);
     } catch (exception) {
       return Left(ExceptionToFailureMapper.mapExceptionToFailure(exception));

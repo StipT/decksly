@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class HSDropdownButton extends StatelessWidget {
   const HSDropdownButton({
+    super.key,
     required this.height,
     required this.assetImagePath,
     required this.text,
@@ -22,7 +23,7 @@ class HSDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -62,12 +63,10 @@ class HSDropdownButton extends StatelessWidget {
               fit: BoxFit.fitWidth,
             ),
           )
-        : Container(
-            child: Image.asset(
-              height: height - 40.h,
-              assetImagePath,
-              fit: BoxFit.fitWidth,
-            ),
+        : Image.asset(
+            height: height - 40.h,
+            assetImagePath,
+            fit: BoxFit.fitWidth,
           );
   }
 }

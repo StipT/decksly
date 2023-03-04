@@ -1,9 +1,9 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const allClasses = 'allClasses';
-  static const deathKnight = 'deathKnight';
-  static const demonHunter = 'demonHunter';
+  static const deathknight = 'deathknight';
+  static const demonhunter = 'demonhunter';
   static const druid = 'druid';
   static const hunter = 'hunter';
   static const mage = 'mage';
@@ -156,4 +156,8 @@ abstract class LocaleKeys {
   static const thereWasAnErrorReadingTheDeckCode = 'thereWasAnErrorReadingTheDeckCode';
   static const thereWasAnErrorGeneratingDeckCode = 'thereWasAnErrorGeneratingDeckCode';
   static const deckCodeHasBeenCopiedToClipboard = 'deckCodeHasBeenCopiedToClipboard';
+  static const yes = 'yes';
+  static const no = 'no';
+  static const youWillLoseYourExistingDeckAreYouSure = 'youWillLoseYourExistingDeckAreYouSure';
+
 }

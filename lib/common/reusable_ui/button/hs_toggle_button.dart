@@ -1,9 +1,9 @@
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_active_button_overlay.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_velvet_border.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_active_button_overlay.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_button_overlay.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,6 +12,7 @@ class HSBarToggleButton extends StatelessWidget {
   const HSBarToggleButton(
       {Key? key, required this.onTap, required this.isToggled, required this.activeFilters, required this.width})
       : super(key: key);
+
   final double width;
   final bool isToggled;
   final int activeFilters;
@@ -66,7 +67,7 @@ class HSBarToggleButton extends StatelessWidget {
           fit: StackFit.expand,
           alignment: Alignment.center,
           children: [
-            Image.asset(assetPath("misc", "filter_number_bubble"), width: 20.w),
+            Image.asset(assetPath(kSubfolderMisc, "filter_number_bubble"), width: 20.w),
             Text(
               activeFilters.toString(),
               textAlign: TextAlign.center,

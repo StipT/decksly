@@ -11,7 +11,7 @@ enum CardSet implements CardFilter {
   // Standard sets
   pathOfArthas("path-of-arthas"),
   marchOfTheLichKing("march-of-the-lich-king"),
-  murderAtCastleNathria("urder-at-castle-nathria"),
+  murderAtCastleNathria("murder-at-castle-nathria"),
   voyageToTheSunkenCity("voyage-to-the-sunken-city"),
   fracturedInAlteracValley("fractured-in-alterac-valley"),
   unitedInStormwind("united-in-stormwind"),
@@ -158,6 +158,7 @@ List<CardSet> _getGameModes() => [
     ];
 
 List<CardSet> _getStandardSets() => [
+      CardSet.standard,
       CardSet.pathOfArthas,
       CardSet.marchOfTheLichKing,
       CardSet.murderAtCastleNathria,
@@ -171,6 +172,7 @@ List<CardSet> _getStandardSets() => [
 List<CardSet> _getClassicSets() => [CardSet.classic];
 
 List<CardSet> _getWildSets() => [
+      CardSet.wild,
       CardSet.madnessAtTheDarkmoonFaire,
       CardSet.scholomanceAcademy,
       CardSet.demonHunterInitiate,

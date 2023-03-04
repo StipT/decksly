@@ -1,7 +1,7 @@
 {
   "allClasses": "All Classes",
-  "deathKnight": "Death Knight",
-  "demonHunter": "Demon Hunter",
+  "deathknight": "Death Knight",
+  "demonhunter": "Demon Hunter",
   "druid": "Druid",
   "hunter": "Hunter",
   "mage": "Mage",
@@ -153,5 +153,8 @@
   "deck": "Deck",
   "thereWasAnErrorReadingTheDeckCode": "There was an error reading the deck code",
   "thereWasAnErrorGeneratingDeckCode": "There was an error generating deck code",
-  "deckCodeHasBeenCopiedToClipboard": "Deck code has been copied to clipboard"
+  "deckCodeHasBeenCopiedToClipboard": "Deck code has been copied to clipboard",
+  "yes": "Yes",
+  "no": "No",
+  "youWillLoseYourExistingDeckAreYouSure": "You will lose your existing deck. Are you sure?"
 }

@@ -1,9 +1,9 @@
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_deck_list_background.dart';
 import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
 import 'package:decksly/features/deck_builder/ui/screen/deck_list/widgets/deck_list_body.dart';
 import 'package:decksly/features/deck_builder/ui/screen/deck_list/widgets/deck_list_footer.dart';
 import 'package:decksly/features/deck_builder/ui/screen/deck_list/widgets/deck_list_header.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_deck_list_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

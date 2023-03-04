@@ -1,212 +1,63 @@
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-enum Keyword {
-  any,
-  adapt,
-  battlecry,
-  charge,
-  colossal,
-  combo,
-  corpse,
-  corrupt,
-  counter,
-  deathrattle,
-  discover,
-  divineShield,
-  dredge,
-  echo,
-  freeze,
-  frenzy,
-  honorableKill,
-  immune,
-  infuse,
-  inspire,
-  invoke,
-  lackey,
-  lifesteal,
-  magnetic,
-  manathirst,
-  megaWindfury,
-  natureSpellDamage,
-  outcast,
-  overkill,
-  overload,
-  poisonous,
-  quest,
-  questline,
-  reborn,
-  recruit,
-  rush,
-  secret,
-  sidequest,
-  silence,
-  spareParts,
-  spellDamage,
-  spellburst,
-  startOfGame,
-  stealh,
-  taunt,
-  tradeable,
-  twinspell,
-  windfury,
-}
+enum Keyword implements CardFilter {
+  any(""),
+  adapt("adapt"),
+  battlecry("battlecry"),
+  charge("charge"),
+  colossal("colossal"),
+  combo("combo"),
+  corpse("corpse"),
+  corrupt("corrupt"),
+  counter("counter"),
+  deathrattle("deathrattle"),
+  discover("discover"),
+  divineShield("divine-shield"),
+  dredge("dredge"),
+  echo("echo"),
+  freeze("freeze"),
+  frenzy("frenzy"),
+  honorableKill("honorablekill"),
+  immune("immune"),
+  infuse("infuse"),
+  inspire("inspire"),
+  invoke("empower"),
+  lackey("evilzug"),
+  lifesteal("lifesteal"),
+  magnetic("modular"),
+  manathirst("manathirst"),
+  megaWindfury("mega-windfury"),
+  natureSpellDamage("spellpowernature"),
+  outcast("outcast"),
+  overkill("overkill"),
+  overload("overload"),
+  poisonous("poisonous"),
+  quest("quest"),
+  questline("questline"),
+  reborn("reborn"),
+  recruit("recruit"),
+  rush("rush"),
+  secret("secret"),
+  sidequest("sidequest"),
+  silence("silence"),
+  spareParts("pare-part"),
+  spellDamage("spellpower"),
+  spellburst("spellburst"),
+  startOfGame("startofgamekeyword"),
+  stealh("stealh"),
+  taunt("taunt"),
+  tradeable("trade"),
+  twinspell("twinspell"),
+  windfury("windfury");
 
-extension KeywordValues on Keyword {
-  String get value {
-    switch (this) {
-      case Keyword.any:
-        return "";
-      case Keyword.adapt:
-        return "adapt";
-      case Keyword.battlecry:
-        return "battlecry";
-      case Keyword.charge:
-        return "charge";
-      case Keyword.colossal:
-        return "colossal";
-      case Keyword.combo:
-        return "combo";
-      case Keyword.corpse:
-        return "corpse";
-      case Keyword.corrupt:
-        return "corrupt";
-      case Keyword.counter:
-        return "counter";
-      case Keyword.deathrattle:
-        return "deathrattle";
-      case Keyword.discover:
-        return "discover";
-      case Keyword.divineShield:
-        return "divine-shield";
-      case Keyword.dredge:
-        return "dredge";
-      case Keyword.echo:
-        return "echo";
-      case Keyword.freeze:
-        return "freeze";
-      case Keyword.frenzy:
-        return "frenzy";
-      case Keyword.honorableKill:
-        return "honorablekill";
-      case Keyword.immune:
-        return "immune";
-      case Keyword.infuse:
-        return "infuse";
-      case Keyword.inspire:
-        return "inspire";
-      case Keyword.invoke:
-        return "empower";
-      case Keyword.lackey:
-        return "evilzug";
-      case Keyword.lifesteal:
-        return "lifesteal";
-      case Keyword.magnetic:
-        return "modular";
-      case Keyword.manathirst:
-        return "manathirst";
-      case Keyword.megaWindfury:
-        return "mega-windfury";
-      case Keyword.natureSpellDamage:
-        return "spellpowernature";
-      case Keyword.outcast:
-        return "outcast";
-      case Keyword.overkill:
-        return "overkill";
-      case Keyword.overload:
-        return "overload";
-      case Keyword.poisonous:
-        return "poisonous";
-      case Keyword.quest:
-        return "quest";
-      case Keyword.questline:
-        return "questline";
-      case Keyword.reborn:
-        return "reborn";
-      case Keyword.recruit:
-        return "recruit";
-      case Keyword.rush:
-        return "rush";
-      case Keyword.secret:
-        return "secret";
-      case Keyword.sidequest:
-        return "sidequest";
-      case Keyword.silence:
-        return "silence";
-      case Keyword.spareParts:
-        return "spare-part";
-      case Keyword.spellDamage:
-        return "spellpower";
-      case Keyword.spellburst:
-        return "spellburst";
-      case Keyword.startOfGame:
-        return "startofgamekeyword";
-      case Keyword.stealh:
-        return "stealh";
-      case Keyword.taunt:
-        return "taunt";
-      case Keyword.tradeable:
-        return "trade";
-      case Keyword.twinspell:
-        return "twinspell";
-      case Keyword.windfury:
-        return "windfury";
-    }
-  }
+  const Keyword(this.value);
 
-  static List<Keyword> get values => [
-        Keyword.any,
-        Keyword.adapt,
-        Keyword.battlecry,
-        Keyword.charge,
-        Keyword.colossal,
-        Keyword.combo,
-        Keyword.corpse,
-        Keyword.corrupt,
-        Keyword.counter,
-        Keyword.deathrattle,
-        Keyword.discover,
-        Keyword.divineShield,
-        Keyword.dredge,
-        Keyword.echo,
-        Keyword.freeze,
-        Keyword.frenzy,
-        Keyword.honorableKill,
-        Keyword.immune,
-        Keyword.infuse,
-        Keyword.inspire,
-        Keyword.invoke,
-        Keyword.lackey,
-        Keyword.lifesteal,
-        Keyword.magnetic,
-        Keyword.manathirst,
-        Keyword.megaWindfury,
-        Keyword.natureSpellDamage,
-        Keyword.outcast,
-        Keyword.overkill,
-        Keyword.overload,
-        Keyword.poisonous,
-        Keyword.quest,
-        Keyword.questline,
-        Keyword.reborn,
-        Keyword.recruit,
-        Keyword.rush,
-        Keyword.secret,
-        Keyword.sidequest,
-        Keyword.silence,
-        Keyword.spareParts,
-        Keyword.spellDamage,
-        Keyword.spellburst,
-        Keyword.startOfGame,
-        Keyword.stealh,
-        Keyword.taunt,
-        Keyword.tradeable,
-        Keyword.twinspell,
-        Keyword.windfury,
-      ];
-}
+  @override
+  final String value;
 
-extension KeywordLocalized on Keyword {
+  @override
   String localized() {
     switch (this) {
       case Keyword.any:
@@ -306,105 +157,5 @@ extension KeywordLocalized on Keyword {
       case Keyword.windfury:
         return LocaleKeys.windfury.tr();
     }
-  }
-}
-
-Keyword keywordFromIndex(int index) {
-  switch (index) {
-    case 0:
-      return Keyword.any;
-    case 1:
-      return Keyword.adapt;
-    case 2:
-      return Keyword.battlecry;
-    case 3:
-      return Keyword.charge;
-    case 4:
-      return Keyword.colossal;
-    case 5:
-      return Keyword.combo;
-    case 6:
-      return Keyword.corpse;
-    case 7:
-      return Keyword.corrupt;
-    case 8:
-      return Keyword.counter;
-    case 9:
-      return Keyword.deathrattle;
-    case 10:
-      return Keyword.discover;
-    case 11:
-      return Keyword.divineShield;
-    case 12:
-      return Keyword.dredge;
-    case 13:
-      return Keyword.echo;
-    case 14:
-      return Keyword.freeze;
-    case 15:
-      return Keyword.frenzy;
-    case 16:
-      return Keyword.honorableKill;
-    case 17:
-      return Keyword.immune;
-    case 18:
-      return Keyword.infuse;
-    case 19:
-      return Keyword.inspire;
-    case 20:
-      return Keyword.invoke;
-    case 21:
-      return Keyword.lackey;
-    case 22:
-      return Keyword.lifesteal;
-    case 23:
-      return Keyword.magnetic;
-    case 24:
-      return Keyword.manathirst;
-    case 25:
-      return Keyword.megaWindfury;
-    case 26:
-      return Keyword.natureSpellDamage;
-    case 27:
-      return Keyword.outcast;
-    case 28:
-      return Keyword.overkill;
-    case 29:
-      return Keyword.overload;
-    case 30:
-      return Keyword.poisonous;
-    case 31:
-      return Keyword.quest;
-    case 32:
-      return Keyword.questline;
-    case 33:
-      return Keyword.reborn;
-    case 34:
-      return Keyword.recruit;
-
-    case 35:
-      return Keyword.secret;
-    case 36:
-      return Keyword.sidequest;
-    case 37:
-      return Keyword.spareParts;
-    case 38:
-      return Keyword.spellDamage;
-    case 39:
-      return Keyword.spellburst;
-    case 40:
-      return Keyword.startOfGame;
-    case 41:
-      return Keyword.stealh;
-    case 42:
-      return Keyword.taunt;
-    case 43:
-      return Keyword.tradeable;
-    case 44:
-      return Keyword.twinspell;
-    case 45:
-      return Keyword.windfury;
-    default:
-      return Keyword.any;
   }
 }

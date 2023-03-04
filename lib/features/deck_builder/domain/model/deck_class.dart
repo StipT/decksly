@@ -19,9 +19,9 @@ extension DeckClassLocalized on DeckClass {
   String localized() {
     switch (this) {
       case DeckClass.deathknight:
-        return LocaleKeys.deathKnight.tr();
+        return LocaleKeys.deathknight.tr();
       case DeckClass.demonhunter:
-        return LocaleKeys.demonHunter.tr();
+        return LocaleKeys.demonhunter.tr();
       case DeckClass.druid:
         return LocaleKeys.druid.tr();
       case DeckClass.hunter:
@@ -44,7 +44,7 @@ extension DeckClassLocalized on DeckClass {
   }
 }
 
-DeckClass deckClassFromValue(String deckClass) {
+DeckClass deckClassFromValue(String? deckClass) {
   switch (deckClass) {
     case "deathknight":
       return DeckClass.deathknight;

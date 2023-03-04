@@ -5,9 +5,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+enum DropdownItemType {
+  value,
+  sectionHeader,
+}
+
 class HSDropdownItem extends StatelessWidget {
   const HSDropdownItem({
-    required this.assetImagePath,
+    super.key,
+    this.assetImagePath = "",
     required this.text,
     required this.isSelected,
   });
@@ -31,7 +37,7 @@ class HSDropdownItem extends StatelessWidget {
             Stack(children: [
               Center(
                 child: Image.asset(
-                  assetPath("misc", "golden_circle_border"),
+                  assetPath(kSubfolderMisc, "golden_circle_border"),
                   fit: BoxFit.fill,
                   width: 30.w,
                 ),

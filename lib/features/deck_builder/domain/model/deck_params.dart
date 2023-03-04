@@ -8,6 +8,7 @@ class DeckParams with _$DeckParams {
     @Default("") String? ids,
     @Default("") String? code,
     @Default("") String? hero,
+    @Default("standard") String deckType,
     @Default("en_US") String locale,
   }) = _DeckParams;
 }

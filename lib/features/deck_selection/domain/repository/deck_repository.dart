@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 abstract class DeckRepository {
   Future<Deck> getDeck(String? deckCode, String locale);
 
-  Future<String> getDeckCode(String? idList, String locale);
+  Future<String> getDeckCode(String? idList, String locale, String deckType);
 }
 
 @LazySingleton(as: DeckRepository)
@@ -31,18 +31,18 @@ class DeckRepositoryImpl extends DeckRepository {
     final deckResponse = await _apiService.apiClient.getDeck(deckCode, locale);
     return Deck(
       cards: deckResponse.cards.toDeckCards(),
-      heroClass: deckClassFromValue(deckResponse.deckClass?.slug ?? "warrior"),
+      heroClass: deckClassFromValue(deckResponse.deckClass?.slug),
       type: deckTypeFromValue(deckResponse.deckType),
     );
   }
 
   @override
-  Future<String> getDeckCode(String? idList, String locale) async {
+  Future<String> getDeckCode(String? idList, String locale, String deckType) async {
     if (!await _networkInfo.isConnected) {
       throw NoInternetException();
     }
 
-    final deckCodeResponse = await _apiService.apiClient.getDeckCode(idList, locale);
+    final deckCodeResponse = await _apiService.apiClient.getDeckCode(idList, locale, deckType);
     return deckCodeResponse.deckCode;
   }
 }

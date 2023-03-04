@@ -8,7 +8,7 @@ class HSAppBarOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Stack(
         children: [
@@ -23,7 +23,7 @@ class HSAppBarOverlay extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,17 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
+import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-abstract class SetListItem {
-  Widget build(BuildContext context);
-}
-
-class SetDropdownHeader extends StatelessWidget implements SetListItem {
+class SetDropdownHeader extends StatelessWidget {
   const SetDropdownHeader({
+    super.key,
     required this.text,
   });
 
@@ -32,15 +31,14 @@ class SetDropdownHeader extends StatelessWidget implements SetListItem {
   }
 }
 
-class SetDropdownItem extends StatelessWidget implements SetListItem {
+class SetDropdownItem extends StatelessWidget {
   const SetDropdownItem({
-    required this.assetImagePath,
-    required this.text,
+    super.key,
+    required this.cardFilter,
     required this.isSelected,
   });
 
-  final String assetImagePath;
-  final String text;
+  final CardFilter cardFilter;
   final bool isSelected;
 
   @override
@@ -50,23 +48,21 @@ class SetDropdownItem extends StatelessWidget implements SetListItem {
         left: 6.w,
         right: 6.w,
       ),
-      padding: EdgeInsets.symmetric(vertical: 0.875.h),
+      padding: EdgeInsets.symmetric(vertical: 2.5.h),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          assetImagePath.isNotEmpty
-              ? SvgPicture.asset(
-                  assetImagePath,
-                  fit: BoxFit.fill,
-                  color: AppColors.gold,
-                  width: 30.w,
-                )
-              : const SizedBox(),
+          SvgPicture.asset(
+            assetPath(kSubfolderSet, _assetName(), fileExtension: kSVGExtension),
+            fit: BoxFit.fill,
+            color: AppColors.gold,
+            width: 30.w,
+          ),
           Expanded(
             child: Container(
               padding: EdgeInsets.only(left: 6.w),
               child: AutoSizeText(
-                text,
+                cardFilter.localized(),
                 style: isSelected ? FontStyles.bold15Gold : FontStyles.bold15,
                 overflow: TextOverflow.fade,
                 minFontSize: 10,
@@ -76,5 +72,9 @@ class SetDropdownItem extends StatelessWidget implements SetListItem {
         ],
       ),
     );
+  }
+
+  String _assetName() {
+    return cardFilter.toString().split(".")[1];
   }
 }

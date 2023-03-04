@@ -1,7 +1,7 @@
 {
   "allClasses": "すべてのクラス",
-  "deathKnight": "デスナイト",
-  "demonHunter": "悪魔ハンター",
+  "deathknight": "デスナイト",
+  "demonhunter": "悪魔ハンター",
   "druid": "ドルイド",
   "hunter": "猟師",
   "mage": "メイジ",
@@ -153,5 +153,8 @@
   "deck": "デッキ",
   "thereWasAnErrorReadingTheDeckCode": "デッキ コードの読み取り中にエラーが発生しました",
   "thereWasAnErrorGeneratingDeckCode": "デッキ コードの生成中にエラーが発生しました",
-  "deckCodeHasBeenCopiedToClipboard": "デッキコードがクリップボードにコピーされました"
+  "deckCodeHasBeenCopiedToClipboard": "デッキコードがクリップボードにコピーされました",
+  "yes": "はい",
+  "no": "いいえ",
+  "youWillLoseYourExistingDeckAreYouSure": "既存のデッキは失われます。本気ですか？"
 }

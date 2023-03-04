@@ -15,6 +15,7 @@ class DeckslyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
         builder: (BuildContext context, Widget? child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),

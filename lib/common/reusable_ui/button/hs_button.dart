@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/reusable_ui/backgrounds/hs_button_overlay.dart';
+import 'package:decksly/common/reusable_ui/backgrounds/hs_button_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

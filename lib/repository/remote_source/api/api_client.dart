@@ -48,5 +48,6 @@ abstract class ApiClient {
   Future<DeckResponse> getDeckCode(
     @Query("ids") String? ids,
     @Query("locale") String locale,
+    @Query("gameMode") String? gameMode,
   );
 }

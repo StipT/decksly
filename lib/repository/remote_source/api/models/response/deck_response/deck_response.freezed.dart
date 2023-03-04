@@ -21,11 +21,11 @@ DeckResponse _$DeckResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DeckResponse {
   String get deckCode => throw _privateConstructorUsedError;
-  int get version => throw _privateConstructorUsedError;
+  int? get version => throw _privateConstructorUsedError;
   CardDTO? get hero => throw _privateConstructorUsedError;
   CardDTO? get heroPower => throw _privateConstructorUsedError;
   List<CardDTO> get cards => throw _privateConstructorUsedError;
-  int get cardCount => throw _privateConstructorUsedError;
+  int? get cardCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'class')
   ClassDTO? get deckClass => throw _privateConstructorUsedError;
   @JsonKey(name: 'format')
@@ -45,11 +45,11 @@ abstract class $DeckResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {String deckCode,
-      int version,
+      int? version,
       CardDTO? hero,
       CardDTO? heroPower,
       List<CardDTO> cards,
-      int cardCount,
+      int? cardCount,
       @JsonKey(name: 'class') ClassDTO? deckClass,
       @JsonKey(name: 'format') String deckType});
 
@@ -72,11 +72,11 @@ class _$DeckResponseCopyWithImpl<$Res, $Val extends DeckResponse>
   @override
   $Res call({
     Object? deckCode = null,
-    Object? version = null,
+    Object? version = freezed,
     Object? hero = freezed,
     Object? heroPower = freezed,
     Object? cards = null,
-    Object? cardCount = null,
+    Object? cardCount = freezed,
     Object? deckClass = freezed,
     Object? deckType = null,
   }) {
@@ -85,10 +85,10 @@ class _$DeckResponseCopyWithImpl<$Res, $Val extends DeckResponse>
           ? _value.deckCode
           : deckCode // ignore: cast_nullable_to_non_nullable
               as String,
-      version: null == version
+      version: freezed == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       hero: freezed == hero
           ? _value.hero
           : hero // ignore: cast_nullable_to_non_nullable
@@ -101,10 +101,10 @@ class _$DeckResponseCopyWithImpl<$Res, $Val extends DeckResponse>
           ? _value.cards
           : cards // ignore: cast_nullable_to_non_nullable
               as List<CardDTO>,
-      cardCount: null == cardCount
+      cardCount: freezed == cardCount
           ? _value.cardCount
           : cardCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       deckClass: freezed == deckClass
           ? _value.deckClass
           : deckClass // ignore: cast_nullable_to_non_nullable
@@ -163,11 +163,11 @@ abstract class _$$_DeckResponseCopyWith<$Res>
   @useResult
   $Res call(
       {String deckCode,
-      int version,
+      int? version,
       CardDTO? hero,
       CardDTO? heroPower,
       List<CardDTO> cards,
-      int cardCount,
+      int? cardCount,
       @JsonKey(name: 'class') ClassDTO? deckClass,
       @JsonKey(name: 'format') String deckType});
 
@@ -191,11 +191,11 @@ class __$$_DeckResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? deckCode = null,
-    Object? version = null,
+    Object? version = freezed,
     Object? hero = freezed,
     Object? heroPower = freezed,
     Object? cards = null,
-    Object? cardCount = null,
+    Object? cardCount = freezed,
     Object? deckClass = freezed,
     Object? deckType = null,
   }) {
@@ -204,10 +204,10 @@ class __$$_DeckResponseCopyWithImpl<$Res>
           ? _value.deckCode
           : deckCode // ignore: cast_nullable_to_non_nullable
               as String,
-      version: null == version
+      version: freezed == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       hero: freezed == hero
           ? _value.hero
           : hero // ignore: cast_nullable_to_non_nullable
@@ -220,10 +220,10 @@ class __$$_DeckResponseCopyWithImpl<$Res>
           ? _value._cards
           : cards // ignore: cast_nullable_to_non_nullable
               as List<CardDTO>,
-      cardCount: null == cardCount
+      cardCount: freezed == cardCount
           ? _value.cardCount
           : cardCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       deckClass: freezed == deckClass
           ? _value.deckClass
           : deckClass // ignore: cast_nullable_to_non_nullable
@@ -256,7 +256,7 @@ class _$_DeckResponse implements _DeckResponse {
   @override
   final String deckCode;
   @override
-  final int version;
+  final int? version;
   @override
   final CardDTO? hero;
   @override
@@ -270,7 +270,7 @@ class _$_DeckResponse implements _DeckResponse {
   }
 
   @override
-  final int cardCount;
+  final int? cardCount;
   @override
   @JsonKey(name: 'class')
   final ClassDTO? deckClass;
@@ -333,11 +333,11 @@ class _$_DeckResponse implements _DeckResponse {
 abstract class _DeckResponse implements DeckResponse {
   const factory _DeckResponse(
           {required final String deckCode,
-          required final int version,
+          required final int? version,
           required final CardDTO? hero,
           required final CardDTO? heroPower,
           required final List<CardDTO> cards,
-          required final int cardCount,
+          required final int? cardCount,
           @JsonKey(name: 'class') required final ClassDTO? deckClass,
           @JsonKey(name: 'format') required final String deckType}) =
       _$_DeckResponse;
@@ -348,7 +348,7 @@ abstract class _DeckResponse implements DeckResponse {
   @override
   String get deckCode;
   @override
-  int get version;
+  int? get version;
   @override
   CardDTO? get hero;
   @override
@@ -356,7 +356,7 @@ abstract class _DeckResponse implements DeckResponse {
   @override
   List<CardDTO> get cards;
   @override
-  int get cardCount;
+  int? get cardCount;
   @override
   @JsonKey(name: 'class')
   ClassDTO? get deckClass;

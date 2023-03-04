@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 enum HSSnackBarType {
   message,
   alert,
+  failure,
 }
 
 class HSSnackBar {
@@ -15,14 +16,20 @@ class HSSnackBar {
 
   static Image _snackBarImage(HSSnackBarType type) {
     switch (type) {
+      case HSSnackBarType.message:
+        return Image.asset(
+          assetPath(kSubfolderMisc, "beer"),
+          height: 52.5.h,
+        );
       case HSSnackBarType.alert:
         return Image.asset(
           assetPath(kSubfolderMisc, "alert"),
           height: 52.5.h,
         );
-      case HSSnackBarType.message:
+
+      case HSSnackBarType.failure:
         return Image.asset(
-          assetPath(kSubfolderMisc, "beer"),
+          assetPath(kSubfolderMisc, "alert"),
           height: 52.5.h,
         );
     }

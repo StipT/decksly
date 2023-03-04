@@ -159,5 +159,11 @@ abstract class  LocaleKeys {
   static const yes = 'yes';
   static const no = 'no';
   static const youWillLoseYourExistingDeckAreYouSure = 'youWillLoseYourExistingDeckAreYouSure';
+  static const serviceNotAvailable = 'serviceNotAvailable';
+  static const checkYourInternetConnectionAndTryAgain = 'checkYourInternetConnectionAndTryAgain';
+  static const noInternetFailureMessage = 'noInternetFailureMessage';
+  static const networkFailureMessage = 'networkFailureMessage';
+  static const cacheFailureMessage = 'cacheFailureMessage';
+  static const unknownFailureMessage = 'unknownFailureMessage';
 
 }

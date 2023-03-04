@@ -9,12 +9,12 @@ part 'card_dto.g.dart';
 class CardDTO with _$CardDTO {
   const factory CardDTO({
     required int id,
-    required int cardSetId,
-    required int classId,
+    required int? cardSetId,
+    required int? classId,
     required int? parentId,
-    required int cardTypeId,
-    required int rarityId,
-    required int collectible,
+    required int? cardTypeId,
+    required int? rarityId,
+    required int? collectible,
     required String? slug,
     required String name,
     required String? artistName,

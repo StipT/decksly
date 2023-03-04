@@ -6,8 +6,8 @@ part 'class_dto.g.dart';
 @freezed
 class ClassDTO with _$ClassDTO {
   const factory ClassDTO({
-    required int id,
-    required String slug,
+    required int? id,
+    required String? slug,
     required String? name,
   }) = _ClassDTO;
 

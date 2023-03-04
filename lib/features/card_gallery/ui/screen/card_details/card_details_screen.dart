@@ -1,5 +1,6 @@
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/reusable_ui/misc/card_loading.dart';
 import 'package:decksly/l10n/locale_keys.g.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,18 +25,35 @@ class _DetailScreenState extends State<CardDetailsScreen> {
     super.initState();
   }
 
-  Widget _buildCard({bool golden = false}) {
-    final hasGoldenEdition = golden && widget.card.imageGold.isNotEmpty;
-    final card = hasGoldenEdition ? widget.card.imageGold : widget.card.image;
+  Widget _buildCard() {
+    return Foil(
+      useSensor: true,
+      isUnwrapped: false,
+      opacity: 0.2,
+      child: Center(
+        child: Image.network(
+          widget.card.image,
+          fit: BoxFit.fill,
+          errorBuilder: (context, object, stackTrace) => const CardLoading(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCardBack() {
+    final hasGoldenEdition = widget.card.imageGold.isNotEmpty;
     return Foil(
       useSensor: true,
       isUnwrapped: false,
       opacity: hasGoldenEdition ? 0.4 : 0.2,
       child: Center(
-        child: Image.network(
-          card,
-          fit: BoxFit.fill,
-        ),
+        child: hasGoldenEdition
+            ? Image.network(
+                widget.card.imageGold,
+                fit: BoxFit.fill,
+                errorBuilder: (context, object, stackTrace) => const CardLoading(),
+              )
+            : Container(alignment: Alignment.bottomCenter, padding: EdgeInsets.only(top: 25.h, left: 10.w, right: 10.w), child: Image.asset(assetPath(kSubfolderMisc, "hs_cardback"))),
       ),
     );
   }
@@ -45,7 +63,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
-      body: Container(
+      body: SizedBox(
         height: 1.sh,
         child: Stack(
           children: [
@@ -74,7 +92,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                             alignment: Alignment.center,
                             child: FlipCard(
                               front: _buildCard(),
-                              back: _buildCard(golden: true),
+                              back: _buildCardBack(),
                               flipOnTouch: true,
                             )),
                       ),

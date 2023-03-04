@@ -1,10 +1,9 @@
-import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/design/fonts.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
+import 'package:decksly/common/reusable_ui/misc/card_loading.dart';
 import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CardItem extends StatefulWidget {
   const CardItem(
@@ -46,21 +45,10 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                   BlendMode.modulate,
                 ),
                 child: Image.network(
-                  // TODO deck-28 Add image not found asset
                   widget.card.image,
+                  errorBuilder: (context, object, stackTrace) => const CardLoading(),
                   loadingBuilder: (context, widget, chunk) {
-                    return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
-                        ? widget
-                        : Container(
-                            padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
-                            child: Shimmer.fromColors(
-                              baseColor: AppColors.spanishGrey,
-                              highlightColor: AppColors.shimmerGrey,
-                              child: Image.asset(
-                                assetPath(kSubfolderMisc, "card_template_grey"),
-                              ),
-                            ),
-                          );
+                    return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes ? widget : const CardLoading();
                   },
                 ),
               ),

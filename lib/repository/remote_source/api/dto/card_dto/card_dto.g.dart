@@ -8,12 +8,12 @@ part of 'card_dto.dart';
 
 _$_CardDTO _$$_CardDTOFromJson(Map<String, dynamic> json) => _$_CardDTO(
       id: json['id'] as int,
-      cardSetId: json['cardSetId'] as int,
-      classId: json['classId'] as int,
+      cardSetId: json['cardSetId'] as int?,
+      classId: json['classId'] as int?,
       parentId: json['parentId'] as int?,
-      cardTypeId: json['cardTypeId'] as int,
-      rarityId: json['rarityId'] as int,
-      collectible: json['collectible'] as int,
+      cardTypeId: json['cardTypeId'] as int?,
+      rarityId: json['rarityId'] as int?,
+      collectible: json['collectible'] as int?,
       slug: json['slug'] as String?,
       name: json['name'] as String,
       artistName: json['artistName'] as String?,

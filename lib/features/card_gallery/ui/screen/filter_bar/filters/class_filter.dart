@@ -119,9 +119,9 @@ class _ClassFilterState extends State<ClassFilter> {
   String _getClassIcon(DeckClass deckClass) {
     switch (deckClass) {
       case DeckClass.deathknight:
-        return "deathKnight_icon";
+        return "deathknight_icon";
       case DeckClass.demonhunter:
-        return "demonHunter_icon";
+        return "demonhunter_icon";
       case DeckClass.druid:
         return "druid_icon";
       case DeckClass.hunter:

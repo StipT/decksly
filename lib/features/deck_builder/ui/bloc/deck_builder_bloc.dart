@@ -126,7 +126,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
 
     log(ids, level: Level.error);
 
-    final resultOrFailure = await fetchDeckCodeUsecase(DeckParams(ids: ids, locale: locale));
+    final resultOrFailure = await fetchDeckCodeUsecase(DeckParams(ids: ids, locale: locale, deckType: state.deck.type.name));
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);

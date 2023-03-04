@@ -156,5 +156,11 @@
   "deckCodeHasBeenCopiedToClipboard": "Der Deckcode wurde in die Zwischenablage kopiert",
   "yes": "Ja",
   "no": "Nein",
-  "youWillLoseYourExistingDeckAreYouSure": "Sie verlieren Ihr vorhandenes Deck. Bist du dir sicher?"
+  "youWillLoseYourExistingDeckAreYouSure": "Sie verlieren Ihr vorhandenes Deck. Bist du dir sicher?",
+  "serviceNotAvailable": "Dienst nicht verfügbar",
+  "checkYourInternetConnectionAndTryAgain": "Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut",
+  "noInternetFailureMessage": "Keine Internetverbindung",
+  "networkFailureMessage": "Die Anforderung konnte nicht ausgeführt werden. Netzwerkfehler",
+  "cacheFailureMessage": "Die Anforderung konnte nicht ausgeführt werden. Cache-Fehler",
+    "unknownFailureMessage": "Die Anforderung konnte nicht ausgeführt werden. Unbekannter Fehler"
 }

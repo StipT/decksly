@@ -156,5 +156,11 @@
   "deckCodeHasBeenCopiedToClipboard": "Deck code has been copied to clipboard",
   "yes": "Yes",
   "no": "No",
-  "youWillLoseYourExistingDeckAreYouSure": "You will lose your existing deck. Are you sure?"
+  "youWillLoseYourExistingDeckAreYouSure": "You will lose your existing deck. Are you sure?",
+  "serviceNotAvailable": "Service not available",
+  "checkYourInternetConnectionAndTryAgain": "Check your internet connection and try again",
+  "noInternetFailureMessage": "No internet connection",
+  "networkFailureMessage": "Failed to execute the request. Network error",
+  "cacheFailureMessage": "Failed to execute the request. Cache error",
+  "unknownFailureMessage": "Failed to execute the request. Unknown error"
 }

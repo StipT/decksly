@@ -21,12 +21,12 @@ CardDTO _$CardDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CardDTO {
   int get id => throw _privateConstructorUsedError;
-  int get cardSetId => throw _privateConstructorUsedError;
-  int get classId => throw _privateConstructorUsedError;
+  int? get cardSetId => throw _privateConstructorUsedError;
+  int? get classId => throw _privateConstructorUsedError;
   int? get parentId => throw _privateConstructorUsedError;
-  int get cardTypeId => throw _privateConstructorUsedError;
-  int get rarityId => throw _privateConstructorUsedError;
-  int get collectible => throw _privateConstructorUsedError;
+  int? get cardTypeId => throw _privateConstructorUsedError;
+  int? get rarityId => throw _privateConstructorUsedError;
+  int? get collectible => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get artistName => throw _privateConstructorUsedError;
@@ -62,12 +62,12 @@ abstract class $CardDTOCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int cardSetId,
-      int classId,
+      int? cardSetId,
+      int? classId,
       int? parentId,
-      int cardTypeId,
-      int rarityId,
-      int collectible,
+      int? cardTypeId,
+      int? rarityId,
+      int? collectible,
       String? slug,
       String name,
       String? artistName,
@@ -109,12 +109,12 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? cardSetId = null,
-    Object? classId = null,
+    Object? cardSetId = freezed,
+    Object? classId = freezed,
     Object? parentId = freezed,
-    Object? cardTypeId = null,
-    Object? rarityId = null,
-    Object? collectible = null,
+    Object? cardTypeId = freezed,
+    Object? rarityId = freezed,
+    Object? collectible = freezed,
     Object? slug = freezed,
     Object? name = null,
     Object? artistName = freezed,
@@ -143,30 +143,30 @@ class _$CardDTOCopyWithImpl<$Res, $Val extends CardDTO>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      cardSetId: null == cardSetId
+      cardSetId: freezed == cardSetId
           ? _value.cardSetId
           : cardSetId // ignore: cast_nullable_to_non_nullable
-              as int,
-      classId: null == classId
+              as int?,
+      classId: freezed == classId
           ? _value.classId
           : classId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      cardTypeId: null == cardTypeId
+      cardTypeId: freezed == cardTypeId
           ? _value.cardTypeId
           : cardTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      rarityId: null == rarityId
+              as int?,
+      rarityId: freezed == rarityId
           ? _value.rarityId
           : rarityId // ignore: cast_nullable_to_non_nullable
-              as int,
-      collectible: null == collectible
+              as int?,
+      collectible: freezed == collectible
           ? _value.collectible
           : collectible // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       slug: freezed == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
@@ -292,12 +292,12 @@ abstract class _$$_CardDTOCopyWith<$Res> implements $CardDTOCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int cardSetId,
-      int classId,
+      int? cardSetId,
+      int? classId,
       int? parentId,
-      int cardTypeId,
-      int rarityId,
-      int collectible,
+      int? cardTypeId,
+      int? rarityId,
+      int? collectible,
       String? slug,
       String name,
       String? artistName,
@@ -338,12 +338,12 @@ class __$$_CardDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? cardSetId = null,
-    Object? classId = null,
+    Object? cardSetId = freezed,
+    Object? classId = freezed,
     Object? parentId = freezed,
-    Object? cardTypeId = null,
-    Object? rarityId = null,
-    Object? collectible = null,
+    Object? cardTypeId = freezed,
+    Object? rarityId = freezed,
+    Object? collectible = freezed,
     Object? slug = freezed,
     Object? name = null,
     Object? artistName = freezed,
@@ -372,30 +372,30 @@ class __$$_CardDTOCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      cardSetId: null == cardSetId
+      cardSetId: freezed == cardSetId
           ? _value.cardSetId
           : cardSetId // ignore: cast_nullable_to_non_nullable
-              as int,
-      classId: null == classId
+              as int?,
+      classId: freezed == classId
           ? _value.classId
           : classId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      cardTypeId: null == cardTypeId
+      cardTypeId: freezed == cardTypeId
           ? _value.cardTypeId
           : cardTypeId // ignore: cast_nullable_to_non_nullable
-              as int,
-      rarityId: null == rarityId
+              as int?,
+      rarityId: freezed == rarityId
           ? _value.rarityId
           : rarityId // ignore: cast_nullable_to_non_nullable
-              as int,
-      collectible: null == collectible
+              as int?,
+      collectible: freezed == collectible
           ? _value.collectible
           : collectible // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       slug: freezed == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
@@ -532,17 +532,17 @@ class _$_CardDTO implements _CardDTO {
   @override
   final int id;
   @override
-  final int cardSetId;
+  final int? cardSetId;
   @override
-  final int classId;
+  final int? classId;
   @override
   final int? parentId;
   @override
-  final int cardTypeId;
+  final int? cardTypeId;
   @override
-  final int rarityId;
+  final int? rarityId;
   @override
-  final int collectible;
+  final int? collectible;
   @override
   final String? slug;
   @override
@@ -731,12 +731,12 @@ class _$_CardDTO implements _CardDTO {
 abstract class _CardDTO implements CardDTO {
   const factory _CardDTO(
       {required final int id,
-      required final int cardSetId,
-      required final int classId,
+      required final int? cardSetId,
+      required final int? classId,
       required final int? parentId,
-      required final int cardTypeId,
-      required final int rarityId,
-      required final int collectible,
+      required final int? cardTypeId,
+      required final int? rarityId,
+      required final int? collectible,
       required final String? slug,
       required final String name,
       required final String? artistName,
@@ -765,17 +765,17 @@ abstract class _CardDTO implements CardDTO {
   @override
   int get id;
   @override
-  int get cardSetId;
+  int? get cardSetId;
   @override
-  int get classId;
+  int? get classId;
   @override
   int? get parentId;
   @override
-  int get cardTypeId;
+  int? get cardTypeId;
   @override
-  int get rarityId;
+  int? get rarityId;
   @override
-  int get collectible;
+  int? get collectible;
   @override
   String? get slug;
   @override

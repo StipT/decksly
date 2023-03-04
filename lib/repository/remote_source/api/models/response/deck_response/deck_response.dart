@@ -9,11 +9,11 @@ part 'deck_response.g.dart';
 class DeckResponse with _$DeckResponse {
   const factory DeckResponse({
     required String deckCode,
-    required int version,
+    required int? version,
     required CardDTO? hero,
     required CardDTO? heroPower,
     required List<CardDTO> cards,
-    required int cardCount,
+    required int? cardCount,
     @JsonKey(name: 'class') required ClassDTO? deckClass,
     @JsonKey(name: 'format') required String deckType,
   }) = _DeckResponse;

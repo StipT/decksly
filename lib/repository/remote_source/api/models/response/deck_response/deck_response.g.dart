@@ -9,7 +9,7 @@ part of 'deck_response.dart';
 _$_DeckResponse _$$_DeckResponseFromJson(Map<String, dynamic> json) =>
     _$_DeckResponse(
       deckCode: json['deckCode'] as String,
-      version: json['version'] as int,
+      version: json['version'] as int?,
       hero: json['hero'] == null
           ? null
           : CardDTO.fromJson(json['hero'] as Map<String, dynamic>),
@@ -19,7 +19,7 @@ _$_DeckResponse _$$_DeckResponseFromJson(Map<String, dynamic> json) =>
       cards: (json['cards'] as List<dynamic>)
           .map((e) => CardDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
-      cardCount: json['cardCount'] as int,
+      cardCount: json['cardCount'] as int?,
       deckClass: json['class'] == null
           ? null
           : ClassDTO.fromJson(json['class'] as Map<String, dynamic>),

@@ -20,8 +20,8 @@ ClassDTO _$ClassDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ClassDTO {
-  int get id => throw _privateConstructorUsedError;
-  String get slug => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get slug => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $ClassDTOCopyWith<$Res> {
   factory $ClassDTOCopyWith(ClassDTO value, $Res Function(ClassDTO) then) =
       _$ClassDTOCopyWithImpl<$Res, ClassDTO>;
   @useResult
-  $Res call({int id, String slug, String? name});
+  $Res call({int? id, String? slug, String? name});
 }
 
 /// @nodoc
@@ -51,19 +51,19 @@ class _$ClassDTOCopyWithImpl<$Res, $Val extends ClassDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? slug = null,
+    Object? id = freezed,
+    Object? slug = freezed,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      slug: null == slug
+              as int?,
+      slug: freezed == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -79,7 +79,7 @@ abstract class _$$_ClassDTOCopyWith<$Res> implements $ClassDTOCopyWith<$Res> {
       __$$_ClassDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String slug, String? name});
+  $Res call({int? id, String? slug, String? name});
 }
 
 /// @nodoc
@@ -93,19 +93,19 @@ class __$$_ClassDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? slug = null,
+    Object? id = freezed,
+    Object? slug = freezed,
     Object? name = freezed,
   }) {
     return _then(_$_ClassDTO(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      slug: null == slug
+              as int?,
+      slug: freezed == slug
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -123,9 +123,9 @@ class _$_ClassDTO implements _ClassDTO {
       _$$_ClassDTOFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
-  final String slug;
+  final String? slug;
   @override
   final String? name;
 
@@ -164,16 +164,16 @@ class _$_ClassDTO implements _ClassDTO {
 
 abstract class _ClassDTO implements ClassDTO {
   const factory _ClassDTO(
-      {required final int id,
-      required final String slug,
+      {required final int? id,
+      required final String? slug,
       required final String? name}) = _$_ClassDTO;
 
   factory _ClassDTO.fromJson(Map<String, dynamic> json) = _$_ClassDTO.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
-  String get slug;
+  String? get slug;
   @override
   String? get name;
   @override

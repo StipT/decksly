@@ -3,7 +3,10 @@ import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
+import 'package:decksly/common/reusable_ui/misc/card_loading.dart';
+import 'package:decksly/common/reusable_ui/misc/no_connection_widget.dart';
 import 'package:decksly/common/reusable_ui/misc/no_results_widget.dart';
+import 'package:decksly/common/reusable_ui/misc/snackbar.dart';
 import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
 import 'package:decksly/features/card_gallery/ui/screen/card_details/card_details_screen.dart';
 import 'package:decksly/features/card_gallery/ui/screen/card_details/hero_dialog_route.dart';
@@ -16,7 +19,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CardGalleryScreen extends StatefulWidget implements AutoRouteWrapper {
   const CardGalleryScreen({super.key});
@@ -111,49 +113,25 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
               padding: EdgeInsets.zero,
               builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                 animateTransitions: true,
-                noItemsFoundIndicatorBuilder: (context) {
-                  return NoResultsWidget(
-                    onTap: () {},
-                  );
-                },
+                firstPageErrorIndicatorBuilder: (context) => const NoConnectionWidget(),
+                newPageErrorIndicatorBuilder: (context) => const NoConnectionWidget(),
+                noItemsFoundIndicatorBuilder: (context) => const NoResultsWidget(),
                 itemBuilder: (ctx, card, _) {
                   return GestureDetector(
                     onTap: () => Navigator.push(context, HeroDialogRoute(builder: (context) {
                       return CardDetailsScreen(card);
                     })),
                     child: Image.network(
-                      // TODO deck-28 Add image not found asset
                       card.image,
                       loadingBuilder: (context, widget, chunk) {
-                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
-                            ? widget
-                            : Container(
-                                padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
-                                child: Shimmer.fromColors(
-                                  baseColor: AppColors.spanishGrey,
-                                  highlightColor: AppColors.shimmerGrey,
-                                  child: Image.asset(
-                                    assetPath(kSubfolderMisc, "card_template_grey"),
-                                  ),
-                                ),
-                              );
+                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes ? widget : const CardLoading();
                       },
+                      errorBuilder: (context, object, stackTrace) => const CardLoading(),
                     ),
                   );
                 },
                 firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.velvet),
-                newPageProgressIndicatorBuilder: (_) => Center(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
-                    child: Shimmer.fromColors(
-                      baseColor: AppColors.spanishGrey,
-                      highlightColor: AppColors.shimmerGrey,
-                      child: Image.asset(
-                        assetPath(kSubfolderMisc, "card_template_grey"),
-                      ),
-                    ),
-                  ),
-                ),
+                newPageProgressIndicatorBuilder: (_) => const CardLoading(),
               ),
             ),
           ),
@@ -215,11 +193,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
       }
     }, failure: (filterParams, failure) {
       _pagingController.error = failure;
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: Text(failure.message),
-        ),
-      );
+      HSSnackBar.show(context, HSSnackBarType.failure, failure.message);
     });
   }
 }

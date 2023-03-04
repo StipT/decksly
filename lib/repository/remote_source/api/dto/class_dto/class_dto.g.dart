@@ -7,8 +7,8 @@ part of 'class_dto.dart';
 // **************************************************************************
 
 _$_ClassDTO _$$_ClassDTOFromJson(Map<String, dynamic> json) => _$_ClassDTO(
-      id: json['id'] as int,
-      slug: json['slug'] as String,
+      id: json['id'] as int?,
+      slug: json['slug'] as String?,
       name: json['name'] as String?,
     );
 

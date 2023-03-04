@@ -15,7 +15,6 @@ class NetworkInfoImpl implements NetworkInfo {
   NetworkInfoImpl(this.connectivity) {
     connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
       _resultSubject.sink.add(result);
-      print('CONNECTIVITY RESULT $result');
     });
   }
 

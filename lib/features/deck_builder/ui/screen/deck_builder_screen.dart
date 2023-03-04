@@ -4,6 +4,8 @@ import 'package:decksly/app/di.dart';
 import 'package:decksly/common/design/colors.dart';
 import 'package:decksly/common/dev/asset_loader.dart';
 import 'package:decksly/common/dev/logger.dart';
+import 'package:decksly/common/reusable_ui/misc/card_loading.dart';
+import 'package:decksly/common/reusable_ui/misc/no_connection_widget.dart';
 import 'package:decksly/common/reusable_ui/misc/no_results_widget.dart';
 import 'package:decksly/common/reusable_ui/misc/snackbar.dart';
 import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
@@ -156,11 +158,9 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisExtent: 210.h),
               builderDelegate: PagedChildBuilderDelegate<CardDTO>(
                 animateTransitions: true,
-                noItemsFoundIndicatorBuilder: (context) {
-                  return NoResultsWidget(
-                    onTap: () {},
-                  );
-                },
+                firstPageErrorIndicatorBuilder: (context) => const NoConnectionWidget(),
+                noItemsFoundIndicatorBuilder: (context) => const NoResultsWidget(),
+
                 itemBuilder: (ctx, card, _) {
                   return CardItem(
                     card: card,
@@ -173,18 +173,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                   );
                 },
                 firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.velvet),
-                newPageProgressIndicatorBuilder: (_) => Center(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 8.75.h, horizontal: 20.w),
-                    child: Shimmer.fromColors(
-                      baseColor: AppColors.spanishGrey,
-                      highlightColor: AppColors.shimmerGrey,
-                      child: Image.asset(
-                        assetPath(kSubfolderMisc, "card_template_grey"),
-                      ),
-                    ),
-                  ),
-                ),
+                newPageProgressIndicatorBuilder: (_) => const CardLoading(),
               ),
             ),
           ),
@@ -259,11 +248,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
       }
     }, failure: (filterParams, failure) {
       _pagingController.error = failure;
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: Text(failure.message),
-        ),
-      );
+      HSSnackBar.show(context, HSSnackBarType.failure, failure.message);
     });
   }
 

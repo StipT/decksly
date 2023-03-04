@@ -6,13 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class NoResultsWidget extends StatelessWidget {
-  const NoResultsWidget({Key? key}) : super(key: key);
+class NoConnectionWidget extends StatelessWidget {
+  const NoConnectionWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      padding: EdgeInsets.only(
+        left: 30.w,
+        right: 30.w,
+        top: 10.h,
+      ),
       child: Column(
         children: [
           SizedBox(
@@ -21,7 +25,7 @@ class NoResultsWidget extends StatelessWidget {
               alignment: Alignment.topCenter,
               children: [
                 Positioned(
-                  top: 122.5.h,
+                  top: 115.5.h,
                   child: Container(
                     child: Image.asset(
                       assetPath(kSubfolderMisc, "divider"),
@@ -31,25 +35,23 @@ class NoResultsWidget extends StatelessWidget {
                 Positioned(
                     top: 0,
                     child: SizedBox(
-                        height: 157.5.h,
+                        height: 165.5.h,
                         child: Image.asset(
-                          assetPath(kSubfolderMisc, "no_cards_found"),
-                          height: 157.5.h,
+                          assetPath(kSubfolderMisc, "murlocs"),
+                          height: 165.5.h,
                         ))),
               ],
             ),
           ),
-          Container(
-            child: Text(
-              LocaleKeys.noCardsFound.tr(),
-              textAlign: TextAlign.center,
-              style: FontStyles.bold25VanDykeBrown,
-            ),
+          Text(
+            LocaleKeys.serviceNotAvailable.tr(),
+            textAlign: TextAlign.center,
+            style: FontStyles.bold25VanDykeBrown,
           ),
           Container(
             margin: EdgeInsets.only(top: 4.375.h),
             child: Text(
-              LocaleKeys.tryRemovingSearchItems.tr(),
+              LocaleKeys.checkYourInternetConnectionAndTryAgain.tr(),
               textAlign: TextAlign.center,
               style: FontStyles.regular17VanDykeBrown,
             ),

@@ -1,13 +1,13 @@
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class NoConnectionWidget extends StatelessWidget {
-  const NoConnectionWidget({Key? key}) : super(key: key);
+  const NoConnectionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +26,20 @@ class NoConnectionWidget extends StatelessWidget {
               children: [
                 Positioned(
                   top: 115.5.h,
-                  child: Container(
-                    child: Image.asset(
-                      assetPath(kSubfolderMisc, "divider"),
-                    ),
+                  child: Image.asset(
+                    assetPath(kSubfolderMisc, "divider"),
                   ),
                 ),
                 Positioned(
-                    top: 0,
-                    child: SizedBox(
-                        height: 165.5.h,
-                        child: Image.asset(
-                          assetPath(kSubfolderMisc, "murlocs"),
-                          height: 165.5.h,
-                        ))),
+                  top: 0,
+                  child: SizedBox(
+                    height: 165.5.h,
+                    child: Image.asset(
+                      assetPath(kSubfolderMisc, "murlocs"),
+                      height: 165.5.h,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

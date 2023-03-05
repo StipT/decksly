@@ -1,6 +1,6 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'deck_params.freezed.dart';
+part "deck_params.freezed.dart";
 
 @freezed
 class DeckParams with _$DeckParams {

@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSSelectedDropdownButtonOverlay extends StatelessWidget {
-  const HSSelectedDropdownButtonOverlay({Key? key, this.isDropdownButton = false}) : super(key: key);
+  const HSSelectedDropdownButtonOverlay({super.key, this.isDropdownButton = false});
 
   final bool isDropdownButton;
 
@@ -14,15 +14,15 @@ class HSSelectedDropdownButtonOverlay extends StatelessWidget {
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            assetPath(kSubfolderDropdown,
-                isDropdownButton ? "selected_dropdown_button_left" : "selected_dropdown_button_left_iconless"),
+            assetPath(
+              kSubfolderDropdown,
+              isDropdownButton ? "selected_dropdown_button_left" : "selected_dropdown_button_left_iconless",
+            ),
             fit: BoxFit.fill,
           ),
         ),
         Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
+          child: SizedBox.expand(
             child: Image.asset(
               assetPath(kSubfolderDropdown, "selected_dropdown_button_center"),
               fit: BoxFit.fill,

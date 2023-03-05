@@ -1,7 +1,7 @@
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum LanguageButtonType {
   english,
@@ -24,11 +24,12 @@ extension LanguageButtonTypeValues on LanguageButtonType {
 
 class LanguageButton extends StatelessWidget {
   const LanguageButton({
-    Key? key,
+    super.key,
     this.type,
     required this.onTap,
     required this.isSelected,
-  }) : super(key: key);
+  });
+
   final LanguageButtonType? type;
   final bool isSelected;
   final VoidCallback onTap;

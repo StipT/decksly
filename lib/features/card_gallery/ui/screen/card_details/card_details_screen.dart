@@ -1,14 +1,14 @@
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/common/reusable_ui/misc/card_loading.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flip_card/flip_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foil/foil.dart';
-import 'package:xl/xl.dart';
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/common/reusable_ui/misc/card_loading.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:flip_card/flip_card.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:foil/foil.dart";
+import "package:xl/xl.dart";
 
 class CardDetailsScreen extends StatefulWidget {
   const CardDetailsScreen(this.card, {super.key});
@@ -27,8 +27,6 @@ class _DetailScreenState extends State<CardDetailsScreen> {
 
   Widget _buildCard() {
     return Foil(
-      useSensor: true,
-      isUnwrapped: false,
       opacity: 0.2,
       child: Center(
         child: Image.network(
@@ -43,8 +41,6 @@ class _DetailScreenState extends State<CardDetailsScreen> {
   Widget _buildCardBack() {
     final hasGoldenEdition = widget.card.imageGold.isNotEmpty;
     return Foil(
-      useSensor: true,
-      isUnwrapped: false,
       opacity: hasGoldenEdition ? 0.4 : 0.2,
       child: Center(
         child: hasGoldenEdition
@@ -53,7 +49,13 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                 fit: BoxFit.fill,
                 errorBuilder: (context, object, stackTrace) => const CardLoading(),
               )
-            : Container(alignment: Alignment.bottomCenter, padding: EdgeInsets.only(top: 25.h, left: 10.w, right: 10.w), child: Image.asset(assetPath(kSubfolderMisc, "hs_cardback"))),
+            : Container(
+                alignment: Alignment.bottomCenter,
+                padding: EdgeInsets.only(top: 25.h, left: 10.w, right: 10.w),
+                child: Image.asset(
+                  assetPath(kSubfolderMisc, "hs_cardback"),
+                ),
+              ),
       ),
     );
   }
@@ -68,16 +70,17 @@ class _DetailScreenState extends State<CardDetailsScreen> {
         child: Stack(
           children: [
             Positioned(
-                top: 43.75.h,
-                right: 60.w,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Image.asset(
-                    assetPath(kSubfolderMisc, "close"),
-                    fit: BoxFit.fill,
-                    width: 40.w,
-                  ),
-                )),
+              top: 43.75.h,
+              right: 60.w,
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Image.asset(
+                  assetPath(kSubfolderMisc, "close"),
+                  fit: BoxFit.fill,
+                  width: 40.w,
+                ),
+              ),
+            ),
             Row(
               children: [
                 Expanded(
@@ -89,12 +92,12 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                         yRotation: 0.9,
                         zRotationByGyro: 0.1,
                         child: Container(
-                            alignment: Alignment.center,
-                            child: FlipCard(
-                              front: _buildCard(),
-                              back: _buildCardBack(),
-                              flipOnTouch: true,
-                            )),
+                          alignment: Alignment.center,
+                          child: FlipCard(
+                            front: _buildCard(),
+                            back: _buildCardBack(),
+                          ),
+                        ),
                       ),
                     ],
                   ),

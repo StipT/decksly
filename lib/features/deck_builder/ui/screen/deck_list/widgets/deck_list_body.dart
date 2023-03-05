@@ -1,23 +1,23 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/util/throttler.dart';
-import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
-import 'package:decksly/features/card_gallery/ui/screen/card_details/card_details_screen.dart';
-import 'package:decksly/features/card_gallery/ui/screen/card_details/hero_dialog_route.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_card.dart';
-import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
-import 'package:decksly/features/deck_builder/ui/screen/deck_list/widgets/deck_card_item.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/util/throttler.dart";
+import "package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart";
+import "package:decksly/features/card_gallery/ui/screen/card_details/card_details_screen.dart";
+import "package:decksly/features/card_gallery/ui/screen/card_details/hero_dialog_route.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_card.dart";
+import "package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart";
+import "package:decksly/features/deck_builder/ui/screen/deck_list/widgets/deck_card_item.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class DeckListBody extends StatefulWidget {
   const DeckListBody({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<DeckListBody> createState() => _DeckListBodyState();
@@ -43,40 +43,42 @@ class _DeckListBodyState extends State<DeckListBody> {
         builder: (BuildContext context, state) {
           return Expanded(
             child: Container(
-                margin: EdgeInsets.only(left: 15.w, right: 5.w, top: 4.h, bottom: 4.h),
-                child: Stack(
-                  children: [
-                    if (state.deck.cards.isEmpty)
-                      Center(
-                        child: Container(
-                          padding: EdgeInsets.only(right: 15.w, left: 5.w),
-                          child: AutoSizeText(
-                            LocaleKeys.tapCardsToAddThemOrHold.tr(),
-                            style: FontStyles.bold11Purple,
-                            minFontSize: 9,
-                            textAlign: TextAlign.center,
-                          ),
+              margin: EdgeInsets.only(left: 15.w, right: 5.w, top: 4.h, bottom: 4.h),
+              child: Stack(
+                children: [
+                  if (state.deck.cards.isEmpty)
+                    Center(
+                      child: Container(
+                        padding: EdgeInsets.only(right: 15.w, left: 5.w),
+                        child: AutoSizeText(
+                          LocaleKeys.tapCardsToAddThemOrHold.tr(),
+                          style: FontStyles.bold11Purple,
+                          minFontSize: 9,
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ScrollConfiguration(
-                      behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
-                      child: RawScrollbar(
+                    ),
+                  ScrollConfiguration(
+                    behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+                    child: RawScrollbar(
+                      controller: _scrollController,
+                      thumbVisibility: true,
+                      thumbColor: AppColors.bistreBrown,
+                      radius: Radius.circular(20.r),
+                      child: AnimatedList(
+                        key: _key,
                         controller: _scrollController,
-                        thumbVisibility: true,
-                        thumbColor: AppColors.bistreBrown,
-                        radius: Radius.circular(20.r),
-                        child: AnimatedList(
-                            key: _key,
-                            controller: _scrollController,
-                            physics: const ClampingScrollPhysics(),
-                            initialItemCount: state.deck.cards.length,
-                            itemBuilder: (context, index, animation) {
-                              return _buildItem(index, state.deck.cards[index], context, animation);
-                            }),
+                        physics: const ClampingScrollPhysics(),
+                        initialItemCount: state.deck.cards.length,
+                        itemBuilder: (context, index, animation) {
+                          return _buildItem(index, state.deck.cards[index], context, animation);
+                        },
                       ),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),
@@ -107,9 +109,11 @@ class _DeckListBodyState extends State<DeckListBody> {
           }),
           onLongPress: (deckCard) => Navigator.push(
             context,
-            HeroDialogRoute(builder: (context) {
-              return CardDetailsScreen(deckCard.card);
-            }),
+            HeroDialogRoute(
+              builder: (context) {
+                return CardDetailsScreen(deckCard.card);
+              },
+            ),
           ),
         ),
       ),
@@ -119,8 +123,11 @@ class _DeckListBodyState extends State<DeckListBody> {
   Future<void> removeItem(int index, DeckCard deckCard) async {
     BlocProvider.of<DeckBuilderBloc>(context).add(RemoveCardEvent(index, deckCard.card));
     if (deckCard.amount == 1) {
-      _key.currentState?.removeItem(index, (context, animation) => _buildItem(index, deckCard, context, animation),
-          duration: const Duration(milliseconds: 200));
+      _key.currentState?.removeItem(
+        index,
+        (context, animation) => _buildItem(index, deckCard, context, animation),
+        duration: const Duration(milliseconds: 200),
+      );
     }
   }
 

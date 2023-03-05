@@ -1,7 +1,9 @@
-import 'package:decksly/common/util/exceptions.dart';
-import 'package:decksly/common/util/failures.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
+// ignore_for_file: avoid_classes_with_only_static_members
+
+import "package:decksly/common/util/exceptions.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
 
 class ExceptionToFailureMapper {
   static final String _noInternetFailureMessage = LocaleKeys.noInternetFailureMessage.tr();

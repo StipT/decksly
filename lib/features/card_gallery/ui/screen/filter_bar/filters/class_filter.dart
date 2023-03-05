@@ -1,23 +1,23 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
-import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart";
+import "package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_class.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class ClassFilter extends StatefulWidget {
-  ClassFilter({
-    Key? key,
+  const ClassFilter({
+    super.key,
     this.height = 40,
     this.width = 150,
     required this.deckClass,
     required this.onToggleClassFilter,
     required this.onToggleNeutralFilter,
-  }) : super(key: key);
+  });
 
-  double height;
-  double width;
+  final double height;
+  final double width;
   final DeckClass deckClass;
   final VoidCallback onToggleClassFilter;
   final VoidCallback onToggleNeutralFilter;
@@ -34,86 +34,88 @@ class _ClassFilterState extends State<ClassFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(builder: (BuildContext context, state) {
-      return Container(
-        height: widget.height,
-        width: widget.width,
-        padding: EdgeInsets.symmetric(horizontal: 2.w),
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              assetPath(kSubfolderMisc, "class_filter"),
-              fit: BoxFit.fill,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: widget.onToggleClassFilter,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 3.w),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                              top: 8.75.h,
-                              bottom: 8.75.h,
+    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
+      builder: (BuildContext context, state) {
+        return Container(
+          height: widget.height,
+          width: widget.width,
+          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                assetPath(kSubfolderMisc, "class_filter"),
+                fit: BoxFit.fill,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: widget.onToggleClassFilter,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 3.w),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(
+                                top: 8.75.h,
+                                bottom: 8.75.h,
+                              ),
+                              child: Image.asset(
+                                assetPath(kSubfolderClass, _getClassIcon(widget.deckClass)),
+                                fit: BoxFit.fitHeight,
+                              ),
                             ),
-                            child: Image.asset(
-                              assetPath(kSubfolderClass, _getClassIcon(widget.deckClass)),
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                          if (state.cardFilterParams.heroClass.contains(widget.deckClass.name))
-                            Image.asset(
-                              assetPath(kSubfolderMisc, "class_filter_selected"),
-                              fit: BoxFit.fitHeight,
-                            ),
-                        ],
+                            if (state.cardFilterParams.heroClass.contains(widget.deckClass.name))
+                              Image.asset(
+                                assetPath(kSubfolderMisc, "class_filter_selected"),
+                                fit: BoxFit.fitHeight,
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: widget.onToggleNeutralFilter,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 3.w),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                              top: 8.75.h,
-                              bottom: 8.75.h,
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: widget.onToggleNeutralFilter,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 3.w),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(
+                                top: 8.75.h,
+                                bottom: 8.75.h,
+                              ),
+                              child: Image.asset(
+                                assetPath(kSubfolderClass, "neutral_icon"),
+                                fit: BoxFit.fitHeight,
+                              ),
                             ),
-                            child: Image.asset(
-                              assetPath(kSubfolderClass, "neutral_icon"),
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
-                          if (state.cardFilterParams.heroClass.contains(CardClass.neutral.value))
-                            Image.asset(
-                              assetPath(kSubfolderMisc, "class_filter_selected"),
-                              fit: BoxFit.fitHeight,
-                            ),
-                        ],
+                            if (state.cardFilterParams.heroClass.contains(CardClass.neutral.value))
+                              Image.asset(
+                                assetPath(kSubfolderMisc, "class_filter_selected"),
+                                fit: BoxFit.fitHeight,
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    });
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   String _getClassIcon(DeckClass deckClass) {

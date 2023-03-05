@@ -1,13 +1,14 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:decksly/common/application.constants.dart';
-import 'package:decksly/env.dart';
-import 'package:decksly/repository/remote_source/api/api_client.dart';
-import 'package:decksly/repository/remote_source/auth/auth_client.dart';
-import 'package:decksly/repository/remote_source/auth/token_request/token_request.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:injectable/injectable.dart';
+import "package:decksly/common/application.constants.dart";
+import "package:decksly/env.dart";
+import "package:decksly/repository/remote_source/api/api_client.dart";
+import "package:decksly/repository/remote_source/auth/auth_client.dart";
+import "package:decksly/repository/remote_source/auth/token_request/token_request.dart";
+import "package:dio/dio.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter_secure_storage/flutter_secure_storage.dart";
+import "package:injectable/injectable.dart";
 
 abstract class ApiService {
   ApiClient get apiClient;
@@ -33,46 +34,59 @@ class ApiServiceImpl implements ApiService {
   AuthClient get authClient => _authClient;
 
   QueuedInterceptorsWrapper get queuedInterceptor {
-    return QueuedInterceptorsWrapper(onRequest: (options, handler) async {
-      String? accessToken = await secureStorage.read(key: kAccessTokenKey);
+    return QueuedInterceptorsWrapper(
+      onRequest: (options, handler) async {
+        String? accessToken = await secureStorage.read(key: kAccessTokenKey);
 
-      if (isTokenInvalid(accessToken)) {
-        accessToken = await refreshAccessToken();
-      }
-      final token = 'Bearer $accessToken';
+        if (isTokenInvalid(accessToken)) {
+          accessToken = await refreshAccessToken();
+        }
+        final token = "Bearer $accessToken";
 
-      _restDio.options.headers.addAll({'Authorization': token});
-      options.headers.addAll({'Authorization': token});
-      return handler.next(options);
-    }, onResponse: (response, handler) {
-      return handler.next(response);
-    }, onError: (error, handler) async {
-      return await _retryRequest(error, handler);
-    });
+        _restDio.options.headers.addAll({"Authorization": token});
+        options.headers.addAll({"Authorization": token});
+        return handler.next(options);
+      },
+      onResponse: (response, handler) {
+        return handler.next(response);
+      },
+      onError: (error, handler) async {
+        return _retryRequest(error, handler);
+      },
+    );
   }
 
   LogInterceptor get logInterceptor => LogInterceptor(
-      responseBody: true,
-      requestBody: true,
-      logPrint: (message) {
-        print(message);
-      });
+        responseBody: true,
+        requestBody: true,
+        logPrint: (message) {
+          if (kDebugMode) {
+            print(message);
+          }
+        },
+      );
 
   void _setUpServices() {
     secureStorage = const FlutterSecureStorage();
 
-    final _authDio = Dio(
-      BaseOptions(baseUrl: kAuthBaseUrl, headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }),
+    final authDio = Dio(
+      BaseOptions(
+        baseUrl: kAuthBaseUrl,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      ),
     );
-    _authDio.interceptors.add(logInterceptor);
-    _authClient = AuthClient(_authDio);
+    authDio.interceptors.add(logInterceptor);
+    _authClient = AuthClient(authDio);
 
     _restDio = Dio(
-      BaseOptions(baseUrl: kApiBaseUrl, headers: {
-        'Content-Type': 'application/json',
-      }),
+      BaseOptions(
+        baseUrl: kApiBaseUrl,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
     );
     _restDio.interceptors.add(queuedInterceptor);
     _restDio.interceptors.add(logInterceptor);
@@ -92,12 +106,12 @@ class ApiServiceImpl implements ApiService {
   Future<void> _retryRequest(DioError error, ErrorInterceptorHandler handler) async {
     if (error.response?.statusCode == 401) {
       final RequestOptions? options = error.response?.requestOptions;
-      if (options == null || options.headers['Retry-Count'] == 1) {
+      if (options == null || options.headers["Retry-Count"] == 1) {
         return;
       }
 
       await refreshAccessToken();
-      options.headers['Retry-Count'] = 1; //setting retry count to 1 to prevent further concurrent calls
+      options.headers["Retry-Count"] = 1; //setting retry count to 1 to prevent further concurrent calls
       final retryResponse = await _restDio.fetch(options);
       return handler.resolve(retryResponse);
     } else {
@@ -106,7 +120,7 @@ class ApiServiceImpl implements ApiService {
   }
 
   Future<String> refreshAccessToken() async {
-    String basicAuth = 'Basic ' + base64.encode(utf8.encode('$BATTLENET_CLIENT_ID:$BATTLENET_CLIENT_SECRET'));
+    final basicAuth = "Basic ${base64.encode(utf8.encode("$kBattleNetClientID:$kBattleNetClientSecret"))}";
 
     final tokenResponse = await _authClient.getAccessToken(
       basicAuth,

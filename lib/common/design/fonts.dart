@@ -1,7 +1,7 @@
 // ignore: avoid_classes_with_only_static_members
-import 'package:decksly/common/design/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/design/colors.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 // ignore: avoid_classes_with_only_static_members
 class FontStyles {
@@ -69,12 +69,10 @@ class FontStyles {
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 5.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 8.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
     ],
   );
@@ -158,12 +156,10 @@ class FontStyles {
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 5.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 8.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
     ],
   );
@@ -205,12 +201,10 @@ class FontStyles {
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 5.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 8.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
     ],
   );
@@ -224,12 +218,10 @@ class FontStyles {
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 5.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 8.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
     ],
   );
@@ -250,12 +242,10 @@ class FontStyles {
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 5.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
       Shadow(
         offset: Offset(1, 1),
         blurRadius: 8.0,
-        color: Color.fromARGB(255, 0, 0, 0),
       ),
     ],
   );

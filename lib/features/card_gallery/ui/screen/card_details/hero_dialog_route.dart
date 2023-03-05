@@ -1,5 +1,5 @@
-import 'package:decksly/common/design/colors.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/design/colors.dart";
+import "package:flutter/widgets.dart";
 
 class HeroDialogRoute<T> extends PageRoute<T> {
   HeroDialogRoute({required this.builder}) : super();

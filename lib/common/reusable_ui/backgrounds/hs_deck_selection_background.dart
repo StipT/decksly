@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSDeckSelectionBackground extends StatelessWidget {
-  const HSDeckSelectionBackground({Key? key}) : super(key: key);
+  const HSDeckSelectionBackground({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,7 @@ class HSDeckSelectionBackground extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        SizedBox(
-          height: double.infinity,
-          width: double.infinity,
+        SizedBox.expand(
           child: Image.asset(
             assetPath(kSubfolderBackground, "deck_creator_background"),
             fit: BoxFit.fill,

@@ -1,8 +1,8 @@
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:shimmer/shimmer.dart";
 
 class CardLoading extends StatelessWidget {
   const CardLoading({super.key});

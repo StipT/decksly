@@ -1,6 +1,6 @@
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
 
 enum CardSet implements CardFilter {
   // Game modes

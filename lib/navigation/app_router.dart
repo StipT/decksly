@@ -1,19 +1,18 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:decksly/features/card_gallery/ui/screen/card_gallery_screen.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck.dart';
-import 'package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart';
-import 'package:decksly/features/deck_selection/ui/screen/deck_selection_screen.dart';
-import 'package:flutter/material.dart';
+import "package:auto_route/auto_route.dart";
+import "package:decksly/features/card_gallery/ui/screen/card_gallery_screen.dart";
+import "package:decksly/features/deck_builder/domain/model/deck.dart";
+import "package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart";
+import "package:decksly/features/deck_selection/ui/screen/deck_selection_screen.dart";
+import "package:flutter/material.dart";
 
-part 'app_router.gr.dart';
+part "app_router.gr.dart";
 
 @MaterialAutoRouter(
-  replaceInRouteName: 'Screen,Route',
+  replaceInRouteName: "Screen,Route",
   routes: <AutoRoute>[
     AutoRoute(
       page: CardGalleryScreen,
       initial: true,
-      maintainState: true,
     ),
     CustomRoute(page: DeckSelectionScreen, transitionsBuilder: bounceInTransition),
     CustomRoute(page: DeckBuilderScreen, transitionsBuilder: bounceOutTransition),
@@ -22,7 +21,11 @@ part 'app_router.gr.dart';
 class AppRouter extends _$AppRouter {}
 
 Widget bounceInTransition(
-    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
   const begin = Offset(0.0, -1.0);
   const end = Offset.zero;
 
@@ -36,7 +39,11 @@ Widget bounceInTransition(
 }
 
 Widget bounceOutTransition(
-    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
   const begin = Offset(0.0, -1.0);
   const end = Offset.zero;
 

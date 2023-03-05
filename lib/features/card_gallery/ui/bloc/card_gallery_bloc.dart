@@ -1,23 +1,23 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:decksly/common/dev/logger.dart';
-import 'package:decksly/common/util/failures.dart';
-import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart';
-import 'package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
-import 'package:rxdart/rxdart.dart';
+import "package:connectivity_plus/connectivity_plus.dart";
+import "package:decksly/common/dev/logger.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/common/util/network_info.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart";
+import "package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart";
+import "package:decksly/features/card_gallery/domain/usecase/fetch_cards_usecase.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_class.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
+import "package:logger/logger.dart";
+import "package:rxdart/rxdart.dart";
 
-part 'card_gallery_bloc.freezed.dart';
+part "card_gallery_bloc.freezed.dart";
 
-part 'card_gallery_event.dart';
+part "card_gallery_event.dart";
 
-part 'card_gallery_state.dart';
+part "card_gallery_state.dart";
 
 @injectable
 class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
@@ -69,7 +69,7 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   }
 
   Future<void> handleToggleClassCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
-    List<String> classes = [];
+    final List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains(deckClass.name) && classes.length == 1) {
       classes.remove(deckClass.name);
@@ -83,7 +83,7 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   }
 
   Future<void> handleToggleNeutralCards(Emitter<CardGalleryState> emit, DeckClass deckClass) async {
-    List<String> classes = [];
+    final List<String> classes = [];
     classes.addAll(state.cardFilterParams.heroClass);
     if (classes.contains(CardClass.neutral.value) && classes.length == 1) {
       classes.remove(CardClass.neutral.value);

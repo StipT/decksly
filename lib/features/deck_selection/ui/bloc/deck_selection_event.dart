@@ -1,4 +1,4 @@
-part of 'deck_selection_bloc.dart';
+part of "deck_selection_bloc.dart";
 
 @immutable
 abstract class DeckSelectionEvent {
@@ -8,33 +8,33 @@ abstract class DeckSelectionEvent {
 class LoadCreatedDecksEvent extends DeckSelectionEvent {}
 
 class ImportDeckEvent extends DeckSelectionEvent {
-  final String locale;
-
   const ImportDeckEvent(this.locale);
+
+  final String locale;
 }
 
 class ChangeGameModeEvent extends DeckSelectionEvent {
-  final DeckType gameMode;
-
   const ChangeGameModeEvent(this.gameMode);
+
+  final DeckType gameMode;
 }
 
 class ChangeDeckCodeEvent extends DeckSelectionEvent {
-  final String deckCode;
-
   const ChangeDeckCodeEvent(this.deckCode);
+
+  final String deckCode;
 }
 
 class SelectLoadedDeckEvent extends DeckSelectionEvent {
-  final String deckId;
-
   const SelectLoadedDeckEvent(this.deckId);
+
+  final String deckId;
 }
 
 class SelectClassEvent extends DeckSelectionEvent {
-  final DeckClass heroClass;
-
   const SelectClassEvent(this.heroClass);
+
+  final DeckClass heroClass;
 }
 
 class CloseEvent extends DeckSelectionEvent {

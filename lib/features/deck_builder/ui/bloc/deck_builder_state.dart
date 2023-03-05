@@ -1,4 +1,4 @@
-part of 'deck_builder_bloc.dart';
+part of "deck_builder_bloc.dart";
 
 @Freezed()
 class DeckBuilderState with _$DeckBuilderState {

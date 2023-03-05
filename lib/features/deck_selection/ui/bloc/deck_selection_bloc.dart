@@ -1,18 +1,20 @@
-import 'package:decksly/common/dev/logger.dart';
-import 'package:decksly/common/util/failures.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_params.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/features/deck_selection/domain/usecase/fetch_deck_usecase.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
+import "package:decksly/common/dev/logger.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/features/deck_builder/domain/model/deck.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_class.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_params.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_type.dart";
+import "package:decksly/features/deck_selection/domain/usecase/fetch_deck_usecase.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
+import "package:logger/logger.dart";
 
-part 'deck_selection_bloc.freezed.dart';
-part 'deck_selection_event.dart';
-part 'deck_selection_state.dart';
+part "deck_selection_bloc.freezed.dart";
+
+part "deck_selection_event.dart";
+
+part "deck_selection_state.dart";
 
 @injectable
 class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
@@ -40,16 +42,20 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);
-        emit(DeckSelectionState.failure(
-          failure: failure,
-          deck: state.deck,
-        ));
+        emit(
+          DeckSelectionState.failure(
+            failure: failure,
+            deck: state.deck,
+          ),
+        );
       },
       (deck) {
         log(deck.toString(), level: Level.warning);
-        emit(DeckSelectionState.deckImported(
-          deck: deck,
-        ));
+        emit(
+          DeckSelectionState.deckImported(
+            deck: deck,
+          ),
+        );
       },
     );
   }
@@ -60,16 +66,20 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
 
   void handleChangeGameModeEvent(Emitter<DeckSelectionState> emit, DeckType type) {
     final deck = state.deck.copyWith(type: type);
-    emit(DeckSelectionState.changed(
-      deck: deck,
-    ));
+    emit(
+      DeckSelectionState.changed(
+        deck: deck,
+      ),
+    );
   }
 
-  handleChangeDeckCodeEvent(Emitter<DeckSelectionState> emit, String code) {
+  void handleChangeDeckCodeEvent(Emitter<DeckSelectionState> emit, String code) {
     final deck = state.deck.copyWith(code: code);
-    emit(DeckSelectionState.changed(
-      deck: deck,
-    ));
+    emit(
+      DeckSelectionState.changed(
+        deck: deck,
+      ),
+    );
   }
 
   void handleSelectClassEvent(Emitter<DeckSelectionState> emit, DeckClass deckClass) {

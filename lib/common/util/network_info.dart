@@ -1,8 +1,8 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:injectable/injectable.dart';
-import 'package:rxdart/rxdart.dart' show PublishSubject;
+import "package:connectivity_plus/connectivity_plus.dart";
+import "package:injectable/injectable.dart";
+import "package:rxdart/rxdart.dart" show PublishSubject;
 
 abstract class NetworkInfo {
   Stream<ConnectivityResult> get resultStream;
@@ -21,11 +21,13 @@ class NetworkInfoImpl implements NetworkInfo {
   final Connectivity connectivity;
   final PublishSubject<ConnectivityResult> _resultSubject = PublishSubject<ConnectivityResult>();
 
+  @override
   Stream<ConnectivityResult> get resultStream => _resultSubject.stream;
 
+  @override
   Future<bool> get isConnected async {
     try {
-      final List<InternetAddress> result = await InternetAddress.lookup('google.com');
+      final List<InternetAddress> result = await InternetAddress.lookup("google.com");
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return Future<bool>.value(true);
       } else {

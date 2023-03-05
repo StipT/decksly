@@ -1,12 +1,12 @@
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_wood_horizontal_border.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_active_text_field_overlay.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_rectangular_golden_border.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_wood_horizontal_border.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum TextFieldTheme {
   none,
@@ -23,13 +23,13 @@ enum TextFieldSuffix {
 
 class HSTextField extends StatefulWidget {
   const HSTextField({
-    Key? key,
+    super.key,
     required this.theme,
     required this.suffix,
     required this.onChange,
     required this.onSubmitted,
     this.hint,
-  }) : super(key: key);
+  });
 
   final void Function(String) onChange;
   final void Function(String) onSubmitted;

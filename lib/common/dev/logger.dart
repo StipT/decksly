@@ -1,17 +1,17 @@
-import 'package:logger/logger.dart';
+import "package:logger/logger.dart";
 
 class DebugLogger {
-  static final DebugLogger _instance = DebugLogger._internal();
 
   factory DebugLogger() {
     return _instance;
   }
 
-  late final Logger logger;
-
   DebugLogger._internal() {
     logger = Logger();
   }
+  static final DebugLogger _instance = DebugLogger._internal();
+
+  late final Logger logger;
 }
 
 void log(String message, {Level level = Level.debug}) {

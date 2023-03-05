@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSWoodHorizontalBorder extends StatelessWidget {
-  const HSWoodHorizontalBorder({Key? key}) : super(key: key);
+  const HSWoodHorizontalBorder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,7 @@ class HSWoodHorizontalBorder extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
+          child: SizedBox.expand(
             child: Image.asset(
               assetPath(kSubfolderShared, "wood_border_horizontal_center_outline"),
               fit: BoxFit.fill,

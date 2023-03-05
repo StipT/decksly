@@ -1,15 +1,15 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_class.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_type.dart";
+import "package:decksly/features/deck_builder/ui/bloc/deck_builder_bloc.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class DeckListHeader extends StatefulWidget {
-  const DeckListHeader({Key? key, required this.onConvertMode}) : super(key: key);
+  const DeckListHeader({super.key, required this.onConvertMode});
 
   final VoidCallback onConvertMode;
 
@@ -124,12 +124,11 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
     }
   }
 
-  _headerContent(DeckBuilderState state) {
+  Widget _headerContent(DeckBuilderState state) {
     final cardCount = state.deck.cards.isEmpty
         ? 0
         : state.deck.cards.map((e) => e.amount).reduce((value, element) => value += element);
-    return Container(
-        child: Row(
+    return Row(
       children: [
         Container(
           margin: EdgeInsets.only(
@@ -162,18 +161,19 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                   ),
                 ),
                 Flexible(
-                    child: AutoSizeText(
-                  "$cardCount/30",
-                  style: cardCount == 30 ? FontStyles.bold13Green : FontStyles.bold13Gold,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.start,
-                  minFontSize: 8,
-                )),
+                  child: AutoSizeText(
+                    "$cardCount/30",
+                    style: cardCount == 30 ? FontStyles.bold13Green : FontStyles.bold13Gold,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
+                    minFontSize: 8,
+                  ),
+                ),
               ],
             ),
           ),
         )
       ],
-    ));
+    );
   }
 }

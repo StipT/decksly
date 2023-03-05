@@ -1,8 +1,9 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSActiveButtonOverlay extends StatelessWidget {
-  const HSActiveButtonOverlay({Key? key, this.isDropdownButton = false}) : super(key: key);
+  const HSActiveButtonOverlay({super.key, this.isDropdownButton = false});
+
   final bool isDropdownButton;
 
   @override
@@ -20,9 +21,7 @@ class HSActiveButtonOverlay extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
+          child: SizedBox.expand(
             child: Image.asset(
               assetPath(kSubfolderButton, "focused_button_center"),
               fit: BoxFit.fill,

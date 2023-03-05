@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/material.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/material.dart";
 
 class HSDeckCardItemBackground extends StatelessWidget {
-  const HSDeckCardItemBackground({Key? key, required this.startWidth, required this.endWidth}) : super(key: key);
+  const HSDeckCardItemBackground({super.key, required this.startWidth, required this.endWidth});
 
   final double startWidth;
   final double endWidth;
@@ -23,9 +23,7 @@ class HSDeckCardItemBackground extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SizedBox(
-                height: double.infinity,
-                width: double.infinity,
+              child: SizedBox.expand(
                 child: Image.asset(
                   assetPath(kSubfolderMisc, "deck_card_item_center"),
                   fit: BoxFit.fill,

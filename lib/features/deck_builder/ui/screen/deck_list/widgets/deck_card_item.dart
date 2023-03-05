@@ -1,12 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_deck_card_item_background.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_card.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_deck_card_item_background.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_card.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class DeckCardItem extends StatelessWidget {
   const DeckCardItem({
@@ -31,13 +31,16 @@ class DeckCardItem extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(right: 12.5.w),
         height: 30.h,
+        padding: EdgeInsets.symmetric(
+          vertical: 1.75.h,
+          horizontal: 2.w,
+        ),
         child: Stack(
           fit: StackFit.expand,
           children: [
             Row(
               children: [
                 Expanded(
-                  flex: 1,
                   child: Container(
                     color: AppColors.ebonyClay,
                   ),
@@ -114,10 +117,6 @@ class DeckCardItem extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        padding: EdgeInsets.symmetric(
-          vertical: 1.75.h,
-          horizontal: 2.w,
         ),
       ),
     );

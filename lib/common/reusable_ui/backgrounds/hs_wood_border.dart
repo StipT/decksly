@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSWoodBorder extends StatelessWidget {
-  const HSWoodBorder({Key? key}) : super(key: key);
+  const HSWoodBorder({super.key});
 
   @override
   Widget build(BuildContext context) {

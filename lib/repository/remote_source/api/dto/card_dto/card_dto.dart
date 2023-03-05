@@ -1,9 +1,10 @@
-import 'package:decksly/repository/remote_source/api/dto/duels_dto/duels_dto.dart';
-import 'package:decksly/repository/remote_source/api/dto/rune_cost_dto/rune_cost_dto.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:decksly/repository/remote_source/api/dto/duels_dto/duels_dto.dart";
+import "package:decksly/repository/remote_source/api/dto/rune_cost_dto/rune_cost_dto.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'card_dto.freezed.dart';
-part 'card_dto.g.dart';
+part "card_dto.freezed.dart";
+
+part "card_dto.g.dart";
 
 @freezed
 class CardDTO with _$CardDTO {

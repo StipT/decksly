@@ -1,5 +1,5 @@
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
 
 enum DeckType {
   standard,
@@ -8,7 +8,6 @@ enum DeckType {
 }
 
 extension DeckTypeExtensions on DeckType {
-
   String get value {
     switch (this) {
       case DeckType.standard:
@@ -17,7 +16,6 @@ extension DeckTypeExtensions on DeckType {
         return "classic-cards";
       case DeckType.wild:
         return "wild";
-
     }
   }
 }

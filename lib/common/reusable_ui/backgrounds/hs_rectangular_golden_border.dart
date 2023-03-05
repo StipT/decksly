@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSRectangularGoldenBorder extends StatelessWidget {
-  const HSRectangularGoldenBorder({Key? key}) : super(key: key);
+  const HSRectangularGoldenBorder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,7 @@ class HSRectangularGoldenBorder extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
+          child: SizedBox.expand(
             child: Image.asset(
               assetPath(kSubfolderTextField, "text_field_border_center"),
               fit: BoxFit.fill,

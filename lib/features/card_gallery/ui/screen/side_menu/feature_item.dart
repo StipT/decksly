@@ -1,10 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum FeatureItemType {
   cardLibrary,
@@ -34,8 +34,8 @@ class FeatureItem extends StatelessWidget {
             _getImage(type, isSelected),
             Expanded(
               child: Container(
-                child: _getTitle(type, isSelected),
                 padding: EdgeInsets.only(left: 5.w),
+                child: _getTitle(type, isSelected),
               ),
             ),
           ],

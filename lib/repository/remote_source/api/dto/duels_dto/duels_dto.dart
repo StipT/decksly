@@ -1,7 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'duels_dto.freezed.dart';
-part 'duels_dto.g.dart';
+part "duels_dto.freezed.dart";
+
+part "duels_dto.g.dart";
 
 @freezed
 class DuelsDTO with _$DuelsDTO {

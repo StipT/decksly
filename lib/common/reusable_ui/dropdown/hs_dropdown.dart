@@ -1,19 +1,19 @@
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_active_button_overlay.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_button_overlay.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_selected_dropdown_button_overlay.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart';
-import 'package:decksly/common/reusable_ui/button/hs_dropdown_button.dart';
-import 'package:decksly/common/reusable_ui/dropdown/custom_dropdown.dart';
-import 'package:decksly/common/reusable_ui/dropdown/dropdown_item/hs_dropdown_item.dart';
-import 'package:decksly/common/reusable_ui/dropdown/dropdown_item/set_dropdown_item.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_active_button_overlay.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_button_overlay.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_selected_dropdown_button_overlay.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart";
+import "package:decksly/common/reusable_ui/button/hs_dropdown_button.dart";
+import "package:decksly/common/reusable_ui/dropdown/custom_dropdown.dart";
+import "package:decksly/common/reusable_ui/dropdown/dropdown_item/hs_dropdown_item.dart";
+import "package:decksly/common/reusable_ui/dropdown/dropdown_item/set_dropdown_item.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum DropdownType {
   cardClass,
@@ -33,8 +33,8 @@ enum DropdownType {
 }
 
 class HSDropdown extends StatelessWidget {
-  HSDropdown({
-    Key? key,
+  const HSDropdown({
+    super.key,
     required this.dropdownType,
     required this.selectedValue,
     required this.dropdownValues,
@@ -42,11 +42,11 @@ class HSDropdown extends StatelessWidget {
     this.width = 150,
     this.dropdownWidth,
     required this.onChange,
-  }) : super(key: key);
+  });
 
-  double height;
-  double width;
-  double? dropdownWidth;
+  final double height;
+  final double width;
+  final double? dropdownWidth;
   final DropdownType dropdownType;
   final String selectedValue;
   final List<CardFilter> dropdownValues;

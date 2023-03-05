@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSActiveTextFieldOverlay extends StatelessWidget {
-  const HSActiveTextFieldOverlay({Key? key}) : super(key: key);
+  const HSActiveTextFieldOverlay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,7 @@ class HSActiveTextFieldOverlay extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
+          child: SizedBox.expand(
             child: Image.asset(
               assetPath(kSubfolderTextField, "focused_text_field_center"),
               fit: BoxFit.fill,

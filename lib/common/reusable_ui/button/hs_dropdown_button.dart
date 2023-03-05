@@ -1,11 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
 class HSDropdownButton extends StatelessWidget {
   const HSDropdownButton({

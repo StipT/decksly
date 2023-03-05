@@ -1,36 +1,36 @@
-import 'package:decksly/common/reusable_ui/backgrounds/hs_appbar_overlay.dart';
-import 'package:decksly/common/reusable_ui/button/hs_toggle_button.dart';
-import 'package:decksly/common/reusable_ui/dropdown/hs_dropdown.dart';
-import 'package:decksly/common/reusable_ui/text_field/hs_text_field.dart';
-import 'package:decksly/common/util/debouncer.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_set.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/sort_by.dart';
-import 'package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar_extension.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/class_filter.dart';
-import 'package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/l10n/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/reusable_ui/backgrounds/hs_appbar_overlay.dart";
+import "package:decksly/common/reusable_ui/button/hs_toggle_button.dart";
+import "package:decksly/common/reusable_ui/dropdown/hs_dropdown.dart";
+import "package:decksly/common/reusable_ui/text_field/hs_text_field.dart";
+import "package:decksly/common/util/debouncer.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_class.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_set.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/sort_by.dart";
+import "package:decksly/features/card_gallery/ui/bloc/card_gallery_bloc.dart";
+import "package:decksly/features/card_gallery/ui/screen/filter_bar/filter_app_bar_extension.dart";
+import "package:decksly/features/card_gallery/ui/screen/filter_bar/filters/class_filter.dart";
+import "package:decksly/features/card_gallery/ui/screen/filter_bar/filters/mana_picker.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_class.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_type.dart";
+import "package:decksly/l10n/locale_keys.g.dart";
+import "package:easy_localization/easy_localization.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class FilterAppBar extends StatefulWidget {
-  FilterAppBar({
-    Key? key,
+  const FilterAppBar({
+    super.key,
     required this.isExtended,
     required this.onToggle,
     this.deckClass,
     this.deckType,
-  }) : super(key: key);
+  });
 
-  bool isExtended;
-  DeckClass? deckClass;
-  DeckType? deckType;
+  final bool isExtended;
+  final DeckClass? deckClass;
+  final DeckType? deckType;
   final VoidCallback onToggle;
 
   @override
@@ -55,7 +55,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
               const HSAppBarOverlay(),
               Column(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 70.h,
                     width: double.infinity,
                     child: Container(
@@ -77,27 +77,35 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                                   .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(set: value))),
                             ),
                           ),
-                          Container(
-                              width: 330.w,
-                              height: 40.h,
-                              child: ManaPicker(
-                                onChange: (mana) => BlocProvider.of<CardGalleryBloc>(context)
-                                    .add(CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(manaCost: mana))),
-                              )),
-                          Expanded(
-                              child: Container(
-                            padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
-                            child: HSTextField(
-                              hint: LocaleKeys.search.tr(),
-                              suffix: TextFieldSuffix.search,
-                              onSubmitted: (_) {},
-                              onChange: (text) => _debouncer.run(() {
-                                BlocProvider.of<CardGalleryBloc>(context).add(
-                                    CardFilterParamsChangedEvent(state.cardFilterParams.copyWith(textFilter: text)));
-                              }),
-                              theme: TextFieldTheme.velvet,
+                          SizedBox(
+                            width: 330.w,
+                            height: 40.h,
+                            child: ManaPicker(
+                              onChange: (mana) => BlocProvider.of<CardGalleryBloc>(context).add(
+                                CardFilterParamsChangedEvent(
+                                  state.cardFilterParams.copyWith(manaCost: mana),
+                                ),
+                              ),
                             ),
-                          )),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
+                              child: HSTextField(
+                                hint: LocaleKeys.search.tr(),
+                                suffix: TextFieldSuffix.search,
+                                onSubmitted: (_) {},
+                                onChange: (text) => _debouncer.run(() {
+                                  BlocProvider.of<CardGalleryBloc>(context).add(
+                                    CardFilterParamsChangedEvent(
+                                      state.cardFilterParams.copyWith(textFilter: text),
+                                    ),
+                                  );
+                                }),
+                                theme: TextFieldTheme.velvet,
+                              ),
+                            ),
+                          ),
                           Container(
                             padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSBarToggleButton(
@@ -157,7 +165,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
     return activeFilters;
   }
 
-  void _toggleBarExtension() async {
+  Future<void> _toggleBarExtension() async {
     widget.onToggle();
   }
 
@@ -201,7 +209,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
       case DeckType.wild:
         return getCardSets(subCollection: SubCollection.wildSets);
       default:
-        return getCardSets(subCollection: SubCollection.all);
+        return getCardSets();
     }
   }
 

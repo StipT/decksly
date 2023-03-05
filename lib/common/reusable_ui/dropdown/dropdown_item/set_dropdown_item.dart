@@ -1,12 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
 class SetDropdownHeader extends StatelessWidget {
   const SetDropdownHeader({
@@ -19,13 +19,13 @@ class SetDropdownHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(
-        text,
-        style: FontStyles.bold17Grey,
-      ),
       padding: EdgeInsets.symmetric(
         vertical: 0.875.h,
         horizontal: 2.w,
+      ),
+      child: Text(
+        text,
+        style: FontStyles.bold17Grey,
       ),
     );
   }
@@ -50,7 +50,6 @@ class SetDropdownItem extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(vertical: 2.5.h),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
         children: [
           SvgPicture.asset(
             assetPath(kSubfolderSet, _assetName(), fileExtension: kSVGExtension),

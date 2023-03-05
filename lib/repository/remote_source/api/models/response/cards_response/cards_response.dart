@@ -1,8 +1,8 @@
-import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'cards_response.freezed.dart';
-part 'cards_response.g.dart';
+part "cards_response.freezed.dart";
+part "cards_response.g.dart";
 
 @freezed
 class CardsResponse with _$CardsResponse {

@@ -1,8 +1,8 @@
-import 'package:collection/collection.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:collection/collection.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class DropdownSectionHeadline extends StatelessWidget {
   const DropdownSectionHeadline(this.index, this.headline, {super.key});
@@ -13,18 +13,34 @@ class DropdownSectionHeadline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 10.h,
-          horizontal: 7.5.w,
-        ),
-        child: Text(
-          headline.toUpperCase(),
-          style: FontStyles.bold13Grey,
-        ));
+      padding: EdgeInsets.symmetric(
+        vertical: 10.h,
+        horizontal: 7.5.w,
+      ),
+      child: Text(
+        headline.toUpperCase(),
+        style: FontStyles.bold13Grey,
+      ),
+    );
   }
 }
 
 class CustomDropdown<T> extends StatefulWidget {
+  const CustomDropdown({
+    super.key,
+    this.hideIcon = false,
+    required this.dropdownButton,
+    required this.items,
+    required this.selectedItem,
+    required this.dropdownStyle,
+    required this.dropdownButtonStyle,
+    required this.icon,
+    required this.onChange,
+    this.activeDropdownButtonOverlay,
+    this.selectedDropdownButtonOverlay,
+    this.headlines,
+  });
+
   final void Function(CardFilter) onChange;
 
   final Widget Function(CardFilter) dropdownButton;
@@ -41,21 +57,6 @@ class CustomDropdown<T> extends StatefulWidget {
 
   final Icon icon;
   final bool hideIcon;
-
-  const CustomDropdown({
-    Key? key,
-    this.hideIcon = false,
-    required this.dropdownButton,
-    required this.items,
-    required this.selectedItem,
-    required this.dropdownStyle,
-    required this.dropdownButtonStyle,
-    required this.icon,
-    required this.onChange,
-    this.activeDropdownButtonOverlay,
-    this.selectedDropdownButtonOverlay,
-    this.headlines,
-  }) : super(key: key);
 
   @override
   _CustomDropdownState<T> createState() => _CustomDropdownState<T>();
@@ -79,15 +80,17 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
       parent: _animationController,
       curve: Curves.easeInOut,
     );
-    _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    var style = widget.dropdownButtonStyle;
+    final style = widget.dropdownButtonStyle;
     return CompositedTransformTarget(
       link: _layerLink,
       child: Stack(
@@ -138,11 +141,11 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   }
 
   OverlayEntry _createOverlayEntry() {
-    RenderBox renderBox = context.findRenderObject() as RenderBox;
-    var size = renderBox.size;
+    final renderBox = context.findRenderObject()! as RenderBox;
+    final size = renderBox.size;
 
-    var offset = renderBox.localToGlobal(Offset.zero);
-    var topOffset = offset.dy + size.height + 5;
+    final offset = renderBox.localToGlobal(Offset.zero);
+    final topOffset = offset.dy + size.height + 5;
     return OverlayEntry(
       builder: (context) => GestureDetector(
         onTap: () => _toggleDropdown(close: true),
@@ -188,42 +191,44 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                             ),
                           ),
                           child: RawScrollbar(
-                              thumbVisibility: false,
-                              radius: Radius.circular(20.r),
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
-                                shrinkWrap: true,
-                                itemCount: widget.items.length,
-                                itemBuilder: (context, index) {
-                                  final headlines = widget.headlines ?? [];
-                                  final indexWithoutHeadlines =
-                                      index - headlines.where((element) => element.index < index).length;
-                                  final item = widget.items.asMap().entries.toList()[indexWithoutHeadlines];
-                                  final DropdownItem<CardFilter> selectedItem = widget.selectedItem(item.value.value);
-                                  final headline = headlines.firstWhereOrNull((element) => element.index == index);
-                                  if (headline != null) {
-                                    return headline;
-                                  } else if (_currentValue?.value == selectedItem.value.value) {
-                                    return InkWell(
-                                        onTap: () {
-                                          setState(() => _currentValue = item.value.value);
-                                          widget.onChange(item.value.value);
-                                          _toggleDropdown();
-                                        },
-                                        child: selectedItem.child);
-                                  } else {
-                                    return InkWell(
-                                      onTap: () {
-                                        setState(() => _currentValue = item.value.value);
-                                        widget.onChange(item.value.value);
-                                        _toggleDropdown();
-                                      },
-                                      child: item.value,
-                                    );
-                                  }
-                                },
-                              )),
+                            thumbVisibility: false,
+                            radius: Radius.circular(20.r),
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: widget.items.length,
+                              itemBuilder: (context, index) {
+                                final headlines = widget.headlines ?? [];
+                                final indexWithoutHeadlines =
+                                    index - headlines.where((element) => element.index < index).length;
+                                final item = widget.items.asMap().entries.toList()[indexWithoutHeadlines];
+                                final DropdownItem<CardFilter> selectedItem = widget.selectedItem(item.value.value);
+                                final headline = headlines.firstWhereOrNull((element) => element.index == index);
+                                if (headline != null) {
+                                  return headline;
+                                } else if (_currentValue?.value == selectedItem.value.value) {
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() => _currentValue = item.value.value);
+                                      widget.onChange(item.value.value);
+                                      _toggleDropdown();
+                                    },
+                                    child: selectedItem.child,
+                                  );
+                                } else {
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() => _currentValue = item.value.value);
+                                      widget.onChange(item.value.value);
+                                      _toggleDropdown();
+                                    },
+                                    child: item.value,
+                                  );
+                                }
+                              },
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -237,7 +242,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
     );
   }
 
-  void _toggleDropdown({bool close = false}) async {
+  Future<void> _toggleDropdown({bool close = false}) async {
     if (_isOpen || close) {
       await _animationController.reverse();
       _overlayEntry.remove();
@@ -254,10 +259,10 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
 }
 
 class DropdownItem<String> extends StatelessWidget {
+  const DropdownItem({super.key, required this.value, required this.child});
+
   final String value;
   final Widget child;
-
-  const DropdownItem({Key? key, required this.value, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -266,17 +271,6 @@ class DropdownItem<String> extends StatelessWidget {
 }
 
 class DropdownButtonStyle {
-  final MainAxisAlignment? mainAxisAlignment;
-  final ShapeBorder? shape;
-  final double? elevation;
-  final Color? backgroundColor;
-  final EdgeInsets? padding;
-  final BoxConstraints? constraints;
-  final double? width;
-  final double? height;
-  final Color? primaryColor;
-  final TextStyle? textStyle;
-
   const DropdownButtonStyle({
     this.mainAxisAlignment,
     this.backgroundColor,
@@ -289,19 +283,20 @@ class DropdownButtonStyle {
     this.shape,
     this.textStyle,
   });
+
+  final MainAxisAlignment? mainAxisAlignment;
+  final ShapeBorder? shape;
+  final double? elevation;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
+  final BoxConstraints? constraints;
+  final double? width;
+  final double? height;
+  final Color? primaryColor;
+  final TextStyle? textStyle;
 }
 
 class DropdownStyle {
-  final BorderRadius? borderRadius;
-  final double? elevation;
-  final Color? color;
-  final EdgeInsets? padding;
-  final BoxConstraints? constraints;
-  final TextStyle? textStyle;
-  final Offset? offset;
-  final double? width;
-  final String? dropdownBackgroundAssetPath;
-
   const DropdownStyle({
     this.dropdownBackgroundAssetPath,
     this.constraints,
@@ -313,4 +308,14 @@ class DropdownStyle {
     this.borderRadius,
     this.textStyle,
   });
+
+  final BorderRadius? borderRadius;
+  final double? elevation;
+  final Color? color;
+  final EdgeInsets? padding;
+  final BoxConstraints? constraints;
+  final TextStyle? textStyle;
+  final Offset? offset;
+  final double? width;
+  final String? dropdownBackgroundAssetPath;
 }

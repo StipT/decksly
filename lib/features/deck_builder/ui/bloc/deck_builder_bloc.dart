@@ -1,22 +1,24 @@
-import 'package:collection/collection.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:decksly/common/dev/logger.dart';
-import 'package:decksly/common/util/failures.dart';
-import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_card.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_params.dart';
-import 'package:decksly/features/deck_builder/domain/usecase/fetch_deck_code_usecase.dart';
-import 'package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
-import 'package:rxdart/rxdart.dart';
+import "package:collection/collection.dart";
+import "package:connectivity_plus/connectivity_plus.dart";
+import "package:decksly/common/dev/logger.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/common/util/network_info.dart";
+import "package:decksly/features/deck_builder/domain/model/deck.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_card.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_params.dart";
+import "package:decksly/features/deck_builder/domain/usecase/fetch_deck_code_usecase.dart";
+import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
+import "package:logger/logger.dart";
+import "package:rxdart/rxdart.dart";
 
-part 'deck_builder_bloc.freezed.dart';
-part 'deck_builder_event.dart';
-part 'deck_builder_state.dart';
+part "deck_builder_bloc.freezed.dart";
+
+part "deck_builder_event.dart";
+
+part "deck_builder_state.dart";
 
 @injectable
 class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
@@ -49,7 +51,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
   }
 
   void handleAddCard(Emitter<DeckBuilderState> emit, CardDTO card) {
-    List<DeckCard> cards = [];
+    final List<DeckCard> cards = [];
     cards.addAll(state.deck.cards);
 
     final duplicateCardOrNull = cards.firstWhereOrNull((element) => element.card == card);
@@ -81,7 +83,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       }
     });
 
-    var index = cards.indexWhere((element) => element.card == card);
+    final index = cards.indexWhere((element) => element.card == card);
 
     cards[index].amount == 2
         ? emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)))
@@ -89,7 +91,7 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
   }
 
   void handleRemoveCard(Emitter<DeckBuilderState> emit, int index, CardDTO card) {
-    List<DeckCard> cards = [];
+    final List<DeckCard> cards = [];
     cards.addAll(state.deck.cards);
 
     final duplicateCardOrNull = cards.firstWhereOrNull((element) => element.card == card);
@@ -126,14 +128,15 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
 
     log(ids, level: Level.error);
 
-    final resultOrFailure = await fetchDeckCodeUsecase(DeckParams(ids: ids, locale: locale, deckType: state.deck.type.name));
+    final resultOrFailure =
+        await fetchDeckCodeUsecase(DeckParams(ids: ids, locale: locale, deckType: state.deck.type.name));
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);
         emit(DeckBuilderState.failure(failure: failure, deck: state.deck));
       },
       (deckCode) {
-        log(deckCode.toString(), level: Level.warning);
+        log(deckCode, level: Level.warning);
         emit(DeckBuilderState.codeGenerated(deck: state.deck.copyWith(code: deckCode)));
       },
     );

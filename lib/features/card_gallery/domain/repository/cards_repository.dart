@@ -1,8 +1,8 @@
-import 'package:decksly/common/util/exceptions.dart';
-import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart';
-import 'package:decksly/repository/remote_source/api/api_service.dart';
-import 'package:injectable/injectable.dart';
+import "package:decksly/common/util/exceptions.dart";
+import "package:decksly/common/util/network_info.dart";
+import "package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart";
+import "package:decksly/repository/remote_source/api/api_service.dart";
+import "package:injectable/injectable.dart";
 
 abstract class CardsRepository {
   Future<CardsPage> getCards({
@@ -80,9 +80,10 @@ class CardsRepositoryImpl extends CardsRepository {
       keyword: keyword,
     );
     return CardsPage(
-        cards: cardResponse.cards,
-        cardCount: cardResponse.cardCount,
-        pageCount: cardResponse.pageCount,
-        page: cardResponse.page);
+      cards: cardResponse.cards,
+      cardCount: cardResponse.cardCount,
+      pageCount: cardResponse.pageCount,
+      page: cardResponse.page,
+    );
   }
 }

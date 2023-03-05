@@ -1,4 +1,4 @@
-part of 'card_gallery_bloc.dart';
+part of "card_gallery_bloc.dart";
 
 @immutable
 abstract class CardGalleryEvent {

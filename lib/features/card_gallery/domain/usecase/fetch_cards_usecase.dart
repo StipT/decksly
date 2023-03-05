@@ -1,11 +1,11 @@
-import 'package:dartz/dartz.dart';
-import 'package:decksly/common/util/exception_to_failure_mapper.dart';
-import 'package:decksly/common/util/failures.dart';
-import 'package:decksly/common/util/use_case.dart';
-import 'package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart';
-import 'package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart';
-import 'package:decksly/features/card_gallery/domain/repository/cards_repository.dart';
-import 'package:injectable/injectable.dart';
+import "package:dartz/dartz.dart";
+import "package:decksly/common/util/exception_to_failure_mapper.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/common/util/use_case.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filter_params/card_filter_params.dart";
+import "package:decksly/features/card_gallery/domain/model/cards_page/cards_page.dart";
+import "package:decksly/features/card_gallery/domain/repository/cards_repository.dart";
+import "package:injectable/injectable.dart";
 
 @lazySingleton
 class FetchCardsUsecase extends UseCase<CardsPage, CardFilterParams> {

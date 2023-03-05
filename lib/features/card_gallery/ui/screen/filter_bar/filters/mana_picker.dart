@@ -1,18 +1,18 @@
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_active_text_field_overlay.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_rectangular_golden_border.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_active_text_field_overlay.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_rectangular_golden_border.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class ManaPicker extends StatefulWidget {
-  final void Function(String) onChange;
-
   const ManaPicker({
-    Key? key,
+    super.key,
     required this.onChange,
-  }) : super(key: key);
+  });
+
+  final void Function(String) onChange;
 
   @override
   State<StatefulWidget> createState() => _ManaPickerState();
@@ -55,7 +55,7 @@ class _ManaPickerState extends State<ManaPicker> {
                   String manaFilter = "";
                   for (int i = 0; i < activeItems.length; i++) {
                     if (activeItems[i] == true) {
-                      manaFilter.isEmpty ? manaFilter += i.toString() : manaFilter += ",${i.toString()}";
+                      manaFilter.isEmpty ? manaFilter += i.toString() : manaFilter += ",$i";
                     }
                   }
                   widget.onChange(manaFilter);
@@ -70,16 +70,16 @@ class _ManaPickerState extends State<ManaPicker> {
 }
 
 class ManaItem extends StatelessWidget {
-  final int index;
-  final bool isActive;
-  final VoidCallback onTap;
-
   const ManaItem({
-    Key? key,
+    super.key,
     required this.index,
     required this.isActive,
     required this.onTap,
-  }) : super(key: key);
+  });
+
+  final int index;
+  final bool isActive;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

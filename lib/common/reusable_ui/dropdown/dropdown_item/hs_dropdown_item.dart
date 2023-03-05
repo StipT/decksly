@@ -1,9 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum DropdownItemType {
   value,
@@ -34,16 +34,17 @@ class HSDropdownItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (assetImagePath.isNotEmpty)
-            Stack(children: [
-              Center(
-                child: Image.asset(
-                  assetPath(kSubfolderMisc, "golden_circle_border"),
-                  fit: BoxFit.fill,
-                  width: 30.w,
+            Stack(
+              children: [
+                Center(
+                  child: Image.asset(
+                    assetPath(kSubfolderMisc, "golden_circle_border"),
+                    fit: BoxFit.fill,
+                    width: 30.w,
+                  ),
                 ),
-              ),
-              Center(
-                child: Container(
+                Center(
+                  child: Container(
                     padding: EdgeInsets.symmetric(vertical: 0.875.h, horizontal: 2.w),
                     child: assetImagePath.isNotEmpty
                         ? Image.asset(
@@ -51,9 +52,11 @@ class HSDropdownItem extends StatelessWidget {
                             fit: BoxFit.fill,
                             width: 25.w,
                           )
-                        : const SizedBox()),
-              ),
-            ]),
+                        : const SizedBox(),
+                  ),
+                ),
+              ],
+            ),
           Expanded(
             child: Container(
               padding: EdgeInsets.only(left: 6.w),

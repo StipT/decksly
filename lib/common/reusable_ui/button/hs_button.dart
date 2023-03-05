@@ -1,18 +1,19 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/reusable_ui/backgrounds/hs_button_overlay.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/reusable_ui/backgrounds/hs_button_overlay.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class HSButton extends StatelessWidget {
   const HSButton({
-    Key? key,
+    super.key,
     this.label,
     this.icon,
     required this.onTap,
     required this.isDisabled,
-  }) : super(key: key);
+  });
+
   final String? label;
   final Widget? icon;
   final bool isDisabled;

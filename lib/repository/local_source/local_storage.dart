@@ -1,6 +1,6 @@
-import 'package:decksly/common/application.constants.dart';
-import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:decksly/common/application.constants.dart";
+import "package:injectable/injectable.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
 @injectable
 class LocalStorage {

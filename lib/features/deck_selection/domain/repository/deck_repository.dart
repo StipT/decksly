@@ -1,10 +1,10 @@
-import 'package:decksly/common/util/exceptions.dart';
-import 'package:decksly/common/util/network_info.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_class.dart';
-import 'package:decksly/features/deck_builder/domain/model/deck_type.dart';
-import 'package:decksly/repository/remote_source/api/api_service.dart';
-import 'package:injectable/injectable.dart';
+import "package:decksly/common/util/exceptions.dart";
+import "package:decksly/common/util/network_info.dart";
+import "package:decksly/features/deck_builder/domain/model/deck.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_class.dart";
+import "package:decksly/features/deck_builder/domain/model/deck_type.dart";
+import "package:decksly/repository/remote_source/api/api_service.dart";
+import "package:injectable/injectable.dart";
 
 abstract class DeckRepository {
   Future<Deck> getDeck(String? deckCode, String locale);

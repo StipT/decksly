@@ -1,4 +1,4 @@
-part of 'deck_builder_bloc.dart';
+part of "deck_builder_bloc.dart";
 
 @immutable
 abstract class DeckBuilderEvent {
@@ -6,32 +6,32 @@ abstract class DeckBuilderEvent {
 }
 
 class InitialDeckPopulationEvent extends DeckBuilderEvent {
-  final Deck deck;
-
   const InitialDeckPopulationEvent(this.deck);
+
+  final Deck deck;
 }
 
 class AddCardEvent extends DeckBuilderEvent {
-  final CardDTO card;
-
   const AddCardEvent(this.card);
+
+  final CardDTO card;
 }
 
 class RemoveCardEvent extends DeckBuilderEvent {
+  const RemoveCardEvent(this.index, this.card);
+
   final int index;
   final CardDTO card;
-
-  const RemoveCardEvent(this.index, this.card);
 }
 
 class DeckChangedEvent extends DeckBuilderEvent {
-  final Deck deck;
-
   const DeckChangedEvent(this.deck);
+
+  final Deck deck;
 }
 
 class FetchDeckCodeEvent extends DeckBuilderEvent {
-  final String locale;
-
   const FetchDeckCodeEvent(this.locale);
+
+  final String locale;
 }

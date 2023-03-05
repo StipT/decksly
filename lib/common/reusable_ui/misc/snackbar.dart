@@ -1,9 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:decksly/common/design/colors.dart';
-import 'package:decksly/common/design/fonts.dart';
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:auto_size_text/auto_size_text.dart";
+import "package:decksly/common/design/colors.dart";
+import "package:decksly/common/design/fonts.dart";
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum HSSnackBarType {
   message,
@@ -35,7 +35,7 @@ class HSSnackBar {
     }
   }
 
-  static show(BuildContext context, HSSnackBarType type, String message) {
+  static void show(BuildContext context, HSSnackBarType type, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
@@ -53,7 +53,6 @@ class HSSnackBar {
         elevation: 10.sp,
         content: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _snackBarImage(type),
             Expanded(

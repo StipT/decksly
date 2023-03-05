@@ -1,6 +1,6 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'card_filter_params.freezed.dart';
+part "card_filter_params.freezed.dart";
 
 @freezed
 class CardFilterParams with _$CardFilterParams {

@@ -1,7 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'class_dto.freezed.dart';
-part 'class_dto.g.dart';
+part "class_dto.freezed.dart";
+
+part "class_dto.g.dart";
 
 @freezed
 class ClassDTO with _$ClassDTO {

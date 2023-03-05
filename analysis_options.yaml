@@ -7,7 +7,16 @@
 
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
+include: package:lint/strict.yaml
+
+analyzer:
+  exclude:
+    - "**.freezed.dart"
+    - "**.gr.dart"
+    - "**.g.dart"
+    - "**.config.dart"
+  errors:
+    invalid_annotation_target: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the
@@ -22,7 +31,10 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-     avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    sort_constructors_first: true
+    avoid_print: true
+    prefer_double_quotes: true
+    sort_pub_dependencies: false
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

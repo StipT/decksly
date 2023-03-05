@@ -1,8 +1,8 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSVelvetBorder extends StatelessWidget {
-  const HSVelvetBorder({Key? key}) : super(key: key);
+  const HSVelvetBorder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,7 @@ class HSVelvetBorder extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: SizedBox(
-            height: double.infinity,
-            width: double.infinity,
+          child: SizedBox.expand(
             child: Image.asset(
               assetPath(kSubfolderShared, "border_center_outline"),
               fit: BoxFit.fill,

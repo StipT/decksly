@@ -1,4 +1,4 @@
-part of 'deck_selection_bloc.dart';
+part of "deck_selection_bloc.dart";
 
 @Freezed()
 class DeckSelectionState with _$DeckSelectionState {

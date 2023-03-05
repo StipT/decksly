@@ -1,12 +1,12 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/widgets.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/widgets.dart";
 
 class HSDeckListBackground extends StatelessWidget {
   const HSDeckListBackground({
-    Key? key,
+    super.key,
     required this.headerHeight,
     required this.footerHeight,
-  }) : super(key: key);
+  });
 
   final double headerHeight;
   final double footerHeight;

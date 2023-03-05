@@ -1,7 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:freezed_annotation/freezed_annotation.dart";
 
-part 'rune_cost_dto.freezed.dart';
-part 'rune_cost_dto.g.dart';
+part "rune_cost_dto.freezed.dart";
+
+part "rune_cost_dto.g.dart";
 
 @freezed
 class RuneCostDTO with _$RuneCostDTO {

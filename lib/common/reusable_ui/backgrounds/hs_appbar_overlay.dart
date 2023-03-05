@@ -1,10 +1,10 @@
-import 'package:decksly/common/dev/asset_loader.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import "package:decksly/common/dev/asset_loader.dart";
+import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class HSAppBarOverlay extends StatelessWidget {
-  const HSAppBarOverlay({Key? key}) : super(key: key);
+  const HSAppBarOverlay({super.key});
 
   @override
   Widget build(BuildContext context) {

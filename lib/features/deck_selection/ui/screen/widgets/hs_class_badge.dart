@@ -28,7 +28,7 @@ class HSClassBadge extends StatelessWidget {
       width: 120.w,
       padding: EdgeInsets.symmetric(horizontal: 2.w),
       child: InkWell(
-        onTap: () => isDisabled ? null : onTap(),
+        onTap: isDisabled ? null : onTap,
         child: Stack(
           alignment: Alignment.center,
           children: [

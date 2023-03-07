@@ -59,7 +59,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
             children: [
               if (widget.isExtended)
                 GestureDetector(
-                  onTap: () => _toggleSideMenu(),
+                  onTap: _toggleSideMenu,
                   behavior: HitTestBehavior.opaque,
                   child: Container(
                     margin: EdgeInsets.only(top: 0.1.sh),
@@ -75,7 +75,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                 curve: Curves.bounceOut,
                 duration: const Duration(milliseconds: 500),
                 child: GestureDetector(
-                  onTap: () => widget.isExtended ? null : _toggleSideMenu(),
+                  onTap: widget.isExtended ? null : _toggleSideMenu,
                   child: Container(
                     alignment: Alignment.center,
                     width: 234.w,

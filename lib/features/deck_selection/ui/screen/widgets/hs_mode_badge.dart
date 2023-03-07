@@ -22,7 +22,7 @@ class HSModeBadge extends StatelessWidget {
         right: 10.w,
       ),
       child: InkWell(
-        onTap: () => onTap(),
+        onTap: onTap,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -27,7 +27,7 @@ class FeatureItem extends StatelessWidget {
         right: 10.w,
       ),
       child: InkWell(
-        onTap: () => onTap(),
+        onTap: onTap,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

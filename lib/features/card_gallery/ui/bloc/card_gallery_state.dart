@@ -1,6 +1,6 @@
 part of "card_gallery_bloc.dart";
 
-@Freezed()
+@freezed
 class CardGalleryState with _$CardGalleryState {
   const factory CardGalleryState.initial({required CardFilterParams cardFilterParams, required CardsPage page}) =
       _CardGalleryInitial;

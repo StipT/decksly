@@ -1,6 +1,6 @@
 part of "deck_selection_bloc.dart";
 
-@Freezed()
+@freezed
 class DeckSelectionState with _$DeckSelectionState {
   const factory DeckSelectionState.initial({required Deck deck}) = _DeckSelectionInitial;
 

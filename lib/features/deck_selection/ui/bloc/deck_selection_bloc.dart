@@ -21,17 +21,11 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
   DeckSelectionBloc(this.fetchDeckUsecase) : super(const DeckSelectionState.initial(deck: Deck())) {
     on<ImportDeckEvent>((event, emit) => handleImportDeck(emit, event.locale));
 
-    on<LoadCreatedDecksEvent>((event, emit) async => handleLoadCreatedDecks(emit));
-
     on<ChangeDeckCodeEvent>((event, emit) async => handleChangeDeckCodeEvent(emit, event.deckCode));
 
     on<ChangeGameModeEvent>((event, emit) async => handleChangeGameModeEvent(emit, event.gameMode));
 
-    on<SelectLoadedDeckEvent>((event, emit) async => handleSelectLoadedDeckEvent(emit, event.deckId));
-
     on<SelectClassEvent>((event, emit) async => handleSelectClassEvent(emit, event.heroClass));
-
-    on<CloseEvent>((event, emit) async => handleClose(emit));
   }
 
   final FetchDeckUsecase fetchDeckUsecase;
@@ -50,7 +44,6 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
         );
       },
       (deck) {
-        log(deck.toString(), level: Level.warning);
         emit(
           DeckSelectionState.deckImported(
             deck: deck,
@@ -59,10 +52,6 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
       },
     );
   }
-
-  void handleClose(Emitter<DeckSelectionState> emit) {}
-
-  void handleSelectLoadedDeckEvent(Emitter<DeckSelectionState> emit, String deckId) {}
 
   void handleChangeGameModeEvent(Emitter<DeckSelectionState> emit, DeckType type) {
     final deck = state.deck.copyWith(type: type);
@@ -86,6 +75,4 @@ class DeckSelectionBloc extends Bloc<DeckSelectionEvent, DeckSelectionState> {
     final deck = state.deck.copyWith(heroClass: deckClass);
     emit(DeckSelectionState.changed(deck: deck));
   }
-
-  void handleLoadCreatedDecks(Emitter<DeckSelectionState> emit) {}
 }

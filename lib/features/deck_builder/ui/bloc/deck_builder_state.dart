@@ -1,6 +1,6 @@
 part of "deck_builder_bloc.dart";
 
-@Freezed()
+@freezed
 class DeckBuilderState with _$DeckBuilderState {
   const factory DeckBuilderState.initial({required Deck deck}) = _DeckBuilderInitial;
 

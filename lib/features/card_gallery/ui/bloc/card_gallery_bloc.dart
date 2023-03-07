@@ -24,7 +24,6 @@ class CardGalleryBloc extends Bloc<CardGalleryEvent, CardGalleryState> {
   CardGalleryBloc(this._networkInfo, this.fetchCardsUsecase)
       : super(const CardGalleryState.initial(cardFilterParams: CardFilterParams(), page: CardsPage())) {
     on<FetchCardsEvent>((event, emit) => handleFetchCards(emit, event.cardFilterParams));
-
     on<CardFilterParamsChangedEvent>((event, emit) => handleCardFilterParamsChanged(emit, event.cardFilterParams));
     on<LocaleChangedEvent>((event, emit) => handleLocaleChanged(emit, event.cardFilterParams));
     on<ToggleClassCardsEvent>((event, emit) => handleToggleClassCards(emit, event.deckCLass));

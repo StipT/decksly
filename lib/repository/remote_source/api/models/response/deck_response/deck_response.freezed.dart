@@ -26,9 +26,9 @@ mixin _$DeckResponse {
   CardDTO? get heroPower => throw _privateConstructorUsedError;
   List<CardDTO> get cards => throw _privateConstructorUsedError;
   int? get cardCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'class')
+  @JsonKey(name: "class")
   ClassDTO? get deckClass => throw _privateConstructorUsedError;
-  @JsonKey(name: 'format')
+  @JsonKey(name: "format")
   String get deckType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,8 +50,8 @@ abstract class $DeckResponseCopyWith<$Res> {
       CardDTO? heroPower,
       List<CardDTO> cards,
       int? cardCount,
-      @JsonKey(name: 'class') ClassDTO? deckClass,
-      @JsonKey(name: 'format') String deckType});
+      @JsonKey(name: "class") ClassDTO? deckClass,
+      @JsonKey(name: "format") String deckType});
 
   $CardDTOCopyWith<$Res>? get hero;
   $CardDTOCopyWith<$Res>? get heroPower;
@@ -168,8 +168,8 @@ abstract class _$$_DeckResponseCopyWith<$Res>
       CardDTO? heroPower,
       List<CardDTO> cards,
       int? cardCount,
-      @JsonKey(name: 'class') ClassDTO? deckClass,
-      @JsonKey(name: 'format') String deckType});
+      @JsonKey(name: "class") ClassDTO? deckClass,
+      @JsonKey(name: "format") String deckType});
 
   @override
   $CardDTOCopyWith<$Res>? get hero;
@@ -246,8 +246,8 @@ class _$_DeckResponse implements _DeckResponse {
       required this.heroPower,
       required final List<CardDTO> cards,
       required this.cardCount,
-      @JsonKey(name: 'class') required this.deckClass,
-      @JsonKey(name: 'format') required this.deckType})
+      @JsonKey(name: "class") required this.deckClass,
+      @JsonKey(name: "format") required this.deckType})
       : _cards = cards;
 
   factory _$_DeckResponse.fromJson(Map<String, dynamic> json) =>
@@ -272,10 +272,10 @@ class _$_DeckResponse implements _DeckResponse {
   @override
   final int? cardCount;
   @override
-  @JsonKey(name: 'class')
+  @JsonKey(name: "class")
   final ClassDTO? deckClass;
   @override
-  @JsonKey(name: 'format')
+  @JsonKey(name: "format")
   final String deckType;
 
   @override
@@ -338,8 +338,8 @@ abstract class _DeckResponse implements DeckResponse {
           required final CardDTO? heroPower,
           required final List<CardDTO> cards,
           required final int? cardCount,
-          @JsonKey(name: 'class') required final ClassDTO? deckClass,
-          @JsonKey(name: 'format') required final String deckType}) =
+          @JsonKey(name: "class") required final ClassDTO? deckClass,
+          @JsonKey(name: "format") required final String deckType}) =
       _$_DeckResponse;
 
   factory _DeckResponse.fromJson(Map<String, dynamic> json) =
@@ -358,10 +358,10 @@ abstract class _DeckResponse implements DeckResponse {
   @override
   int? get cardCount;
   @override
-  @JsonKey(name: 'class')
+  @JsonKey(name: "class")
   ClassDTO? get deckClass;
   @override
-  @JsonKey(name: 'format')
+  @JsonKey(name: "format")
   String get deckType;
   @override
   @JsonKey(ignore: true)

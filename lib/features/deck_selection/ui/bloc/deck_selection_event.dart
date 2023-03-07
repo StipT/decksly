@@ -25,18 +25,8 @@ class ChangeDeckCodeEvent extends DeckSelectionEvent {
   final String deckCode;
 }
 
-class SelectLoadedDeckEvent extends DeckSelectionEvent {
-  const SelectLoadedDeckEvent(this.deckId);
-
-  final String deckId;
-}
-
 class SelectClassEvent extends DeckSelectionEvent {
   const SelectClassEvent(this.heroClass);
 
   final DeckClass heroClass;
-}
-
-class CloseEvent extends DeckSelectionEvent {
-  const CloseEvent();
 }

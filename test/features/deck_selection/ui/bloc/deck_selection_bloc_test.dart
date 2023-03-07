@@ -35,7 +35,8 @@ void main() {
       "handleImportDeck successfully",
       setUp: () {
         when(() => fetchDeckUsecase(DeckParams(code: "deckCode123", locale: Locale.english.value))).thenAnswer(
-            (_) async => Future.value(const Right(Deck(type: DeckType.wild, heroClass: DeckClass.paladin, cards: []))));
+          (_) async => Future.value(const Right(Deck(type: DeckType.wild, heroClass: DeckClass.paladin, cards: []))),
+        );
       },
       build: () => deckSelectionBloc,
       seed: () => const DeckSelectionState.changed(deck: Deck(code: "deckCode123")),

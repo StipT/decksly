@@ -64,10 +64,6 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
       return;
     }
 
-    if (duplicateCardOrNull != null && duplicateCardOrNull.amount > 1) {
-      return;
-    }
-
     if (cards.where((element) => element.card == card).length == 1) {
       cards.removeWhere((element) => element.card == card);
       cards.add(DeckCard(card: card, amount: 2));
@@ -125,9 +121,6 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
 
   Future<void> handleFetchDeckCode(Emitter<DeckBuilderState> emit, String locale) async {
     final ids = state.deck.cards.map((e) => e.amount == 2 ? "${e.card.id},${e.card.id}" : "${e.card.id}").join(",");
-
-    log(ids, level: Level.error);
-
     final resultOrFailure =
         await fetchDeckCodeUsecase(DeckParams(ids: ids, locale: locale, deckType: state.deck.type.name));
     resultOrFailure.fold(

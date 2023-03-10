@@ -6,7 +6,7 @@ import "package:decksly/repository/remote_source/auth/auth_client.dart";
 import "package:decksly/repository/remote_source/auth/token_request/token_request.dart";
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:injectable/injectable.dart";
 

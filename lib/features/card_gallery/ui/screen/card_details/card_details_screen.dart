@@ -113,7 +113,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                         children: [
                           Text(
                             widget.card.name,
-                            style: FontStyles.bold28,
+                            style: FontStyles.bold28(),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
@@ -121,7 +121,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                             ),
                             child: Text(
                               widget.card.flavorText ?? "",
-                              style: FontStyles.regular17Grey,
+                              style: FontStyles.regular17Grey(),
                             ),
                           ),
                           Container(
@@ -134,9 +134,9 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                                   // TODO Add localization
                                   TextSpan(
                                     text: LocaleKeys.artist.tr(),
-                                    style: FontStyles.regular17NavajoWhite,
+                                    style: FontStyles.regular17NavajoWhite(),
                                   ),
-                                  TextSpan(text: widget.card.artistName, style: FontStyles.regular17),
+                                  TextSpan(text: widget.card.artistName, style: FontStyles.regular17()),
                                 ],
                               ),
                             ),

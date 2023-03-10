@@ -19,7 +19,7 @@ class DropdownSectionHeadline extends StatelessWidget {
       ),
       child: Text(
         headline.toUpperCase(),
-        style: FontStyles.bold13Grey,
+        style: FontStyles.bold13Grey(),
       ),
     );
   }

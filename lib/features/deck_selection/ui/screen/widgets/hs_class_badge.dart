@@ -48,7 +48,7 @@ class HSClassBadge extends StatelessWidget {
                   _getTitle(classType),
                   maxLines: 1,
                   minFontSize: 8,
-                  style: FontStyles.bold11WithShadow,
+                  style: FontStyles.bold11WithShadow(),
                 ),
               ),
             ),

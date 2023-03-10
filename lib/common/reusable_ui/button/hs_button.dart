@@ -35,7 +35,7 @@ class HSButton extends StatelessWidget {
               side: const BorderSide(
                 color: Colors.transparent,
               ),
-              textStyle: FontStyles.bold15VanDykeBrown,
+              textStyle: FontStyles.bold15VanDykeBrown(),
               padding: EdgeInsets.only(
                 top: 8.75.h,
                 bottom: 8.75.h,

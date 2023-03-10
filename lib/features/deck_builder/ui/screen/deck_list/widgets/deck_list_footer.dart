@@ -73,7 +73,7 @@ class DeckListFooter extends StatelessWidget {
                   side: const BorderSide(
                     color: Colors.transparent,
                   ),
-                  textStyle: FontStyles.bold15,
+                  textStyle: FontStyles.bold15(),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
                 ),
                 child: Container(
@@ -110,7 +110,7 @@ class DeckListFooter extends StatelessWidget {
               side: const BorderSide(
                 color: Colors.transparent,
               ),
-              textStyle: FontStyles.bold15,
+              textStyle: FontStyles.bold15(),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
             ),
             child: Container(
@@ -119,7 +119,7 @@ class DeckListFooter extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 6.125.h, horizontal: 1.w),
               child: AutoSizeText(
                 LocaleKeys.copyDeckCode.tr(),
-                style: FontStyles.bold11,
+                style: FontStyles.bold11(),
                 minFontSize: 8,
                 maxLines: 1,
               ),

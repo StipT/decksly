@@ -52,7 +52,7 @@ class _DeckListBodyState extends State<DeckListBody> {
                         padding: EdgeInsets.only(right: 15.w, left: 5.w),
                         child: AutoSizeText(
                           LocaleKeys.tapCardsToAddThemOrHold.tr(),
-                          style: FontStyles.bold11Purple,
+                          style: FontStyles.bold11Purple(),
                           minFontSize: 9,
                           textAlign: TextAlign.center,
                         ),

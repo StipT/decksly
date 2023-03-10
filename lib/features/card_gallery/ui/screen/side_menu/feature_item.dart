@@ -81,9 +81,9 @@ class FeatureItem extends StatelessWidget {
   TextStyle _getTextStyle(bool isSelected) {
     switch (isSelected) {
       case true:
-        return FontStyles.bold22GoldWithShadow;
+        return FontStyles.bold22GoldWithShadow();
       default:
-        return FontStyles.bold22WithShadow;
+        return FontStyles.bold22WithShadow();
     }
   }
 }

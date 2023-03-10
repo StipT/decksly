@@ -59,7 +59,7 @@ class HSSnackBar {
               child: AutoSizeText(
                 message,
                 textAlign: TextAlign.center,
-                style: FontStyles.regular15Black,
+                style: FontStyles.regular15Black(),
               ),
             ),
           ],

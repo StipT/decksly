@@ -43,7 +43,7 @@ class HSBarToggleButton extends StatelessWidget {
                 side: const BorderSide(
                   color: Colors.transparent,
                 ),
-                textStyle: FontStyles.bold15VanDykeBrown,
+                textStyle: FontStyles.bold15VanDykeBrown(),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
               ),
               child: SvgPicture.asset(
@@ -75,7 +75,7 @@ class HSBarToggleButton extends StatelessWidget {
             Text(
               activeFilters.toString(),
               textAlign: TextAlign.center,
-              style: FontStyles.bold15,
+              style: FontStyles.bold15(),
             ),
           ],
         ),

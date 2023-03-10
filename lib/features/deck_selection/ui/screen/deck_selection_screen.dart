@@ -183,12 +183,15 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.standard));
                   },
                 ),
-                HSModeBadge(
-                  type: DeckType.classic,
-                  isSelected: DeckType.classic == state.deck.type,
-                  onTap: () {
-                    BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
-                  },
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: HSModeBadge(
+                    type: DeckType.classic,
+                    isSelected: DeckType.classic == state.deck.type,
+                    onTap: () {
+                      BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
+                    },
+                  ),
                 ),
                 HSModeBadge(
                   type: DeckType.wild,

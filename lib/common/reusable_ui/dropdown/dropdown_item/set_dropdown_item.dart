@@ -25,7 +25,7 @@ class SetDropdownHeader extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: FontStyles.bold17Grey,
+        style: FontStyles.bold17Grey(),
       ),
     );
   }
@@ -62,7 +62,7 @@ class SetDropdownItem extends StatelessWidget {
               padding: EdgeInsets.only(left: 6.w),
               child: AutoSizeText(
                 cardFilter.localized(),
-                style: isSelected ? FontStyles.bold15Gold : FontStyles.bold15,
+                style: isSelected ? FontStyles.bold15Gold() : FontStyles.bold15(),
                 overflow: TextOverflow.fade,
                 minFontSize: 10,
               ),

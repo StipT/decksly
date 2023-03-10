@@ -198,7 +198,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
             children: [
               AutoSizeText(
                 LocaleKeys.language.tr(),
-                style: FontStyles.bold22WithShadow,
+                style: FontStyles.bold22WithShadow(),
               ),
             ],
           ),

@@ -86,9 +86,9 @@ class HSModeBadge extends StatelessWidget {
   TextStyle _getTextStyle(bool isSelected) {
     switch (isSelected) {
       case true:
-        return FontStyles.bold15;
+        return FontStyles.bold15();
       default:
-        return FontStyles.bold15;
+        return FontStyles.bold15();
     }
   }
 }

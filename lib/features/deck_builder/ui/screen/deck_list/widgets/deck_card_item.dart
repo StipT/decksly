@@ -86,7 +86,7 @@ class DeckCardItem extends StatelessWidget {
                     child: AutoSizeText(
                       deckCard.card.manaCost.toString(),
                       textAlign: TextAlign.center,
-                      style: FontStyles.bold17WithShadow,
+                      style: FontStyles.bold17WithShadow(),
                     ),
                   ),
                   Container(
@@ -94,7 +94,7 @@ class DeckCardItem extends StatelessWidget {
                     width: 150.w,
                     child: Text(
                       deckCard.card.name,
-                      style: FontStyles.bold11WithShadow,
+                      style: FontStyles.bold11WithShadow(),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -109,7 +109,7 @@ class DeckCardItem extends StatelessWidget {
                     Expanded(
                       child: Text(
                         deckCard.amount.toString(),
-                        style: FontStyles.bold13Gold,
+                        style: FontStyles.bold13Gold(),
                         textAlign: TextAlign.center,
                       ),
                     ),

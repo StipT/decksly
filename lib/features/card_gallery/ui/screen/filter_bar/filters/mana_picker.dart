@@ -105,7 +105,7 @@ class ManaItem extends StatelessWidget {
             Center(
               child: Text(
                 index.toString(),
-                style: FontStyles.bold22WithShadow,
+                style: FontStyles.bold22WithShadow(),
               ),
             ),
           ],

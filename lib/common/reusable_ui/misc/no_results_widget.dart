@@ -42,14 +42,14 @@ class NoResultsWidget extends StatelessWidget {
           Text(
             LocaleKeys.noCardsFound.tr(),
             textAlign: TextAlign.center,
-            style: FontStyles.bold25VanDykeBrown,
+            style: FontStyles.bold25VanDykeBrown(),
           ),
           Container(
             margin: EdgeInsets.only(top: 4.375.h),
             child: Text(
               LocaleKeys.tryRemovingSearchItems.tr(),
               textAlign: TextAlign.center,
-              style: FontStyles.regular17VanDykeBrown,
+              style: FontStyles.regular17VanDykeBrown(),
             ),
           ),
           Container(

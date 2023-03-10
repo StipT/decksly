@@ -31,7 +31,7 @@ class HSDialog {
         return Text(
           LocaleKeys.youWillLoseYourExistingDeckAreYouSure.tr(),
           textAlign: TextAlign.center,
-          style: FontStyles.bold22,
+          style: FontStyles.bold22(),
         );
     }
   }

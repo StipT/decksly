@@ -116,14 +116,14 @@ class HSDropdown extends StatelessWidget {
               width: width,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
               padding: EdgeInsets.only(left: 8.w),
-              textStyle: FontStyles.bold13VanDykeBrown,
+              textStyle: FontStyles.bold13VanDykeBrown(),
               elevation: 1.sp,
               backgroundColor: Colors.transparent,
               primaryColor: AppColors.vanDykeBrown,
             ),
             dropdownStyle: DropdownStyle(
               width: dropdownWidth,
-              textStyle: FontStyles.bold11,
+              textStyle: FontStyles.bold11(),
               dropdownBackgroundAssetPath: assetPath(
                 kSubfolderDropdown,
                 "dropdown_background",

@@ -86,12 +86,13 @@ class _HSTextFieldState extends State<HSTextField> {
                 widget.onChange(searchString);
               },
               textAlignVertical: TextAlignVertical.center,
-              style: FontStyles.bold15,
+              style: FontStyles.bold15(),
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.only(bottom: 2.5.h),
                 border: InputBorder.none,
                 suffixIcon: _suffixIcon(widget.suffix),
                 hintText: widget.hint,
-                hintStyle: FontStyles.bold15DarkChestnutBrown,
+                hintStyle: FontStyles.bold15DarkChestnutBrown(),
               ),
             ),
           ),

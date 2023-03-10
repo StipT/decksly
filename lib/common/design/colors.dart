@@ -1,6 +1,6 @@
 import "package:flutter/rendering.dart";
 
-class AppColors {
+abstract class AppColors {
   static const Color black90 = Color(0xE6000000);
   static const Color black50 = Color(0x8A000000);
   static const Color gold = Color(0xffffd700);

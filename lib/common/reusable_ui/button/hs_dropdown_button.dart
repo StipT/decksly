@@ -38,7 +38,7 @@ class HSDropdownButton extends StatelessWidget {
                   minFontSize: 10,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: FontStyles.bold13VanDykeBrown,
+                  style: FontStyles.bold13VanDykeBrown(),
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class HSDropdownButton extends StatelessWidget {
     final isSvg = assetImagePath.substring(assetImagePath.length - 3).contains(kSVGExtension);
     return isSvg
         ? Container(
-            margin: EdgeInsets.only(left: 2.w),
+            margin: EdgeInsets.only(left: 1.w),
             child: SvgPicture.asset(
               assetImagePath,
               height: height - 45.h,

@@ -157,13 +157,13 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
                 Flexible(
                   child: AutoSizeText(
                     "${state.deck.type.localized()} ${state.deck.heroClass.localized()}",
-                    style: FontStyles.bold11WithShadow,
+                    style: FontStyles.bold11WithShadow(),
                   ),
                 ),
                 Flexible(
                   child: AutoSizeText(
                     "$cardCount/30",
-                    style: cardCount == 30 ? FontStyles.bold13Green : FontStyles.bold13Gold,
+                    style: cardCount == 30 ? FontStyles.bold13Green() : FontStyles.bold13Gold(),
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.start,
                     minFontSize: 8,

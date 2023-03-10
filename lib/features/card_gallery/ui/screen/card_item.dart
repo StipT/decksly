@@ -71,7 +71,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                       padding: EdgeInsets.only(left: 10.w),
                       child: Text(
                         "1/1",
-                        style: FontStyles.bold17WithShadow,
+                        style: FontStyles.bold17WithShadow(),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -95,7 +95,7 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                       padding: EdgeInsets.only(left: widget.amount == 2 ? 10.w : 0.w),
                       child: Text(
                         "${widget.amount}/2",
-                        style: FontStyles.bold17WithShadow,
+                        style: FontStyles.bold17WithShadow(),
                         textAlign: TextAlign.center,
                       ),
                     ),

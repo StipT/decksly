@@ -9,6 +9,7 @@ enum CardSet implements CardFilter {
   classic("classic-cards"),
 
   // Standard sets
+  festivalOfLegends("festival-of-legends"),
   pathOfArthas("path-of-arthas"),
   marchOfTheLichKing("march-of-the-lich-king"),
   murderAtCastleNathria("murder-at-castle-nathria"),
@@ -60,6 +61,8 @@ enum CardSet implements CardFilter {
         return LocaleKeys.classic.tr();
 
       // Standard sets
+      case CardSet.festivalOfLegends:
+        return LocaleKeys.festivalOfLegends.tr();
       case CardSet.pathOfArthas:
         return LocaleKeys.pathOfArthas.tr();
       case CardSet.marchOfTheLichKing:
@@ -159,6 +162,7 @@ List<CardSet> _getGameModes() => [
 
 List<CardSet> _getStandardSets() => [
       CardSet.standard,
+      CardSet.festivalOfLegends,
       CardSet.pathOfArthas,
       CardSet.marchOfTheLichKing,
       CardSet.murderAtCastleNathria,
@@ -173,6 +177,14 @@ List<CardSet> _getClassicSets() => [CardSet.classic];
 
 List<CardSet> _getWildSets() => [
       CardSet.wild,
+      CardSet.festivalOfLegends,
+      CardSet.pathOfArthas,
+      CardSet.marchOfTheLichKing,
+      CardSet.murderAtCastleNathria,
+      CardSet.voyageToTheSunkenCity,
+      CardSet.fracturedInAlteracValley,
+      CardSet.unitedInStormwind,
+      CardSet.forgedInTheBarrens,
       CardSet.madnessAtTheDarkmoonFaire,
       CardSet.scholomanceAcademy,
       CardSet.demonHunterInitiate,

@@ -17,6 +17,7 @@ abstract class  LocaleKeys {
   static const standard = 'standard';
   static const wild = 'wild';
   static const classic = 'classic';
+  static const festivalOfLegends = 'festivalOfLegends';
   static const pathOfArthas = 'pathOfArthas';
   static const marchOfTheLichKing = 'marchOfTheLichKing';
   static const murderAtCastleNathria = 'murderAtCastleNathria';
@@ -73,6 +74,7 @@ abstract class  LocaleKeys {
   static const divineShield = 'divineShield';
   static const dredge = 'dredge';
   static const echo = 'echo';
+  static const finale = 'finale';
   static const freeze = 'freeze';
   static const frenzy = 'frenzy';
   static const honorableKill = 'honorableKill';
@@ -87,6 +89,7 @@ abstract class  LocaleKeys {
   static const megaWindfury = 'megaWindfury';
   static const natureSpellDamage = 'natureSpellDamage';
   static const outcast = 'outcast';
+  static const overheal = 'overheal';
   static const overkill = 'overkill';
   static const overload = 'overload';
   static const poisonous = 'poisonous';

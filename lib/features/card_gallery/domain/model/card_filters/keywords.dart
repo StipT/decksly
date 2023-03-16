@@ -17,6 +17,7 @@ enum Keyword implements CardFilter {
   divineShield("divine-shield"),
   dredge("dredge"),
   echo("echo"),
+  finale("finale"),
   freeze("freeze"),
   frenzy("frenzy"),
   honorableKill("honorablekill"),
@@ -31,6 +32,7 @@ enum Keyword implements CardFilter {
   megaWindfury("mega-windfury"),
   natureSpellDamage("spellpowernature"),
   outcast("outcast"),
+  overheal("overheal"),
   overkill("overkill"),
   overload("overload"),
   poisonous("poisonous"),
@@ -88,6 +90,8 @@ enum Keyword implements CardFilter {
         return LocaleKeys.dredge.tr();
       case Keyword.echo:
         return LocaleKeys.echo.tr();
+      case Keyword.finale:
+        return LocaleKeys.finale.tr();
       case Keyword.freeze:
         return LocaleKeys.freeze.tr();
       case Keyword.frenzy:
@@ -116,6 +120,8 @@ enum Keyword implements CardFilter {
         return LocaleKeys.natureSpellDamage.tr();
       case Keyword.outcast:
         return LocaleKeys.outcast.tr();
+      case Keyword.overheal:
+        return LocaleKeys.overheal.tr();
       case Keyword.overkill:
         return LocaleKeys.overkill.tr();
       case Keyword.overload:

@@ -11,6 +11,8 @@ class DeckslyApp extends StatelessWidget {
 
   final _appRouter = AppRouter();
 
+  static const designScreenSize = Size(787, 375);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +22,7 @@ class DeckslyApp extends StatelessWidget {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
           child: ScreenUtilInit(
-            designSize: const Size(787, 375),
+            designSize: designScreenSize,
             useInheritedMediaQuery: true,
             builder: (BuildContext context, Widget? child) {
               return MaterialApp.router(

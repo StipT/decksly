@@ -7,7 +7,10 @@ import "package:flutter/widgets.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class NoConnectionWidget extends StatelessWidget {
-  const NoConnectionWidget({super.key});
+  const NoConnectionWidget();
+
+  @override
+  Key? get key => const Key("noConnectionWidget");
 
   @override
   Widget build(BuildContext context) {

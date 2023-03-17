@@ -27,6 +27,9 @@ class SideMenu extends StatefulWidget {
   final bool inDeckBuilderMode;
 
   @override
+  Key? get key => const Key("sideMenu");
+
+  @override
   State<SideMenu> createState() => _SideMenuState();
 }
 
@@ -59,6 +62,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
             children: [
               if (widget.isExtended)
                 GestureDetector(
+                  key: const Key("sideMenuBarrier"),
                   onTap: _toggleSideMenu,
                   behavior: HitTestBehavior.opaque,
                   child: Container(
@@ -75,6 +79,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                 curve: Curves.bounceOut,
                 duration: const Duration(milliseconds: 500),
                 child: GestureDetector(
+                  key: const Key("sideMenuGesture"),
                   onTap: widget.isExtended ? null : _toggleSideMenu,
                   child: Container(
                     alignment: Alignment.center,
@@ -113,6 +118,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
                           ),
                         ),
                         Positioned(
+                          key: const Key("sideMenuArrow"),
                           left: 206.w,
                           top: 105.h,
                           child: Container(
@@ -160,6 +166,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
       children: [
         Expanded(
           child: FeatureItem(
+            key: const Key("cardLibraryFeatureItem"),
             type: FeatureItemType.cardLibrary,
             isSelected: !widget.inDeckBuilderMode,
             onTap: () => widget.inDeckBuilderMode ? _navigate(context, const CardGalleryRoute()) : null,
@@ -173,6 +180,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         ),
         Expanded(
           child: FeatureItem(
+            key: const Key("cardLibraryFeatureItem"),
             type: FeatureItemType.deckBuilder,
             isSelected: widget.inDeckBuilderMode,
             onTap: () => widget.inDeckBuilderMode ? null : _navigate(context, const DeckSelectionRoute()),
@@ -209,6 +217,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
             children: [
               Expanded(
                 child: LanguageButton(
+                  key: const Key("englishLanguageButton"),
                   isSelected: state.cardFilterParams.locale == LanguageButtonType.english.value,
                   type: LanguageButtonType.english,
                   onTap: () => _changeLocale(state, const Locale("en", "US")),
@@ -216,6 +225,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: LanguageButton(
+                  key: const Key("germanLanguageButton"),
                   isSelected: state.cardFilterParams.locale == LanguageButtonType.german.value,
                   type: LanguageButtonType.german,
                   onTap: () => _changeLocale(state, const Locale("de", "DE")),
@@ -223,6 +233,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: LanguageButton(
+                  key: const Key("japaneseLanguageButton"),
                   isSelected: state.cardFilterParams.locale == LanguageButtonType.japanese.value,
                   type: LanguageButtonType.japanese,
                   onTap: () => _changeLocale(state, const Locale("ja", "JP")),

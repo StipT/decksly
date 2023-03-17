@@ -12,7 +12,7 @@ enum FeatureItemType {
 }
 
 class FeatureItem extends StatelessWidget {
-  const FeatureItem({required this.type, required this.isSelected, required this.onTap});
+  const FeatureItem({super.key, required this.type, required this.isSelected, required this.onTap});
 
   final FeatureItemType type;
   final bool isSelected;

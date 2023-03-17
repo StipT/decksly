@@ -5,7 +5,10 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:shimmer/shimmer.dart";
 
 class CardLoading extends StatelessWidget {
-  const CardLoading({super.key});
+  const CardLoading();
+
+  @override
+  Key? get key => const Key("cardLoading");
 
   @override
   Widget build(BuildContext context) {

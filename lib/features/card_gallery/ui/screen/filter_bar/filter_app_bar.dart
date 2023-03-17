@@ -21,7 +21,6 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class FilterAppBar extends StatefulWidget {
   const FilterAppBar({
-    super.key,
     required this.isExtended,
     required this.onToggle,
     this.deckClass,
@@ -32,6 +31,9 @@ class FilterAppBar extends StatefulWidget {
   final DeckClass? deckClass;
   final DeckType? deckType;
   final VoidCallback onToggle;
+
+  @override
+  Key? get key => const Key("filterAppBar");
 
   @override
   State<FilterAppBar> createState() => _FilterAppBarState();
@@ -67,6 +69,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                           Container(
                             padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSDropdown(
+                              key: const Key("setFilterDropdown"),
                               height: 70.h,
                               width: 95.w,
                               dropdownWidth: 250.w,
@@ -81,6 +84,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             width: 330.w,
                             height: 40.h,
                             child: ManaPicker(
+                              key: const Key("manaPicker"),
                               onChange: (mana) => BlocProvider.of<CardGalleryBloc>(context).add(
                                 CardFilterParamsChangedEvent(
                                   state.cardFilterParams.copyWith(manaCost: mana),
@@ -92,6 +96,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                             child: Container(
                               padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                               child: HSTextField(
+                                key: const Key("searchFilter"),
                                 hint: LocaleKeys.search.tr(),
                                 suffix: TextFieldSuffix.search,
                                 onSubmitted: (_) {},
@@ -109,6 +114,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
                           Container(
                             padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                             child: HSBarToggleButton(
+                              key: const Key("appBarToggle"),
                               width: 70.w,
                               isToggled: widget.isExtended,
                               activeFilters: extraFiltersActive(state.cardFilterParams),
@@ -172,6 +178,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
   Widget _classFilter(DeckClass? deckClass, CardGalleryState state) {
     return deckClass != null
         ? ClassFilter(
+            key: const Key("classFilter"),
             onToggleClassFilter: () {
               BlocProvider.of<CardGalleryBloc>(context).add(ToggleClassCardsEvent(deckClass));
             },
@@ -183,6 +190,7 @@ class _FilterAppBarState extends State<FilterAppBar> with TickerProviderStateMix
             width: 110.w,
           )
         : Container(
+            key: const Key("classFilterDropdown"),
             padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
             child: HSDropdown(
               height: 70.h,

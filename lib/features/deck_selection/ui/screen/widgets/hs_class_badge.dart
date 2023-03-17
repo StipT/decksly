@@ -9,6 +9,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class HSClassBadge extends StatelessWidget {
   const HSClassBadge({
+    super.key,
     required this.modeType,
     required this.classType,
     required this.isSelected,

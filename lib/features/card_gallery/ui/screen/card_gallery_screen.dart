@@ -71,6 +71,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 children: [
                   _cardList(),
                   SideMenu(
+                    key: const Key("sideMenu"),
                     isExtended: isSideMenuExtended,
                     onToggle: () => _onSideMenuToggle(),
                     inDeckBuilderMode: false,
@@ -131,13 +132,16 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                     child: Image.network(
                       card.image,
                       loadingBuilder: (context, widget, chunk) {
-                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes ? widget : const CardLoading();
+                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
+                            ? widget
+                            : const CardLoading();
                       },
                       errorBuilder: (context, object, stackTrace) => const CardLoading(),
                     ),
                   );
                 },
-                firstPageProgressIndicatorBuilder: (_) => const SpinKitRipple(color: AppColors.velvet),
+                firstPageProgressIndicatorBuilder: (_) =>
+                    const SpinKitRipple(key: Key("spinner"), color: AppColors.velvet),
                 newPageProgressIndicatorBuilder: (_) => const CardLoading(),
               ),
             ),

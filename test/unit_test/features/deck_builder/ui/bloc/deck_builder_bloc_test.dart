@@ -15,7 +15,7 @@ import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart"
 import "package:flutter_test/flutter_test.dart";
 import "package:mocktail/mocktail.dart";
 
-import "../../../../test_data/test_data.dart";
+import "../../../../../mock_data/mock_data.dart";
 
 class MockFetchDeckCodeUsecase extends Mock implements FetchDeckCodeUsecase {}
 

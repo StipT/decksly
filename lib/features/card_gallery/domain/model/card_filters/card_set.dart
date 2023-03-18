@@ -129,6 +129,86 @@ enum CardSet implements CardFilter {
         return LocaleKeys.legacy.tr();
     }
   }
+
+  int id() {
+    switch (this) {
+    // Game modes
+      case CardSet.standard:
+        return 5;
+      case CardSet.wild:
+        return 1;
+      case CardSet.classic:
+        return 1646;
+
+    // Standard sets
+      case CardSet.festivalOfLegends:
+        return 1809;
+      case CardSet.pathOfArthas:
+        return 1869;
+      case CardSet.marchOfTheLichKing:
+        return 1776;
+      case CardSet.murderAtCastleNathria:
+        return 1691;
+      case CardSet.voyageToTheSunkenCity:
+        return 1658;
+      case CardSet.fracturedInAlteracValley:
+        return 1626;
+      case CardSet.unitedInStormwind:
+        return 1578;
+      case CardSet.forgedInTheBarrens:
+        return 1525;
+      case CardSet.core:
+        return 1637;
+
+    // Wild sets
+      case CardSet.madnessAtTheDarkmoonFaire:
+        return 1466;
+      case CardSet.scholomanceAcademy:
+        return 1443;
+      case CardSet.demonHunterInitiate:
+        return 1463;
+      case CardSet.ashesOfOutland:
+        return 1414;
+      case CardSet.galakrondsAwakening:
+        return 1403;
+      case CardSet.descentOfDragons:
+        return 1347;
+      case CardSet.saviorsOfUldum:
+        return 1158;
+      case CardSet.riseOfShadows:
+        return 1130;
+      case CardSet.rastakhansRumble:
+        return 1129;
+      case CardSet.theBoomsdayProject:
+        return 1127;
+      case CardSet.theWitchwood:
+        return 1125;
+      case CardSet.koboltsAndCatacombs:
+        return 1004;
+      case CardSet.knightsOfTheFrozenThrone:
+        return 1001;
+      case CardSet.journeyToUnGoro:
+        return 27;
+      case CardSet.meanStreetsOfGadgetzan:
+        return 25;
+      case CardSet.oneNightInKarazhan:
+        return 23;
+      case CardSet.whispersOfTheOldGods:
+        return 21;
+      case CardSet.leagueOfExplorers:
+        return 20;
+      case CardSet.theGrandTournament:
+        return 15;
+      case CardSet.blackrockMountain:
+        return 14;
+      case CardSet.goblinsVsGnomes:
+        return 13;
+      case CardSet.curseOfNaxxramas:
+        return 12;
+      case CardSet.legacy:
+        return 1635;
+    }
+  }
 }
 
 enum SubCollection {

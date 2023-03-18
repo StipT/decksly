@@ -198,11 +198,13 @@ class HSDropdown extends StatelessWidget {
       case DropdownType.cardSetClassic:
       case DropdownType.cardSetWild:
         return SetDropdownItem(
+          key: Key("${filter.value}_dropdown_item"),
           cardFilter: filter,
           isSelected: isSelected,
         );
       case DropdownType.cardClass:
         return HSDropdownItem(
+          key: Key("${filter.value}_dropdown_item"),
           text: filter.localized(),
           assetImagePath: assetPath(kSubfolderClass, filter.value.isEmpty ? "allClasses_icon" : "${filter.value}_icon"),
           isSelected: isSelected,
@@ -210,6 +212,7 @@ class HSDropdown extends StatelessWidget {
 
       default:
         return HSDropdownItem(
+          key: Key("${filter.value}_dropdown_item"),
           text: filter.localized(),
           isSelected: isSelected,
         );

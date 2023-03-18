@@ -194,10 +194,11 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
                             thumbVisibility: false,
                             radius: Radius.circular(20.r),
                             child: ListView.builder(
+                              key: const Key("dropdownListView"),
                               physics: const BouncingScrollPhysics(),
                               padding: widget.dropdownStyle.padding ?? EdgeInsets.zero,
                               shrinkWrap: true,
-                              itemCount: widget.items.length,
+                              itemCount: widget.items.length + (widget.headlines?.length ?? 0),
                               itemBuilder: (context, index) {
                                 final headlines = widget.headlines ?? [];
                                 final indexWithoutHeadlines =

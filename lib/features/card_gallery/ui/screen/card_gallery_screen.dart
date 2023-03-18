@@ -109,6 +109,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
             curve: Curves.bounceOut,
             duration: const Duration(milliseconds: 500),
             child: PagedGridView<int, CardDTO>(
+              key: const Key("cardList"),
               pagingController: _pagingController,
               scrollController: _scrollController,
               physics: const BouncingScrollPhysics(),

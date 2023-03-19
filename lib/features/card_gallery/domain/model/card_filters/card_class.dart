@@ -53,4 +53,35 @@ enum CardClass implements CardFilter {
         return LocaleKeys.neutral.tr();
     }
   }
+
+  int id() {
+    switch (this) {
+      case CardClass.allClasses:
+        return -1;
+      case CardClass.deathKnight:
+        return 1;
+      case CardClass.demonHunter:
+        return 14;
+      case CardClass.druid:
+        return 2;
+      case CardClass.hunter:
+        return 3;
+      case CardClass.mage:
+        return 4;
+      case CardClass.paladin:
+        return 5;
+      case CardClass.priest:
+        return 6;
+      case CardClass.rogue:
+        return 7;
+      case CardClass.shaman:
+        return 8;
+      case CardClass.warlock:
+        return 9;
+      case CardClass.warrior:
+        return 10;
+      case CardClass.neutral:
+        return 12;
+    }
+  }
 }

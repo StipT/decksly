@@ -32,4 +32,21 @@ enum Rarity implements CardFilter {
         return LocaleKeys.legendary.tr();
     }
   }
+
+  int id() {
+    switch (this) {
+      case Rarity.any:
+        return -1;
+      case Rarity.free:
+        return 2;
+      case Rarity.common:
+        return 1;
+      case Rarity.rare:
+        return 3;
+      case Rarity.epic:
+        return 4;
+      case Rarity.legendary:
+        return 5;
+    }
+  }
 }

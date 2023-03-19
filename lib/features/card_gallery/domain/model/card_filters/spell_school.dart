@@ -38,4 +38,25 @@ enum SpellSchool implements CardFilter {
         return LocaleKeys.fel.tr();
     }
   }
+
+  int id() {
+    switch (this) {
+      case SpellSchool.any:
+        return -1;
+      case SpellSchool.arcane:
+        return 1;
+      case SpellSchool.fire:
+        return 2;
+      case SpellSchool.frost:
+        return 3;
+      case SpellSchool.nature:
+        return 4;
+      case SpellSchool.holy:
+        return 5;
+      case SpellSchool.shadow:
+        return 6;
+      case SpellSchool.fel:
+        return 7;
+    }
+  }
 }

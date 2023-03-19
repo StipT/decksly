@@ -50,4 +50,33 @@ enum MinionType implements CardFilter {
         return LocaleKeys.undead.tr();
     }
   }
+
+  int id() {
+    switch (this) {
+      case MinionType.any:
+        return -1;
+      case MinionType.beast:
+        return 20;
+      case MinionType.demon:
+        return 15;
+      case MinionType.dragon:
+        return 24;
+      case MinionType.elemental:
+        return 18;
+      case MinionType.mech:
+        return 17;
+      case MinionType.murloc:
+        return 14;
+      case MinionType.naga:
+        return 92;
+      case MinionType.pirate:
+        return 23;
+      case MinionType.quilboar:
+        return 43;
+      case MinionType.totem:
+        return 21;
+      case MinionType.undead:
+        return 11;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import "package:collection/collection.dart";
 import "package:decksly/common/design/fonts.dart";
-import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter_interface/card_filter_interface.dart";
+import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter/card_filter.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 

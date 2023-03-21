@@ -51,6 +51,7 @@ enum MinionType implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
       case MinionType.any:

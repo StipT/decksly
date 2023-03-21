@@ -165,6 +165,7 @@ enum Keyword implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
       case Keyword.any:

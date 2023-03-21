@@ -130,9 +130,10 @@ enum CardSet implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
-    // Game modes
+      // Game modes
       case CardSet.standard:
         return 5;
       case CardSet.wild:
@@ -140,7 +141,7 @@ enum CardSet implements CardFilter {
       case CardSet.classic:
         return 1646;
 
-    // Standard sets
+      // Standard sets
       case CardSet.festivalOfLegends:
         return 1809;
       case CardSet.pathOfArthas:
@@ -160,7 +161,7 @@ enum CardSet implements CardFilter {
       case CardSet.core:
         return 1637;
 
-    // Wild sets
+      // Wild sets
       case CardSet.madnessAtTheDarkmoonFaire:
         return 1466;
       case CardSet.scholomanceAcademy:

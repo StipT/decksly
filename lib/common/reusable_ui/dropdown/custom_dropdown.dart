@@ -89,6 +89,12 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> with TickerProvid
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.dropdownButtonStyle;
     return CompositedTransformTarget(

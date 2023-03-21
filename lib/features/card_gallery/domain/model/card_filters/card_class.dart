@@ -54,6 +54,7 @@ enum CardClass implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
       case CardClass.allClasses:

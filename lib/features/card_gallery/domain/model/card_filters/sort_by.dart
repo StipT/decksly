@@ -38,4 +38,26 @@ enum SortBy implements CardFilter {
         return LocaleKeys.healthDesc.tr();
     }
   }
+
+  @override
+  int id() {
+    switch (this) {
+      case SortBy.manaAsc:
+        return -1;
+      case SortBy.manaDesc:
+        return 0;
+      case SortBy.nameAsc:
+        return 1;
+      case SortBy.nameDesc:
+        return 2;
+      case SortBy.attackAsc:
+        return 3;
+      case SortBy.attackDesc:
+        return 4;
+      case SortBy.healthAsc:
+        return 5;
+      case SortBy.healthDesc:
+        return 5;
+    }
+  }
 }

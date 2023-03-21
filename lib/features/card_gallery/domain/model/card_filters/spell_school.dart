@@ -39,6 +39,7 @@ enum SpellSchool implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
       case SpellSchool.any:

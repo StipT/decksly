@@ -33,6 +33,7 @@ enum CardType implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
       case CardType.any:

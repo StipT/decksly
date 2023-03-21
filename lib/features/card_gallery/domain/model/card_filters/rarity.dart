@@ -33,6 +33,7 @@ enum Rarity implements CardFilter {
     }
   }
 
+  @override
   int id() {
     switch (this) {
       case Rarity.any:

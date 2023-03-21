@@ -50,4 +50,34 @@ enum Health implements CardFilter {
         return "10+";
     }
   }
+
+  @override
+  int id() {
+    switch (this) {
+      case Health.any:
+        return -1;
+      case Health.zero:
+        return 0;
+      case Health.one:
+        return 1;
+      case Health.two:
+        return 2;
+      case Health.three:
+        return 3;
+      case Health.four:
+        return 4;
+      case Health.five:
+        return 5;
+      case Health.six:
+        return 6;
+      case Health.seven:
+        return 7;
+      case Health.eight:
+        return 8;
+      case Health.nine:
+        return 9;
+      case Health.ten:
+        return 10;
+    }
+  }
 }

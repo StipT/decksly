@@ -50,4 +50,34 @@ enum Attack implements CardFilter {
         return "10+";
     }
   }
+
+  @override
+  int id() {
+    switch (this) {
+      case Attack.any:
+        return -1;
+      case Attack.zero:
+        return 0;
+      case Attack.one:
+        return 1;
+      case Attack.two:
+        return 2;
+      case Attack.three:
+        return 3;
+      case Attack.four:
+        return 4;
+      case Attack.five:
+        return 5;
+      case Attack.six:
+        return 6;
+      case Attack.seven:
+        return 7;
+      case Attack.eight:
+        return 8;
+      case Attack.nine:
+        return 9;
+      case Attack.ten:
+        return 10;
+    }
+  }
 }

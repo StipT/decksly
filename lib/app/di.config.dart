@@ -10,19 +10,14 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../common/util/network_info.dart' as _i5;
-import '../features/card_gallery/domain/repository/cards_repository.dart'
-    as _i6;
-import '../features/card_gallery/domain/usecase/fetch_cards_usecase.dart'
-    as _i8;
-import '../features/card_gallery/ui/bloc/card_gallery_bloc.dart' as _i11;
-import '../features/deck_builder/domain/usecase/fetch_deck_code_usecase.dart'
-    as _i9;
-import '../features/deck_builder/ui/bloc/deck_builder_bloc.dart' as _i12;
-import '../features/deck_selection/domain/repository/deck_repository.dart'
-    as _i7;
-import '../features/deck_selection/domain/usecase/fetch_deck_usecase.dart'
-    as _i10;
-import '../features/deck_selection/ui/bloc/deck_selection_bloc.dart' as _i13;
+import '../domain/card_gallery/repository/cards_repository.dart' as _i6;
+import '../domain/card_gallery/usecase/fetch_cards_usecase.dart' as _i8;
+import '../domain/deck_builder/usecase/fetch_deck_code_usecase.dart' as _i9;
+import '../domain/deck_selection/repository/deck_repository.dart' as _i7;
+import '../domain/deck_selection/usecase/fetch_deck_usecase.dart' as _i10;
+import '../presentation/card_gallery/bloc/card_gallery_bloc.dart' as _i11;
+import '../presentation/deck_builder/bloc/deck_builder_bloc.dart' as _i12;
+import '../presentation/deck_selection/bloc/deck_selection_bloc.dart' as _i13;
 import '../repository/remote_source/api/api_service.dart' as _i3;
 import 'util_module.dart' as _i14; // ignore_for_file: unnecessary_lambdas
 

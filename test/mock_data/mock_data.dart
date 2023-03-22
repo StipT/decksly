@@ -1,5 +1,5 @@
-import "package:decksly/features/deck_builder/domain/model/deck.dart";
-import "package:decksly/features/deck_builder/domain/model/deck_card.dart";
+import "package:decksly/domain/deck_builder/model/deck.dart";
+import "package:decksly/domain/deck_builder/model/deck_card.dart";
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
 import "package:decksly/repository/remote_source/api/dto/duels_dto/duels_dto.dart";
 

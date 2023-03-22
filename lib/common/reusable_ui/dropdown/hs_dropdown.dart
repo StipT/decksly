@@ -9,7 +9,7 @@ import "package:decksly/common/reusable_ui/button/hs_dropdown_button.dart";
 import "package:decksly/common/reusable_ui/dropdown/custom_dropdown.dart";
 import "package:decksly/common/reusable_ui/dropdown/dropdown_item/hs_dropdown_item.dart";
 import "package:decksly/common/reusable_ui/dropdown/dropdown_item/set_dropdown_item.dart";
-import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter/card_filter.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
 import "package:decksly/l10n/locale_keys.g.dart";
 import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";

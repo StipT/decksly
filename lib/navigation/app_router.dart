@@ -1,8 +1,8 @@
 import "package:auto_route/auto_route.dart";
-import "package:decksly/features/card_gallery/ui/screen/card_gallery_screen.dart";
-import "package:decksly/features/deck_builder/domain/model/deck.dart";
-import "package:decksly/features/deck_builder/ui/screen/deck_builder_screen.dart";
-import "package:decksly/features/deck_selection/ui/screen/deck_selection_screen.dart";
+import "package:decksly/domain/deck_builder/model/deck.dart";
+import "package:decksly/presentation/card_gallery/screen/card_gallery_screen.dart";
+import "package:decksly/presentation/deck_builder/screen/deck_builder_screen.dart";
+import "package:decksly/presentation/deck_selection/screen/deck_selection_screen.dart";
 import "package:flutter/material.dart";
 
 part "app_router.gr.dart";

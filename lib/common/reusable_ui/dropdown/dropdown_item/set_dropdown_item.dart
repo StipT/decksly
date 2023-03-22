@@ -2,7 +2,7 @@ import "package:auto_size_text/auto_size_text.dart";
 import "package:decksly/common/design/colors.dart";
 import "package:decksly/common/design/fonts.dart";
 import "package:decksly/common/dev/asset_loader.dart";
-import "package:decksly/features/card_gallery/domain/model/card_filters/card_filter/card_filter.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";

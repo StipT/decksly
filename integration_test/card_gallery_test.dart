@@ -1,4 +1,6 @@
-import "package:decksly/features/card_gallery/domain/model/card_filters/card_set.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/card_set.dart";
 import "package:decksly/main.dart" as app;
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
 import "package:flutter/material.dart";
@@ -11,9 +13,75 @@ void main() {
 
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
 
+  Future<void> testDropdownFilter(
+    WidgetTester tester,
+    List<CardFilter> cardFilters,
+    Key dropdownKey,
+    bool Function(int, CardDTO?) expect,
+  ) async {
+
+    await tester.runAsync(() async {
+    final Finder filterDropdown = find.byKey(dropdownKey);
+    final cardList = tester.widget(find.byKey(const Key("cardList"))) as PagedGridView;
+
+
+      cardFilters.asMap().forEach((index, cardFilter) async {
+        final expectedCardFilterId = cardFilter.id();
+
+        // Tap on Set filter dropdown
+        await tester.tap(filterDropdown);
+        await tester.pumpAndSettle();
+
+        final Finder dropdownValue = find.byKey(Key("${cardFilter.value}_dropdown_item"));
+
+        // Tap on select dropdown item
+        await tester.dragUntilVisible(
+          dropdownValue, // what you want to find
+          find.byKey(const Key("dropdownListView")), // widget you want to scroll
+          const Offset(0, -100), // delta to move
+        );
+
+        await tester.pumpAndSettle();
+        await tester.tap(dropdownValue);
+
+        await tester.pumpAndSettle(
+          const Duration(milliseconds: 500),
+        );
+
+        final CardDTO? firstCard = cardList.pagingController.itemList?.first as CardDTO?;
+        expect(0, firstCard);
+        if (firstCard != null && firstCard.id != expectedCardFilterId) {
+          // Since we are not mocking our API calls, we are waiting for the response. Sometimes responses are under 500ms, but 1 in 50 times, it takes upwards to 7 seconds
+          await tester.pumpAndSettle(
+            const Duration(seconds: 7),
+          );
+        }
+
+        cardList.pagingController.itemList?.forEach((element) {
+          final card = element as CardDTO;
+          expect(index, card);
+        });
+      });
+    });
+  }
+
   group("CardGallery e2e", () {
-    testWidgets("card set filter", (WidgetTester tester) async {
+    setUpAll(() {
       app.main();
+    });
+
+    testWidgets("card class filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+      await testDropdownFilter(tester, CardClass.values.cast<CardFilter>(), const Key("classFilterDropdown"), (index, card) {
+        if (index != 0) {
+          expect(card?.classId, CardClass.values[index].id());
+          return card?.classId == CardClass.values[index].id();
+        }
+        return false;
+      });
+    });
+
+    testWidgets("card set filter", (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
       final Finder setFilterDropdown = find.byKey(const Key("setFilterDropdown"));

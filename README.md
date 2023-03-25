@@ -4,6 +4,8 @@
 
 ## Demo
 
+*The video clips presented below have undergone heavy compression to conform to the 10MB size restriction; consequently, the quality may not be optimal.* 
+
 ### Card gallery
 
 https://user-images.githubusercontent.com/46530146/226215132-ae29155c-6075-4df9-889c-7bea64ebdeb4.mp4

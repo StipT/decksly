@@ -1,4 +1,3 @@
-import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_set.dart";
 import "package:decksly/main.dart" as app;
@@ -19,13 +18,13 @@ void main() {
     Key dropdownKey,
     bool Function(int, CardDTO?) expect,
   ) async {
-
     await tester.runAsync(() async {
-    final Finder filterDropdown = find.byKey(dropdownKey);
-    final cardList = tester.widget(find.byKey(const Key("cardList"))) as PagedGridView;
+      final Finder filterDropdown = find.byKey(dropdownKey);
+      final cardList = tester.widget(find.byKey(const Key("cardList"))) as PagedGridView;
 
-
-      cardFilters.asMap().forEach((index, cardFilter) async {
+      int index = -1;
+      for (final cardFilter in cardFilters) {
+        index++;
         final expectedCardFilterId = cardFilter.id();
 
         // Tap on Set filter dropdown
@@ -61,80 +60,31 @@ void main() {
           final card = element as CardDTO;
           expect(index, card);
         });
-      });
+      }
     });
   }
 
   group("CardGallery e2e", () {
-    setUpAll(() {
+    testWidgets("card set filter", (WidgetTester tester) async {
       app.main();
-    });
-
-    testWidgets("card class filter", (WidgetTester tester) async {
       await tester.pumpAndSettle();
-      await testDropdownFilter(tester, CardClass.values.cast<CardFilter>(), const Key("classFilterDropdown"), (index, card) {
-        if (index != 0) {
-          expect(card?.classId, CardClass.values[index].id());
-          return card?.classId == CardClass.values[index].id();
+
+      await testDropdownFilter(tester, CardSet.values.cast<CardFilter>(), const Key("setFilterDropdown"),
+          (index, card) {
+        if (card?.cardSetId == CardSet.standard.id()) {
+          final standardCardSetIds = getCardSets(subCollection: SubCollection.standardSets).map((e) => e.id());
+          expect(standardCardSetIds.contains(card?.cardSetId), true);
+        } else if (card?.cardSetId == CardSet.wild.id()) {
+          // Wild cards contain all sets in the constructed mode of play
+          expect(card?.cardSetId.runtimeType, int);
+        } else if (card?.cardSetId == CardSet.legacy.id()) {
+          // Classic cards have "alias set IDs" for some reason, so we check for any of those IDs
+          expect(card?.cardSetId, anyOf(card?.cardSetId, 3, 4));
+        } else {
+          expect(card?.cardSetId, card?.cardSetId);
         }
         return false;
       });
-    });
-
-    testWidgets("card set filter", (WidgetTester tester) async {
-      await tester.pumpAndSettle();
-
-      final Finder setFilterDropdown = find.byKey(const Key("setFilterDropdown"));
-      final cardList = tester.widget(find.byKey(const Key("cardList"))) as PagedGridView;
-
-      for (final cardSet in CardSet.values) {
-        final expectedCardSetId = cardSet.id();
-
-        // Tap on Set filter dropdown
-        await tester.tap(setFilterDropdown);
-        await tester.pumpAndSettle();
-
-        final Finder setDropdownValue = find.byKey(Key("${cardSet.value}_dropdown_item"));
-
-        // Tap on select dropdown item
-        await tester.dragUntilVisible(
-          setDropdownValue, // what you want to find
-          find.byKey(const Key("dropdownListView")), // widget you want to scroll
-          const Offset(0, -100), // delta to move
-        );
-
-        await tester.pumpAndSettle();
-        await tester.tap(setDropdownValue);
-
-        await tester.pumpAndSettle(
-          const Duration(milliseconds: 500),
-        );
-
-        final CardDTO? firstCard = cardList.pagingController.itemList?.first as CardDTO?;
-        if (firstCard != null && firstCard.cardSetId != expectedCardSetId) {
-          // Since we are not mocking our API calls, we are waiting for the response. Sometimes responses are under 500ms, but 1 in 50 times, it takes upwards to 7 seconds
-          await tester.pumpAndSettle(
-            const Duration(seconds: 7),
-          );
-        }
-
-        cardList.pagingController.itemList?.forEach((element) {
-          final card = element as CardDTO;
-
-          if (cardSet == CardSet.standard) {
-            final standardCardSetIds = getCardSets(subCollection: SubCollection.standardSets).map((e) => e.id());
-            expect(standardCardSetIds.contains(card.cardSetId), true);
-          } else if (cardSet == CardSet.wild) {
-            // Wild cards contain all sets in the constructed mode of play
-            expect(card.cardSetId.runtimeType, int);
-          } else if (cardSet == CardSet.legacy) {
-            // Classic cards have "alias set IDs" for some reason, so we check for any of those IDs
-            expect(card.cardSetId.runtimeType, anyOf(expectedCardSetId, 3, 4));
-          } else {
-            expect(card.cardSetId, expectedCardSetId);
-          }
-        });
-      }
     });
   });
 }

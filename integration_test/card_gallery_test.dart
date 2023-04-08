@@ -1,3 +1,4 @@
+import "package:decksly/app/di.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_set.dart";
@@ -9,9 +10,6 @@ import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 import "package:integration_test/integration_test.dart";
 
 void main() {
-  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
-
   Future<void> testDropdownFilter(
     WidgetTester tester,
     List<CardFilter> cardFilters,
@@ -19,7 +17,7 @@ void main() {
     Function(int, CardDTO?) expect,
     bool Function(int, CardDTO?) waitForResponse,
   ) async {
-    await tester.runAsync(() async {
+
       final Finder filterDropdown = find.byKey(dropdownKey);
       final cardList = tester.widget(find.byKey(const Key("cardList"))) as PagedGridView;
 
@@ -63,12 +61,37 @@ void main() {
           expect(index, card);
         });
       }
-    });
   }
 
   group("CardGallery e2e", () {
+
+    setUpAll(() async {
+      final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+      binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
+      getIt.allowReassignment = true;
+    });
+
+    setUp(() async {
+      await Future.delayed(const Duration(seconds: 5), (){ app.main();});
+    });
+
+    testWidgets("card class filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      await testDropdownFilter(
+        tester,
+        CardClass.values.cast<CardFilter>(),
+        const Key("classFilterDropdown"),
+            (index, card) {
+          expect(card?.cardSetId, card?.cardSetId);
+        },
+            (index, card) {
+          return card != null && card.classId != CardClass.values[index].id();
+        },
+      );
+    });
+
     testWidgets("card set filter", (WidgetTester tester) async {
-      app.main();
       await tester.pumpAndSettle();
 
       await testDropdownFilter(
@@ -95,21 +118,6 @@ void main() {
       );
     });
 
-    testWidgets("card class filter", (WidgetTester tester) async {
-      app.main();
-      await tester.pumpAndSettle();
 
-      await testDropdownFilter(
-        tester,
-        CardClass.values.cast<CardFilter>(),
-        const Key("classFilterDropdown"),
-        (index, card) {
-          expect(card?.cardSetId, card?.cardSetId);
-        },
-        (index, card) {
-          return card != null && card.classId != CardClass.values[index].id();
-        },
-      );
-    });
   });
 }

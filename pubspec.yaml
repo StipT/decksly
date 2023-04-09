@@ -141,8 +141,6 @@ flutter:
     # Font
     - assets/font/
 
-    # Env
-    - assets/env/
   fonts:
     - family: Belwe
       fonts:

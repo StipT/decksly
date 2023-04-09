@@ -6,7 +6,6 @@ import "package:decksly/repository/remote_source/auth/auth_client.dart";
 import "package:decksly/repository/remote_source/auth/token_request/token_request.dart";
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:injectable/injectable.dart";
 
@@ -120,8 +119,13 @@ class ApiServiceImpl implements ApiService {
   }
 
   Future<String> refreshAccessToken() async {
+    const kEnvBattleNetClientID = String.fromEnvironment('BATTLE_NET_CLIENT_ID');
+    const kEnvBattleNetClientSecret = String.fromEnvironment('BATTLE_NET_CLIENT_SECRET');
+    print("String.fromEnvironment('BATTLE_NET_CLIENT_ID') == $kEnvBattleNetClientID");
+    print("String.fromEnvironment('BATTLE_NET_CLIENT_SECRET') == $kEnvBattleNetClientSecret");
+
     final basicAuth =
-        "Basic ${base64.encode(utf8.encode("${dotenv.env['BATTLE_NET_CLIENT_ID']}:${dotenv.env['BATTLE_NET_CLIENT_SECRET']}"))}";
+        "Basic ${base64.encode(utf8.encode("$kEnvBattleNetClientID:$kEnvBattleNetClientSecret"))}";
 
     final tokenResponse = await _authClient.getAccessToken(
       basicAuth,

@@ -119,10 +119,8 @@ class ApiServiceImpl implements ApiService {
   }
 
   Future<String> refreshAccessToken() async {
-    const kEnvBattleNetClientID = String.fromEnvironment('BATTLE_NET_CLIENT_ID');
-    const kEnvBattleNetClientSecret = String.fromEnvironment('BATTLE_NET_CLIENT_SECRET');
-    print("String.fromEnvironment('BATTLE_NET_CLIENT_ID') == $kEnvBattleNetClientID");
-    print("String.fromEnvironment('BATTLE_NET_CLIENT_SECRET') == $kEnvBattleNetClientSecret");
+    const kEnvBattleNetClientID = String.fromEnvironment("BATTLE_NET_CLIENT_ID");
+    const kEnvBattleNetClientSecret = String.fromEnvironment("BATTLE_NET_CLIENT_SECRET");
 
     final basicAuth =
         "Basic ${base64.encode(utf8.encode("$kEnvBattleNetClientID:$kEnvBattleNetClientSecret"))}";

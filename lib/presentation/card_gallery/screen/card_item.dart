@@ -45,13 +45,14 @@ class _CardItemState extends State<CardItem> with TickerProviderStateMixin {
                   isDisabled() ? Colors.grey : Colors.white,
                   BlendMode.modulate,
                 ),
-                child: Image.network(
+                child: widget.card.image.isNotEmpty ?
+                Image.network(
                   widget.card.image,
                   errorBuilder: (context, object, stackTrace) => const CardLoading(),
                   loadingBuilder: (context, widget, chunk) {
                     return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes ? widget : const CardLoading();
                   },
-                ),
+                ): Image.asset(assetPath(kSubfolderMisc, "card_template_grey")),
               ),
             ),
             if (widget.card.rarityId == 5 && widget.amount == 1)

@@ -43,19 +43,11 @@ class _DetailScreenState extends State<CardDetailsScreen> {
     return Foil(
       opacity: hasGoldenEdition ? 0.4 : 0.2,
       child: Center(
-        child: hasGoldenEdition
-            ? Image.network(
-                widget.card.imageGold,
-                fit: BoxFit.fill,
-                errorBuilder: (context, object, stackTrace) => const CardLoading(),
-              )
-            : Container(
-                alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.only(top: 25.h, left: 10.w, right: 10.w),
-                child: Image.asset(
-                  assetPath(kSubfolderMisc, "hs_cardback"),
-                ),
-              ),
+        child: Image.network(
+          hasGoldenEdition ? widget.card.imageGold : widget.card.image,
+          fit: BoxFit.fill,
+          errorBuilder: (context, object, stackTrace) => const CardLoading(),
+        ),
       ),
     );
   }

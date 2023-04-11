@@ -107,6 +107,7 @@ class _HSTextFieldState extends State<HSTextField> {
         return const SizedBox();
       case TextFieldSuffix.search:
         return IconButton(
+          key: const Key("searchSuffixIcon"),
           iconSize: 22.5.w,
           onPressed: () {
             if (!isEmpty) {
@@ -124,6 +125,7 @@ class _HSTextFieldState extends State<HSTextField> {
         );
       case TextFieldSuffix.paste:
         return IconButton(
+          key: const Key("pasteSuffixIcon"),
           iconSize: 22.5.w,
           onPressed: () {
             Clipboard.getData(Clipboard.kTextPlain).then((value) {

@@ -98,8 +98,8 @@ void main() {
       await tester.tap(englishLanguageButton);
       await tester.pumpAndSettle(const Duration(milliseconds: 1000));
 
-      final Finder appBarToggle = find.byKey(const Key("appBarToggle"));
-      await tester.tap(appBarToggle);
+      final Finder cardList = find.byKey(const Key("cardList"));
+      await tester.tap(cardList);
       await tester.pumpAndSettle(const Duration(milliseconds: 1000));
     });
 
@@ -253,6 +253,11 @@ void main() {
             card.minionTypeId == MinionType.dragon.id();
         expect(isFiltered, true);
       });
+
+      final Finder searchSuffixIcon = find.byKey(const Key("searchSuffixIcon"));
+
+      await tester.tap(searchSuffixIcon);
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
     });
 
     testWidgets("attack filter", (WidgetTester tester) async {

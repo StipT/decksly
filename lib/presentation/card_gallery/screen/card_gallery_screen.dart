@@ -130,15 +130,24 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                         },
                       ),
                     ),
-                    child: Image.network(
-                      card.image,
-                      loadingBuilder: (context, widget, chunk) {
-                        return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
-                            ? widget
-                            : const CardLoading(key: Key("imageCardLoading"));
-                      },
-                      errorBuilder: (context, object, stackTrace) => const CardLoading(key: Key("imageCardLoading")),
-                    ),
+                    child: card.image.isNotEmpty
+                        ? Image.network(
+                            card.image,
+                            loadingBuilder: (context, widget, chunk) {
+                              return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
+                                  ? widget
+                                  : const CardLoading(key: Key("imageCardLoading"));
+                            },
+                            errorBuilder: (context, object, stackTrace) =>
+                                const CardLoading(key: Key("imageCardLoading")),
+                          )
+                        : Container(
+                      alignment: Alignment.bottomCenter,
+                            padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+                            child: Image.asset(
+                              assetPath(kSubfolderMisc, "card_template_grey"),
+                            ),
+                          ),
                   );
                 },
                 firstPageProgressIndicatorBuilder: (_) =>

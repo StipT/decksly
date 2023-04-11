@@ -94,6 +94,10 @@ void main() {
       await tester.tap(japaneseLanguageButton);
       await tester.pumpAndSettle(const Duration(milliseconds: 1000));
 
+      final Finder englishLanguageButton = find.byKey(const Key("englishLanguageButton"));
+      await tester.tap(englishLanguageButton);
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+
       final Finder appBarToggle = find.byKey(const Key("appBarToggle"));
       await tester.tap(appBarToggle);
       await tester.pumpAndSettle(const Duration(milliseconds: 1000));

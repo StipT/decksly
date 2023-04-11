@@ -9,7 +9,7 @@
 .history
 .svn/
 *.env
-lcov.info
+*lcov.info
 
 # IntelliJ related
 *.iml

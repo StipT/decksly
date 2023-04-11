@@ -135,15 +135,15 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                       loadingBuilder: (context, widget, chunk) {
                         return chunk?.cumulativeBytesLoaded == chunk?.expectedTotalBytes
                             ? widget
-                            : const CardLoading();
+                            : const CardLoading(key: Key("imageCardLoading"));
                       },
-                      errorBuilder: (context, object, stackTrace) => const CardLoading(),
+                      errorBuilder: (context, object, stackTrace) => const CardLoading(key: Key("imageCardLoading")),
                     ),
                   );
                 },
                 firstPageProgressIndicatorBuilder: (_) =>
                     const SpinKitRipple(key: Key("spinner"), color: AppColors.velvet),
-                newPageProgressIndicatorBuilder: (_) => const CardLoading(),
+                newPageProgressIndicatorBuilder: (_) => const CardLoading(key: Key("newPageCardLoading")),
               ),
             ),
           ),

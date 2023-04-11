@@ -33,6 +33,7 @@ class FilterAppBarExtension extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             children: [
               HSDropdown(
+                key: const Key("sortByDropdown"),
                 width: 140.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.sort,
@@ -42,6 +43,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(sort: value))),
               ),
               HSDropdown(
+                key: const Key("attackDropdown"),
                 width: 120.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.attack,
@@ -51,6 +53,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(attack: value))),
               ),
               HSDropdown(
+                key: const Key("healthDropdown"),
                 width: 120.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.health,
@@ -60,6 +63,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(health: value))),
               ),
               HSDropdown(
+                key: const Key("typeDropdown"),
                 width: 140.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.type,
@@ -69,6 +73,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(type: value))),
               ),
               HSDropdown(
+                key: const Key("minionTypeDropdown"),
                 width: 140.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.minionType,
@@ -78,6 +83,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(minionType: value))),
               ),
               HSDropdown(
+                key: const Key("spellSchoolDropdown"),
                 width: 140.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.spellSchool,
@@ -87,6 +93,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(spellSchool: value))),
               ),
               HSDropdown(
+                key: const Key("rarityDropdown"),
                 width: 140.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.rarity,
@@ -96,6 +103,7 @@ class FilterAppBarExtension extends StatelessWidget {
                     .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(rarity: value))),
               ),
               HSDropdown(
+                key: const Key("keywordDropdown"),
                 width: 140.w,
                 height: 70.h,
                 selectedValue: cardFilterParams.keyword,

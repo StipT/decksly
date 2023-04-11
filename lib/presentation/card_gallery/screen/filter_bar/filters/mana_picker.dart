@@ -45,6 +45,7 @@ class _ManaPickerState extends State<ManaPicker> {
             itemCount: 11,
             itemBuilder: (BuildContext context, int index) {
               return ManaItem(
+                key: Key("manaItem$index"),
                 index: index,
                 isActive: activeItems[index],
                 onTap: () {

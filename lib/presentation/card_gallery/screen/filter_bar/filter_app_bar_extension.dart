@@ -28,6 +28,7 @@ class FilterAppBarExtension extends StatelessWidget {
       child: Stack(
         children: [
           ListView(
+            key: const Key("filterAppBarExtension"),
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(horizontal: 20.w),

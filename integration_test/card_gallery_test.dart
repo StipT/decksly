@@ -3,8 +3,12 @@ import "package:decksly/domain/card_gallery/model/card_filters/attack.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_set.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/card_type.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/health.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/keywords.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/minion_type.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/rarity.dart";
+import "package:decksly/domain/card_gallery/model/card_filters/spell_school.dart";
 import "package:decksly/main.dart" as app;
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
 import "package:flutter/material.dart";
@@ -103,6 +107,19 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 1000));
     });
 
+    testWidgets("select card, details screen", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("cardListItem")).first);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("detailsCard")));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("closeDetails")));
+      await tester.pumpAndSettle();
+    });
+
     testWidgets("card class filter", (WidgetTester tester) async {
       await tester.pumpAndSettle();
 
@@ -174,13 +191,9 @@ void main() {
       final Finder mana5 = find.byKey(const Key("manaItem5"));
       await tester.tap(mana0);
       await tester.pumpAndSettle(
-        const Duration(milliseconds: 500),
+        const Duration(milliseconds: 2000),
       );
       await tester.tap(mana5);
-
-      await tester.pumpAndSettle(
-        const Duration(milliseconds: 500),
-      );
 
       firstCard = cardList.pagingController.itemList?.first as CardDTO?;
 
@@ -199,13 +212,9 @@ void main() {
       final Finder mana8 = find.byKey(const Key("manaItem8"));
       await tester.tap(mana5);
       await tester.pumpAndSettle(
-        const Duration(milliseconds: 500),
+        const Duration(milliseconds: 2000),
       );
       await tester.tap(mana8);
-
-      await tester.pumpAndSettle(
-        const Duration(milliseconds: 500),
-      );
 
       firstCard = cardList.pagingController.itemList?.first as CardDTO?;
 
@@ -313,6 +322,197 @@ void main() {
         (index, card) {
           if (index != 0) {
             return card != null && card.health != Health.values[index].id();
+          } else {
+            return true;
+          }
+        },
+      );
+    });
+
+    testWidgets("typeDropdown filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      final Finder toggleButton = find.byKey(const Key("appBarToggle"));
+      await tester.tap(toggleButton);
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.byKey(const Key("typeDropdown")),
+        find.byKey(const Key("filterAppBarExtension")),
+        const Offset(-100, 0),
+      );
+      await tester.pumpAndSettle();
+
+      await testDropdownFilter(
+        tester,
+        CardType.values.cast<CardFilter>(),
+        const Key("typeDropdown"),
+        (index, card) {
+          if (card == null && index == 1) {
+            expect(card, null);
+          } else if (index != 0) {
+            expect(card?.cardTypeId, CardType.values[index].id());
+          }
+        },
+        (index, card) {
+          if (index != 0) {
+            return card != null && card.cardTypeId != CardType.values[index].id();
+          } else {
+            return true;
+          }
+        },
+      );
+    });
+
+    testWidgets("minionTypeDropdown filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      final Finder toggleButton = find.byKey(const Key("appBarToggle"));
+      await tester.tap(toggleButton);
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.byKey(const Key("minionTypeDropdown")),
+        find.byKey(const Key("filterAppBarExtension")),
+        const Offset(-100, 0),
+      );
+      await tester.pumpAndSettle();
+
+      await testDropdownFilter(
+        tester,
+        MinionType.values.cast<CardFilter>(),
+        const Key("minionTypeDropdown"),
+        (index, card) {
+          if (card == null && index == 1) {
+            expect(card, null);
+          } else if (index != 0) {
+            final bool multiTypeID;
+            if (card?.multiTypeIds == null) {
+              multiTypeID = true;
+            } else {
+              multiTypeID = card?.multiTypeIds?.contains(MinionType.values[index].id()) ?? false;
+            }
+
+            final isSameType = card?.minionTypeId == MinionType.values[index].id() || multiTypeID;
+            expect(isSameType, true);
+          }
+        },
+        (index, card) {
+          if (index != 0) {
+            final multiTypeID = card?.multiTypeIds?.contains(MinionType.values[index].id()) ?? false;
+            final isSameType = card?.minionTypeId == MinionType.values[index].id() || multiTypeID;
+
+            return card != null && card.minionTypeId != MinionType.values[index].id() || !isSameType;
+          } else {
+            return true;
+          }
+        },
+      );
+    });
+
+    testWidgets("spellSchoolDropdown filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      final Finder toggleButton = find.byKey(const Key("appBarToggle"));
+      await tester.tap(toggleButton);
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.byKey(const Key("spellSchoolDropdown")),
+        find.byKey(const Key("filterAppBarExtension")),
+        const Offset(-100, 0),
+      );
+      await tester.pumpAndSettle();
+
+      await testDropdownFilter(
+        tester,
+        SpellSchool.values.cast<CardFilter>(),
+        const Key("spellSchoolDropdown"),
+        (index, card) {
+          if (card == null && index == 1) {
+            expect(card, null);
+          } else if (index != 0) {
+            expect(card?.spellSchoolId, SpellSchool.values[index].id());
+          }
+        },
+        (index, card) {
+          if (index != 0) {
+            return card != null && card.spellSchoolId != SpellSchool.values[index].id();
+          } else {
+            return true;
+          }
+        },
+      );
+    });
+
+    testWidgets("rarityDropdown filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      final Finder toggleButton = find.byKey(const Key("appBarToggle"));
+      await tester.tap(toggleButton);
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.byKey(const Key("rarityDropdown")),
+        find.byKey(const Key("filterAppBarExtension")),
+        const Offset(-100, 0),
+      );
+      await tester.pumpAndSettle();
+
+      await testDropdownFilter(
+        tester,
+        Rarity.values.cast<CardFilter>(),
+        const Key("rarityDropdown"),
+        (index, card) {
+          if (card == null && index == 1) {
+            expect(card, null);
+          } else if (index != 0) {
+            expect(card?.rarityId, Rarity.values[index].id());
+          }
+        },
+        (index, card) {
+          if (index != 0) {
+            return card != null && card.rarityId != Rarity.values[index].id();
+          } else {
+            return true;
+          }
+        },
+      );
+    });
+
+    testWidgets("keywordDropdown filter", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      final Finder toggleButton = find.byKey(const Key("appBarToggle"));
+      await tester.tap(toggleButton);
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.byKey(const Key("keywordDropdown")),
+        find.byKey(const Key("filterAppBarExtension")),
+        const Offset(-100, 0),
+      );
+      await tester.pumpAndSettle();
+
+      await testDropdownFilter(
+        tester,
+        Keyword.values.cast<CardFilter>(),
+        const Key("keywordDropdown"),
+        (index, card) {
+          if (card == null && index == 1) {
+            expect(card, null);
+          } else if (Keyword.values[index] == Keyword.spellDamage) {
+            // Ignore spell damage
+          } else if (index != 0) {
+            final containsKeyword = card?.keywordIds?.contains(Keyword.values[index].id()) ?? false;
+            final textContainsKeyword = card?.text?.toLowerCase().contains(Keyword.values[index].value) ?? false;
+            expect(containsKeyword || textContainsKeyword, true);
+          }
+        },
+        (index, card) {
+          if (index != 0) {
+            final containsKeyword = card?.keywordIds?.contains(Keyword.values[index].id()) ?? false;
+            return card != null && !containsKeyword;
           } else {
             return true;
           }

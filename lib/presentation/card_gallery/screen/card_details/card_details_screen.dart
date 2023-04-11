@@ -27,6 +27,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
 
   Widget _buildCard() {
     return Foil(
+      key: const Key("detailsCard"),
       opacity: 0.2,
       child: Center(
         child: Image.network(
@@ -65,6 +66,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
               top: 43.75.h,
               right: 60.w,
               child: GestureDetector(
+                key: const Key("closeDetails"),
                 onTap: () => Navigator.pop(context),
                 child: Image.asset(
                   assetPath(kSubfolderMisc, "close"),
@@ -123,7 +125,6 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                             child: RichText(
                               text: TextSpan(
                                 children: [
-                                  // TODO Add localization
                                   TextSpan(
                                     text: LocaleKeys.artist.tr(),
                                     style: FontStyles.regular17NavajoWhite(),

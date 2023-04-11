@@ -122,6 +122,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                 noItemsFoundIndicatorBuilder: (context) => const NoResultsWidget(),
                 itemBuilder: (ctx, card, _) {
                   return GestureDetector(
+                    key: const Key("cardListItem"),
                     onTap: () => Navigator.push(
                       context,
                       HeroDialogRoute(

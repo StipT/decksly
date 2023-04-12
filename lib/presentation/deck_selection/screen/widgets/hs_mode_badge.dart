@@ -8,7 +8,12 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class HSModeBadge extends StatelessWidget {
-  const HSModeBadge({required this.type, required this.isSelected, required this.onTap});
+  const HSModeBadge({
+    super.key,
+    required this.type,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   final DeckType type;
   final bool isSelected;

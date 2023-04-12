@@ -110,6 +110,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                         Expanded(
                           flex: 3,
                           child: HSTextField(
+                            key: const Key("deckCodeInput"),
                             onChange: (text) =>
                                 BlocProvider.of<DeckSelectionBloc>(context).add(ChangeDeckCodeEvent(text)),
                             onSubmitted: (_) => BlocProvider.of<DeckSelectionBloc>(context)
@@ -121,6 +122,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                         ),
                         Expanded(
                           child: HSButton(
+                            key: const Key("importDeckCodeButton"),
                             isDisabled: state.deck.code.isEmpty,
                             label: LocaleKeys.import.tr(),
                             onTap: () => BlocProvider.of<DeckSelectionBloc>(context)
@@ -142,6 +144,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 24.w),
                   child: HSButton(
+                    key: const Key("deckSelectionCloseButton"),
                     isDisabled: false,
                     label: LocaleKeys.close.tr(),
                     onTap: () {
@@ -177,6 +180,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                   ),
                 ),
                 HSModeBadge(
+                  key: const Key("modeBadge_standard"),
                   type: DeckType.standard,
                   isSelected: DeckType.standard == state.deck.type,
                   onTap: () {
@@ -186,6 +190,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: HSModeBadge(
+                    key: const Key("modeBadge_classic"),
                     type: DeckType.classic,
                     isSelected: DeckType.classic == state.deck.type,
                     onTap: () {
@@ -194,6 +199,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                   ),
                 ),
                 HSModeBadge(
+                  key: const Key("modeBadge_wild"),
                   type: DeckType.wild,
                   isSelected: DeckType.wild == state.deck.type,
                   onTap: () {
@@ -235,6 +241,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
               children: DeckClass.values
                   .map(
                     (e) => HSClassBadge(
+                      key: Key("classBadge_${e.name}"),
                       classType: e,
                       modeType: state.deck.type,
                       isSelected: e == state.deck.heroClass,
@@ -258,6 +265,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
               children: DeckClass.values
                   .map(
                     (e) => HSClassBadge(
+                      key: Key("classBadge_${e.name}"),
                       classType: e,
                       modeType: state.deck.type,
                       isSelected: e == state.deck.heroClass,

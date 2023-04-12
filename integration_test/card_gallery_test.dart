@@ -120,6 +120,17 @@ void main() {
       await tester.pumpAndSettle();
     });
 
+    testWidgets("open sideMenu, navigate to Deck Builder", (WidgetTester tester) async {
+      await tester.pumpAndSettle();
+
+      final Finder sideMenuArrow = find.byKey(const Key("sideMenuArrow"));
+      await tester.tap(sideMenuArrow);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("deckBuilderFeatureItem")));
+      await tester.pumpAndSettle();
+    });
+
     testWidgets("card class filter", (WidgetTester tester) async {
       await tester.pumpAndSettle();
 

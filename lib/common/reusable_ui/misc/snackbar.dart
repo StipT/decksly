@@ -38,6 +38,7 @@ class HSSnackBar {
   static void show(BuildContext context, HSSnackBarType type, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        key: Key("snackBar_${type.name}"),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.white,
         width: 400.w,

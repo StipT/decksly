@@ -154,6 +154,7 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
               curve: Curves.bounceOut,
               duration: const Duration(milliseconds: 500),
               child: PagedGridView<int, CardDTO>(
+                key: const Key("deckBuilderCardList"),
                 pagingController: _pagingController,
                 scrollController: _scrollController,
                 physics: const BouncingScrollPhysics(),
@@ -162,8 +163,9 @@ class _DeckBuilderScreenState extends State<DeckBuilderScreen> {
                   animateTransitions: true,
                   firstPageErrorIndicatorBuilder: (context) => const NoConnectionWidget(),
                   noItemsFoundIndicatorBuilder: (context) => const NoResultsWidget(),
-                  itemBuilder: (ctx, card, _) {
+                  itemBuilder: (ctx, card, index) {
                     return CardItem(
+                      key: Key("cardItem_$index"),
                       card: card,
                       amount: state.deck.cards.firstWhereOrNull((element) => element.card == card)?.amount ?? 0,
                       onLongPress: (card) => Navigator.push(

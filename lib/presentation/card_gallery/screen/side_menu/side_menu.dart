@@ -180,7 +180,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         ),
         Expanded(
           child: FeatureItem(
-            key: const Key("cardLibraryFeatureItem"),
+            key: const Key("deckBuilderFeatureItem"),
             type: FeatureItemType.deckBuilder,
             isSelected: widget.inDeckBuilderMode,
             onTap: () => widget.inDeckBuilderMode ? null : _navigate(context, const DeckSelectionRoute()),

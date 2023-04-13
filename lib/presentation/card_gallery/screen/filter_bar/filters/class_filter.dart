@@ -53,6 +53,7 @@ class _ClassFilterState extends State<ClassFilter> {
                 children: [
                   Expanded(
                     child: GestureDetector(
+                      key: const Key("classFilterButton"),
                       onTap: widget.onToggleClassFilter,
                       child: Padding(
                         padding: EdgeInsets.only(left: 3.w),
@@ -82,6 +83,7 @@ class _ClassFilterState extends State<ClassFilter> {
                   ),
                   Expanded(
                     child: GestureDetector(
+                      key: const Key("neutralClassFilterButton"),
                       onTap: widget.onToggleNeutralFilter,
                       child: Padding(
                         padding: EdgeInsets.only(right: 3.w),

@@ -34,7 +34,7 @@ void main() {
       });
     });
 
-    testWidgets("input deckCode, receive failed message, close Deck Selection", (WidgetTester tester) async {
+    testWidgets("add cards to deck", (WidgetTester tester) async {
       await navigateToDeckBuilder(tester);
       await tester.ensureVisible(find.byKey(const Key("deckBuilderCardList")));
 
@@ -45,6 +45,65 @@ void main() {
       await tester.tap(card);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
+      await tester.tap(find.byKey(const Key("fetchDeckCodeButton")));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
+
+      await tester.tap(find.byKey(const Key("newDeckButton")));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("dialogSecondaryButton")));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("newDeckButton")));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("dialogPrimaryButton")));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets("card class filter", (WidgetTester tester) async {
+      await navigateToDeckBuilder(tester);
+
+      await tester.tap(find.byKey(const Key("appBarToggle")));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key("appBarToggle")));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key("classFilterButton")));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
+
+      await tester.tap(find.byKey(const Key("neutralClassFilterButton")));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
+
+      await tester.tap(find.byKey(const Key("neutralClassFilterButton")));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
+
+      await tester.tap(find.byKey(const Key("classFilterButton")));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
+    });
+
+    testWidgets("open sideMenu, change languages, close sideMenu ", (WidgetTester tester) async {
+      await navigateToDeckBuilder(tester);
+
+      final Finder sideMenuArrow = find.byKey(const Key("sideMenuArrow"));
+      await tester.tap(sideMenuArrow);
+      await tester.pumpAndSettle();
+
+      final Finder germanLanguageButton = find.byKey(const Key("germanLanguageButton"));
+      await tester.tap(germanLanguageButton);
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+
+      final Finder japaneseLanguageButton = find.byKey(const Key("japaneseLanguageButton"));
+      await tester.tap(japaneseLanguageButton);
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+
+      final Finder englishLanguageButton = find.byKey(const Key("englishLanguageButton"));
+      await tester.tap(englishLanguageButton);
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+
+      final Finder cardList = find.byKey(const Key("deckBuilderCardList"));
+      await tester.tap(cardList);
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
     });
   });
 }

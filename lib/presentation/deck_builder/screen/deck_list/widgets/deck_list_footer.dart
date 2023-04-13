@@ -65,6 +65,7 @@ class DeckListFooter extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               OutlinedButton(
+                key: const Key("newDeckButton"),
                 onPressed: () {
                   _showAlert(context, state);
                 },
@@ -102,6 +103,7 @@ class DeckListFooter extends StatelessWidget {
             fit: BoxFit.fill,
           ),
           OutlinedButton(
+            key: const Key("fetchDeckCodeButton"),
             onPressed: () {
               BlocProvider.of<DeckBuilderBloc>(context).add(FetchDeckCodeEvent(context.locale.toStringWithSeparator()));
             },

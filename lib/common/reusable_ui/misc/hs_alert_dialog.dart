@@ -104,6 +104,7 @@ class HSDialog {
                                     Container(
                                       margin: EdgeInsets.only(left: 30.w, right: 30.w),
                                       child: HSButton(
+                                        key: const Key("dialogPrimaryButton"),
                                         isDisabled: false,
                                         label: _dialogPrimaryButtonTitle(type),
                                         onTap: () => onPrimaryButtonTap(dialogContext),
@@ -120,6 +121,7 @@ class HSDialog {
                                       Container(
                                         margin: EdgeInsets.only(left: 30.w, right: 30.w),
                                         child: HSButton(
+                                          key: const Key("dialogSecondaryButton"),
                                           isDisabled: false,
                                           label: _dialogSecondaryButtonTitle(type),
                                           onTap: () => onSecondaryButtonTap(dialogContext),

@@ -54,8 +54,10 @@ void main() {
 
       final deckCodeInput = find.byKey(const Key("deckCodeInput"));
       await tester.tap(deckCodeInput);
-      await tester.enterText(deckCodeInput,
-          "AAECAf0ECJGgBMSgBL2fBMKgBMOgBOj3A9bsA5agBAvU6gP0/APT+QOu9wOt7gOk7wOroAT09gOfkgTL+QOrnwQAAA==");
+      await tester.enterText(
+        deckCodeInput,
+        "AAECAf0ECJGgBMSgBL2fBMKgBMOgBOj3A9bsA5agBAvU6gP0/APT+QOu9wOt7gOk7wOroAT09gOfkgTL+QOrnwQAAA==",
+      );
       await tester.pumpAndSettle();
 
       final importDeckCodeButton = find.byKey(const Key("importDeckCodeButton"));

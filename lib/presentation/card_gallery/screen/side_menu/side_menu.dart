@@ -52,6 +52,12 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _throttler.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardGalleryBloc, CardGalleryState>(
       builder: (BuildContext context, state) {

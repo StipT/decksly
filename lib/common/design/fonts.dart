@@ -9,13 +9,6 @@ abstract class FontStyles {
 
   // Regular Belwe
 
-  static TextStyle regular15() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.w400,
-        fontSize: 15.sp,
-        color: AppColors.white,
-      );
-
   static TextStyle regular15Black() => TextStyle(
         fontFamily: kFontFamily,
         fontWeight: FontWeight.bold,
@@ -140,13 +133,6 @@ abstract class FontStyles {
         color: AppColors.gold,
       );
 
-  static TextStyle bold17() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 17.sp,
-        color: AppColors.white,
-      );
-
   static TextStyle bold17WithShadow() => TextStyle(
         fontFamily: kFontFamily,
         fontWeight: FontWeight.bold,
@@ -162,27 +148,6 @@ abstract class FontStyles {
             blurRadius: 8.0,
           ),
         ],
-      );
-
-  static TextStyle bold17DarkChestnutBrown() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.w700,
-        fontSize: 17.sp,
-        color: AppColors.darkChestnutBrown,
-      );
-
-  static TextStyle bold17Grey() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.w700,
-        fontSize: 17.sp,
-        color: AppColors.spanishGrey,
-      );
-
-  static TextStyle bold17Gold() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 17.sp,
-        color: AppColors.gold,
       );
 
   static TextStyle bold22() => TextStyle(
@@ -233,36 +198,10 @@ abstract class FontStyles {
         color: AppColors.vanDykeBrown,
       );
 
-  static TextStyle bold25WithShadow() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 25.sp,
-        color: AppColors.white,
-        shadows: const <Shadow>[
-          Shadow(
-            offset: Offset(1, 1),
-            blurRadius: 5.0,
-          ),
-          Shadow(
-            offset: Offset(1, 1),
-            blurRadius: 8.0,
-          ),
-        ],
-      );
-
   static TextStyle bold28() => TextStyle(
         fontFamily: kFontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 28.sp,
-        color: AppColors.white,
-      );
-
-  // Light Belwe
-
-  static TextStyle light15() => TextStyle(
-        fontFamily: kFontFamily,
-        fontWeight: FontWeight.w300,
-        fontSize: 15.sp,
         color: AppColors.white,
       );
 }

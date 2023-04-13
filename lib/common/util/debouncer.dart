@@ -6,7 +6,6 @@ class Debouncer {
   Debouncer({this.milliseconds = kDefaultDelay});
 
   final int milliseconds;
-  VoidCallback action = () {};
   Timer? _timer;
 
   @visibleForTesting

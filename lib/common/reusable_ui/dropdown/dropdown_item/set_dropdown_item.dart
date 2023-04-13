@@ -8,29 +8,6 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 
-class SetDropdownHeader extends StatelessWidget {
-  const SetDropdownHeader({
-    super.key,
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 0.875.h,
-        horizontal: 2.w,
-      ),
-      child: Text(
-        text,
-        style: FontStyles.bold17Grey(),
-      ),
-    );
-  }
-}
-
 class SetDropdownItem extends StatelessWidget {
   const SetDropdownItem({
     super.key,

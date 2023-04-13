@@ -29,6 +29,12 @@ class _DeckListBodyState extends State<DeckListBody> {
   final _scrollController = ScrollController();
 
   @override
+  void dispose() {
+    super.dispose();
+    _throttler.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [

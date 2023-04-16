@@ -2,6 +2,16 @@
 
 [Initial project setup](https://github.com/StipT/decksly/wiki/Initial-Setup)
 
+## Same App - Different state management solutions
+
+#### bloc + get_it - [develop-bloc](https://github.com/StipT/decksly/tree/develop-bloc)
+
+#### riverpod - [develop-riverpod ](https://github.com/StipT/decksly/tree/develop-riverpod) ~ ***In progress*** ~
+
+#### riverpod + hooks - TODO
+
+#### redux - TODO
+
 ## Demo
 
 *The video clips presented below have undergone heavy compression to conform to the 10MB size restriction; consequently, the quality may not be optimal.* 

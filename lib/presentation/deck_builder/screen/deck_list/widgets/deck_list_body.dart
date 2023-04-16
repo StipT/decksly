@@ -41,8 +41,8 @@ class _DeckListBodyState extends ConsumerState<DeckListBody> {
     final cardGalleryState = ref.watch(cardGalleryNotifierProvider);
     final deckBuilderState = ref.watch(deckBuilderNotifierProvider);
 
-    ref.listen(cardGalleryNotifierProvider, (previous, next) => listenForCardChanges(context, cardGalleryState));
-    ref.listen(deckBuilderNotifierProvider, (previous, next) => listenForDeckChanges(context, deckBuilderState));
+    ref.listen(cardGalleryNotifierProvider, (previous, next) => listenForCardChanges(context, next as CardGalleryState?));
+    ref.listen(deckBuilderNotifierProvider, (previous, next) => listenForDeckChanges(context, next as DeckBuilderState?));
 
     return Expanded(
       child: Container(
@@ -156,14 +156,14 @@ class _DeckListBodyState extends ConsumerState<DeckListBody> {
     setState(() => _key = GlobalKey<AnimatedListState>());
   }
 
-  void listenForDeckChanges(BuildContext context, DeckBuilderState state) {
-    state.whenOrNull(
+  void listenForDeckChanges(BuildContext context, DeckBuilderState? state) {
+    state?.whenOrNull(
       initial: (deck) => _loadAnimatedList(deck.cards),
       cardAdded: (index, deck) => insertItem(index, deck.cards),
     );
   }
 
-  void listenForCardChanges(BuildContext context, CardGalleryState state) {
-    state.whenOrNull(localeChanged: (_) => _clearAnimatedList());
+  void listenForCardChanges(BuildContext context, CardGalleryState? state) {
+    state?.whenOrNull(localeChanged: (_) => _clearAnimatedList());
   }
 }

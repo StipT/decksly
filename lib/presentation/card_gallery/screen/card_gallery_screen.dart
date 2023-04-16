@@ -12,6 +12,7 @@ import "package:decksly/presentation/card_gallery/screen/card_details/hero_dialo
 import "package:decksly/presentation/card_gallery/screen/filter_bar/filter_app_bar.dart";
 import "package:decksly/presentation/card_gallery/screen/side_menu/side_menu.dart";
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
+import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
@@ -33,6 +34,11 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
   bool isFilterBarExtended = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _pagingController.dispose();
     _scrollController.dispose();
@@ -43,7 +49,18 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(cardGalleryNotifierProvider);
 
-    listenToCardGalleryBloc(context, state);
+    state.whenOrNull(
+      initial: (cardParams, page) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(
+            cardParams.copyWith(
+              locale: context.locale.toStringWithSeparator(),
+            ),
+          ),
+    );
+
+    ref.listen(
+      cardGalleryNotifierProvider,
+      (previous, next) => listenToCardGalleryBloc(context, next as CardGalleryState?),
+    );
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -165,11 +182,11 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
     });
   }
 
-  void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
-    state.whenOrNull(
-      initial: (cards, cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+  void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState? state) {
+    state?.whenOrNull(
       fetching: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
-      localeChanged: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+      localeChanged: (cardParams) =>
+          ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
       fetched: (cardParams, cards) {
         log(cardParams.toString());
         final nextPageKey = _pagingController.nextPageKey ?? 0;

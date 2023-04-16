@@ -57,13 +57,39 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cardGalleryState = ref.watch(cardGalleryNotifierProvider);
+
     final deckBuilderState = ref.watch(deckBuilderNotifierProvider);
 
-    ref.listen(cardGalleryNotifierProvider, (previous, next) => listenToCardGallery(context, cardGalleryState));
+    deckBuilderState.whenOrNull(
+      initial: (_) {
+        /*
+        ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(
+              Deck(
+                cards: widget.deck.cards,
+                type: widget.deck.type,
+                heroClass: widget.deck.heroClass,
+              ),
+            );
+
+        ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(
+              cardGalleryState.cardFilterParams.copyWith(
+                locale: context.locale.toStringWithSeparator(),
+                heroClass: [widget.deck.heroClass.name, CardClass.neutral.value],
+                set: widget.deck.type.value,
+              ),
+            );
+
+         */
+      },
+    );
+
+    ref.listen(
+      cardGalleryNotifierProvider,
+      (previous, next) => listenToCardGallery(context, next as CardGalleryState?),
+    );
     ref.listen(
       deckBuilderNotifierProvider,
-      (previous, next) => listenForDeckCode(context, deckBuilderState, cardGalleryState),
+      (previous, next) => listenForDeckCode(context, next as DeckBuilderState?),
     );
 
     return WillPopScope(
@@ -195,10 +221,8 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
     });
   }
 
-  void listenToCardGallery(BuildContext ctx, CardGalleryState state) {
-    state.whenOrNull(
-      initial: (cards, cardParams) =>
-          ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+  void listenToCardGallery(BuildContext ctx, CardGalleryState? state) {
+    state?.whenOrNull(
       fetching: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
       localeChanged: (cardParams) {
         ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(widget.deck.copyWith(cards: [], code: ""));
@@ -232,27 +256,8 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
     );
   }
 
-  void _initialState(CardGalleryState cardGalleryState) {
-    ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(
-          Deck(
-            cards: widget.deck.cards,
-            type: widget.deck.type,
-            heroClass: widget.deck.heroClass,
-          ),
-        );
-
-    ref.read(cardGalleryNotifierProvider.notifier).handleCardFilterParamsChanged(
-          cardGalleryState.cardFilterParams.copyWith(
-            locale: context.locale.toStringWithSeparator(),
-            heroClass: [widget.deck.heroClass.name, CardClass.neutral.value],
-            set: widget.deck.type.value,
-          ),
-        );
-  }
-
-  void listenForDeckCode(BuildContext context, DeckBuilderState deckBuilderState, CardGalleryState cardGalleryState) {
-    deckBuilderState.whenOrNull(
-      initial: (_) => _initialState(cardGalleryState),
+  void listenForDeckCode(BuildContext context, DeckBuilderState? deckBuilderState) {
+    deckBuilderState?.whenOrNull(
       codeGenerated: (deck) => Clipboard.setData(ClipboardData(text: deck.code)).then((_) {
         HSSnackBar.show(context, HSSnackBarType.message, LocaleKeys.deckCodeHasBeenCopiedToClipboard.tr());
       }),

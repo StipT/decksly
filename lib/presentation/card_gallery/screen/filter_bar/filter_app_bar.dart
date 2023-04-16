@@ -37,7 +37,7 @@ class FilterAppBar extends ConsumerStatefulWidget {
   Key? get key => const Key("filterAppBar");
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _FilterAppBarState();
+  ConsumerState<FilterAppBar> createState() => _FilterAppBarState();
 }
 
 class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProviderStateMixin {

@@ -20,13 +20,13 @@ class _$AppRouter extends RootStackRouter {
     CardGalleryRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(child: const CardGalleryScreen()),
+        child: const CardGalleryScreen(),
       );
     },
     DeckSelectionRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(child: const DeckSelectionScreen()),
+        child: const DeckSelectionScreen(),
         transitionsBuilder: bounceInTransition,
         opaque: true,
         barrierDismissible: false,
@@ -36,11 +36,10 @@ class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<DeckBuilderRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: WrappedRoute(
-            child: DeckBuilderScreen(
+        child: DeckBuilderScreen(
           key: args.key,
           deck: args.deck,
-        )),
+        ),
         transitionsBuilder: bounceOutTransition,
         opaque: true,
         barrierDismissible: false,

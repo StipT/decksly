@@ -4,26 +4,28 @@ import "package:decksly/common/design/fonts.dart";
 import "package:decksly/common/util/throttler.dart";
 import "package:decksly/domain/deck_builder/model/deck_card.dart";
 import "package:decksly/l10n/locale_keys.g.dart";
-import "package:decksly/presentation/card_gallery/bloc/card_gallery_bloc.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state_notifier.dart";
 import "package:decksly/presentation/card_gallery/screen/card_details/card_details_screen.dart";
 import "package:decksly/presentation/card_gallery/screen/card_details/hero_dialog_route.dart";
-import "package:decksly/presentation/deck_builder/bloc/deck_builder_bloc.dart";
+import "package:decksly/presentation/deck_builder/provider/deck_builder_state.dart";
+import "package:decksly/presentation/deck_builder/provider/deck_builder_state_notifier.dart";
 import "package:decksly/presentation/deck_builder/screen/deck_list/widgets/deck_card_item.dart";
 import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
-class DeckListBody extends StatefulWidget {
+class DeckListBody extends ConsumerStatefulWidget {
   const DeckListBody({
     super.key,
   });
 
   @override
-  State<DeckListBody> createState() => _DeckListBodyState();
+  ConsumerState<DeckListBody> createState() => _DeckListBodyState();
 }
 
-class _DeckListBodyState extends State<DeckListBody> {
+class _DeckListBodyState extends ConsumerState<DeckListBody> {
   var _key = GlobalKey<AnimatedListState>();
   final _throttler = Throttler(milliseconds: 250);
   final _scrollController = ScrollController();
@@ -36,57 +38,49 @@ class _DeckListBodyState extends State<DeckListBody> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<CardGalleryBloc, CardGalleryState>(
-          listener: (ctx, state) => listenForCardChanges(ctx, state),
-        ),
-        BlocListener<DeckBuilderBloc, DeckBuilderState>(
-          listener: (ctx, state) => listenForDeckChanges(ctx, state),
-        ),
-      ],
-      child: BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
-        builder: (BuildContext context, state) {
-          return Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 15.w, right: 5.w, top: 4.h, bottom: 4.h),
-              child: Stack(
-                children: [
-                  if (state.deck.cards.isEmpty)
-                    Center(
-                      child: Container(
-                        padding: EdgeInsets.only(right: 15.w, left: 5.w),
-                        child: AutoSizeText(
-                          LocaleKeys.tapCardsToAddThemOrHold.tr(),
-                          style: FontStyles.bold11Purple(),
-                          minFontSize: 9,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ScrollConfiguration(
-                    behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
-                    child: RawScrollbar(
-                      controller: _scrollController,
-                      thumbVisibility: true,
-                      thumbColor: AppColors.bistreBrown,
-                      radius: Radius.circular(20.r),
-                      child: AnimatedList(
-                        key: _key,
-                        controller: _scrollController,
-                        physics: const ClampingScrollPhysics(),
-                        initialItemCount: state.deck.cards.length,
-                        itemBuilder: (context, index, animation) {
-                          return _buildItem(index, state.deck.cards[index], context, animation);
-                        },
-                      ),
-                    ),
+    final cardGalleryState = ref.watch(cardGalleryNotifierProvider);
+    final deckBuilderState = ref.watch(deckBuilderNotifierProvider);
+
+    ref.listen(cardGalleryNotifierProvider, (previous, next) => listenForCardChanges(context, cardGalleryState));
+    ref.listen(deckBuilderNotifierProvider, (previous, next) => listenForDeckChanges(context, deckBuilderState));
+
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(left: 15.w, right: 5.w, top: 4.h, bottom: 4.h),
+        child: Stack(
+          children: [
+            if (deckBuilderState.deck.cards.isEmpty)
+              Center(
+                child: Container(
+                  padding: EdgeInsets.only(right: 15.w, left: 5.w),
+                  child: AutoSizeText(
+                    LocaleKeys.tapCardsToAddThemOrHold.tr(),
+                    style: FontStyles.bold11Purple(),
+                    minFontSize: 9,
+                    textAlign: TextAlign.center,
                   ),
-                ],
+                ),
+              ),
+            ScrollConfiguration(
+              behavior: const MaterialScrollBehavior().copyWith(overscroll: false),
+              child: RawScrollbar(
+                controller: _scrollController,
+                thumbVisibility: true,
+                thumbColor: AppColors.bistreBrown,
+                radius: Radius.circular(20.r),
+                child: AnimatedList(
+                  key: _key,
+                  controller: _scrollController,
+                  physics: const ClampingScrollPhysics(),
+                  initialItemCount: deckBuilderState.deck.cards.length,
+                  itemBuilder: (context, index, animation) {
+                    return _buildItem(index, deckBuilderState.deck.cards[index], context, animation);
+                  },
+                ),
               ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
@@ -127,7 +121,8 @@ class _DeckListBodyState extends State<DeckListBody> {
   }
 
   Future<void> removeItem(int index, DeckCard deckCard) async {
-    BlocProvider.of<DeckBuilderBloc>(context).add(RemoveCardEvent(index, deckCard.card));
+    ref.read(deckBuilderNotifierProvider.notifier).handleRemoveCard(index, deckCard.card);
+
     if (deckCard.amount == 1) {
       _key.currentState?.removeItem(
         index,

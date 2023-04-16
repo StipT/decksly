@@ -1,5 +1,3 @@
-import "package:auto_route/auto_route.dart";
-import "package:decksly/app/di.dart";
 import "package:decksly/common/design/colors.dart";
 import "package:decksly/common/dev/asset_loader.dart";
 import "package:decksly/common/dev/logger.dart";
@@ -7,35 +5,27 @@ import "package:decksly/common/reusable_ui/misc/card_loading.dart";
 import "package:decksly/common/reusable_ui/misc/no_connection_widget.dart";
 import "package:decksly/common/reusable_ui/misc/no_results_widget.dart";
 import "package:decksly/common/reusable_ui/misc/snackbar.dart";
-import "package:decksly/presentation/card_gallery/bloc/card_gallery_bloc.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state_notifier.dart";
 import "package:decksly/presentation/card_gallery/screen/card_details/card_details_screen.dart";
 import "package:decksly/presentation/card_gallery/screen/card_details/hero_dialog_route.dart";
 import "package:decksly/presentation/card_gallery/screen/filter_bar/filter_app_bar.dart";
 import "package:decksly/presentation/card_gallery/screen/side_menu/side_menu.dart";
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
-import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";
 import "package:infinite_scroll_pagination/infinite_scroll_pagination.dart";
 
-class CardGalleryScreen extends StatefulWidget implements AutoRouteWrapper {
+class CardGalleryScreen extends ConsumerStatefulWidget {
   const CardGalleryScreen({super.key});
 
   @override
-  State<CardGalleryScreen> createState() => _CardGalleryScreenState();
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<CardGalleryBloc>(),
-      child: this,
-    );
-  }
+  ConsumerState<CardGalleryScreen> createState() => _CardGalleryScreenState();
 }
 
-class _CardGalleryScreenState extends State<CardGalleryScreen> {
+class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
   final PagingController<int, CardDTO> _pagingController = PagingController(firstPageKey: 0);
   final ScrollController _scrollController = ScrollController();
 
@@ -51,40 +41,29 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CardGalleryBloc, CardGalleryState>(
-      listener: (ctx, state) => listenToCardGalleryBloc(ctx, state),
-      child: BlocBuilder<CardGalleryBloc, CardGalleryState>(
-        builder: (BuildContext context, state) {
-          state.maybeWhen(
-            initial: (cardParams, cards) {
-              BlocProvider.of<CardGalleryBloc>(context)
-                  .add(FetchCardsEvent(cardParams.copyWith(locale: context.locale.toStringWithSeparator())));
-            },
-            orElse: () {},
-          );
+    final state = ref.watch(cardGalleryNotifierProvider);
 
-          return WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: Stack(
-                children: [
-                  _cardList(),
-                  SideMenu(
-                    key: const Key("sideMenu"),
-                    isExtended: isSideMenuExtended,
-                    onToggle: () => _onSideMenuToggle(),
-                    inDeckBuilderMode: false,
-                  ),
-                  FilterAppBar(
-                    isExtended: isFilterBarExtended,
-                    onToggle: () => _onFilterAppBarToggle(),
-                  ),
-                ],
-              ),
+    listenToCardGalleryBloc(context, state);
+
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: [
+            _cardList(),
+            SideMenu(
+              key: const Key("sideMenu"),
+              isExtended: isSideMenuExtended,
+              onToggle: () => _onSideMenuToggle(),
+              inDeckBuilderMode: false,
             ),
-          );
-        },
+            FilterAppBar(
+              isExtended: isFilterBarExtended,
+              onToggle: () => _onFilterAppBarToggle(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -143,7 +122,7 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
                                 const CardLoading(key: Key("imageCardLoading")),
                           )
                         : Container(
-                      alignment: Alignment.bottomCenter,
+                            alignment: Alignment.bottomCenter,
                             padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
                             child: Image.asset(
                               assetPath(kSubfolderMisc, "card_template_grey"),
@@ -188,15 +167,9 @@ class _CardGalleryScreenState extends State<CardGalleryScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState state) {
     state.whenOrNull(
-      initial: (cards, cardParams) {
-        BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
-      },
-      fetching: (cardParams) {
-        BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
-      },
-      localeChanged: (cardParams) {
-        BlocProvider.of<CardGalleryBloc>(context).add(FetchCardsEvent(state.cardFilterParams));
-      },
+      initial: (cards, cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+      fetching: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+      localeChanged: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
       fetched: (cardParams, cards) {
         log(cardParams.toString());
         final nextPageKey = _pagingController.nextPageKey ?? 0;

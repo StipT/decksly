@@ -1,5 +1,4 @@
 import "package:auto_route/auto_route.dart";
-import "package:decksly/app/di.dart";
 import "package:decksly/common/dev/asset_loader.dart";
 import "package:decksly/common/reusable_ui/backgrounds/hs_deck_selection_background.dart";
 import "package:decksly/common/reusable_ui/backgrounds/hs_wood_horizontal_border.dart";
@@ -11,82 +10,70 @@ import "package:decksly/domain/deck_builder/model/deck_class.dart";
 import "package:decksly/domain/deck_builder/model/deck_type.dart";
 import "package:decksly/l10n/locale_keys.g.dart";
 import "package:decksly/navigation/app_router.dart";
-import "package:decksly/presentation/deck_selection/bloc/deck_selection_bloc.dart";
+import "package:decksly/presentation/deck_selection/provider/deck_selection_state.dart";
+import "package:decksly/presentation/deck_selection/provider/deck_selection_state_notifier.dart";
 import "package:decksly/presentation/deck_selection/screen/widgets/hs_class_badge.dart";
 import "package:decksly/presentation/deck_selection/screen/widgets/hs_mode_badge.dart";
 import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
-class DeckSelectionScreen extends StatefulWidget implements AutoRouteWrapper {
+class DeckSelectionScreen extends ConsumerStatefulWidget {
   const DeckSelectionScreen({super.key});
 
   @override
-  State<DeckSelectionScreen> createState() => _DeckSelectionScreenState();
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<DeckSelectionBloc>(),
-      child: this,
-    );
-  }
+  ConsumerState<ConsumerStatefulWidget> createState() => _DeckSelectionScreenState();
 }
 
-class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
+class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DeckSelectionBloc, DeckSelectionState>(
-      builder: (BuildContext context, state) {
-        return BlocListener<DeckSelectionBloc, DeckSelectionState>(
-          listener: (context, state) {
-            listenForDeckImport(context, state);
-          },
-          child: WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: Stack(
-                children: [
-                  const HSDeckSelectionBackground(),
-                  Column(
-                    children: [
-                      _getAppBar(state),
-                      _getModeSelector(state),
-                      Expanded(child: _getClassSelector(state)),
-                    ],
-                  ),
-                  Positioned(
-                    width: 125.w,
-                    top: 63.h,
-                    left: 18.w,
-                    child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 300),
-                      opacity: state.deck.type == DeckType.wild ? 1 : 0,
-                      child: Image.asset(
-                        assetPath(kSubfolderMisc, "wild_branch_left"),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    width: 125.w,
-                    top: 63.h,
-                    right: 18.w,
-                    child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 300),
-                      opacity: state.deck.type == DeckType.wild ? 1 : 0,
-                      child: Image.asset(
-                        assetPath(kSubfolderMisc, "wild_branch_right"),
-                      ),
-                    ),
-                  ),
-                ],
+    final state = ref.watch(deckSelectionNotifierProvider);
+
+    ref.listen(deckSelectionNotifierProvider, (previous, next) => listenForDeckImport(context, next as DeckSelectionState));
+
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: [
+            const HSDeckSelectionBackground(),
+            Column(
+              children: [
+                _getAppBar(state),
+                _getModeSelector(state),
+                Expanded(child: _getClassSelector(state)),
+              ],
+            ),
+            Positioned(
+              width: 125.w,
+              top: 63.h,
+              left: 18.w,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: state.deck.type == DeckType.wild ? 1 : 0,
+                child: Image.asset(
+                  assetPath(kSubfolderMisc, "wild_branch_left"),
+                ),
               ),
             ),
-          ),
-        );
-      },
+            Positioned(
+              width: 125.w,
+              top: 63.h,
+              right: 18.w,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: state.deck.type == DeckType.wild ? 1 : 0,
+                child: Image.asset(
+                  assetPath(kSubfolderMisc, "wild_branch_right"),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -112,9 +99,10 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                           child: HSTextField(
                             key: const Key("deckCodeInput"),
                             onChange: (text) =>
-                                BlocProvider.of<DeckSelectionBloc>(context).add(ChangeDeckCodeEvent(text)),
-                            onSubmitted: (_) => BlocProvider.of<DeckSelectionBloc>(context)
-                                .add(ImportDeckEvent(context.locale.toStringWithSeparator())),
+                                ref.read(deckSelectionNotifierProvider.notifier).handleChangeDeckCodeEvent(text),
+                            onSubmitted: (_) => ref
+                                .read(deckSelectionNotifierProvider.notifier)
+                                .handleImportDeck(context.locale.toStringWithSeparator()),
                             suffix: TextFieldSuffix.paste,
                             theme: TextFieldTheme.none,
                             hint: LocaleKeys.pasteADeckCodeHere.tr(),
@@ -125,8 +113,9 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                             key: const Key("importDeckCodeButton"),
                             isDisabled: state.deck.code.isEmpty,
                             label: LocaleKeys.import.tr(),
-                            onTap: () => BlocProvider.of<DeckSelectionBloc>(context)
-                                .add(ImportDeckEvent(context.locale.toStringWithSeparator())),
+                            onTap: () => ref
+                                .read(deckSelectionNotifierProvider.notifier)
+                                .handleImportDeck(context.locale.toStringWithSeparator()),
                           ),
                         ),
                       ],
@@ -183,9 +172,8 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                   key: const Key("modeBadge_standard"),
                   type: DeckType.standard,
                   isSelected: DeckType.standard == state.deck.type,
-                  onTap: () {
-                    BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.standard));
-                  },
+                  onTap: () =>
+                      ref.read(deckSelectionNotifierProvider.notifier).handleChangeGameModeEvent(DeckType.standard),
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -193,18 +181,16 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                     key: const Key("modeBadge_classic"),
                     type: DeckType.classic,
                     isSelected: DeckType.classic == state.deck.type,
-                    onTap: () {
-                      BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.classic));
-                    },
+                    onTap: () =>
+                        ref.read(deckSelectionNotifierProvider.notifier).handleChangeGameModeEvent(DeckType.classic),
                   ),
                 ),
                 HSModeBadge(
                   key: const Key("modeBadge_wild"),
                   type: DeckType.wild,
                   isSelected: DeckType.wild == state.deck.type,
-                  onTap: () {
-                    BlocProvider.of<DeckSelectionBloc>(context).add(const ChangeGameModeEvent(DeckType.wild));
-                  },
+                  onTap: () =>
+                      ref.read(deckSelectionNotifierProvider.notifier).handleChangeGameModeEvent(DeckType.wild),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 20.w),
@@ -246,7 +232,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       modeType: state.deck.type,
                       isSelected: e == state.deck.heroClass,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
+                        ref.read(deckSelectionNotifierProvider.notifier).handleSelectClassEvent(e);
                         context.pushRoute(
                           DeckBuilderRoute(
                             deck: Deck(type: state.deck.type, heroClass: e),
@@ -270,7 +256,7 @@ class _DeckSelectionScreenState extends State<DeckSelectionScreen> {
                       modeType: state.deck.type,
                       isSelected: e == state.deck.heroClass,
                       onTap: () {
-                        BlocProvider.of<DeckSelectionBloc>(context).add(SelectClassEvent(e));
+                        ref.read(deckSelectionNotifierProvider.notifier).handleSelectClassEvent(e);
                         context.pushRoute(
                           DeckBuilderRoute(
                             deck: Deck(type: state.deck.type, heroClass: e),

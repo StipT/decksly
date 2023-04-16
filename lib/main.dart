@@ -1,15 +1,13 @@
 import "package:decksly/app/app.dart";
-import "package:decksly/app/di.dart";
 import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
-
 Future<void> main() async {
-  configureInjection();
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await EasyLocalization.ensureInitialized();
@@ -18,15 +16,17 @@ Future<void> main() async {
   clearStorage();
 
   runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale("en", "US"),
-        Locale("de", "DE"),
-        Locale("ja", "JP"),
-      ],
-      path: "assets/l10n",
-      fallbackLocale: const Locale("en", "US"),
-      child: DeckslyApp(),
+    ProviderScope(
+      child: EasyLocalization(
+        supportedLocales: const [
+          Locale("en", "US"),
+          Locale("de", "DE"),
+          Locale("ja", "JP"),
+        ],
+        path: "assets/l10n",
+        fallbackLocale: const Locale("en", "US"),
+        child: DeckslyApp(),
+      ),
     ),
   );
 }

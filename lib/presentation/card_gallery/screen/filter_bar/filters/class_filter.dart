@@ -1,12 +1,12 @@
 import "package:decksly/common/dev/asset_loader.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
 import "package:decksly/domain/deck_builder/model/deck_class.dart";
-import "package:decksly/presentation/card_gallery/bloc/card_gallery_bloc.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state_notifier.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
-class ClassFilter extends StatefulWidget {
+class ClassFilter extends ConsumerWidget {
   const ClassFilter({
     super.key,
     this.height = 40,
@@ -23,100 +23,88 @@ class ClassFilter extends StatefulWidget {
   final VoidCallback onToggleNeutralFilter;
 
   @override
-  State<StatefulWidget> createState() => _ClassFilterState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(cardGalleryNotifierProvider);
 
-class _ClassFilterState extends State<ClassFilter> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CardGalleryBloc, CardGalleryState>(
-      builder: (BuildContext context, state) {
-        return Container(
-          height: widget.height,
-          width: widget.width,
-          padding: EdgeInsets.symmetric(horizontal: 2.w),
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: Alignment.center,
+    return Container(
+      height: height,
+      width: width,
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      child: Stack(
+        fit: StackFit.expand,
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            assetPath(kSubfolderMisc, "class_filter"),
+            fit: BoxFit.fill,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                assetPath(kSubfolderMisc, "class_filter"),
-                fit: BoxFit.fill,
+              Expanded(
+                child: GestureDetector(
+                  key: const Key("classFilterButton"),
+                  onTap: onToggleClassFilter,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 3.w),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            top: 8.75.h,
+                            bottom: 8.75.h,
+                          ),
+                          child: Image.asset(
+                            assetPath(kSubfolderClass, _getClassIcon(deckClass)),
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                        if (state.cardFilterParams.heroClass.contains(deckClass.name))
+                          Image.asset(
+                            assetPath(kSubfolderMisc, "class_filter_selected"),
+                            fit: BoxFit.fitHeight,
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      key: const Key("classFilterButton"),
-                      onTap: widget.onToggleClassFilter,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 3.w),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                top: 8.75.h,
-                                bottom: 8.75.h,
-                              ),
-                              child: Image.asset(
-                                assetPath(kSubfolderClass, _getClassIcon(widget.deckClass)),
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                            if (state.cardFilterParams.heroClass.contains(widget.deckClass.name))
-                              Image.asset(
-                                assetPath(kSubfolderMisc, "class_filter_selected"),
-                                fit: BoxFit.fitHeight,
-                              ),
-                          ],
+              Expanded(
+                child: GestureDetector(
+                  key: const Key("neutralClassFilterButton"),
+                  onTap: onToggleNeutralFilter,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 3.w),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      alignment: Alignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            top: 8.75.h,
+                            bottom: 8.75.h,
+                          ),
+                          child: Image.asset(
+                            assetPath(kSubfolderClass, "neutral_icon"),
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
-                      ),
+                        if (state.cardFilterParams.heroClass.contains(CardClass.neutral.value))
+                          Image.asset(
+                            assetPath(kSubfolderMisc, "class_filter_selected"),
+                            fit: BoxFit.fitHeight,
+                          ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: GestureDetector(
-                      key: const Key("neutralClassFilterButton"),
-                      onTap: widget.onToggleNeutralFilter,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 3.w),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                top: 8.75.h,
-                                bottom: 8.75.h,
-                              ),
-                              child: Image.asset(
-                                assetPath(kSubfolderClass, "neutral_icon"),
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                            if (state.cardFilterParams.heroClass.contains(CardClass.neutral.value))
-                              Image.asset(
-                                assetPath(kSubfolderMisc, "class_filter_selected"),
-                                fit: BoxFit.fitHeight,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 

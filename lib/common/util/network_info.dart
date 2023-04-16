@@ -1,8 +1,14 @@
 import "dart:io";
 
 import "package:connectivity_plus/connectivity_plus.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:rxdart/rxdart.dart" show PublishSubject;
+
+final networkInfoProvider = Provider<NetworkInfo>(
+  (ref) => NetworkInfoImpl(
+    Connectivity(),
+  ),
+);
 
 abstract class NetworkInfo {
   Stream<ConnectivityResult> get resultStream;
@@ -10,7 +16,6 @@ abstract class NetworkInfo {
   Future<bool> get isConnected;
 }
 
-@LazySingleton(as: NetworkInfo)
 class NetworkInfoImpl implements NetworkInfo {
   NetworkInfoImpl(this.connectivity) {
     connectivity.onConnectivityChanged.listen((ConnectivityResult result) {

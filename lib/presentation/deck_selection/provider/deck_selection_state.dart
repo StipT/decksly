@@ -1,4 +1,8 @@
-part of "deck_selection_bloc.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/domain/deck_builder/model/deck.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+
+part "deck_selection_state.freezed.dart";
 
 @freezed
 class DeckSelectionState with _$DeckSelectionState {

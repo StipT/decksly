@@ -3,21 +3,22 @@ import "package:decksly/common/design/fonts.dart";
 import "package:decksly/common/dev/asset_loader.dart";
 import "package:decksly/domain/deck_builder/model/deck_class.dart";
 import "package:decksly/domain/deck_builder/model/deck_type.dart";
-import "package:decksly/presentation/deck_builder/bloc/deck_builder_bloc.dart";
+import "package:decksly/presentation/deck_builder/provider/deck_builder_state.dart";
+import "package:decksly/presentation/deck_builder/provider/deck_builder_state_notifier.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
-class DeckListHeader extends StatefulWidget {
+class DeckListHeader extends ConsumerStatefulWidget {
   const DeckListHeader({super.key, required this.onConvertMode});
 
   final VoidCallback onConvertMode;
 
   @override
-  State<DeckListHeader> createState() => _DeckListHeaderState();
+  ConsumerState<DeckListHeader> createState() => _DeckListHeaderState();
 }
 
-class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStateMixin {
+class _DeckListHeaderState extends ConsumerState<DeckListHeader> with TickerProviderStateMixin {
   bool isExpanded = false;
 
   @override
@@ -27,53 +28,51 @@ class _DeckListHeaderState extends State<DeckListHeader> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DeckBuilderBloc, DeckBuilderState>(
-      builder: (BuildContext context, state) {
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          child: Container(
-            color: Colors.green,
-            width: double.infinity,
-            height: 55.h,
-            margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 6.h),
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 5.h, bottom: 5.h),
-                  child: Image.asset(
-                    assetPath(kSubfolderClass, _headerBackground(state.deck.heroClass), fileExtension: kJPGExtension),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Image.asset(
-                  assetPath(kSubfolderMisc, _headerBorder(state.deck.type)),
-                  fit: BoxFit.fill,
-                ),
-                if (isExpanded)
-                  Image.asset(
-                    assetPath(kSubfolderMisc, _headerBorderSelected(state.deck.type)),
-                    fit: BoxFit.fill,
-                  ),
-                _headerContent(state),
-                Positioned(
-                  right: 12.5.w,
-                  top: 20.h,
-                  child: Image.asset(
-                    assetPath(kSubfolderMisc, "arrow"),
-                    fit: BoxFit.fill,
-                    width: 10.w,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+    final state = ref.watch(deckBuilderNotifierProvider);
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+        });
       },
+      child: Container(
+        color: Colors.green,
+        width: double.infinity,
+        height: 55.h,
+        margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 6.h),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 8.w, right: 8.w, top: 5.h, bottom: 5.h),
+              child: Image.asset(
+                assetPath(kSubfolderClass, _headerBackground(state.deck.heroClass), fileExtension: kJPGExtension),
+                fit: BoxFit.fill,
+              ),
+            ),
+            Image.asset(
+              assetPath(kSubfolderMisc, _headerBorder(state.deck.type)),
+              fit: BoxFit.fill,
+            ),
+            if (isExpanded)
+              Image.asset(
+                assetPath(kSubfolderMisc, _headerBorderSelected(state.deck.type)),
+                fit: BoxFit.fill,
+              ),
+            _headerContent(state),
+            Positioned(
+              right: 12.5.w,
+              top: 20.h,
+              child: Image.asset(
+                assetPath(kSubfolderMisc, "arrow"),
+                fit: BoxFit.fill,
+                width: 10.w,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

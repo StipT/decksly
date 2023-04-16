@@ -1,8 +1,15 @@
 import "package:decksly/common/util/exceptions.dart";
-import "package:decksly/common/util/network_info.dart";
+import 'package:decksly/common/util/network_info.dart';
 import "package:decksly/domain/card_gallery/model/cards_page/cards_page.dart";
 import "package:decksly/repository/remote_source/api/api_service.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+
+final cardsRepositoryProvider = Provider<CardsRepository>(
+  (ref) => CardsRepositoryImpl(
+    ref.watch(apiServiceProvider),
+    ref.watch(networkInfoProvider),
+  ),
+);
 
 abstract class CardsRepository {
   Future<CardsPage> getCards({
@@ -26,7 +33,6 @@ abstract class CardsRepository {
   });
 }
 
-@LazySingleton(as: CardsRepository)
 class CardsRepositoryImpl extends CardsRepository {
   CardsRepositoryImpl(
     this._apiService,

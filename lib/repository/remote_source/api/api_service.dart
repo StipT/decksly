@@ -7,7 +7,11 @@ import "package:decksly/repository/remote_source/auth/token_request/token_reques
 import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
-import "package:injectable/injectable.dart";
+import "package:riverpod_annotation/riverpod_annotation.dart";
+
+final apiServiceProvider = Provider<ApiService>(
+  (ref) => ApiServiceImpl(),
+);
 
 abstract class ApiService {
   ApiClient get apiClient;
@@ -15,7 +19,6 @@ abstract class ApiService {
   AuthClient get authClient;
 }
 
-@Injectable(as: ApiService)
 class ApiServiceImpl implements ApiService {
   ApiServiceImpl() {
     _setUpServices();
@@ -122,8 +125,7 @@ class ApiServiceImpl implements ApiService {
     const kEnvBattleNetClientID = String.fromEnvironment("BATTLE_NET_CLIENT_ID");
     const kEnvBattleNetClientSecret = String.fromEnvironment("BATTLE_NET_CLIENT_SECRET");
 
-    final basicAuth =
-        "Basic ${base64.encode(utf8.encode("$kEnvBattleNetClientID:$kEnvBattleNetClientSecret"))}";
+    final basicAuth = "Basic ${base64.encode(utf8.encode("$kEnvBattleNetClientID:$kEnvBattleNetClientSecret"))}";
 
     final tokenResponse = await _authClient.getAccessToken(
       basicAuth,

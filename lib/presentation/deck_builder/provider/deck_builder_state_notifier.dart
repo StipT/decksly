@@ -1,33 +1,27 @@
 import "package:collection/collection.dart";
 import "package:connectivity_plus/connectivity_plus.dart";
 import "package:decksly/common/dev/logger.dart";
-import "package:decksly/common/util/failures.dart";
 import "package:decksly/common/util/network_info.dart";
 import "package:decksly/domain/deck_builder/model/deck.dart";
 import "package:decksly/domain/deck_builder/model/deck_card.dart";
 import "package:decksly/domain/deck_builder/model/deck_params.dart";
 import "package:decksly/domain/deck_builder/usecase/fetch_deck_code_usecase.dart";
+import "package:decksly/presentation/deck_builder/provider/deck_builder_state.dart";
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
-import "package:freezed_annotation/freezed_annotation.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:logger/logger.dart";
 import "package:rxdart/rxdart.dart";
 
-part "deck_builder_bloc.freezed.dart";
+final deckBuilderNotifierProvider = StateNotifierProvider.autoDispose<DeckBuilderNotifier, DeckBuilderState>(
+  (ref) => DeckBuilderNotifier(
+    ref.watch(networkInfoProvider),
+    ref.watch(fetchDeckCodeUsecaseProvider),
+  ),
+);
 
-part "deck_builder_event.dart";
-
-part "deck_builder_state.dart";
-
-@injectable
-class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
-  DeckBuilderBloc(this._networkInfo, this.fetchDeckCodeUsecase) : super(const DeckBuilderState.initial(deck: Deck())) {
-    on<DeckChangedEvent>((event, emit) => handleDeckChanged(emit, event.deck));
-    on<AddCardEvent>((event, emit) => handleAddCard(emit, event.card));
-    on<RemoveCardEvent>((event, emit) => handleRemoveCard(emit, event.index, event.card));
-    on<FetchDeckCodeEvent>((event, emit) => handleFetchDeckCode(emit, event.locale));
-
+class DeckBuilderNotifier extends StateNotifier<DeckBuilderState> {
+  DeckBuilderNotifier(this._networkInfo, this.fetchDeckCodeUsecase)
+      : super(const DeckBuilderState.initial(deck: Deck())) {
     _streamInternetConnectionState();
   }
 
@@ -42,15 +36,15 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
         .debounceTime(const Duration(milliseconds: 60));
   }
 
-  void handleDeckChanged(Emitter<DeckBuilderState> emit, Deck deck) {
+  void handleDeckChanged(Deck deck) {
     final Deck changedDeck = state.deck.copyWith(heroClass: deck.heroClass, type: deck.type, cards: deck.cards);
 
     state.deck.cards.isEmpty
-        ? emit(DeckBuilderState.initial(deck: changedDeck))
-        : emit(DeckBuilderState.changed(deck: changedDeck));
+        ? state = DeckBuilderState.initial(deck: changedDeck)
+        : state = DeckBuilderState.changed(deck: changedDeck);
   }
 
-  void handleAddCard(Emitter<DeckBuilderState> emit, CardDTO card) {
+  void handleAddCard(CardDTO card) {
     final List<DeckCard> cards = [];
     cards.addAll(state.deck.cards);
 
@@ -82,11 +76,11 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
     final index = cards.indexWhere((element) => element.card == card);
 
     cards[index].amount == 2
-        ? emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)))
-        : emit(DeckBuilderState.cardAdded(index: index, deck: state.deck.copyWith(cards: cards)));
+        ? state = DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards))
+        : state = DeckBuilderState.cardAdded(index: index, deck: state.deck.copyWith(cards: cards));
   }
 
-  void handleRemoveCard(Emitter<DeckBuilderState> emit, int index, CardDTO card) {
+  void handleRemoveCard(int index, CardDTO card) {
     final List<DeckCard> cards = [];
     cards.addAll(state.deck.cards);
 
@@ -115,21 +109,21 @@ class DeckBuilderBloc extends Bloc<DeckBuilderEvent, DeckBuilderState> {
     });
 
     cardRemoved
-        ? emit(DeckBuilderState.cardRemoved(index: index, deck: state.deck.copyWith(cards: cards)))
-        : emit(DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards)));
+        ? state = DeckBuilderState.cardRemoved(index: index, deck: state.deck.copyWith(cards: cards))
+        : state = DeckBuilderState.changed(deck: state.deck.copyWith(cards: cards));
   }
 
-  Future<void> handleFetchDeckCode(Emitter<DeckBuilderState> emit, String locale) async {
+  Future<void> handleFetchDeckCode(String locale) async {
     final ids = state.deck.cards.map((e) => e.amount == 2 ? "${e.card.id},${e.card.id}" : "${e.card.id}").join(",");
     final resultOrFailure =
         await fetchDeckCodeUsecase(DeckParams(ids: ids, locale: locale, deckType: state.deck.type.name));
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);
-        emit(DeckBuilderState.failure(failure: failure, deck: state.deck));
+        state = DeckBuilderState.failure(failure: failure, deck: state.deck);
       },
       (deckCode) {
-        emit(DeckBuilderState.codeGenerated(deck: state.deck.copyWith(code: deckCode)));
+        state = DeckBuilderState.codeGenerated(deck: state.deck.copyWith(code: deckCode));
       },
     );
   }

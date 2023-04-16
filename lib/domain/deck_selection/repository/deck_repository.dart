@@ -4,7 +4,14 @@ import "package:decksly/domain/deck_builder/model/deck.dart";
 import "package:decksly/domain/deck_builder/model/deck_class.dart";
 import "package:decksly/domain/deck_builder/model/deck_type.dart";
 import "package:decksly/repository/remote_source/api/api_service.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+
+final deckRepositoryProvider = Provider<DeckRepository>(
+  (ref) => DeckRepositoryImpl(
+    ref.watch(apiServiceProvider),
+    ref.watch(networkInfoProvider),
+  ),
+);
 
 abstract class DeckRepository {
   Future<Deck> getDeck(String? deckCode, String locale);
@@ -12,7 +19,6 @@ abstract class DeckRepository {
   Future<String> getDeckCode(String? idList, String locale, String deckType);
 }
 
-@LazySingleton(as: DeckRepository)
 class DeckRepositoryImpl extends DeckRepository {
   DeckRepositoryImpl(
     this._apiService,

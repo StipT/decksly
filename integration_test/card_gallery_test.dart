@@ -1,4 +1,3 @@
-import "package:decksly/app/di.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/attack.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_filter/card_filter.dart";
@@ -74,7 +73,6 @@ void main() {
     setUpAll(() async {
       final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
       binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
-      getIt.allowReassignment = true;
     });
 
     setUp(() async {

@@ -4,9 +4,14 @@ import "package:decksly/common/util/failures.dart";
 import "package:decksly/common/util/use_case.dart";
 import "package:decksly/domain/deck_builder/model/deck_params.dart";
 import "package:decksly/domain/deck_selection/repository/deck_repository.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
-@lazySingleton
+final fetchDeckCodeUsecaseProvider = Provider<FetchDeckCodeUsecase>(
+  (ref) => FetchDeckCodeUsecase(
+    ref.watch(deckRepositoryProvider),
+  ),
+);
+
 class FetchDeckCodeUsecase extends UseCase<String, DeckParams> {
   FetchDeckCodeUsecase(this._deckRepository);
 

@@ -8,19 +8,21 @@ import "package:decksly/domain/card_gallery/model/card_filters/minion_type.dart"
 import "package:decksly/domain/card_gallery/model/card_filters/rarity.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/sort_by.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/spell_school.dart";
-import "package:decksly/presentation/card_gallery/bloc/card_gallery_bloc.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state_notifier.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
-class FilterAppBarExtension extends StatelessWidget {
+class FilterAppBarExtension extends ConsumerWidget {
   const FilterAppBarExtension({super.key, required this.height, required this.cardFilterParams});
 
   final double height;
   final CardFilterParams cardFilterParams;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(cardGalleryNotifierProvider);
+
     return Container(
       alignment: Alignment.center,
       height: height,
@@ -40,8 +42,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.sort,
                 dropdownType: DropdownType.sortBy,
                 dropdownValues: SortBy.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(sort: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(sort: value)),
               ),
               HSDropdown(
                 key: const Key("attackDropdown"),
@@ -50,8 +53,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.attack,
                 dropdownType: DropdownType.attack,
                 dropdownValues: Attack.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(attack: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(attack: value)),
               ),
               HSDropdown(
                 key: const Key("healthDropdown"),
@@ -60,8 +64,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.health,
                 dropdownType: DropdownType.health,
                 dropdownValues: Health.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(health: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(health: value)),
               ),
               HSDropdown(
                 key: const Key("typeDropdown"),
@@ -70,8 +75,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.type,
                 dropdownType: DropdownType.cardType,
                 dropdownValues: CardType.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(type: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(type: value)),
               ),
               HSDropdown(
                 key: const Key("minionTypeDropdown"),
@@ -80,8 +86,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.minionType,
                 dropdownType: DropdownType.minionType,
                 dropdownValues: MinionType.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(minionType: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(minionType: value)),
               ),
               HSDropdown(
                 key: const Key("spellSchoolDropdown"),
@@ -90,8 +97,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.spellSchool,
                 dropdownType: DropdownType.spellSchool,
                 dropdownValues: SpellSchool.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(spellSchool: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(spellSchool: value)),
               ),
               HSDropdown(
                 key: const Key("rarityDropdown"),
@@ -100,8 +108,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.rarity,
                 dropdownType: DropdownType.rarity,
                 dropdownValues: Rarity.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(rarity: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(rarity: value)),
               ),
               HSDropdown(
                 key: const Key("keywordDropdown"),
@@ -110,8 +119,9 @@ class FilterAppBarExtension extends StatelessWidget {
                 selectedValue: cardFilterParams.keyword,
                 dropdownType: DropdownType.keywords,
                 dropdownValues: Keyword.values,
-                onChange: (value) => BlocProvider.of<CardGalleryBloc>(context)
-                    .add(CardFilterParamsChangedEvent(cardFilterParams.copyWith(keyword: value))),
+                onChange: (value) => ref
+                    .read(cardGalleryNotifierProvider.notifier)
+                    .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(keyword: value)),
               ),
             ],
           ),

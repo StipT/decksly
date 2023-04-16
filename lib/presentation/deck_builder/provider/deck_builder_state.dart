@@ -1,4 +1,8 @@
-part of "deck_builder_bloc.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/domain/deck_builder/model/deck.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+
+part "deck_builder_state.freezed.dart";
 
 @freezed
 class DeckBuilderState with _$DeckBuilderState {

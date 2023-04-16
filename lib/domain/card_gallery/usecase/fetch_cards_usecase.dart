@@ -5,9 +5,14 @@ import "package:decksly/common/util/use_case.dart";
 import "package:decksly/domain/card_gallery/model/card_filter_params/card_filter_params.dart";
 import "package:decksly/domain/card_gallery/model/cards_page/cards_page.dart";
 import "package:decksly/domain/card_gallery/repository/cards_repository.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
-@lazySingleton
+final fetchCardsUsecaseProvider = Provider<FetchCardsUsecase>(
+      (ref) => FetchCardsUsecase(
+    ref.watch(cardsRepositoryProvider),
+  ),
+);
+
 class FetchCardsUsecase extends UseCase<CardsPage, CardFilterParams> {
   FetchCardsUsecase(this._cardsRepository);
 

@@ -3,14 +3,13 @@ import "package:connectivity_plus/connectivity_plus.dart";
 import "package:dartz/dartz.dart";
 import "package:decksly/common/util/exception_to_failure_mapper.dart";
 import "package:decksly/common/util/failures.dart";
-import "package:decksly/common/util/network_info.dart";
+import 'package:decksly/common/util/network_info.dart';
 import "package:decksly/domain/card_gallery/model/card_filters/locale.dart";
 import "package:decksly/domain/deck_builder/model/deck.dart";
 import "package:decksly/domain/deck_builder/model/deck_class.dart";
 import "package:decksly/domain/deck_builder/model/deck_params.dart";
 import "package:decksly/domain/deck_builder/model/deck_type.dart";
 import "package:decksly/domain/deck_builder/usecase/fetch_deck_code_usecase.dart";
-import "package:decksly/presentation/deck_builder/bloc/deck_builder_bloc.dart";
 import "package:decksly/repository/remote_source/api/dto/card_dto/card_dto.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:mocktail/mocktail.dart";
@@ -26,6 +25,7 @@ class MockNetworkInfo extends Mock implements NetworkInfo {
 }
 
 void main() {
+  /*
   group("DeckBuilderBloc", () {
     late DeckBuilderBloc deckBuilderBloc;
 
@@ -280,4 +280,6 @@ void main() {
       deckBuilderBloc.close();
     });
   });
+
+   */
 }

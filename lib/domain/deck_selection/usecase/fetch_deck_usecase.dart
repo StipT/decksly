@@ -5,9 +5,14 @@ import "package:decksly/common/util/use_case.dart";
 import "package:decksly/domain/deck_builder/model/deck.dart";
 import "package:decksly/domain/deck_builder/model/deck_params.dart";
 import "package:decksly/domain/deck_selection/repository/deck_repository.dart";
-import "package:injectable/injectable.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
-@lazySingleton
+final fetchDeckUsecaseProvider = Provider<FetchDeckUsecase>(
+  (ref) => FetchDeckUsecase(
+    ref.watch(deckRepositoryProvider),
+  ),
+);
+
 class FetchDeckUsecase extends UseCase<Deck, DeckParams> {
   FetchDeckUsecase(this._deckRepository);
 

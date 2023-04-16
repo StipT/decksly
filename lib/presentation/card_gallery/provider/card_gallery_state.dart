@@ -1,4 +1,9 @@
-part of "card_gallery_bloc.dart";
+import "package:decksly/common/util/failures.dart";
+import "package:decksly/domain/card_gallery/model/card_filter_params/card_filter_params.dart";
+import "package:decksly/domain/card_gallery/model/cards_page/cards_page.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+
+part "card_gallery_state.freezed.dart";
 
 @freezed
 class CardGalleryState with _$CardGalleryState {

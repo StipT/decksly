@@ -23,15 +23,20 @@ class DeckSelectionScreen extends ConsumerStatefulWidget {
   const DeckSelectionScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _DeckSelectionScreenState();
+  ConsumerState<DeckSelectionScreen> createState() => _DeckSelectionScreenState();
 }
 
 class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = ref.watch(deckSelectionNotifierProvider);
-
-    ref.listen(deckSelectionNotifierProvider, (previous, next) => listenForDeckImport(context, next as DeckSelectionState));
+    ref.listen(deckSelectionNotifierProvider, (previous, next) => listenForDeckImport(context, next as DeckSelectionState?));
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -274,8 +279,8 @@ class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
     );
   }
 
-  void listenForDeckImport(BuildContext context, DeckSelectionState state) {
-    state.whenOrNull(
+  void listenForDeckImport(BuildContext context, DeckSelectionState? state) {
+    state?.whenOrNull(
       deckImported: (deck) => context.pushRoute(DeckBuilderRoute(deck: deck)),
       failure: (deck, failure) =>
           HSSnackBar.show(context, HSSnackBarType.alert, LocaleKeys.thereWasAnErrorReadingTheDeckCode.tr()),

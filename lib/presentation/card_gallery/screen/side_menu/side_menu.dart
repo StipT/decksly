@@ -31,7 +31,7 @@ class SideMenu extends ConsumerStatefulWidget {
   Key? get key => const Key("sideMenu");
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SideMenuState();
+  ConsumerState<SideMenu> createState() => _SideMenuState();
 }
 
 class _SideMenuState extends ConsumerState<SideMenu> with TickerProviderStateMixin {

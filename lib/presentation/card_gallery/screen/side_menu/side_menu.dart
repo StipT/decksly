@@ -252,6 +252,7 @@ class _SideMenuState extends ConsumerState<SideMenu> with TickerProviderStateMix
   }
 
   void _navigate(BuildContext context, PageRouteInfo route) {
+    ref.invalidate(cardGalleryNotifierProvider);
     _toggleSideMenu();
     context.pushRoute(route);
   }

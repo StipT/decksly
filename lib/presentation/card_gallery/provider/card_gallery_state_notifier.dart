@@ -11,6 +11,11 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:logger/logger.dart";
 import "package:rxdart/rxdart.dart";
 
+enum CardGalleryScreenType {
+  cardGallery,
+  deckBuilder,
+}
+
 final cardGalleryNotifierProvider = StateNotifierProvider.autoDispose<CardGalleryNotifier, CardGalleryState>(
   (ref) => CardGalleryNotifier(
     ref.watch(networkInfoProvider),
@@ -38,6 +43,7 @@ class CardGalleryNotifier extends StateNotifier<CardGalleryState> {
   Future<void> handleFetchCards(CardFilterParams cardFilterParams) async {
     final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
+
     resultOrFailure.fold(
       (failure) {
         log(failure.message, level: Level.error);

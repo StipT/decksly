@@ -34,11 +34,6 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
   bool isFilterBarExtended = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _pagingController.dispose();
     _scrollController.dispose();

@@ -242,7 +242,7 @@ class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
                         ref.read(deckSelectionNotifierProvider.notifier).handleSelectClassEvent(e);
                         ref.invalidate(deckBuilderNotifierProvider);
                         ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
-                        context.pushRoute(
+                        context.navigateTo(
                           DeckBuilderRoute(
                             deck: Deck(type: state.deck.type, heroClass: e),
                           ),
@@ -268,7 +268,7 @@ class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
                         ref.read(deckSelectionNotifierProvider.notifier).handleSelectClassEvent(e);
                         ref.invalidate(deckBuilderNotifierProvider);
                         ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
-                        context.pushRoute(
+                        context.navigateTo(
                           DeckBuilderRoute(
                             deck: Deck(type: state.deck.type, heroClass: e),
                           ),
@@ -287,7 +287,7 @@ class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
 
   void listenForDeckImport(BuildContext context, DeckSelectionState? state) {
     state?.whenOrNull(
-      deckImported: (deck) => context.pushRoute(DeckBuilderRoute(deck: deck)),
+      deckImported: (deck) => context.navigateTo(DeckBuilderRoute(deck: deck)),
       failure: (deck, failure) =>
           HSSnackBar.show(context, HSSnackBarType.alert, LocaleKeys.thereWasAnErrorReadingTheDeckCode.tr()),
     );

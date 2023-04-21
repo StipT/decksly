@@ -134,12 +134,12 @@ class DeckListFooter extends ConsumerWidget {
         HSDialogType.alert,
         (dialogContext) {
           Navigator.pop(dialogContext);
-          context.pushRoute(const DeckSelectionRoute());
+          context.navigateTo(const DeckSelectionRoute());
         },
         (dialogContext) => Navigator.pop(dialogContext),
       );
     } else {
-      context.pushRoute(const DeckSelectionRoute());
+      context.navigateTo(const DeckSelectionRoute());
     }
   }
 }

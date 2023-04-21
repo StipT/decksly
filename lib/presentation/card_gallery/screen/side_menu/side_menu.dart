@@ -261,7 +261,7 @@ class _SideMenuState extends ConsumerState<SideMenu> with TickerProviderStateMix
     ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery));
     ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
     _toggleSideMenu();
-    context.pushRoute(route);
+    context.navigateTo(route);
   }
 
   void _changeLocale(CardGalleryState state, Locale locale) {

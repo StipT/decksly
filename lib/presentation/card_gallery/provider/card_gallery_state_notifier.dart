@@ -44,7 +44,6 @@ class CardGalleryNotifier extends StateNotifier<CardGalleryState> {
   }
 
   Future<void> handleFetchCards(CardFilterParams cardFilterParams) async {
-    print("handleFetchCards called from $notifierInstanceType");
     final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
 

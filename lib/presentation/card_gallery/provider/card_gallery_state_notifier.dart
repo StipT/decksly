@@ -11,24 +11,27 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:logger/logger.dart";
 import "package:rxdart/rxdart.dart";
 
-enum CardGalleryScreenType {
+enum CardGalleryNotifierInstanceType {
   cardGallery,
   deckBuilder,
 }
 
-final cardGalleryNotifierProvider = StateNotifierProvider.autoDispose<CardGalleryNotifier, CardGalleryState>(
-  (ref) => CardGalleryNotifier(
+final cardGalleryNotifierProvider =
+    StateNotifierProvider.autoDispose.family<CardGalleryNotifier, CardGalleryState, CardGalleryNotifierInstanceType>(
+  (ref, screenType) => CardGalleryNotifier(
     ref.watch(networkInfoProvider),
     ref.watch(fetchCardsUsecaseProvider),
+    screenType,
   ),
 );
 
 class CardGalleryNotifier extends StateNotifier<CardGalleryState> {
-  CardGalleryNotifier(this._networkInfo, this.fetchCardsUsecase)
+  CardGalleryNotifier(this._networkInfo, this.fetchCardsUsecase, this.notifierInstanceType)
       : super(const CardGalleryState.initial(cardFilterParams: CardFilterParams(), page: CardsPage())) {
     _streamInternetConnectionState();
   }
 
+  final CardGalleryNotifierInstanceType notifierInstanceType;
   final NetworkInfo _networkInfo;
   late final Stream<bool> internetConnectionState;
 
@@ -41,6 +44,7 @@ class CardGalleryNotifier extends StateNotifier<CardGalleryState> {
   }
 
   Future<void> handleFetchCards(CardFilterParams cardFilterParams) async {
+    print("handleFetchCards called from $notifierInstanceType");
     final updatedParams = cardFilterParams.copyWith(page: cardFilterParams.page! + 1);
     final resultOrFailure = await fetchCardsUsecase(updatedParams);
 

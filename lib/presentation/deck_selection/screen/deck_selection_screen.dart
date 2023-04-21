@@ -10,6 +10,8 @@ import "package:decksly/domain/deck_builder/model/deck_class.dart";
 import "package:decksly/domain/deck_builder/model/deck_type.dart";
 import "package:decksly/l10n/locale_keys.g.dart";
 import "package:decksly/navigation/app_router.dart";
+import "package:decksly/presentation/card_gallery/provider/card_gallery_state_notifier.dart";
+import "package:decksly/presentation/deck_builder/provider/deck_builder_state_notifier.dart";
 import "package:decksly/presentation/deck_selection/provider/deck_selection_state.dart";
 import "package:decksly/presentation/deck_selection/provider/deck_selection_state_notifier.dart";
 import "package:decksly/presentation/deck_selection/screen/widgets/hs_class_badge.dart";
@@ -238,6 +240,8 @@ class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
                       isSelected: e == state.deck.heroClass,
                       onTap: () {
                         ref.read(deckSelectionNotifierProvider.notifier).handleSelectClassEvent(e);
+                        ref.invalidate(deckBuilderNotifierProvider);
+                        ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
                         context.pushRoute(
                           DeckBuilderRoute(
                             deck: Deck(type: state.deck.type, heroClass: e),
@@ -262,6 +266,8 @@ class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
                       isSelected: e == state.deck.heroClass,
                       onTap: () {
                         ref.read(deckSelectionNotifierProvider.notifier).handleSelectClassEvent(e);
+                        ref.invalidate(deckBuilderNotifierProvider);
+                        ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
                         context.pushRoute(
                           DeckBuilderRoute(
                             deck: Deck(type: state.deck.type, heroClass: e),

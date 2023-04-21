@@ -38,11 +38,17 @@ class _DeckListBodyState extends ConsumerState<DeckListBody> {
 
   @override
   Widget build(BuildContext context) {
-    final cardGalleryState = ref.watch(cardGalleryNotifierProvider);
     final deckBuilderState = ref.watch(deckBuilderNotifierProvider);
 
-    ref.listen(cardGalleryNotifierProvider, (previous, next) => listenForCardChanges(context, next as CardGalleryState?));
-    ref.listen(deckBuilderNotifierProvider, (previous, next) => listenForDeckChanges(context, next as DeckBuilderState?));
+    ref.listen(
+      cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder),
+      (previous, next) => listenForCardChanges(context, next as CardGalleryState?),
+    );
+
+    ref.listen(
+      deckBuilderNotifierProvider,
+      (previous, next) => listenForDeckChanges(context, next as DeckBuilderState?),
+    );
 
     return Expanded(
       child: Container(

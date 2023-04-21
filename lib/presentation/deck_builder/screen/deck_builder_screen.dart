@@ -61,7 +61,7 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
     final deckBuilderState = ref.watch(deckBuilderNotifierProvider);
 
     ref.listen(
-      cardGalleryNotifierProvider,
+      cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder),
       (previous, next) => listenToCardGallery(context, next as CardGalleryState?),
     );
     ref.listen(
@@ -80,7 +80,7 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
                 ),
               );
 
-          ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(
+          ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder).notifier).handleFetchCards(
                 CardFilterParams(
                   locale: context.locale.toStringWithSeparator(),
                   heroClass: [widget.deck.heroClass.name, CardClass.neutral.value],
@@ -224,10 +224,13 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
 
   void listenToCardGallery(BuildContext ctx, CardGalleryState? state) {
     state?.whenOrNull(
-      fetching: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+      fetching: (cardParams) => ref
+          .read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder).notifier)
+          .handleFetchCards(state.cardFilterParams),
       localeChanged: (cardParams) {
         ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(widget.deck.copyWith(cards: [], code: ""));
-        ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams);
+        ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder).notifier)
+            .handleFetchCards(state.cardFilterParams);
       },
       fetched: (cardParams, cards) {
         log(cardParams.toString());

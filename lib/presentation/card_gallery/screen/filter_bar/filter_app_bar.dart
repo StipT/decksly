@@ -45,7 +45,12 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(cardGalleryNotifierProvider);
+    final isDeckBuilderMode = widget.deckClass != null;
+    final notifierProvider = cardGalleryNotifierProvider(
+      isDeckBuilderMode ? CardGalleryNotifierInstanceType.deckBuilder : CardGalleryNotifierInstanceType.cardGallery,
+    );
+
+    final state = ref.watch(notifierProvider);
 
     return AnimatedContainer(
       curve: Curves.bounceOut,
@@ -66,7 +71,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _classFilter(widget.deckClass, state),
+                      _classFilter(widget.deckClass, state, isDeckBuilderMode),
                       Container(
                         padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                         child: HSDropdown(
@@ -78,7 +83,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                           dropdownType: _setDropDownType(widget.deckType),
                           dropdownValues: _setDropDownValues(widget.deckType),
                           onChange: (value) => ref
-                              .read(cardGalleryNotifierProvider.notifier)
+                              .read(notifierProvider.notifier)
                               .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(set: value)),
                         ),
                       ),
@@ -88,7 +93,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                         child: ManaPicker(
                           key: const Key("manaPicker"),
                           onChange: (mana) => ref
-                              .read(cardGalleryNotifierProvider.notifier)
+                              .read(notifierProvider.notifier)
                               .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(manaCost: mana)),
                         ),
                       ),
@@ -102,7 +107,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                             onSubmitted: (_) {},
                             onChange: (text) => _debouncer.run(() {
                               ref
-                                  .read(cardGalleryNotifierProvider.notifier)
+                                  .read(notifierProvider.notifier)
                                   .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(textFilter: text));
                             }),
                             theme: TextFieldTheme.velvet,
@@ -129,6 +134,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                 child: FilterAppBarExtension(
                   height: widget.isExtended ? 43.75.h : 0,
                   cardFilterParams: state.cardFilterParams,
+                  isDeckBuilderMode: isDeckBuilderMode,
                 ),
               ),
             ],
@@ -171,13 +177,16 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
     widget.onToggle();
   }
 
-  Widget _classFilter(DeckClass? deckClass, CardGalleryState state) {
+  Widget _classFilter(DeckClass? deckClass, CardGalleryState state, bool isDeckBuilderMode) {
+    final notifierProvider = cardGalleryNotifierProvider(
+      isDeckBuilderMode ? CardGalleryNotifierInstanceType.deckBuilder : CardGalleryNotifierInstanceType.cardGallery,
+    );
+
     return deckClass != null
         ? ClassFilter(
             key: const Key("classFilter"),
-            onToggleClassFilter: () => ref.read(cardGalleryNotifierProvider.notifier).handleToggleClassCards(deckClass),
-            onToggleNeutralFilter: () =>
-                ref.read(cardGalleryNotifierProvider.notifier).handleToggleNeutralCards(deckClass),
+            onToggleClassFilter: () => ref.read(notifierProvider.notifier).handleToggleClassCards(deckClass),
+            onToggleNeutralFilter: () => ref.read(notifierProvider.notifier).handleToggleNeutralCards(deckClass),
             deckClass: deckClass,
             height: 105.h,
             width: 110.w,
@@ -193,7 +202,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
               dropdownType: DropdownType.cardClass,
               dropdownValues: CardClass.values,
               onChange: (value) => ref
-                  .read(cardGalleryNotifierProvider.notifier)
+                  .read(notifierProvider.notifier)
                   .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(heroClass: [value])),
             ),
           );

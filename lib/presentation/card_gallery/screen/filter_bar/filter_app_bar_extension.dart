@@ -14,14 +14,24 @@ import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class FilterAppBarExtension extends ConsumerWidget {
-  const FilterAppBarExtension({super.key, required this.height, required this.cardFilterParams});
+  const FilterAppBarExtension({
+    super.key,
+    required this.height,
+    required this.cardFilterParams,
+    required this.isDeckBuilderMode,
+  });
 
   final double height;
   final CardFilterParams cardFilterParams;
+  final bool isDeckBuilderMode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(cardGalleryNotifierProvider);
+    final notifierProvider = cardGalleryNotifierProvider(
+      isDeckBuilderMode ? CardGalleryNotifierInstanceType.deckBuilder : CardGalleryNotifierInstanceType.cardGallery,
+    );
+
+    final state = ref.watch(notifierProvider);
 
     return Container(
       alignment: Alignment.center,
@@ -43,7 +53,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.sortBy,
                 dropdownValues: SortBy.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(sort: value)),
               ),
               HSDropdown(
@@ -54,7 +64,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.attack,
                 dropdownValues: Attack.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(attack: value)),
               ),
               HSDropdown(
@@ -65,7 +75,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.health,
                 dropdownValues: Health.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(health: value)),
               ),
               HSDropdown(
@@ -76,7 +86,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.cardType,
                 dropdownValues: CardType.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(type: value)),
               ),
               HSDropdown(
@@ -87,7 +97,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.minionType,
                 dropdownValues: MinionType.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(minionType: value)),
               ),
               HSDropdown(
@@ -98,7 +108,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.spellSchool,
                 dropdownValues: SpellSchool.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(spellSchool: value)),
               ),
               HSDropdown(
@@ -109,7 +119,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.rarity,
                 dropdownValues: Rarity.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(rarity: value)),
               ),
               HSDropdown(
@@ -120,7 +130,7 @@ class FilterAppBarExtension extends ConsumerWidget {
                 dropdownType: DropdownType.keywords,
                 dropdownValues: Keyword.values,
                 onChange: (value) => ref
-                    .read(cardGalleryNotifierProvider.notifier)
+                    .read(notifierProvider.notifier)
                     .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(keyword: value)),
               ),
             ],

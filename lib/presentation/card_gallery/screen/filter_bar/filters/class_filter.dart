@@ -24,7 +24,7 @@ class ClassFilter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(cardGalleryNotifierProvider);
+    final state = ref.watch(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
 
     return Container(
       height: height,

@@ -6,6 +6,7 @@ import "package:decksly/common/reusable_ui/misc/card_loading.dart";
 import "package:decksly/common/reusable_ui/misc/no_connection_widget.dart";
 import "package:decksly/common/reusable_ui/misc/no_results_widget.dart";
 import "package:decksly/common/reusable_ui/misc/snackbar.dart";
+import "package:decksly/domain/card_gallery/model/card_filter_params/card_filter_params.dart";
 import "package:decksly/domain/card_gallery/model/card_filters/card_class.dart";
 import "package:decksly/domain/deck_builder/model/deck.dart";
 import "package:decksly/domain/deck_builder/model/deck_type.dart";
@@ -57,34 +58,10 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final deckBuilderState = ref.watch(deckBuilderNotifierProvider);
 
-    deckBuilderState.whenOrNull(
-      initial: (_) {
-        /*
-        ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(
-              Deck(
-                cards: widget.deck.cards,
-                type: widget.deck.type,
-                heroClass: widget.deck.heroClass,
-              ),
-            );
-
-        ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(
-              cardGalleryState.cardFilterParams.copyWith(
-                locale: context.locale.toStringWithSeparator(),
-                heroClass: [widget.deck.heroClass.name, CardClass.neutral.value],
-                set: widget.deck.type.value,
-              ),
-            );
-
-         */
-      },
-    );
-
     ref.listen(
-      cardGalleryNotifierProvider,
+      cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder),
       (previous, next) => listenToCardGallery(context, next as CardGalleryState?),
     );
     ref.listen(
@@ -92,41 +69,65 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
       (previous, next) => listenForDeckCode(context, next as DeckBuilderState?),
     );
 
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SizedBox(
-          height: 1.sh,
-          width: 1.sw,
-          child: Stack(
-            children: [
-              Stack(
-                children: [
-                  Row(
-                    children: [
-                      _cardList(deckBuilderState),
-                      _deckList(),
-                    ],
-                  ),
-                  if (isSideMenuExtended)
-                    Container(
-                      color: Colors.black54,
+    deckBuilderState.whenOrNull(
+      initial: (_) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(
+                Deck(
+                  cards: widget.deck.cards,
+                  type: widget.deck.type,
+                  heroClass: widget.deck.heroClass,
+                ),
+              );
+
+          ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder).notifier).handleFetchCards(
+                CardFilterParams(
+                  locale: context.locale.toStringWithSeparator(),
+                  heroClass: [widget.deck.heroClass.name, CardClass.neutral.value],
+                  set: widget.deck.type.value,
+                ),
+              );
+        });
+      },
+    );
+
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SizedBox(
+            height: 1.sh,
+            width: 1.sw,
+            child: Stack(
+              children: [
+                Stack(
+                  children: [
+                    Row(
+                      children: [
+                        _cardList(deckBuilderState),
+                        _deckList(),
+                      ],
                     ),
-                ],
-              ),
-              SideMenu(
-                isExtended: isSideMenuExtended,
-                onToggle: () => _onSideMenuToggle(),
-                inDeckBuilderMode: true,
-              ),
-              FilterAppBar(
-                deckType: widget.deck.type,
-                deckClass: widget.deck.heroClass,
-                isExtended: isFilterBarExtended,
-                onToggle: () => _onFilterAppBarToggle(),
-              ),
-            ],
+                    if (isSideMenuExtended)
+                      Container(
+                        color: Colors.black54,
+                      ),
+                  ],
+                ),
+                SideMenu(
+                  isExtended: isSideMenuExtended,
+                  onToggle: () => _onSideMenuToggle(),
+                  inDeckBuilderMode: true,
+                ),
+                FilterAppBar(
+                  deckType: widget.deck.type,
+                  deckClass: widget.deck.heroClass,
+                  isExtended: isFilterBarExtended,
+                  onToggle: () => _onFilterAppBarToggle(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -223,10 +224,13 @@ class _DeckBuilderScreenState extends ConsumerState<DeckBuilderScreen> {
 
   void listenToCardGallery(BuildContext ctx, CardGalleryState? state) {
     state?.whenOrNull(
-      fetching: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+      fetching: (cardParams) => ref
+          .read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder).notifier)
+          .handleFetchCards(state.cardFilterParams),
       localeChanged: (cardParams) {
         ref.read(deckBuilderNotifierProvider.notifier).handleDeckChanged(widget.deck.copyWith(cards: [], code: ""));
-        ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams);
+        ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder).notifier)
+            .handleFetchCards(state.cardFilterParams);
       },
       fetched: (cardParams, cards) {
         log(cardParams.toString());

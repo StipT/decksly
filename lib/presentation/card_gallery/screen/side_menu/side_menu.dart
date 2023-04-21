@@ -60,7 +60,13 @@ class _SideMenuState extends ConsumerState<SideMenu> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(cardGalleryNotifierProvider);
+    final state = ref.watch(
+      cardGalleryNotifierProvider(
+        widget.inDeckBuilderMode
+            ? CardGalleryNotifierInstanceType.deckBuilder
+            : CardGalleryNotifierInstanceType.cardGallery,
+      ),
+    );
 
     return SizedBox(
       width: 1.sw,
@@ -252,6 +258,8 @@ class _SideMenuState extends ConsumerState<SideMenu> with TickerProviderStateMix
   }
 
   void _navigate(BuildContext context, PageRouteInfo route) {
+    ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery));
+    ref.invalidate(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.deckBuilder));
     _toggleSideMenu();
     context.pushRoute(route);
   }
@@ -260,7 +268,14 @@ class _SideMenuState extends ConsumerState<SideMenu> with TickerProviderStateMix
     _throttler.run(() {
       context.setLocale(locale);
       final params = state.cardFilterParams.copyWith(locale: context.locale.toStringWithSeparator());
-      ref.read(cardGalleryNotifierProvider.notifier).handleLocaleChanged(params);
+      ref.read(
+            cardGalleryNotifierProvider(
+              widget.inDeckBuilderMode
+                  ? CardGalleryNotifierInstanceType.deckBuilder
+                  : CardGalleryNotifierInstanceType.cardGallery,
+            ).notifier,
+          )
+          .handleLocaleChanged(params);
     });
   }
 

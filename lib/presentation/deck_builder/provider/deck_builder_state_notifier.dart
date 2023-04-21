@@ -39,9 +39,7 @@ class DeckBuilderNotifier extends StateNotifier<DeckBuilderState> {
   void handleDeckChanged(Deck deck) {
     final Deck changedDeck = state.deck.copyWith(heroClass: deck.heroClass, type: deck.type, cards: deck.cards);
 
-    state.deck.cards.isEmpty
-        ? state = DeckBuilderState.initial(deck: changedDeck)
-        : state = DeckBuilderState.changed(deck: changedDeck);
+    state = DeckBuilderState.changed(deck: changedDeck);
   }
 
   void handleAddCard(CardDTO card) {

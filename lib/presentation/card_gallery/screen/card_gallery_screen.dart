@@ -34,11 +34,6 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
   bool isFilterBarExtended = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _pagingController.dispose();
     _scrollController.dispose();
@@ -47,10 +42,10 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(cardGalleryNotifierProvider);
+    final state = ref.watch(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery));
 
     state.whenOrNull(
-      initial: (cardParams, page) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(
+      initial: (cardParams, page) => ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery).notifier).handleFetchCards(
             cardParams.copyWith(
               locale: context.locale.toStringWithSeparator(),
             ),
@@ -58,7 +53,7 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
     );
 
     ref.listen(
-      cardGalleryNotifierProvider,
+      cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery),
       (previous, next) => listenToCardGalleryBloc(context, next as CardGalleryState?),
     );
 
@@ -184,9 +179,9 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
 
   void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState? state) {
     state?.whenOrNull(
-      fetching: (cardParams) => ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+      fetching: (cardParams) => ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery).notifier).handleFetchCards(state.cardFilterParams),
       localeChanged: (cardParams) =>
-          ref.read(cardGalleryNotifierProvider.notifier).handleFetchCards(state.cardFilterParams),
+          ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery).notifier).handleFetchCards(state.cardFilterParams),
       fetched: (cardParams, cards) {
         log(cardParams.toString());
         final nextPageKey = _pagingController.nextPageKey ?? 0;

@@ -6,7 +6,7 @@
 
 #### bloc + get_it - [develop-bloc](https://github.com/StipT/decksly/tree/develop-bloc)
 
-#### riverpod - [develop-riverpod ](https://github.com/StipT/decksly/tree/develop-riverpod) ~ ***In progress*** ~
+#### riverpod - [develop-riverpod](https://github.com/StipT/decksly/tree/develop-riverpod)
 
 #### riverpod + hooks - TODO
 

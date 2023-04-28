@@ -186,7 +186,6 @@ void main() {
       var firstCard = cardList.pagingController.itemList?.first as CardDTO?;
 
       if (firstCard != null && firstCard.manaCost != 0) {
-        // Since we are not mocking our API calls, we are waiting for the response. Sometimes responses are under 500ms, but 1 in 50 times, it takes upwards to 7 seconds
         await tester.pumpAndSettle(
           const Duration(seconds: 7),
         );
@@ -207,7 +206,6 @@ void main() {
       firstCard = cardList.pagingController.itemList?.first as CardDTO?;
 
       if (firstCard != null && firstCard.manaCost != 5) {
-        // Since we are not mocking our API calls, we are waiting for the response. Sometimes responses are under 500ms, but 1 in 50 times, it takes upwards to 7 seconds
         await tester.pumpAndSettle(
           const Duration(seconds: 7),
         );
@@ -228,7 +226,6 @@ void main() {
       firstCard = cardList.pagingController.itemList?.first as CardDTO?;
 
       if (firstCard != null && firstCard.manaCost != 8) {
-        // Since we are not mocking our API calls, we are waiting for the response. Sometimes responses are under 500ms, but 1 in 50 times, it takes upwards to 7 seconds
         await tester.pumpAndSettle(
           const Duration(seconds: 7),
         );
@@ -258,7 +255,6 @@ void main() {
       if (firstCard != null && firstCard.name.toLowerCase().contains("dragon") ||
           firstCard!.text!.toLowerCase().contains("dragon") ||
           firstCard.minionTypeId == MinionType.dragon.id()) {
-        // Since we are not mocking our API calls, we are waiting for the response. Sometimes responses are under 500ms, but 1 in 50 times, it takes upwards to 7 seconds
         await tester.pumpAndSettle(
           const Duration(seconds: 7),
         );

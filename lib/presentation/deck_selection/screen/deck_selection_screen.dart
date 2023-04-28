@@ -30,12 +30,6 @@ class DeckSelectionScreen extends ConsumerStatefulWidget {
 
 class _DeckSelectionScreenState extends ConsumerState<DeckSelectionScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final state = ref.watch(deckSelectionNotifierProvider);
     ref.listen(deckSelectionNotifierProvider, (previous, next) => listenForDeckImport(context, next as DeckSelectionState?));

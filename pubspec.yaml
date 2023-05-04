@@ -90,6 +90,7 @@ dev_dependencies:
   json_serializable: ^6.3.1
   lint: ^2.0.1
   retrofit_generator: ^4.1.1
+  state_notifier_test: ^0.0.9
 
   flutter_test:
     sdk: flutter

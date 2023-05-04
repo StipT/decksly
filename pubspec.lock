@@ -764,6 +764,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  mockito:
+    dependency: transitive
+    description:
+      name: mockito
+      sha256: dd61809f04da1838a680926de50a9e87385c1de91c6579629c3d1723946e8059
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.0"
   mocktail:
     dependency: "direct main"
     description:
@@ -1209,6 +1217,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2+1"
+  state_notifier_test:
+    dependency: "direct dev"
+    description:
+      name: state_notifier_test
+      sha256: c3a2e2cf99e303d50ff0e87a77770e3503e39a03c037265e398103834ffbf0a6
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   stream_channel:
     dependency: transitive
     description:

@@ -43,7 +43,6 @@ dependencies:
   auto_route: ^5.0.4
 
   # Testing
-  bloc_test: ^9.1.1
   mocktail: ^0.3.0
 
   # Code Generation

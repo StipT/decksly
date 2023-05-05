@@ -145,14 +145,14 @@ void main() {
     stateNotifierTest<CardGalleryNotifier, CardGalleryState>(
       "handleToggleClassCards while class is not selected but neutral is",
       build: () => cardGalleryNotifier,
-      seed: () => [CardGalleryState.fetched(
-        page: const CardsPage(),
-        cardFilterParams: CardFilterParams(heroClass: [CardClass.neutral.value]),
-      )],
+      seed: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.neutral.value]))
+      ],
       actions: (cardGalleryNotifier) {
         cardGalleryNotifier.handleToggleClassCards(DeckClass.paladin);
       },
       expect: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.neutral.value])),
         const CardGalleryState.fetching(cardFilterParams: CardFilterParams(heroClass: ["neutral", "paladin"], page: 0)),
       ],
     );
@@ -160,14 +160,14 @@ void main() {
     stateNotifierTest<CardGalleryNotifier, CardGalleryState>(
       "handleToggleClassCards while class is selected and so is neutral",
       build: () => cardGalleryNotifier,
-      seed: () => [CardGalleryState.fetched(
-        page: const CardsPage(),
-        cardFilterParams: CardFilterParams(heroClass: [CardClass.paladin.value, CardClass.neutral.value]),
-      )],
+      seed: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.paladin.value, CardClass.neutral.value]))
+      ],
       actions: (cardGalleryNotifier) {
         cardGalleryNotifier.handleToggleClassCards(DeckClass.paladin);
       },
       expect: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.paladin.value, CardClass.neutral.value])),
         const CardGalleryState.fetching(cardFilterParams: CardFilterParams(heroClass: ["neutral"], page: 0)),
       ],
     );
@@ -175,14 +175,14 @@ void main() {
     stateNotifierTest<CardGalleryNotifier, CardGalleryState>(
       "handleToggleClassCards while class is selected and neutral is not",
       build: () => cardGalleryNotifier,
-      seed: () => [CardGalleryState.fetched(
-        page: const CardsPage(),
-        cardFilterParams: CardFilterParams(heroClass: [DeckClass.paladin.name]),
-      )],
+      seed: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [DeckClass.paladin.name]))
+      ],
       actions: (cardGalleryNotifier) {
         cardGalleryNotifier.handleToggleClassCards(DeckClass.paladin);
       },
       expect: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [DeckClass.paladin.name])),
         const CardGalleryState.fetching(cardFilterParams: CardFilterParams(heroClass: ["neutral"], page: 0)),
       ],
     );
@@ -190,14 +190,14 @@ void main() {
     stateNotifierTest<CardGalleryNotifier, CardGalleryState>(
       "handleToggleNeutralCards while class is not selected but neutral is",
       build: () => cardGalleryNotifier,
-      seed: () => [CardGalleryState.fetched(
-        page: const CardsPage(),
-        cardFilterParams: CardFilterParams(heroClass: [CardClass.neutral.value]),
-      )],
+      seed: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.neutral.value]))
+      ],
       actions: (cardGalleryNotifier) {
         cardGalleryNotifier.handleToggleNeutralCards(DeckClass.paladin);
       },
       expect: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.neutral.value])),
         const CardGalleryState.fetching(cardFilterParams: CardFilterParams(heroClass: ["paladin"], page: 0)),
       ],
     );
@@ -205,14 +205,14 @@ void main() {
     stateNotifierTest<CardGalleryNotifier, CardGalleryState>(
       "handleToggleNeutralCards while class is selected and so is neutral",
       build: () => cardGalleryNotifier,
-      seed: () => [CardGalleryState.fetched(
-        page: const CardsPage(),
-        cardFilterParams: CardFilterParams(heroClass: [CardClass.paladin.value, CardClass.neutral.value]),
-      )],
+      seed: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.paladin.value, CardClass.neutral.value]))
+      ],
       actions: (cardGalleryNotifier) {
         cardGalleryNotifier.handleToggleNeutralCards(DeckClass.paladin);
       },
       expect: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [CardClass.paladin.value, CardClass.neutral.value])),
         const CardGalleryState.fetching(cardFilterParams: CardFilterParams(heroClass: ["paladin"], page: 0)),
       ],
     );
@@ -220,14 +220,14 @@ void main() {
     stateNotifierTest<CardGalleryNotifier, CardGalleryState>(
       "handleToggleNeutralCards while class is selected and neutral is not",
       build: () => cardGalleryNotifier,
-      seed: () => [CardGalleryState.fetched(
-        page: const CardsPage(),
-        cardFilterParams: CardFilterParams(heroClass: [DeckClass.paladin.name]),
+      seed: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [DeckClass.paladin.name]),
       )],
       actions: (cardGalleryNotifier) {
         cardGalleryNotifier.handleToggleNeutralCards(DeckClass.paladin);
       },
       expect: () => [
+        CardGalleryState.fetched(page: const CardsPage(), cardFilterParams: CardFilterParams(heroClass: [DeckClass.paladin.name])),
         const CardGalleryState.fetching(cardFilterParams: CardFilterParams(heroClass: ["paladin", "neutral"], page: 0)),
       ],
     );

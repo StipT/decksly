@@ -54,7 +54,7 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
 
     ref.listen(
       cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery),
-      (previous, next) => listenToCardGalleryBloc(context, next as CardGalleryState?),
+      (previous, next) => listenToCardGalleryNotifier(context, next as CardGalleryState?),
     );
 
     return WillPopScope(
@@ -177,7 +177,7 @@ class _CardGalleryScreenState extends ConsumerState<CardGalleryScreen> {
     });
   }
 
-  void listenToCardGalleryBloc(BuildContext ctx, CardGalleryState? state) {
+  void listenToCardGalleryNotifier(BuildContext ctx, CardGalleryState? state) {
     state?.whenOrNull(
       fetching: (cardParams) => ref.read(cardGalleryNotifierProvider(CardGalleryNotifierInstanceType.cardGallery).notifier).handleFetchCards(state.cardFilterParams),
       localeChanged: (cardParams) =>

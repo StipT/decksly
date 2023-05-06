@@ -33,6 +33,8 @@ dependencies:
   # State Management
   flutter_riverpod: ^2.3.4
   riverpod_annotation: ^2.0.4
+  flutter_hooks: ^0.18.6
+  hooks_riverpod: ^2.3.6
   dartz: ^0.10.1
   equatable: ^2.0.3
   freezed: ^2.3.2

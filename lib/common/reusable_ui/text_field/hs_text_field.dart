@@ -6,6 +6,7 @@ import "package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart";
 import "package:decksly/common/reusable_ui/backgrounds/hs_wood_horizontal_border.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:flutter_hooks/flutter_hooks.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
 enum TextFieldTheme {
@@ -21,7 +22,7 @@ enum TextFieldSuffix {
   paste,
 }
 
-class HSTextField extends StatefulWidget {
+class HSTextField extends HookWidget {
   const HSTextField({
     super.key,
     required this.theme,
@@ -38,36 +39,18 @@ class HSTextField extends StatefulWidget {
   final String? hint;
 
   @override
-  State<HSTextField> createState() => _HSTextFieldState();
-}
-
-class _HSTextFieldState extends State<HSTextField> {
-  final _textEditingController = TextEditingController();
-
-  final FocusNode _focus = FocusNode();
-  bool isEmpty = true;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _focus.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final isEmpty = useState(true);
+    final focus = useFocusNode();
+    final textEditingController = useTextEditingController();
     return Container(
-      margin: _getMargin(widget.theme),
+      margin: _getMargin(theme),
       child: Stack(
         fit: StackFit.expand,
         children: [
-          _getBorder(widget.theme),
+          _getBorder(theme),
           const HSRectangularGoldenBorder(),
-          if (!isEmpty) const HSActiveTextFieldOverlay(),
+          if (!isEmpty.value) const HSActiveTextFieldOverlay(),
           Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(
@@ -75,23 +58,21 @@ class _HSTextFieldState extends State<HSTextField> {
               right: 7.5.w,
             ),
             child: TextField(
-              textInputAction: _getInputAction(widget.suffix),
-              onSubmitted: (value) => widget.onSubmitted(value),
-              focusNode: _focus,
-              controller: _textEditingController,
+              textInputAction: _getInputAction(suffix),
+              onSubmitted: (value) => onSubmitted(value),
+              focusNode: focus,
+              controller: textEditingController,
               onChanged: (searchString) {
-                setState(() {
-                  isEmpty = _textEditingController.text.trim().isEmpty;
-                });
-                widget.onChange(searchString);
+                isEmpty.value = textEditingController.text.trim().isEmpty;
+                onChange(searchString);
               },
               textAlignVertical: TextAlignVertical.center,
               style: FontStyles.bold15(),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(bottom: 2.5.h),
                 border: InputBorder.none,
-                suffixIcon: _suffixIcon(widget.suffix),
-                hintText: widget.hint,
+                suffixIcon: _suffixIcon(suffix, isEmpty, textEditingController),
+                hintText: hint,
                 hintStyle: FontStyles.bold15DarkChestnutBrown(),
               ),
             ),
@@ -101,7 +82,7 @@ class _HSTextFieldState extends State<HSTextField> {
     );
   }
 
-  Widget _suffixIcon(TextFieldSuffix suffix) {
+  Widget _suffixIcon(TextFieldSuffix suffix, ValueNotifier<bool> isEmpty, TextEditingController textEditingController) {
     switch (suffix) {
       case TextFieldSuffix.none:
         return const SizedBox();
@@ -110,16 +91,14 @@ class _HSTextFieldState extends State<HSTextField> {
           key: const Key("searchSuffixIcon"),
           iconSize: 22.5.w,
           onPressed: () {
-            if (!isEmpty) {
-              setState(() {
-                _textEditingController.clear();
-                isEmpty = _textEditingController.text.isEmpty;
-                widget.onChange(_textEditingController.text);
-              });
+            if (!isEmpty.value) {
+              textEditingController.clear();
+              isEmpty.value = textEditingController.text.isEmpty;
+              onChange(textEditingController.text);
             }
           },
           icon: Icon(
-            isEmpty ? Icons.search : Icons.close,
+            isEmpty.value ? Icons.search : Icons.close,
           ),
           color: AppColors.gold,
         );
@@ -129,11 +108,9 @@ class _HSTextFieldState extends State<HSTextField> {
           iconSize: 22.5.w,
           onPressed: () {
             Clipboard.getData(Clipboard.kTextPlain).then((value) {
-              setState(() {
-                _textEditingController.text = value?.text ?? "";
-                isEmpty = _textEditingController.text.trim().isEmpty;
-                widget.onChange(_textEditingController.text);
-              });
+              textEditingController.text = value?.text ?? "";
+              isEmpty.value = textEditingController.text.trim().isEmpty;
+              onChange(textEditingController.text);
             });
           },
           icon: const Icon(

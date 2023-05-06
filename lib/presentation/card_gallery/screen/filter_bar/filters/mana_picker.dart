@@ -4,9 +4,10 @@ import "package:decksly/common/reusable_ui/backgrounds/hs_active_text_field_over
 import "package:decksly/common/reusable_ui/backgrounds/hs_rectangular_golden_border.dart";
 import "package:decksly/common/reusable_ui/backgrounds/hs_velvet_border.dart";
 import "package:flutter/material.dart";
+import "package:flutter_hooks/flutter_hooks.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 
-class ManaPicker extends StatefulWidget {
+class ManaPicker extends HookWidget {
   const ManaPicker({
     super.key,
     required this.onChange,
@@ -15,25 +16,14 @@ class ManaPicker extends StatefulWidget {
   final void Function(String) onChange;
 
   @override
-  State<StatefulWidget> createState() => _ManaPickerState();
-}
-
-class _ManaPickerState extends State<ManaPicker> {
-  final List<bool> activeItems = List.filled(11, false);
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final activeItems = useState(List.filled(11, false));
     return Stack(
       fit: StackFit.expand,
       children: [
         const HSVelvetBorder(),
         const HSRectangularGoldenBorder(),
-        if (activeItems.contains(true)) const HSActiveTextFieldOverlay(),
+        if (activeItems.value.contains(true)) const HSActiveTextFieldOverlay(),
         Container(
           padding: EdgeInsets.symmetric(
             horizontal: 5.w,
@@ -47,19 +37,16 @@ class _ManaPickerState extends State<ManaPicker> {
               return ManaItem(
                 key: Key("manaItem$index"),
                 index: index,
-                isActive: activeItems[index],
+                isActive: activeItems.value[index],
                 onTap: () {
-                  setState(() {
-                    activeItems[index] = !activeItems[index];
-                  });
-
+                  activeItems.value[index] = !activeItems.value[index];
                   String manaFilter = "";
-                  for (int i = 0; i < activeItems.length; i++) {
-                    if (activeItems[i] == true) {
+                  for (int i = 0; i < activeItems.value.length; i++) {
+                    if (activeItems.value[i] == true) {
                       manaFilter.isEmpty ? manaFilter += i.toString() : manaFilter += ",$i";
                     }
                   }
-                  widget.onChange(manaFilter);
+                  onChange(manaFilter);
                 },
               );
             },

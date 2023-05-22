@@ -19,8 +19,9 @@ import "package:easy_localization/easy_localization.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:hooks_riverpod/hooks_riverpod.dart";
 
-class FilterAppBar extends ConsumerStatefulWidget {
+class FilterAppBar extends HookConsumerWidget {
   const FilterAppBar({
     required this.isExtended,
     required this.onToggle,
@@ -37,15 +38,10 @@ class FilterAppBar extends ConsumerStatefulWidget {
   Key? get key => const Key("filterAppBar");
 
   @override
-  ConsumerState<FilterAppBar> createState() => _FilterAppBarState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final debouncer = Debouncer(milliseconds: 500);
 
-class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProviderStateMixin {
-  final _debouncer = Debouncer(milliseconds: 500);
-
-  @override
-  Widget build(BuildContext context) {
-    final isDeckBuilderMode = widget.deckClass != null;
+    final isDeckBuilderMode = deckClass != null;
     final notifierProvider = cardGalleryNotifierProvider(
       isDeckBuilderMode ? CardGalleryNotifierInstanceType.deckBuilder : CardGalleryNotifierInstanceType.cardGallery,
     );
@@ -55,7 +51,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
     return AnimatedContainer(
       curve: Curves.bounceOut,
       duration: const Duration(milliseconds: 500),
-      height: widget.isExtended ? 122.5.h : 70.h,
+      height: isExtended ? 122.5.h : 70.h,
       width: 1.sw,
       child: Stack(
         fit: StackFit.expand,
@@ -71,7 +67,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _classFilter(widget.deckClass, state, isDeckBuilderMode),
+                      _classFilter(deckClass, ref, state, isDeckBuilderMode),
                       Container(
                         padding: EdgeInsets.only(top: 4.375.h, bottom: 2.625.h),
                         child: HSDropdown(
@@ -80,8 +76,8 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                           width: 95.w,
                           dropdownWidth: 250.w,
                           selectedValue: state.cardFilterParams.set,
-                          dropdownType: _setDropDownType(widget.deckType),
-                          dropdownValues: _setDropDownValues(widget.deckType),
+                          dropdownType: _setDropDownType(deckType),
+                          dropdownValues: _setDropDownValues(deckType),
                           onChange: (value) => ref
                               .read(notifierProvider.notifier)
                               .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(set: value)),
@@ -105,7 +101,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                             hint: LocaleKeys.search.tr(),
                             suffix: TextFieldSuffix.search,
                             onSubmitted: (_) {},
-                            onChange: (text) => _debouncer.run(() {
+                            onChange: (text) => debouncer.run(() {
                               ref
                                   .read(notifierProvider.notifier)
                                   .handleCardFilterParamsChanged(state.cardFilterParams.copyWith(textFilter: text));
@@ -119,7 +115,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
                         child: HSBarToggleButton(
                           key: const Key("appBarToggle"),
                           width: 70.w,
-                          isToggled: widget.isExtended,
+                          isToggled: isExtended,
                           activeFilters: extraFiltersActive(state.cardFilterParams),
                           onTap: () {
                             _toggleBarExtension();
@@ -132,7 +128,7 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
               ),
               Flexible(
                 child: FilterAppBarExtension(
-                  height: widget.isExtended ? 43.75.h : 0,
+                  height: isExtended ? 43.75.h : 0,
                   cardFilterParams: state.cardFilterParams,
                   isDeckBuilderMode: isDeckBuilderMode,
                 ),
@@ -174,10 +170,10 @@ class _FilterAppBarState extends ConsumerState<FilterAppBar> with TickerProvider
   }
 
   Future<void> _toggleBarExtension() async {
-    widget.onToggle();
+    onToggle();
   }
 
-  Widget _classFilter(DeckClass? deckClass, CardGalleryState state, bool isDeckBuilderMode) {
+  Widget _classFilter(DeckClass? deckClass, WidgetRef ref, CardGalleryState state, bool isDeckBuilderMode) {
     final notifierProvider = cardGalleryNotifierProvider(
       isDeckBuilderMode ? CardGalleryNotifierInstanceType.deckBuilder : CardGalleryNotifierInstanceType.cardGallery,
     );

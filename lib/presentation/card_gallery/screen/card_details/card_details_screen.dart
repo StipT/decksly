@@ -10,20 +10,10 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:foil/foil.dart";
 import "package:xl/xl.dart";
 
-class CardDetailsScreen extends StatefulWidget {
+class CardDetailsScreen extends StatelessWidget {
   const CardDetailsScreen(this.card, {super.key});
 
   final CardDTO card;
-
-  @override
-  State<CardDetailsScreen> createState() => _DetailScreenState();
-}
-
-class _DetailScreenState extends State<CardDetailsScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   Widget _buildCard() {
     return Foil(
@@ -31,7 +21,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
       opacity: 0.2,
       child: Center(
         child: Image.network(
-          widget.card.image,
+          card.image,
           fit: BoxFit.fill,
           errorBuilder: (context, object, stackTrace) => const CardLoading(),
         ),
@@ -40,12 +30,12 @@ class _DetailScreenState extends State<CardDetailsScreen> {
   }
 
   Widget _buildCardBack() {
-    final hasGoldenEdition = widget.card.imageGold.isNotEmpty;
+    final hasGoldenEdition = card.imageGold.isNotEmpty;
     return Foil(
       opacity: hasGoldenEdition ? 0.4 : 0.2,
       child: Center(
         child: Image.network(
-          hasGoldenEdition ? widget.card.imageGold : widget.card.image,
+          hasGoldenEdition ? card.imageGold : card.image,
           fit: BoxFit.fill,
           errorBuilder: (context, object, stackTrace) => const CardLoading(),
         ),
@@ -106,7 +96,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            widget.card.name,
+                            card.name,
                             style: FontStyles.bold28(),
                           ),
                           Container(
@@ -114,7 +104,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                               vertical: 17.5.h,
                             ),
                             child: Text(
-                              widget.card.flavorText ?? "",
+                              card.flavorText ?? "",
                               style: FontStyles.regular17Grey(),
                             ),
                           ),
@@ -129,7 +119,7 @@ class _DetailScreenState extends State<CardDetailsScreen> {
                                     text: LocaleKeys.artist.tr(),
                                     style: FontStyles.regular17NavajoWhite(),
                                   ),
-                                  TextSpan(text: widget.card.artistName, style: FontStyles.regular17()),
+                                  TextSpan(text: card.artistName, style: FontStyles.regular17()),
                                 ],
                               ),
                             ),

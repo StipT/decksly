@@ -4,42 +4,27 @@ import "package:decksly/presentation/deck_builder/screen/deck_list/widgets/deck_
 import "package:decksly/presentation/deck_builder/screen/deck_list/widgets/deck_list_footer.dart";
 import "package:decksly/presentation/deck_builder/screen/deck_list/widgets/deck_list_header.dart";
 import "package:flutter/material.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:hooks_riverpod/hooks_riverpod.dart";
 
-class DeckListMenu extends ConsumerStatefulWidget {
-  const DeckListMenu({
+class DeckListMenu extends HookConsumerWidget {
+  DeckListMenu({
     super.key,
     required this.width,
     required this.isFilterBarExtended,
   });
 
-  final double? width;
-  final bool isFilterBarExtended;
+  double width;
+  bool isFilterBarExtended;
 
   @override
-  ConsumerState<DeckListMenu> createState() => _DeckListMenuState();
-}
-
-class _DeckListMenuState extends ConsumerState<DeckListMenu> with TickerProviderStateMixin {
-  late double _width;
-  late bool _isFilterBarExtended;
-
-  @override
-  void initState() {
-    _width = widget.width ?? 409.5.h;
-    _isFilterBarExtended = widget.isFilterBarExtended;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      width: _width,
+      width: width,
       height: 0.82.sh,
       margin: EdgeInsets.only(top: 0.18.sh),
       child: AnimatedPadding(
-        padding: EdgeInsets.only(top: _isFilterBarExtended ? 52.5.h : 0),
+        padding: EdgeInsets.only(top: isFilterBarExtended ? 52.5.h : 0),
         curve: Curves.bounceOut,
         duration: const Duration(milliseconds: 500),
         child: Stack(
@@ -47,7 +32,7 @@ class _DeckListMenuState extends ConsumerState<DeckListMenu> with TickerProvider
           children: [
             Image.asset(
               assetPath(kSubfolderBackground, "purple_velvet_background"),
-              width: _width,
+              width: width,
               fit: BoxFit.fill,
             ),
             HSDeckListBackground(headerHeight: 70.h, footerHeight: 60.h),

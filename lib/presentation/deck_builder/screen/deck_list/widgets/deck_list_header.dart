@@ -6,35 +6,22 @@ import "package:decksly/domain/deck_builder/model/deck_type.dart";
 import "package:decksly/presentation/deck_builder/provider/deck_builder_state.dart";
 import "package:decksly/presentation/deck_builder/provider/deck_builder_state_notifier.dart";
 import "package:flutter/material.dart";
-import "package:flutter_riverpod/flutter_riverpod.dart";
+import "package:flutter_hooks/flutter_hooks.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:hooks_riverpod/hooks_riverpod.dart";
 
-class DeckListHeader extends ConsumerStatefulWidget {
+class DeckListHeader extends HookConsumerWidget {
   const DeckListHeader({super.key, required this.onConvertMode});
 
   final VoidCallback onConvertMode;
 
   @override
-  ConsumerState<DeckListHeader> createState() => _DeckListHeaderState();
-}
-
-class _DeckListHeaderState extends ConsumerState<DeckListHeader> with TickerProviderStateMixin {
-  bool isExpanded = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isExpanded = useState(false);
     final state = ref.watch(deckBuilderNotifierProvider);
-
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isExpanded = !isExpanded;
-        });
+        isExpanded.value = !isExpanded.value;
       },
       child: Container(
         color: Colors.green,
@@ -55,7 +42,7 @@ class _DeckListHeaderState extends ConsumerState<DeckListHeader> with TickerProv
               assetPath(kSubfolderMisc, _headerBorder(state.deck.type)),
               fit: BoxFit.fill,
             ),
-            if (isExpanded)
+            if (isExpanded.value)
               Image.asset(
                 assetPath(kSubfolderMisc, _headerBorderSelected(state.deck.type)),
                 fit: BoxFit.fill,

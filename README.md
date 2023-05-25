@@ -8,7 +8,7 @@
 
 #### riverpod - [develop-riverpod](https://github.com/StipT/decksly/tree/develop-riverpod)
 
-#### riverpod + hooks - [develop-riverpod-hooks](https://github.com/StipT/decksly/tree/develop-riverpod-hooks) ~ ***In progress*** ~
+#### riverpod + hooks - [develop-riverpod-hooks](https://github.com/StipT/decksly/tree/develop-riverpod-hooks)
 
 #### redux - TODO
 

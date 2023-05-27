@@ -10,7 +10,7 @@
 
 #### riverpod + hooks - [develop-riverpod-hooks](https://github.com/StipT/decksly/tree/develop-riverpod-hooks)
 
-#### redux - TODO
+#### redux - ~ In progress ~
 
 ## Demo
 
